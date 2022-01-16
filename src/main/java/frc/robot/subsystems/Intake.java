@@ -8,10 +8,10 @@ import frc.robot.Constants;
 
 public class Intake extends SubsystemBase {
     
-    CANSparkMax intakeMotor;
+    CANSparkMax m_intakeMotor;
 
     public Intake(){
-        intakeMotor = new CANSparkMax(Constants.INTAKE_MOTOR_CAN_ID, MotorType.kBrushless);
+        m_intakeMotor = new CANSparkMax(Constants.INTAKE_MOTOR_CAN_ID, MotorType.kBrushless);
     }
 
     @Override
@@ -20,14 +20,14 @@ public class Intake extends SubsystemBase {
     }
 
     public void run(double speed) {
-        intakeMotor.set(-speed);
+        m_intakeMotor.set(-speed);
     }
 
-    public void IntakeCargo() {
+    public void intakeCargo() {
         run(0.25);
     }
 
-    public void OutputCargo() {
+    public void outputCargo() {
         run(-0.25);
     }
 }
