@@ -25,7 +25,10 @@ public class Climber extends SubsystemBase {
   DutyCycleEncoder m_armEncoder;
 
   public Climber() {
-    
+    m_elevatorMotorLeader = new CANSparkMax(Constants.ELEVATOR_LEADER_CAN_ID, MotorType.kBrushless);
+    m_elevatorMotorFollower = new CANSparkMax(Constants.ELEVATOR_FOLLOWER_CAN_ID, MotorType.kBrushless);
+    m_armMotorLeader = new TalonFX(Constants.ARM_LEADER_CAN_ID);
+    m_armMotorFollower = new TalonFX(Constants.ARM_FOLLOWER_CAN_ID);
   }
 
   @Override
