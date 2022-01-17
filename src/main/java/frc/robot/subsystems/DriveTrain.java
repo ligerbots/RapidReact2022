@@ -1,6 +1,6 @@
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
@@ -11,10 +11,10 @@ import frc.robot.Constants;
 
 public class DriveTrain extends SubsystemBase {
 
-    private TalonFX m_leftLeader = new TalonFX(Constants.LEADER_LEFT_CAN_ID);
-    private TalonFX m_leftFollower = new TalonFX(Constants.FOLLOWER_LEFT_CAN_ID);
-    private TalonFX m_rightLeader = new TalonFX(Constants.LEADER_RIGHT_CAN_ID);
-    private TalonFX m_rightFollower = new TalonFX(Constants.FOLLOWER_RIGHT_CAN_ID);
+    private WPI_TalonFX m_leftLeader = new WPI_TalonFX(Constants.LEADER_LEFT_CAN_ID);
+    private WPI_TalonFX m_leftFollower = new WPI_TalonFX(Constants.FOLLOWER_LEFT_CAN_ID);
+    private WPI_TalonFX m_rightLeader = new WPI_TalonFX(Constants.LEADER_RIGHT_CAN_ID);
+    private WPI_TalonFX m_rightFollower = new WPI_TalonFX(Constants.FOLLOWER_RIGHT_CAN_ID);
 
     private final MotorControllerGroup m_leftMotors = new MotorControllerGroup(m_leftLeader, m_leftFollower);
     private final MotorControllerGroup m_rightMotors = new MotorControllerGroup(m_rightLeader, m_rightFollower);
@@ -51,7 +51,7 @@ public class DriveTrain extends SubsystemBase {
     public void periodic() {
     }
 
-    public void arcadeDrive(double throttle, double rotate){
-        m_differentialDrive.arcadeDrive(throttle, -rotate);
+    public void drive(double throttle, double rotate, boolean squaredInput){
+        m_differentialDrive.arcadeDrive(throttle, -rotate, squaredInput);
     }
 }

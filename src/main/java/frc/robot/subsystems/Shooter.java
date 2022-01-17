@@ -6,10 +6,6 @@
 /*----------------------------------------------------------------------------*/
 package frc.robot.subsystems;
 
-import java.util.Arrays;
-import java.util.TreeMap;
-import java.util.Map.Entry;
-
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
