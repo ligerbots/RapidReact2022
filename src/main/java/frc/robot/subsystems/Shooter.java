@@ -32,7 +32,7 @@ public class Shooter extends SubsystemBase {
 
     }
 
-    //periodically undate the values of motors for shooter to SmartDashboard
+    //periodically update the values of motors for shooter to SmartDashboard
     @Override
     public void periodic() {
     }
@@ -46,12 +46,8 @@ public class Shooter extends SubsystemBase {
     public void shootHigh() {
 
     }
-    //shoot the ball for low hub
-    public void shootLow() {
 
-    }
-
-    //dump the balls for low hub
+    //dump the balls into the low hub
     public void dump(){
 
     }
