@@ -14,8 +14,11 @@ package frc.robot;
  */
 public final class Constants {
 
+<<<<<<< HEAD
     public static int INTAKE_MOTOR_CAN_ID = 1; //temporary value
 
+=======
+>>>>>>> 0b370e9ead4d13031d70d15e31da85779ea526b6
     public static final int LEADER_LEFT_CAN_ID = 1; 
     public static final int LEADER_RIGHT_CAN_ID = 4;
     public static final int FOLLOWER_LEFT_CAN_ID = 2;
@@ -23,4 +26,8 @@ public final class Constants {
 
     public static final int[] LEFT_ENCODER_PORTS = new int[]{0, 1};
     public static final int[] RIGHT_ENCODER_PORTS = new int[]{2, 3};
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 0b370e9ead4d13031d70d15e31da85779ea526b6
