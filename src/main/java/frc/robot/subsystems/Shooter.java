@@ -12,6 +12,7 @@ import java.util.Map.Entry;
 
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.ControlType;
@@ -30,24 +31,24 @@ import frc.robot.Constants;
 public class Shooter extends SubsystemBase {
 
     //CANSparkMax for the hopper
-    CANSparkMax motor1, motor2;
-    //WPI_TalonSRX for the shooter
-    WPI_TalonSRX motor3, motor4;
+    CANSparkMax m_motor1, m_motor2;
+    //WPI_TalonFX for the shooter
+    WPI_TalonFX m_motor3, m_motor4;
     //Limit Switch for Intake
-    DigitalInput limitSwitch1, limitSwitch2;
+    DigitalInput m_limitSwitch1, m_limitSwitch2;
 
 
     //Shooter class constructor, initialize arrays for motors controllers, encoders, and SmartDashboard data
     public Shooter() {
 
-        motor1 = new CANSparkMax(Constants.HOPPER_ONE_CAN_ID, MotorType.kBrushless);
-        motor2 = new CANSparkMax(Constants.HOPPER_TWO_CAN_ID, MotorType.kBrushless);
+        m_motor1 = new CANSparkMax(Constants.HOPPER_ONE_CAN_ID, MotorType.kBrushless);
+        m_motor2 = new CANSparkMax(Constants.HOPPER_TWO_CAN_ID, MotorType.kBrushless);
 
-        motor3 = new WPI_TalonSRX(Constants.SHOOTER_ONE_CAN_ID);
-        motor4 = new WPI_TalonSRX(Constants.SHOOTER_TWO_CAN_ID);
+        m_motor3 = new WPI_TalonFX(Constants.SHOOTER_ONE_CAN_ID);
+        m_motor4 = new WPI_TalonFX(Constants.SHOOTER_TWO_CAN_ID);
 
-        limitSwitch1 = new DigitalInput(Constants.LIMIT_SWITCH_ONE);
-        limitSwitch2 = new DigitalInput(Constants.LIMIT_SWITCH_TWO);
+        m_limitSwitch1 = new DigitalInput(Constants.LIMIT_SWITCH_ONE);
+        m_limitSwitch2 = new DigitalInput(Constants.LIMIT_SWITCH_TWO);
     }
 
     //periodically update the values of motors for shooter to SmartDashboard
