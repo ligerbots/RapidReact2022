@@ -27,80 +27,32 @@ import frc.robot.Constants;
 @SuppressWarnings("serial")
 public class Shooter extends SubsystemBase {
 
+    //Shooter class constructor, initialize arrays for motors controllers, encoders, and SmartDashboard data
     public Shooter() {
 
     }
 
+    //periodically undate the values of motors for shooter to SmartDashboard
     @Override
     public void periodic() {
     }
 
-    public double getVoltage() {
-        return 0.0;
-    }
-
-    public void setHood(double angle) {
-
-    }
-
-    public double getSpeed() {
-        return 0.0;
-    }
-
+    // Set the shooter and hood based on the distance
     public void prepareShooter(double distance) {
-        // Set the shooter and hood based on the distance
-        setShooterRpm(calculateShooterSpeed(distance));
-        setHood(calculateShooterHood(distance));
-    }
-
-    // public void setShooterVoltage (double voltage) {
-    //     pidController.setReference(voltage, ControlType.kVoltage);
-    // }
-
-    public void shoot() {
 
     }
 
-    public void setShooterRpm(double rpm) {
+    //shoot the ball for high hub
+    public void shootHigh() {
+
+    }
+    //shoot the ball for low hub
+    public void shootLow() {
 
     }
 
-    public double calculateShooterSpeed(double distance) {
-        return 0.0;
-    }
+    //dump the balls for low hub
+    public void dump(){
 
-    public double calculateShooterHood(double distance) {
-        return 0.0;
-    }
-
-    public void warmUp() {
-
-    }
-
-    public boolean speedOnTarget(final double targetVelocity, final double percentAllowedError) {
-        return true;
-    }
-
-    public boolean hoodOnTarget(final double targetAngle) {
-        return true;
-    }
-
-    public void calibratePID(final double p, final double i, final double d, final double f) {
- 
-    }
-
-    public void stopAll() {
-        
-    }
-
-    public double getTurretAngle() {
-        return 0.0;
-    }
-
-    private void setTurret(double angle) {
-       
-    }
-
-    public void setTurretAdjusted(double adjustedAngle) {
     }
 }
