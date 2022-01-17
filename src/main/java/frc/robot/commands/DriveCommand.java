@@ -18,10 +18,10 @@ public class DriveCommand extends CommandBase {
   DoubleSupplier m_turn;
   BooleanSupplier m_driveSwitch;
   public DriveCommand(DriveTrain driveTrain, DoubleSupplier throttle, DoubleSupplier turn, BooleanSupplier driveSwitch) {
-    this.m_driveTrain = driveTrain;
-    this.m_throttle = throttle;
-    this.m_turn = turn;
-    this.m_driveSwitch = driveSwitch;
+    m_driveTrain = driveTrain;
+    m_throttle = throttle;
+    m_turn = turn;
+    m_driveSwitch = driveSwitch;
     addRequirements(driveTrain);
   }
 
