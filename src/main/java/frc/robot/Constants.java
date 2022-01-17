@@ -17,4 +17,14 @@ public final class Constants {
     public static final int ELEVATOR_FOLLOWER_CAN_ID = 2;
     public static final int ARM_LEADER_CAN_ID = 3;
     public static final int ARM_FOLLOWER_CAN_ID = 4;
+
+    public static int INTAKE_MOTOR_CAN_ID = 1; //temporary value
+
+    public static final int LEADER_LEFT_CAN_ID = 1; 
+    public static final int LEADER_RIGHT_CAN_ID = 4;
+    public static final int FOLLOWER_LEFT_CAN_ID = 2;
+    public static final int FOLLOWER_RIGHT_CAN_ID = 3;
+
+    public static final int[] LEFT_ENCODER_PORTS = new int[]{0, 1};
+    public static final int[] RIGHT_ENCODER_PORTS = new int[]{2, 3};
 }
