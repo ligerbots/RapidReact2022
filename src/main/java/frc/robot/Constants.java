@@ -41,7 +41,7 @@ public final class Constants {
     public static final int HOPPER_ONE_CAN_ID = 5; // Motor 1 on hopper
     public static final int HOPPER_TWO_CAN_ID = 6; // Motor 2 on hopper
 
-    public static final int GRAYHILL_ENCODER_DISTANCE_PER_PULSE = 1; //Temporary value
+    public static final int GRAYHILL_ENCODER_DISTANCE_PER_PULSE = 1; //TODO: Replace this value with a correct one 
 
     
 
