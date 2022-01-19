@@ -30,9 +30,9 @@ public class DriveTrain extends SubsystemBase {
     private Encoder m_leftEncoder = new Encoder(Constants.LEFT_ENCODER_PORTS[0], Constants.LEFT_ENCODER_PORTS[1]);
     private Encoder m_rightEncoder = new Encoder(Constants.RIGHT_ENCODER_PORTS[0], Constants.RIGHT_ENCODER_PORTS[1]);
 
-    private DifferentialDriveOdometry odometry;
+    private DifferentialDriveOdometry m_odometry;
 
-    private AHRS navX;
+    private AHRS m_navX;
 
     public DriveTrain() {
         
@@ -43,11 +43,11 @@ public class DriveTrain extends SubsystemBase {
         m_leftEncoder.setDistancePerPulse(Constants.ENCODER_DISTANCE_PER_PULSE);
         m_rightEncoder.setDistancePerPulse(Constants.ENCODER_DISTANCE_PER_PULSE);
 
-        odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(0));
-        navX = new AHRS(Port.kMXP, (byte) 200);
+        m_odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(0));
+        m_navX = new AHRS(Port.kMXP, (byte) 200);
     }
 
-    //Get the speed of the motors
+    //Get the current set speed of the speed controllers
     public double getRightSpeed() {  
         return -m_rightMotors.get();
     }
@@ -75,23 +75,23 @@ public class DriveTrain extends SubsystemBase {
 
     //Get and Set odometry values
     public Pose2d getPose(){
-        return odometry.getPoseMeters();
+        return m_odometry.getPoseMeters();
     }
 
     public void setPose (Pose2d pose){
         m_leftEncoder.reset();
         m_rightEncoder.reset();
-        odometry.resetPosition(pose, Rotation2d.fromDegrees(getGyroAngle()));
+        m_odometry.resetPosition(pose, Rotation2d.fromDegrees(getGyroAngle()));
     }
 
     public double getHeading() {
-        return odometry.getPoseMeters().getRotation().getDegrees();
+        return m_odometry.getPoseMeters().getRotation().getDegrees();
     }
 
 
     //Get Gyro info
     public double getGyroAngle() {
-        return Math.IEEEremainder(navX.getAngle(), 360) * -1;
+        return Math.IEEEremainder(m_navX.getAngle(), 360) * -1;
     }
 
 
