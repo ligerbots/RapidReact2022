@@ -1,14 +1,10 @@
 package frc.robot.subsystems;
 
-import javax.swing.text.FieldView;
-
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
-
 import edu.wpi.first.hal.SimDouble;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
-import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.RobotController;
@@ -19,7 +15,6 @@ import edu.wpi.first.wpilibj.simulation.DifferentialDrivetrainSim;
 import edu.wpi.first.wpilibj.simulation.EncoderSim;
 import edu.wpi.first.wpilibj.simulation.SimDeviceSim;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
-import edu.wpi.first.wpilibj.smartdashboard.FieldObject2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -169,7 +164,7 @@ public class DriveTrain extends SubsystemBase {
         m_rightEncoderSim.setRate(m_differentialDriveSim.getRightVelocityMetersPerSecond());
         m_gyroAngleSim.set(-m_differentialDriveSim.getHeading().getDegrees());
         m_fieldSim.setRobotPose(m_odometry.getPoseMeters());
-      }
+    }
 
 
 }

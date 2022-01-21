@@ -11,8 +11,9 @@
     "windows": {
       "/SmartDashboard/Field": {
         "Robot": {
-          "image": "C:\\Users\\WEQ\\Desktop\\larry.png",
-          "length": 1.0,
+          "arrowSize": 55,
+          "image": "C:\\Users\\WEQ\\Downloads\\Yanjun Z.jpeg",
+          "length": 1.5,
           "style": "Box/Image",
           "width": 1.0
         },

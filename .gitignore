@@ -1,6 +1,224 @@
 # This gitignore has been specially created by the WPILib team.
 # If you remove items from this file, intellisense might break.
 
+# simgui.json
+{
+  "NTProvider": {
+    "types": {
+      "/FMSInfo": "FMSInfo",
+      "/LiveWindow/DriveTrain": "Subsystem",
+      "/LiveWindow/Ungrouped/DifferentialDrive[1]": "DifferentialDrive",
+      "/LiveWindow/Ungrouped/Scheduler": "Scheduler",
+      "/LiveWindow/Ungrouped/navX-Sensor[4]": "Gyro",
+      "/SmartDashboard/Field": "Field2d"
+    },
+    "windows": {
+      "/SmartDashboard/Field": {
+        "Robot": {
+          "image": "C:\\Users\\WEQ\\Desktop\\larry.png",
+          "length": 1.0,
+          "style": "Box/Image",
+          "width": 1.0
+        },
+        "image": "C:\\Users\\WEQ\\Desktop\\Ligerbots\\RapidReact2022\\2022-field.png",
+        "window": {
+          "visible": true
+        }
+      }
+    }
+  },
+  "NetworkTables View": {
+    "visible": false
+  }
+}
+
+
+# simgui-window.json
+{
+  "MainWindow": {
+    "GLOBAL": {
+      "height": "720",
+      "maximized": "0",
+      "style": "0",
+      "userScale": "2",
+      "width": "1280",
+      "xpos": "213",
+      "ypos": "209"
+    }
+  },
+  "Window": {
+    "###/FMSInfo": {
+      "Collapsed": "0",
+      "Pos": "60,61",
+      "Size": "169,167"
+    },
+    "###/LiveWindow/DriveTrain": {
+      "Collapsed": "0",
+      "Pos": "60,60",
+      "Size": "148,86"
+    },
+    "###/SmartDashboard/Field": {
+      "Collapsed": "0",
+      "Pos": "92,18",
+      "Size": "1025,680"
+    },
+    "###DIO": {
+      "Collapsed": "0",
+      "Pos": "470,20",
+      "Size": "162,123"
+    },
+    "###FMS": {
+      "Collapsed": "0",
+      "Pos": "5,540",
+      "Size": "235,169"
+    },
+    "###Joysticks": {
+      "Collapsed": "0",
+      "Pos": "250,465",
+      "Size": "796,240"
+    },
+    "###Keyboard 0 Settings": {
+      "Collapsed": "0",
+      "Pos": "10,50",
+      "Size": "300,560"
+    },
+    "###NetworkTables": {
+      "Collapsed": "0",
+      "Pos": "250,277",
+      "Size": "750,185"
+    },
+    "###Other Devices": {
+      "Collapsed": "0",
+      "Pos": "1025,20",
+      "Size": "250,695"
+    },
+    "###System Joysticks": {
+      "Collapsed": "0",
+      "Pos": "5,350",
+      "Size": "192,218"
+    },
+    "###Timing": {
+      "Collapsed": "0",
+      "Pos": "5,150",
+      "Size": "135,127"
+    },
+    "Debug##Default": {
+      "Collapsed": "0",
+      "Pos": "60,60",
+      "Size": "400,400"
+    },
+    "Robot State": {
+      "Collapsed": "0",
+      "Pos": "5,20",
+      "Size": "92,99"
+    }
+  }
+}
+
+
+# simgui-ds.json
+{
+  "keyboardJoysticks": [
+    {
+      "axisConfig": [
+        {
+          "decKey": 65,
+          "incKey": 68
+        },
+        {
+          "decKey": 87,
+          "incKey": 83
+        },
+        {
+          "decKey": 69,
+          "decayRate": 0.0,
+          "incKey": 82,
+          "keyRate": 0.009999999776482582
+        }
+      ],
+      "axisCount": 3,
+      "buttonCount": 4,
+      "buttonKeys": [
+        90,
+        88,
+        67,
+        86
+      ],
+      "povConfig": [
+        {
+          "key0": 328,
+          "key135": 323,
+          "key180": 322,
+          "key225": 321,
+          "key270": 324,
+          "key315": 327,
+          "key45": 329,
+          "key90": 326
+        }
+      ],
+      "povCount": 1
+    },
+    {
+      "axisConfig": [
+        {
+          "decKey": 74,
+          "incKey": 76
+        },
+        {
+          "decKey": 73,
+          "incKey": 75
+        }
+      ],
+      "axisCount": 2,
+      "buttonCount": 4,
+      "buttonKeys": [
+        77,
+        44,
+        46,
+        47
+      ],
+      "povCount": 0
+    },
+    {
+      "axisConfig": [
+        {
+          "decKey": 263,
+          "incKey": 262
+        },
+        {
+          "decKey": 265,
+          "incKey": 264
+        }
+      ],
+      "axisCount": 2,
+      "buttonCount": 6,
+      "buttonKeys": [
+        260,
+        268,
+        266,
+        261,
+        269,
+        267
+      ],
+      "povCount": 0
+    },
+    {
+      "axisCount": 0,
+      "buttonCount": 0,
+      "povCount": 0
+    }
+  ],
+  "robotJoysticks": [
+    {
+      "guid": "78696e70757401000000000000000000",
+      "useGamepad": true
+    }
+  ]
+}
+
+
+
+
 ### C++ ###
 # Prerequisites
 *.d

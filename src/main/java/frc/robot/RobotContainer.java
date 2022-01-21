@@ -50,7 +50,7 @@ public class RobotContainer {
   private class Turn implements DoubleSupplier{
     @Override
     public double getAsDouble() {
-      return m_xbox.getLeftX();
+      return m_xbox.getRightX();
     }
   }
 
