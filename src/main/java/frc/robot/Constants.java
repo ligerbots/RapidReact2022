@@ -4,6 +4,12 @@
 
 package frc.robot;
 
+import edu.wpi.first.math.numbers.N2;
+import edu.wpi.first.math.system.LinearSystem;
+import edu.wpi.first.math.system.plant.DCMotor;
+import edu.wpi.first.math.system.plant.LinearSystemId;
+import edu.wpi.first.math.util.Units;
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants. This class should not be used for any other purpose. All constants should be declared
@@ -13,6 +19,25 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
+
+    // Temporary Encoder's Distance Per Pulse for simulation
+    public static final double ENCODER_DISTANCE_PER_PULSE = Units.inchesToMeters(Math.PI * 6.0 / 1024);
+
+    //Temporary variable values for simulation
+    public static final double kvVoltSecondsPerMeter = 2.64; 
+    public static final double kaVoltSecondsSquaredPerMeter = 0.324; 
+    public static final double kvVoltSecondsPerRadian = 3.0;
+    public static final double kaVoltSecondsSquaredPerRadian = 0.3;
+
+    public static final LinearSystem<N2, N2, N2> kDrivetrainPlant =
+    LinearSystemId.identifyDrivetrainSystem(kvVoltSecondsPerMeter, kaVoltSecondsSquaredPerMeter,
+        kvVoltSecondsPerRadian, kaVoltSecondsSquaredPerRadian);
+
+    public static final DCMotor kDriveGearbox = DCMotor.getNEO(2);
+    public static final double kDriveGearing = 8;
+    public static final double kWheelDiameterMeters = 0.1016;
+    public static final double kTrackwidth = 0.6604;
+
 
     // Following four CAN IDs are for the drivetrain
     public static final int LEADER_LEFT_CAN_ID = 1; 
