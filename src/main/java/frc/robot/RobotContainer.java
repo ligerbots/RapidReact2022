@@ -38,6 +38,7 @@ public class RobotContainer {
   public final Intake m_intake = new Intake();
   public final Shooter m_shooter = new Shooter(m_vision);
   public final Climber m_climber = new Climber();
+  
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings
@@ -69,10 +70,10 @@ public class RobotContainer {
   public DriveCommand getDriveCommand(){
     return m_driveCommand;
   }
-  /**
-   * LigerBots: we don't use this function. 
-   * Autonomous is controlled by a Chooser defined in Robot.
-   */
+  //
+  // LigerBots: we don't use this function. 
+  // Autonomous is controlled by a Chooser defined in Robot.
+  //
   // public Command getAutonomousCommand() {
   //   return null;
   // }
