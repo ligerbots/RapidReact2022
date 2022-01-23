@@ -30,12 +30,9 @@ public class Climber extends SubsystemBase {
     m_armMotorLeader = new TalonFX(Constants.ARM_LEADER_CAN_ID);
     m_armMotorFollower = new TalonFX(Constants.ARM_FOLLOWER_CAN_ID);
   }
-
-  @Override
   public void periodic() {
     // This method will be called once per scheduler run
   }
-
   // sets the elevator to a certain height
   public void setElevatorHeight(double height) {
 
