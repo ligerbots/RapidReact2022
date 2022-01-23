@@ -4,6 +4,9 @@
 
 package frc.robot;
 
+import java.util.function.BooleanSupplier;
+import java.util.function.DoubleSupplier;
+
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
@@ -62,6 +65,9 @@ public class RobotContainer {
     }
   }
 
+  public DriveCommand getDriveCommand(){
+    return m_driveCommand;
+  }
   private class DriveSwitch implements BooleanSupplier{
     @Override
     public boolean getAsBoolean() {
