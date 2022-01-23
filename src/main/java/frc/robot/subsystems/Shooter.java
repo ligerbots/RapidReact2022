@@ -27,7 +27,7 @@ public class Shooter extends SubsystemBase {
 
 
     //Shooter class constructor, initialize arrays for motors controllers, encoders, and SmartDashboard data
-    public Shooter() {
+    public Shooter(Vision vision) {
 
         m_motor1 = new CANSparkMax(Constants.HOPPER_ONE_CAN_ID, MotorType.kBrushless);
         m_motor2 = new CANSparkMax(Constants.HOPPER_TWO_CAN_ID, MotorType.kBrushless);
