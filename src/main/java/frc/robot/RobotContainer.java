@@ -51,43 +51,24 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
-  public class Throttle implements DoubleSupplier{
-    @Override 
-    public double getAsDouble() {
-      return m_xbox.getLeftY(); // use left joystick for throttle
-    }
-  }
-
-  public class Turn implements DoubleSupplier{
+  private void configureButtonBindings() {}
+  private class Throttle implements DoubleSupplier{
     @Override
     public double getAsDouble() {
-      return m_xbox.getRightX(); // use right joystick for turn
+      return m_xbox.getLeftY();
     }
   }
 
+  private class Turn implements DoubleSupplier{
+    @Override
+    public double getAsDouble() {
+      return m_xbox.getRightX();
+    }
+  }
+
+  /* The getter for m_driveCommand. Notice that it's public, meaning that outsiders can access it. */
   public DriveCommand getDriveCommand(){
     return m_driveCommand;
-  }
-  private class DriveSwitch implements BooleanSupplier{
-    @Override
-    public boolean getAsBoolean() {
-      return m_xbox.getBButton();
-    }
-  }
-  
-  // public class Shoulder implements DoubleSupplier{
-  //   @Override
-  //   public double getAsDouble() {
-  //     //return xbox.getTriggerAxis(Hand.kRight) - xbox.getTriggerAxis(Hand.kLeft);// set shoulder speed 
-  //     return 0.0;
-  //   }
-  // }
-
-  private void configureButtonBindings() {
-    if (Robot.isSimulation()) {
-      // for the simulation, silence warnings about missing joysticks
-      DriverStation.getInstance().silenceJoystickConnectionWarning(true);
-    }
   }
   /**
    * LigerBots: we don't use this function. 
