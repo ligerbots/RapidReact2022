@@ -17,6 +17,7 @@ public class IntakeCommand extends CommandBase {
     //this.climber = climber;
     m_speed = speed;
     // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(intake);
   }
 
   // Called when the command is initially scheduled.

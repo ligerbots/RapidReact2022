@@ -4,10 +4,13 @@
 
 package frc.robot;
 
+import java.util.function.DoubleSupplier;
+
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.commands.DriveCommand;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Intake;
@@ -21,12 +24,16 @@ import frc.robot.subsystems.Vision;
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
-  // The robot's subsystems and commands are defined here...
-  public final DriveTrain robotDrive = new DriveTrain();
-  
-  XboxController xbox = new XboxController(0);
 
-  public final Vision vision = new Vision(robotDrive);
+  XboxController m_xbox = new XboxController(0);
+
+  // The robot's subsystems and commands are defined here...
+  private final Throttle m_throttle = new Throttle(); // create an instance of the throttle class. See explaination below
+  private final Turn m_turn = new Turn();
+  private final DriveTrain m_driveTrain = new DriveTrain(); 
+  private final DriveCommand m_driveCommand = new DriveCommand(m_driveTrain, m_throttle, m_turn); 
+
+  public final Vision vision = new Vision(m_driveTrain);
   public final Intake intake = new Intake();
   public final Shooter shooter = new Shooter(vision);
   public final Climber climber = new Climber();
@@ -42,13 +49,25 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
-  private void configureButtonBindings() {
-    if(Robot.isSimulation()){
-      DriverStation.getInstance().silenceJoystickConnectionWarning(true);
+  private void configureButtonBindings() {}
+  private class Throttle implements DoubleSupplier{
+    @Override
+    public double getAsDouble() {
+      return m_xbox.getLeftY();
     }
-    
   }
 
+  private class Turn implements DoubleSupplier{
+    @Override
+    public double getAsDouble() {
+      return m_xbox.getRightX();
+    }
+  }
+
+  /* The getter for m_driveCommand. Notice that it's public, meaning that outsiders can access it. */
+  public DriveCommand getDriveCommand(){
+    return m_driveCommand;
+  }
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
    *

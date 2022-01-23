@@ -7,9 +7,7 @@ package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -30,12 +28,9 @@ public class Climber extends SubsystemBase {
     m_armMotorLeader = new TalonFX(Constants.ARM_LEADER_CAN_ID);
     m_armMotorFollower = new TalonFX(Constants.ARM_FOLLOWER_CAN_ID);
   }
-
-  @Override
   public void periodic() {
     // This method will be called once per scheduler run
   }
-
   // sets the elevator to a certain height
   public void setElevatorHeight(double height) {
 
