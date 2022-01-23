@@ -8,8 +8,6 @@ package frc.robot.commands;
 import java.util.function.DoubleSupplier;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.RobotContainer.Throttle;
-import frc.robot.RobotContainer.Turn;
 import frc.robot.subsystems.DriveTrain;
 
 public class DriveCommand extends CommandBase {
