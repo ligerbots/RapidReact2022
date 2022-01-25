@@ -36,10 +36,8 @@ public class IntakeCommand extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    if (interrupted) {
-      m_intake.run(0);
+    m_intake.run(0);
       //climber.shoulder.setIdleMode(IdleMode.kBrake);
-  }
   }
 
 
