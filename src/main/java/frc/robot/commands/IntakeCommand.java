@@ -1,8 +1,8 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Climber;
 
 public class IntakeCommand extends CommandBase {
   /**
@@ -39,7 +39,6 @@ public class IntakeCommand extends CommandBase {
     m_intake.run(0);
       //climber.shoulder.setIdleMode(IdleMode.kBrake);
   }
-
 
   // Returns true when the command should end.
   @Override
