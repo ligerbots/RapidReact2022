@@ -31,6 +31,7 @@ public class Climber extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
   }
+  
   // sets the elevator to a certain height
   public void setElevatorHeight(double height) {
 

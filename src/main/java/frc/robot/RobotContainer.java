@@ -9,6 +9,7 @@ import java.util.function.DoubleSupplier;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.DriveCommand;
 import frc.robot.subsystems.Climber;
@@ -33,10 +34,11 @@ public class RobotContainer {
   private final DriveTrain m_driveTrain = new DriveTrain(); 
   private final DriveCommand m_driveCommand = new DriveCommand(m_driveTrain, m_throttle, m_turn); 
 
-  public final Vision vision = new Vision(m_driveTrain);
-  public final Intake intake = new Intake();
-  public final Shooter shooter = new Shooter(vision);
-  public final Climber climber = new Climber();
+  public final Vision m_vision = new Vision(m_driveTrain);
+  public final Intake m_intake = new Intake();
+  public final Shooter m_shooter = new Shooter(m_vision);
+  public final Climber m_climber = new Climber();
+  
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings
@@ -68,13 +70,11 @@ public class RobotContainer {
   public DriveCommand getDriveCommand(){
     return m_driveCommand;
   }
-  /**
-   * Use this to pass the autonomous command to the main {@link Robot} class.
-   *
-   * @return the command to run in autonomous
-   */
-  //public Command getAutonomousCommand() {
-    // An ExampleCommand will run in autonomous
-    //return m_autoCommand;
-  //}
+  //
+  // LigerBots: we don't use this function. 
+  // Autonomous is controlled by a Chooser defined in Robot.
+  //
+  // public Command getAutonomousCommand() {
+  //   return null;
+  // }
 }
