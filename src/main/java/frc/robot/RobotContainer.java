@@ -9,7 +9,7 @@ import java.util.function.DoubleSupplier;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.buttons.JoystickButton;
+//import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.DriveCommand;
 import frc.robot.subsystems.Climber;
@@ -33,10 +33,10 @@ public class RobotContainer {
 
     // The robot's subsystems and commands are defined here...
     private final DriveTrain m_driveTrain = new DriveTrain();
-    private final Vision m_vision = new Vision(m_driveTrain);
-    private final Intake m_intake = new Intake();
-    private final Shooter m_shooter = new Shooter(m_vision);
-    private final Climber m_climber = new Climber();
+    // private final Vision m_vision = new Vision(m_driveTrain);
+    // private final Intake m_intake = new Intake();
+    // private final Shooter m_shooter = new Shooter(m_vision);
+    // private final Climber m_climber = new Climber();
 
     private final Throttle m_throttle = new Throttle(); // create an instance of the throttle class. 
     private final Turn m_turn = new Turn();
@@ -64,14 +64,15 @@ public class RobotContainer {
     private class Throttle implements DoubleSupplier {
         @Override
         public double getAsDouble() {
-            return m_xbox.getLeftY();
+            // the controller does <0 is forward
+            return -m_xbox.getLeftY();
         }
     }
 
     private class Turn implements DoubleSupplier {
         @Override
         public double getAsDouble() {
-            return m_xbox.getRightX();
+            return -m_xbox.getRightX();
         }
     }
 

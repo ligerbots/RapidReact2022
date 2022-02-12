@@ -47,7 +47,7 @@ public class DriveTrain extends SubsystemBase {
     private AHRS m_navX;
 
     public DriveTrain() {
-        
+
         m_rightMotors.setInverted(true);
         m_differentialDrive = new DifferentialDrive(m_leftMotors, m_rightMotors);
         m_differentialDrive.setSafetyEnabled(false);
@@ -58,29 +58,28 @@ public class DriveTrain extends SubsystemBase {
         m_odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(0));
         m_navX = new AHRS(Port.kMXP, (byte) 200);
 
-
         if (RobotBase.isSimulation()) {
 
             m_differentialDriveSim = new DifferentialDrivetrainSim(
-                Constants.kDrivetrainPlant,
-                Constants.kDriveGearbox,
-                Constants.kDriveGearing,
-                Constants.kTrackwidth,
-                Constants.kWheelDiameterMeters / 2.0,
-                null);
+                    Constants.kDrivetrainPlant,
+                    Constants.kDriveGearbox,
+                    Constants.kDriveGearing,
+                    Constants.kTrackwidth,
+                    Constants.kWheelDiameterMeters / 2.0,
+                    null);
 
             m_leftEncoderSim = new EncoderSim(m_leftEncoder);
             m_rightEncoderSim = new EncoderSim(m_rightEncoder);
 
             m_gyroAngleSim = new SimDeviceSim("navX-Sensor[0]").getDouble("Yaw");
-            
+
             m_fieldSim = new Field2d();
             SmartDashboard.putData("Field", m_fieldSim);
         }
     }
 
-    //Get the current set speed of the speed controllers
-    public double getRightSpeed() {  
+    // Get the current set speed of the speed controllers
+    public double getRightSpeed() {
         return -m_rightMotors.get();
     }
 
@@ -88,29 +87,29 @@ public class DriveTrain extends SubsystemBase {
         return m_leftMotors.get();
     }
 
-    //Get stats about the encoders
+    // Get stats about the encoders
     public double getLeftEncoderDistance() {
         return m_leftEncoder.getDistance();
     }
-    
+
     public double getRightEncoderDistance() {
         return m_rightEncoder.getDistance();
     }
-    
-    public int getLeftEncoderTicks(){
+
+    public int getLeftEncoderTicks() {
         return m_leftEncoder.get();
     }
 
-    public int getRightEncoderTicks(){
+    public int getRightEncoderTicks() {
         return m_rightEncoder.get();
     }
 
-    //Get and Set odometry values
-    public Pose2d getPose(){
+    // Get and Set odometry values
+    public Pose2d getPose() {
         return m_odometry.getPoseMeters();
     }
 
-    public void setPose (Pose2d pose){
+    public void setPose(Pose2d pose) {
         m_leftEncoder.reset();
         m_rightEncoder.reset();
         m_odometry.resetPosition(pose, Rotation2d.fromDegrees(getGyroAngle()));
@@ -120,16 +119,15 @@ public class DriveTrain extends SubsystemBase {
         return m_odometry.getPoseMeters().getRotation().getDegrees();
     }
 
-
-    //Get Gyro info
+    // Get Gyro info
     public double getGyroAngle() {
         return Math.IEEEremainder(m_navX.getAngle(), 360) * -1;
     }
 
-
     @Override
     public void periodic() {
-        m_odometry.update(Rotation2d.fromDegrees(getGyroAngle()), m_leftEncoder.getDistance(), m_rightEncoder.getDistance());
+        m_odometry.update(Rotation2d.fromDegrees(getGyroAngle()), m_leftEncoder.getDistance(),
+                m_rightEncoder.getDistance());
 
         SmartDashboard.putNumber("driveTrain/heading", getHeading());
         SmartDashboard.putNumber("driveTrain/NavX gyro", getGyroAngle());
@@ -140,7 +138,9 @@ public class DriveTrain extends SubsystemBase {
         SmartDashboard.putNumber("driveTrain/right encoder", getRightEncoderTicks());
     }
 
-    public void drive(double throttle, double rotate, boolean squaredInput){
+    public void drive(double throttle, double rotate, boolean squaredInput) {
+        SmartDashboard.putNumber("driveTrain/throttle", throttle);
+
         m_differentialDrive.arcadeDrive(throttle, -rotate, squaredInput);
     }
 
@@ -150,13 +150,13 @@ public class DriveTrain extends SubsystemBase {
         // the [-1, 1] PWM signal to voltage by multiplying it by the
         // robot controller voltage.
         m_differentialDriveSim.setInputs(m_leftMotors.get() * RobotController.getInputVoltage(),
-                             m_rightMotors.get() * RobotController.getInputVoltage());
-      
+                m_rightMotors.get() * RobotController.getInputVoltage());
+
         // Advance the model by 20 ms. Note that if you are running this
         // subsystem in a separate thread or have changed the nominal timestep
         // of TimedRobot, this value needs to match it.
         m_differentialDriveSim.update(0.02);
-      
+
         // Update all of our sensors.
         m_leftEncoderSim.setDistance(m_differentialDriveSim.getLeftPositionMeters());
         m_leftEncoderSim.setRate(m_differentialDriveSim.getLeftVelocityMetersPerSecond());
@@ -165,6 +165,5 @@ public class DriveTrain extends SubsystemBase {
         m_gyroAngleSim.set(-m_differentialDriveSim.getHeading().getDegrees());
         m_fieldSim.setRobotPose(m_odometry.getPoseMeters());
     }
-
 
 }
