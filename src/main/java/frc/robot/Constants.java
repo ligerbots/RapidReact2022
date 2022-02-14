@@ -40,10 +40,10 @@ public final class Constants {
 
 
     // Following four CAN IDs are for the drivetrain
-    public static final int LEADER_LEFT_CAN_ID = 1; 
-    public static final int LEADER_RIGHT_CAN_ID = 4;
-    public static final int FOLLOWER_LEFT_CAN_ID = 2;
-    public static final int FOLLOWER_RIGHT_CAN_ID = 3;
+    public static final int LEADER_LEFT_CAN_ID = 9; 
+    public static final int LEADER_RIGHT_CAN_ID = 11;
+    public static final int FOLLOWER_LEFT_CAN_ID = 12;
+    public static final int FOLLOWER_RIGHT_CAN_ID = 8;
 
     // Following four CAN IDs are for the climber subsystem
     public static final int ELEVATOR_LEADER_CAN_ID = 5;
@@ -67,7 +67,4 @@ public final class Constants {
     public static final int HOPPER_TWO_CAN_ID = 6; // Motor 2 on hopper
 
     public static final int GRAYHILL_ENCODER_DISTANCE_PER_PULSE = 1; //TODO: Replace this value with a correct one 
-
-    
-
 }
