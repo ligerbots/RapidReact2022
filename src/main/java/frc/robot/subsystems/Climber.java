@@ -43,12 +43,12 @@ public class Climber extends SubsystemBase {
   }
 
   // returns the currrent height of the elevator
-  public void getElevatorHeight(){
-
+  public double getElevatorHeight(){
+    return 0.0;
   }
 
   //returns the current angle of the arm
-  public void getArmAngle(){
-
+  public double getArmAngle(){
+    return 0.0;
   }
 }

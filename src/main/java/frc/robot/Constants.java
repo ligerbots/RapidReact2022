@@ -67,4 +67,12 @@ public final class Constants {
     public static final int HOPPER_TWO_CAN_ID = 6; // Motor 2 on hopper
 
     public static final int GRAYHILL_ENCODER_DISTANCE_PER_PULSE = 1; //TODO: Replace this value with a correct one 
+
+    //define constants for high, low, and mid rung
+    public static final int HIGH_RUNG = 192;//192 cm
+    public static final int MID_RUNG = 153;//153 cm
+    public static final int LOW_RUNG = 124;//Top of rung is 124cm
+    public static final double CLIMBER_ANGLE = 22.0;
+    public static final double ELEVATORHEIGHT_TOLERANCE = 0.5;
+    public static final double ARMANGLE_TOLERANCE = 0.5;
 }
