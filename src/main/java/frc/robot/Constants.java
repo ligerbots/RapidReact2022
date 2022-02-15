@@ -57,14 +57,14 @@ public final class Constants {
     // drivetrain encoders
     public static final int[] LEFT_ENCODER_PORTS = new int[]{0, 1};
     public static final int[] RIGHT_ENCODER_PORTS = new int[]{2, 3};
-    public static final int LIMIT_SWITCH_ONE = 1; // Limit Switch 1
-    public static final int LIMIT_SWITCH_TWO = 2; // Limit Switch 2
+    public static final int LIMIT_SWITCH_ONE = 4; // Limit Switch 1
+    public static final int LIMIT_SWITCH_TWO = 5; // Limit Switch 2
 
-    public static final int SHOOTER_ONE_CAN_ID = 3; // Motor 1 on shooter
-    public static final int SHOOTER_TWO_CAN_ID = 4; // Motor 2 on shooter
+    public static final int SHOOTER_ONE_CAN_ID = 10; // Motor 1 on shooter
+    public static final int SHOOTER_TWO_CAN_ID = 11; // Motor 2 on shooter
 
-    public static final int HOPPER_ONE_CAN_ID = 5; // Motor 1 on hopper
-    public static final int HOPPER_TWO_CAN_ID = 6; // Motor 2 on hopper
+    public static final int HOPPER_ONE_CAN_ID = 12; // Motor 1 on hopper
+    public static final int HOPPER_TWO_CAN_ID = 13; // Motor 2 on hopper
 
     public static final int GRAYHILL_ENCODER_DISTANCE_PER_PULSE = 1; //TODO: Replace this value with a correct one 
 
