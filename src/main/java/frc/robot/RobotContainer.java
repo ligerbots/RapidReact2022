@@ -62,7 +62,10 @@ public class RobotContainer {
   private class Turn implements DoubleSupplier{
     @Override
     public double getAsDouble() {
-      return m_xbox.getRightX();
+      if (Robot.isReal())
+        return m_xbox.getRightX();
+      else
+        return m_xbox.getLeftX(); // convenience for keyboard simulation
     }
   }
 
