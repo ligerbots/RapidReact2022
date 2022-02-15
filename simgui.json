@@ -2,22 +2,30 @@
   "NTProvider": {
     "types": {
       "/FMSInfo": "FMSInfo",
+      "/LiveWindow/Climber": "Subsystem",
       "/LiveWindow/DriveTrain": "Subsystem",
+      "/LiveWindow/Intake": "Subsystem",
+      "/LiveWindow/Shooter": "Subsystem",
       "/LiveWindow/Ungrouped/DifferentialDrive[1]": "DifferentialDrive",
+      "/LiveWindow/Ungrouped/DigitalInput[4]": "Digital Input",
+      "/LiveWindow/Ungrouped/DigitalInput[5]": "Digital Input",
       "/LiveWindow/Ungrouped/Scheduler": "Scheduler",
       "/LiveWindow/Ungrouped/navX-Sensor[4]": "Gyro",
+      "/LiveWindow/Vision": "Subsystem",
       "/SmartDashboard/Field": "Field2d"
     },
     "windows": {
       "/SmartDashboard/Field": {
         "Robot": {
           "arrowSize": 55,
-          "image": "C:\\Users\\WEQ\\Downloads\\Yanjun Z.jpeg",
-          "length": 1.5,
+          "image": "robot.png",
+          "length": 0.7620000243186951,
           "style": "Box/Image",
-          "width": 1.0
+          "width": 0.6413499712944031
         },
-        "image": "C:\\Users\\WEQ\\Desktop\\Ligerbots\\RapidReact2022\\2022-field.png",
+        "height": 8.229599952697754,
+        "image": "2022-field.png",
+        "width": 16.459199905395508,
         "window": {
           "visible": true
         }
