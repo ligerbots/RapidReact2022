@@ -20,6 +20,22 @@ import edu.wpi.first.math.util.Units;
  */
 public final class Constants {
 
+    // PID coefficients for Elevator
+    public static final double kPElevator = 5e-5;
+    public static final double kIElevator = 1e-6;
+    public static final double kDElevator = 0; 
+    public static final double kIzElevator = 0; 
+    public static final double kFFElevator = 0.000156; 
+    public static final double kMaxOutputElevator = 1; 
+    public static final double kMinOutputElevator = -1;
+    
+    public static final double ElevatorMaxRPM = 5700;
+
+    // Smart Motion Coefficients for Elevator
+    public static final double ElevatorMaxVel = 2000; // rpm
+    public static final double ElevatorMaxAcc = 1500;
+
+
     // Temporary Encoder's Distance Per Pulse for simulation
     public static final double ENCODER_DISTANCE_PER_PULSE = Units.inchesToMeters(Math.PI * 6.0 / 1024);
 
