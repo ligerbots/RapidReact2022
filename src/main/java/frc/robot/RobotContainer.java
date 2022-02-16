@@ -36,7 +36,7 @@ public class RobotContainer {
     // private final Vision m_vision = new Vision(m_driveTrain);
     // private final Intake m_intake = new Intake();
     // private final Shooter m_shooter = new Shooter(m_vision);
-    // private final Climber m_climber = new Climber();
+    private final Climber m_climber = new Climber();
 
     private final Throttle m_throttle = new Throttle(); // create an instance of the throttle class. 
     private final Turn m_turn = new Turn();

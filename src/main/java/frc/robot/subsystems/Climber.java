@@ -50,8 +50,10 @@ public class Climber extends SubsystemBase {
     m_elevatorMotorLeader = new CANSparkMax(Constants.ELEVATOR_LEADER_CAN_ID,MotorType.kBrushless);
     m_elevatorMotorFollower = new CANSparkMax(Constants.ELEVATOR_FOLLOWER_CAN_ID,MotorType.kBrushless);
 
+    m_armMotorLeader.restoreFactoryDefaults();
     m_armPIDController = m_armMotorLeader.getPIDController();
     m_armEncoder = m_armMotorLeader.getEncoder();
+    m_armEncoder.setPositionConversionFactor(360/(42*150));
 
     m_armPIDController.setP(m_kPArm);
     m_armPIDController.setI(m_kIArm);
@@ -91,6 +93,7 @@ public class Climber extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     checkArmPIDVal();
+    System.out.println("checking arm PIDS");
   }
   
   // sets the elevator to a certain height
