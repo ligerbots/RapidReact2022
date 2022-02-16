@@ -17,6 +17,7 @@ public class setClimber  extends CommandBase {
   @Override
   public void initialize() {
     //only called at beginning when driver clicks button, only needs to execute once
+    
     m_climber.rotateArm(m_angle);
     m_climber.setElevatorHeight(m_rungHeight);
   }
@@ -36,12 +37,8 @@ public class setClimber  extends CommandBase {
   @Override
   public boolean isFinished() {
       //is finished if the distance between the getElevatorHeight()
-    boolean isFinished = false;
-    if(Math.abs(m_rungHeight - m_climber.getElevatorHeight())<Constants.ARMANGLE_TOLERANCE){//if distance between rung height and elevator heigh tis less then the tolerance
-        isFinished = true;//stop running
-    }else{
-        isFinished = false;
-    }
-    return isFinished;
+    
+
+    return (Math.abs(m_rungHeight - m_climber.getElevatorHeight())<Constants.ARMANGLE_TOLERANCE);
   }
 }
