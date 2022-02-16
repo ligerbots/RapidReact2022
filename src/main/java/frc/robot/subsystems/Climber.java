@@ -47,8 +47,8 @@ public class Climber extends SubsystemBase {
   public Climber() {
     m_armMotorLeader = new CANSparkMax(Constants.ARM_LEADER_CAN_ID, MotorType.kBrushless);
     m_armMotorFollower = new CANSparkMax(Constants.ARM_FOLLOWER_CAN_ID, MotorType.kBrushless);
-    m_elevatorMotorLeader = new CANSparkMax(Constants.ARM_LEADER_CAN_ID,MotorType.kBrushless);
-    m_elevatorMotorFollower = new CANSparkMax(Constants.ARM_FOLLOWER_CAN_ID,MotorType.kBrushless);
+    m_elevatorMotorLeader = new CANSparkMax(Constants.ELEVATOR_LEADER_CAN_ID,MotorType.kBrushless);
+    m_elevatorMotorFollower = new CANSparkMax(Constants.ELEVATOR_FOLLOWER_CAN_ID,MotorType.kBrushless);
 
     m_armPIDController = m_armMotorLeader.getPIDController();
     m_armEncoder = m_armMotorLeader.getEncoder();
