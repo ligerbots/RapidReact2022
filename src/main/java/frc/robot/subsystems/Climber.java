@@ -39,7 +39,7 @@ public class Climber extends SubsystemBase {
   // Smart Motion Coefficients for Elevator
   double m_armMaxVel = 2000; // rpm
   double m_armMinVel = 0;
-  double m_armMaxAcc = 1500;
+  double m_armMaxAcc = 100;
 
   double m_armAllowedErr = 0;
 
@@ -53,8 +53,8 @@ public class Climber extends SubsystemBase {
     m_armMotorLeader.restoreFactoryDefaults();
     m_armPIDController = m_armMotorLeader.getPIDController();
     m_armEncoder = m_armMotorLeader.getEncoder();
-    m_armEncoder.setPositionConversionFactor(360/(42*150));
-
+    m_armEncoder.setPositionConversionFactor((1.0/25.0)*360.0);
+    System.out.println("Get Position Conversion Factor");
     m_armPIDController.setP(m_kPArm);
     m_armPIDController.setI(m_kIArm);
     m_armPIDController.setD(m_kDArm);
@@ -93,7 +93,7 @@ public class Climber extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     checkArmPIDVal();
-    System.out.println("checking arm PIDS");
+    
   }
   
   // sets the elevator to a certain height
