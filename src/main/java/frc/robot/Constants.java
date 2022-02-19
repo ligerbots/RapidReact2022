@@ -60,8 +60,9 @@ public final class Constants {
     public static final int LIMIT_SWITCH_ONE = 1; // Limit Switch 1
     public static final int LIMIT_SWITCH_TWO = 2; // Limit Switch 2
 
-    public static final int SHOOTER_ONE_CAN_ID = 3; // Motor 1 on shooter
-    public static final int SHOOTER_TWO_CAN_ID = 4; // Motor 2 on shooter
+    // Following two CAN IDs are for the shooter subsystem
+    public static final int TOP_SHOOTER_CAN_ID = 3; // Motor 1 on shooter
+    public static final int BOTTOM_SHOOTER_CAN_ID = 4; // Motor 2 on shooter
 
     public static final int HOPPER_ONE_CAN_ID = 5; // Motor 1 on hopper
     public static final int HOPPER_TWO_CAN_ID = 6; // Motor 2 on hopper
