@@ -4,11 +4,11 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Climber;
-public class setClimber  extends CommandBase {
+public class SetClimber extends CommandBase {
     Climber m_climber;
     double m_rungHeight;
     double m_angle = Constants.CLIMBER_ANGLE;
-    public setClimber(Climber climber, double rungHeight) {
+    public SetClimber(Climber climber, double rungHeight) {
         m_climber = climber;
         m_rungHeight = rungHeight;
         addRequirements(climber);

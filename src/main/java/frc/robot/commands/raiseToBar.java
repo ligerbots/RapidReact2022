@@ -8,7 +8,7 @@ enum State {
   RAISE_ROBOT, GRAB_BAR, LOWER_ROBOT;
 }
 
-public class raiseToBar extends CommandBase {
+public class RaiseToBar extends CommandBase {
   Climber m_climber;
   State m_state;
   boolean m_stateFlagRaiseRobot = false; //this and next 3 var checks the state of whether or not the code has been checked yet, because we dont want to keep on calling setElevatorHeight and etc in execute
@@ -19,7 +19,7 @@ public class raiseToBar extends CommandBase {
                                                                   // robot
   double m_postHeight = Constants.POSTGRAB_ELEVATOR_HEIGHT;//
 
-  public raiseToBar(Climber climber) {
+  public RaiseToBar(Climber climber) {
     m_climber = climber;
     addRequirements(climber);
   }
