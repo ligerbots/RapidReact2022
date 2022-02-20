@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class TuneShooterCommand extends CommandBase{
     Shooter m_shooter;
     Intake m_intake;
-    Double top, bottom, chute;
     SmartDashboard smartDashboard;
     public TuneShooterCommand(Shooter shooter, Intake intake){
         m_shooter = shooter;
@@ -25,9 +24,9 @@ public class TuneShooterCommand extends CommandBase{
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        top = SmartDashboard.getNumber("Shooter Top Speed", 0);
-        bottom = SmartDashboard.getNumber("Shooter Bottom Speed", 0);
-        chute = SmartDashboard.getNumber("Chute Speed", 0);
+        double top = SmartDashboard.getNumber("Shooter Top Speed", 0);
+        double bottom = SmartDashboard.getNumber("Shooter Bottom Speed", 0);
+        double chute = SmartDashboard.getNumber("Chute Speed", 0);
         m_intake.run(5.0);
         m_shooter.shoot(top,bottom,chute);
     }

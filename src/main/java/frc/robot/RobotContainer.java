@@ -44,8 +44,7 @@ public class RobotContainer {
     private final Throttle m_throttle = new Throttle(); // create an instance of the throttle class. 
     private final Turn m_turn = new Turn();
     private final DriveCommand m_driveCommand = new DriveCommand(m_driveTrain, m_throttle, m_turn);
-
-    private final TuneShooterCommand m_tuneShooterCommand = new TuneShooterCommand(m_shooter, m_intake);
+    
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
      */
