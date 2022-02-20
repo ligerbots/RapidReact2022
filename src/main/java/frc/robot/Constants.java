@@ -19,7 +19,6 @@ import edu.wpi.first.math.util.Units;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-
     // Temporary Encoder's Distance Per Pulse for simulation
     public static final double ENCODER_DISTANCE_PER_PULSE = Units.inchesToMeters(Math.PI * 6.0 / 1024);
 
@@ -53,6 +52,7 @@ public final class Constants {
 
     // intake subsystem
     public static final int INTAKE_MOTOR_CAN_ID = 5; 
+    public static final double INTAKE_SHOOTING_SPEED = 5.0;
 
     // drivetrain encoders
     public static final int[] LEFT_ENCODER_PORTS = new int[]{0, 1};
@@ -68,4 +68,6 @@ public final class Constants {
     public static final int CHUTE_CAN_ID = 6; 
 
     public static final int GRAYHILL_ENCODER_DISTANCE_PER_PULSE = 1; //TODO: Replace this value with a correct one 
+
+    public static final int XBOX_A = 1;
 }

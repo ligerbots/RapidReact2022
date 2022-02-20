@@ -6,10 +6,11 @@
 /*----------------------------------------------------------------------------*/
 package frc.robot.subsystems;
 
+
+
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -25,9 +26,9 @@ public class Shooter extends SubsystemBase {
     //Limit Switch for Intake
     DigitalInput m_limitSwitch1, m_limitSwitch2;
 
-
+    
     //Shooter class constructor, initialize arrays for motors controllers, encoders, and SmartDashboard data
-    public Shooter(Vision vision) {
+    public Shooter() {
 
         m_chuteMotor = new CANSparkMax(Constants.CHUTE_CAN_ID, MotorType.kBrushless);
 
@@ -36,6 +37,7 @@ public class Shooter extends SubsystemBase {
 
         m_limitSwitch1 = new DigitalInput(Constants.LIMIT_SWITCH_ONE);
         m_limitSwitch2 = new DigitalInput(Constants.LIMIT_SWITCH_TWO);
+
     }
 
     //periodically update the values of motors for shooter to SmartDashboard
@@ -44,12 +46,16 @@ public class Shooter extends SubsystemBase {
     }
 
     //shoot the ball into the high hub for certain distance
-    public void shoot(double distance) {
-
+    public void shoot(double top, double bottom, double chute) {
+        m_topShooterMotor.set(top);
+        m_bottomShooterMotor.set(bottom);
+        m_chuteMotor.set(chute);
     }
 
     //dump the balls into the low hub
     public void dump(){
 
     }
+
+
 }
