@@ -1,5 +1,6 @@
 package frc.robot.commands;
 
+import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.ShooterTable;
 
@@ -9,10 +10,12 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class ShooterCommand extends CommandBase{
     Shooter m_shooter;
+    Intake m_intake;
     TreeMap <Double, ShooterTable> m_speedTable = new TreeMap <Double, ShooterTable> (){}; //set up lookup table for shooter speeds
 
-    public ShooterCommand(Shooter shooter){
+    public ShooterCommand(Shooter shooter, Intake intake){
         m_shooter = shooter;
+        m_intake = intake;
     }
 
     @Override

@@ -67,4 +67,6 @@ public final class Constants {
     public static final int CHUTE_CAN_ID = 6; 
 
     public static final int GRAYHILL_ENCODER_DISTANCE_PER_PULSE = 1; //TODO: Replace this value with a correct one 
+
+    public static final int XBOX_A = 1;
 }
