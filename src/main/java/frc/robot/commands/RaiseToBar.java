@@ -2,7 +2,6 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
-import frc.robot.commands.ClimbToNextBar.STAGE;
 import frc.robot.subsystems.Climber;
 
 public class RaiseToBar extends CommandBase {
@@ -47,6 +46,7 @@ public class RaiseToBar extends CommandBase {
 					if (Math.abs(m_climber.getElevatorHeight() - m_setRetractElevator) < Constants.ELEVATOR_HEIGHT_TOLERANCE) 
 						m_state = State.GRAB_BAR; // grabs bar
 					break;	
+
 			case GRAB_BAR:
 					m_climber.setArmAngle(m_rungAngle);// is a constant
 					m_state = State.WAIT_GRAB_BAR;
@@ -54,6 +54,7 @@ public class RaiseToBar extends CommandBase {
 				if (Math.abs(m_climber.getArmAngle() - m_rungAngle) < Constants.ARM_ANGLE_TOLERANCE) 
 					m_state = State.LOWER_ROBOT; // lowers robot
 				break;
+				
 			case LOWER_ROBOT:
 					m_climber.setElevatorHeight(Constants.POSTGRAB_ELEVATOR_HEIGHT);
 					m_state = State.WAIT_LOWER_ROBOT;
