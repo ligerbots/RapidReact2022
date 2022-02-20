@@ -20,9 +20,9 @@ import frc.robot.Constants;
 public class Shooter extends SubsystemBase {
 
     //CANSparkMax for the hopper
-    CANSparkMax m_hopper1, m_hopper2;
+    CANSparkMax m_chuteMotor;
     //WPI_TalonFX for the shooter
-    WPI_TalonFX m_shooterTop, m_shooterBottom;
+    WPI_TalonFX m_topShooterMotor, m_bottomShooterMotor;
     //Limit Switch for Intake
     DigitalInput m_limitSwitch1, m_limitSwitch2;
 
@@ -30,11 +30,10 @@ public class Shooter extends SubsystemBase {
     //Shooter class constructor, initialize arrays for motors controllers, encoders, and SmartDashboard data
     public Shooter(Vision vision) {
 
-        m_hopper1 = new CANSparkMax(Constants.HOPPER_ONE_CAN_ID, MotorType.kBrushless);
-        m_hopper2 = new CANSparkMax(Constants.HOPPER_TWO_CAN_ID, MotorType.kBrushless);
+        m_chuteMotor = new CANSparkMax(Constants.CHUTE_CAN_ID, MotorType.kBrushless);
 
-        m_shooterTop = new WPI_TalonFX(Constants.SHOOTER_ONE_CAN_ID);
-        m_shooterBottom = new WPI_TalonFX(Constants.SHOOTER_TWO_CAN_ID);
+        m_topShooterMotor = new WPI_TalonFX(Constants.TOP_SHOOTER_CAN_ID);
+        m_bottomShooterMotor = new WPI_TalonFX(Constants.BOTTOM_SHOOTER_CAN_ID);
 
         m_limitSwitch1 = new DigitalInput(Constants.LIMIT_SWITCH_ONE);
         m_limitSwitch2 = new DigitalInput(Constants.LIMIT_SWITCH_TWO);
@@ -48,10 +47,9 @@ public class Shooter extends SubsystemBase {
 
     //shoot the ball into the high hub for certain distance
     public void shoot(double top, double bottom, double chute) {
-        m_shooterTop.set(top);
-        m_shooterBottom.set(bottom);
-        m_hopper1.set(chute);
-        m_hopper2.set(chute);
+        m_topShooterMotor.set(top);
+        m_bottomShooterMotor.set(bottom);
+        m_chuteMotor.set(chute);
     }
 
     //dump the balls into the low hub
