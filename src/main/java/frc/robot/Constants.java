@@ -39,7 +39,7 @@ public final class Constants {
     public static final double kTrackwidth = 0.6604;
 
 
-    // Following four CAN IDs are for the drivetrain
+    // Following four CAN IDs are for the drivetrain subsystem
     public static final int LEADER_LEFT_CAN_ID = 9; 
     public static final int LEADER_RIGHT_CAN_ID = 11;
     public static final int FOLLOWER_LEFT_CAN_ID = 12;
@@ -51,8 +51,8 @@ public final class Constants {
     public static final int ARM_LEADER_CAN_ID = 7;
     public static final int ARM_FOLLOWER_CAN_ID = 10;
 
-    // Intake subsystem
-    public static final int INTAKE_MOTOR_CAN_ID = 5; //temporary value
+    // intake subsystem
+    public static final int INTAKE_MOTOR_CAN_ID = 5; 
 
     // drivetrain encoders
     public static final int[] LEFT_ENCODER_PORTS = new int[]{0, 1};
@@ -64,7 +64,7 @@ public final class Constants {
     public static final int TOP_SHOOTER_CAN_ID = 3; 
     public static final int BOTTOM_SHOOTER_CAN_ID = 4;
 
-    // Following CAN ID is for the  subsystem
+    // chute subsystem
     public static final int CHUTE_CAN_ID = 6; 
 
     public static final int GRAYHILL_ENCODER_DISTANCE_PER_PULSE = 1; //TODO: Replace this value with a correct one 
