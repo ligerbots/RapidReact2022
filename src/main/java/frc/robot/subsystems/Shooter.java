@@ -19,9 +19,9 @@ import frc.robot.Constants;
 public class Shooter extends SubsystemBase {
 
     //CANSparkMax for the hopper
-    CANSparkMax m_motor1, m_motor2;
+    CANSparkMax m_chuteMotor;
     //WPI_TalonFX for the shooter
-    WPI_TalonFX m_motor3, m_motor4;
+    WPI_TalonFX m_topShooterMotor, m_bottomShooterMotor;
     //Limit Switch for Intake
     DigitalInput m_limitSwitch1, m_limitSwitch2;
 
@@ -29,11 +29,10 @@ public class Shooter extends SubsystemBase {
     //Shooter class constructor, initialize arrays for motors controllers, encoders, and SmartDashboard data
     public Shooter(Vision vision) {
 
-        m_motor1 = new CANSparkMax(Constants.HOPPER_ONE_CAN_ID, MotorType.kBrushless);
-        m_motor2 = new CANSparkMax(Constants.HOPPER_TWO_CAN_ID, MotorType.kBrushless);
+        m_chuteMotor = new CANSparkMax(Constants.CHUTE_CAN_ID, MotorType.kBrushless);
 
-        m_motor3 = new WPI_TalonFX(Constants.SHOOTER_ONE_CAN_ID);
-        m_motor4 = new WPI_TalonFX(Constants.SHOOTER_TWO_CAN_ID);
+        m_topShooterMotor = new WPI_TalonFX(Constants.TOP_SHOOTER_CAN_ID);
+        m_bottomShooterMotor = new WPI_TalonFX(Constants.BOTTOM_SHOOTER_CAN_ID);
 
         m_limitSwitch1 = new DigitalInput(Constants.LIMIT_SWITCH_ONE);
         m_limitSwitch2 = new DigitalInput(Constants.LIMIT_SWITCH_TWO);
