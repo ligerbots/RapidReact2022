@@ -37,8 +37,8 @@ public class Climber extends SubsystemBase {
 
   }
   
-  // rotates the arms a certain degree
-  public void rotateArm(double degree){
+  // rotates the arms to a certain angle
+  public void setArmAngle(double degree){
 
   }
 

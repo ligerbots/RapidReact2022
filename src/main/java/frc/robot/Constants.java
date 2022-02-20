@@ -75,17 +75,18 @@ public final class Constants {
     public static final double CLIMBER_ANGLE = 22.0;//angle for setClimber()
     
     
-    public static final double ELEVATORHEIGHT_TOLERANCE = 0.5;//tolerance for elevator
-    public static final double ARMANGLE_TOLERANCE = 0.5;
+    public static final double ELEVATOR_HEIGHT_TOLERANCE = 0.5;//tolerance for elevator
+    public static final double ARM_ANGLE_TOLERANCE = 0.5;
 
     public static final double RUNG_ANGLE = -22.0;//angle to clamp back on rung for raiseToBar command
     public static final double ELEVATOR_RETRACT_HEIGHT = 100.0;////height elevator is lowered to to raise the robot
     public static final double POSTGRAB_ELEVATOR_HEIGHT = 130.0; //for raiseToBar, changes elevator after arm hooks on, height of elevator after grab
     
-    //the angle between the perpendicular elevator and the next bar
-    public static final double ANGLE_TO_NEXT_BAR = 40.0; 
-    //the angle for the arm to rotate to follow the motion of the elevator when retracting
-    public static final double ARM_RETRACT_ANGLE = 20.0;
+    public static final double ELEVATOR_MAX_HEIGHT = 200.0;//length of elevator when fully extended
+    public static final double ELEVATOR_MIN_HEIGHT = 100.0;//length of elevator when fully retracted
 
-    public static final double POSTGRAB_ARM_ANGLE = 90.0;
+    //the angle for the arm to rotate to turn the elevator towards the next bar
+    public static final double ARM_ANGLE_TO_NEXT_BAR = 130.0;
+    public static final double ARM_ADJUST_ANGLE = 160.0; // the angle the arm needs to rotate to follow the motion of the elevator when retracting
+
 }
