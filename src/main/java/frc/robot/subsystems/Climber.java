@@ -20,6 +20,7 @@ public class Climber extends SubsystemBase {
   CANSparkMax m_elevatorMotorFollower;
   CANSparkMax m_armMotorLeader;
   CANSparkMax m_armMotorFollower;
+  DutyCycleEncoder throughBoreEncoder;
   RelativeEncoder m_winchEncoder;
   RelativeEncoder m_armEncoder;
   SmartDashboard smartDashboard;
@@ -158,6 +159,7 @@ public class Climber extends SubsystemBase {
       * setReference method on an existing pid object and setting
       * the control type to kSmartMotion
       */
+    //TODO: this setReference stuff should be put into the setArmAngle method
      m_armPIDController.setReference(setPoint, CANSparkMax.ControlType.kSmartMotion);
      processVariable = m_armEncoder.getPosition();
    }
