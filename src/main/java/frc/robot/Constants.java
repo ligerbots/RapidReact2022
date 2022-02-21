@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.math.numbers.N2;
 import edu.wpi.first.math.system.LinearSystem;
 import edu.wpi.first.math.system.plant.DCMotor;
@@ -36,7 +37,15 @@ public final class Constants {
     public static final double kDriveGearing = 8;
     public static final double kWheelDiameterMeters = 0.1016;
     public static final double kTrackwidth = 0.6604;
+    // more fake values for ramsete
+    public static final double ksVolts = 0.182; 
+    public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(kTrackwidth);
+    public static final double kMaxSpeed = 1.75;
+    public static final double kMaxAcceleration = 1.5;
+    public static final double kPDriveVel = 6; 
 
+    public static final double kRamseteB = 2; // generic ramsete values
+    public static final double kRamseteZeta = 0.7; // generic ramsete values
 
     // Following four CAN IDs are for the drivetrain subsystem
     public static final int LEADER_LEFT_CAN_ID = 9; 
@@ -70,4 +79,9 @@ public final class Constants {
     public static final int GRAYHILL_ENCODER_DISTANCE_PER_PULSE = 1; //TODO: Replace this value with a correct one 
 
     public static final int XBOX_A = 1;
+
+    // Vision Subsystem
+    public static final double TOLERANCE_DEG = 5.;
+    public static final double STABALIZE_SECS = .5;
+    public static final double TIMEOUT_SECS = 3;
 }
