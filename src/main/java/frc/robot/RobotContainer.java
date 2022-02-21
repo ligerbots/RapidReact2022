@@ -6,12 +6,9 @@ package frc.robot;
 
 import java.util.function.DoubleSupplier;
 
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 //import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.TuneShooterCommand;
@@ -75,12 +72,8 @@ public class RobotContainer {
     private class Turn implements DoubleSupplier {
         @Override
         public double getAsDouble() {
-            if (Robot.isReal())
-                return m_xbox.getRightX();
-            else
-                return m_xbox.getLeftX();
+            return -m_xbox.getRightX();
         }
-        // convenience for keyboard simulation
     }
 
     /*

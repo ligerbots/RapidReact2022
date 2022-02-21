@@ -53,12 +53,12 @@ public class TurnTowardsHub extends SequentialCommandGroup{
         m_toleranceDeg = toleranceDeg;
         m_stabilizeSecs = stabilizeSecs;
         addCommands(
-            vision.new AwaitVisionResult(Vision.VisionMode.HUBFINDER),
+            new AwaitVisionResult(vision, Vision.VisionMode.HUBFINDER),
             new TurnTowardsHubLoop()
         );
     }
     public TurnTowardsHub(DriveTrain driveTrain, Vision vision){
-        this(Constants.TOLERANCE_DEG, Constants.STABALIZE_SECS, driveTrain, vision);
+        this(Constants.TURN_TOLERANCE_DEG, Constants.TURN_STABILIZE_SECS, driveTrain, vision);
     }
 
 }

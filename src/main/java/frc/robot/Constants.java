@@ -80,8 +80,8 @@ public final class Constants {
 
     public static final int XBOX_A = 1;
 
-    // Vision Subsystem
-    public static final double TOLERANCE_DEG = 5.;
-    public static final double STABALIZE_SECS = .5;
-    public static final double TIMEOUT_SECS = 3;
+    // drivetrain turning constants
+    public static final double TURN_TOLERANCE_DEG = 5.;
+    public static final double TURN_STABILIZE_SECS = .5;
+    public static final double TURN_TIMEOUT_SECS = 3;
 }

@@ -6,7 +6,6 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.RamseteController;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.math.trajectory.TrajectoryGenerator;
@@ -72,7 +71,7 @@ public class TwoBallAutoCurved extends SequentialCommandGroup implements AutoCom
                 ), 
                 new IntakeCommand(intake, Constants.INTAKE_SHOOTING_SPEED)
             ),
-            new TurnTowardsHub(driveTrain, vision).withTimeout(Constants.TIMEOUT_SECS),
+            new TurnTowardsHub(driveTrain, vision).withTimeout(Constants.TURN_TIMEOUT_SECS),
             new SelectCommand(() -> new ShooterCommand(shooter, intake, vision, Shooter.calculateShooterSpeeds(vision.getDistance())))
         );
     }

@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.FieldInformation;
-import frc.robot.Robot;
 
 public class Vision extends SubsystemBase {
     public enum VisionMode {
@@ -20,7 +19,7 @@ public class Vision extends SubsystemBase {
         HUBFINDER,
     }
 
-    static final VisionMode DEFAULT_MODE = VisionMode.INTAKE;
+    public static final VisionMode DEFAULT_MODE = VisionMode.INTAKE;
     private static final double[] EMPTY_TARGET_INFO = new double[] {0.0,0.0,0.0,0.0,0.0,0.0,0.0};
 
     private Relay m_spike;
@@ -110,28 +109,5 @@ public class Vision extends SubsystemBase {
 
     public void setLedRing (boolean on) {
         m_spike.set(on ? Value.kReverse : Value.kOff);
-    }
-
-    public class AwaitVisionResult extends CommandBase {
-        private VisionMode m_mode;
-        public AwaitVisionResult(VisionMode mode) {
-            m_mode = mode;
-        }
-        @Override
-        public void initialize() {
-            setMode(m_mode);
-        }
-        @Override
-        public boolean isFinished() {
-            return getStatus();
-        }
-        @Override
-        public void execute() {
-        }
-        @Override
-        public void end(boolean interrupted) {
-            if(interrupted) setMode(DEFAULT_MODE);
-            // this command does not reset the mode unless it is interrupted (for use in SequentialCommandGroups)
-        }
     }
 }

@@ -21,10 +21,12 @@ import frc.robot.Constants;
 
 
 public class Shooter extends SubsystemBase {
-
-    CANSparkMax m_chuteMotor; //CANSparkMax for the hopper
-    WPI_TalonFX m_topShooterMotor, m_bottomShooterMotor; //WPI_TalonFX for the shooter
-    DigitalInput m_limitSwitch1, m_limitSwitch2; //Limit Swit
+    // CANSparkMax for the hopper
+    CANSparkMax m_chuteMotor;
+    // WPI_TalonFX for the shooter
+    WPI_TalonFX m_topShooterMotor, m_bottomShooterMotor;
+    // Limit Switch for Intake
+    DigitalInput m_limitSwitch1, m_limitSwitch2;
     
     static TreeMap<Double, ShooterSpeeds> shooterSpeeds = new TreeMap<>(Map.ofEntries(
         Map.entry(1., new ShooterSpeeds(0.5, 0.5, 0.5)),
@@ -51,9 +53,9 @@ public class Shooter extends SubsystemBase {
         }
         public ShooterSpeeds interpolate(ShooterSpeeds other, double ratio) {
             return new ShooterSpeeds(
-                top * (1 - ratio) + other.top * ratio,
-                bottom * (1 - ratio) + other.bottom * ratio,
-                chute * (1 - ratio) + other.chute * ratio
+                top + (other.top - top) * ratio,
+                bottom + (other.bottom - bottom) * ratio,
+                chute + (other.chute - chute) * ratio
             );
         }
     }
@@ -61,7 +63,7 @@ public class Shooter extends SubsystemBase {
     public static ShooterSpeeds calculateShooterSpeeds(double distance){
         Map.Entry<Double, ShooterSpeeds> before = shooterSpeeds.floorEntry(distance);
         Map.Entry<Double, ShooterSpeeds> after = shooterSpeeds.ceilingEntry(distance);
-        if (before == null && after == null) throw new Error("Shooter Speeds empty");
+        if (before == null && after == null) return null;
         if (before == null) return after.getValue();
         if (after == null) return before.getValue();
         double ratio = (distance - before.getKey()) / (after.getKey() - before.getKey());
