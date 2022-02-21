@@ -1,101 +1,41 @@
+// Copyright (c) FIRST and other WPILib contributors.
+// Open Source Software; you can modify and/or share it under the terms of
+// the WPILib BSD license file in the root directory of this project.
+
 package frc.robot.commands;
 
-import java.util.zip.Deflater;
-
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
 import frc.robot.subsystems.Climber;
 
-public class ClimbToNextBar extends CommandBase {
+// NOTE:  Consider using this command inline, rather than writing a subclass.  For more
+// information, see:
+// https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
+public class ClimbToNextBar extends SequentialCommandGroup {
+  /** Creates a new ClimbToNextBar. */
+  Climber m_climber;
+  public ClimbToNextBar(Climber climber) {
 
-    enum STAGE {
-        STAGE1, WAIT_STAGE1, STAGE2, WAIT_STAGE2, STAGE3, WAIT_STAGE3, STAGE4, WAIT_STAGE4, STAGE5, WAIT_STAGE5, STAGE6,
-        WAIT_STAGE6, FINISHED;
-    }
+    m_climber = climber;
+    // Add your commands in the addCommands() call, e.g.
+    // addCommands(new FooCommand(), new BarCommand());
+    addCommands(
+      // rotate the arm to point elevator towards the next bar
+      new SetArmAngle(m_climber, Constants.ARM_ANGLE_TO_NEXT_BAR),
 
-    Climber m_climber;
-    STAGE m_stage;
+      // extend the elevator
+      new SetElevatorHeight(m_climber, Constants.ELEVATOR_MAX_HEIGHT),
 
-    public ClimbToNextBar(Climber climber) {
-        m_climber = climber;
-        addRequirements(climber);
-    }
+      // parallel command group, to have the arm rotate while elevator retracts
+      new RetractElevatorAdjustArm(m_climber),
 
-    // Called when the command is initially scheduled.
-    @Override
-    public void initialize() {
-        m_stage = STAGE.STAGE1;
-    }
+      // rotate the arm to leave the previous bar and get to the side of the next bar
+      new SetArmAngle(m_climber, 45.0),
 
-    // Called every time the scheduler runs while the command is scheduled.
-    @Override
-    public void execute() {
-        switch (m_stage) {
-            case STAGE1:
-                // rotate the arm to point elevator towards the next bar
-                m_climber.setArmAngle(Constants.ARM_ANGLE_TO_NEXT_BAR);
-                m_stage = STAGE.WAIT_STAGE1;
-            case WAIT_STAGE1:
-                if (Math.abs(m_climber.getArmAngle() - Constants.ARM_ANGLE_TO_NEXT_BAR) < Constants.ARM_ANGLE_TOLERANCE)
-                    m_stage = STAGE.STAGE2;
-                break;
-            case STAGE2:
-                // extend the elevator
-                m_climber.setElevatorHeight(Constants.ELEVATOR_MAX_HEIGHT);
-                m_stage = STAGE.WAIT_STAGE2;
-            case WAIT_STAGE2:
-                if (Math.abs(m_climber.getElevatorHeight()
-                        - Constants.ELEVATOR_MAX_HEIGHT) < Constants.ELEVATOR_HEIGHT_TOLERANCE)
-                    m_stage = STAGE.STAGE3;
-                break;
+      // fully retract the elevator
+      new SetElevatorHeight(m_climber, Constants.ELEVATOR_MIN_HEIGHT),
 
-            case STAGE3:
-                // parallel command group, to have the arm rotate while elevator retracts
-                new RetractElevatorAdjustArm(m_climber).schedule();
-                m_stage = STAGE.WAIT_STAGE3;
-            case WAIT_STAGE3:
-                if (Math.abs(m_climber.getArmAngle() - Constants.ARM_ADJUST_ANGLE) < Constants.ARM_ANGLE_TOLERANCE
-                        && Math.abs(m_climber.getElevatorHeight()
-                                - (Constants.ELEVATOR_MIN_HEIGHT + 20.0)) < Constants.ELEVATOR_HEIGHT_TOLERANCE)
-                    m_stage = STAGE.STAGE4;
-                break;
-            case STAGE4:
-                // rotate the arm to leave the previous bar and get to the side of the next bar
-                m_climber.setArmAngle(45.0);
-                m_stage = STAGE.WAIT_STAGE4;
-            case WAIT_STAGE4:
-                if (Math.abs(m_climber.getArmAngle() - 45.0) < Constants.ARM_ANGLE_TOLERANCE)
-                    m_stage = STAGE.STAGE5;
-                break;
-            case STAGE5:
-                // fully retract the elevator
-                m_climber.setElevatorHeight(Constants.ELEVATOR_MIN_HEIGHT);
-                m_stage = STAGE.WAIT_STAGE5;
-            case WAIT_STAGE5:
-                if (Math.abs(m_climber.getElevatorHeight()
-                        - Constants.ELEVATOR_MIN_HEIGHT) < Constants.ELEVATOR_HEIGHT_TOLERANCE)
-                    m_stage = STAGE.STAGE6;
-                break;
-            case STAGE6:
-                // rotate the arm back to grab on to the bar
-                m_climber.setArmAngle(90.0);
-                m_stage = STAGE.WAIT_STAGE6;
-            case WAIT_STAGE6:
-                if (Math.abs(m_climber.getArmAngle() - 90.0) < Constants.ARM_ANGLE_TOLERANCE)
-                    m_stage = STAGE.FINISHED;
-                break;
-        }
-    }
-
-    // Called once the command ends or is interrupted.
-    @Override
-    public void end(boolean interrupted) {
-    }
-
-    // Returns true when the command should end.
-    @Override
-    public boolean isFinished() {
-        return m_stage == STAGE.FINISHED;
-    }
-
+      // rotate the arm back to grab on to the bar
+      new SetArmAngle(m_climber, 90.0));
+  }
 }

@@ -79,8 +79,6 @@ public final class Constants {
     public static final double ARM_ANGLE_TOLERANCE = 0.5;
 
     public static final double RUNG_ANGLE = -22.0;//angle to clamp back on rung for raiseToBar command
-    public static final double ELEVATOR_RETRACT_HEIGHT = 100.0;////height elevator is lowered to to raise the robot
-    public static final double POSTGRAB_ELEVATOR_HEIGHT = 130.0; //for raiseToBar, changes elevator after arm hooks on, height of elevator after grab
     
     public static final double ELEVATOR_MAX_HEIGHT = 200.0;//length of elevator when fully extended
     public static final double ELEVATOR_MIN_HEIGHT = 100.0;//length of elevator when fully retracted
