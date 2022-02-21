@@ -29,16 +29,17 @@ public class RobotContainer {
   XboxController m_xbox = new XboxController(0);
 
   // The robot's subsystems and commands are defined here...
-  private final Throttle m_throttle = new Throttle(); // create an instance of the throttle class. See explaination below
-  private final Turn m_turn = new Turn();
-  private final DriveTrain m_driveTrain = new DriveTrain(); 
-  private final DriveCommand m_driveCommand = new DriveCommand(m_driveTrain, m_throttle, m_turn); 
 
+  public final DriveTrain m_driveTrain = new DriveTrain(); 
   public final Vision m_vision = new Vision(m_driveTrain);
   public final Intake m_intake = new Intake();
   public final Shooter m_shooter = new Shooter(m_vision);
   public final Climber m_climber = new Climber();
-  
+
+  private final Throttle m_throttle = new Throttle(); // create an instance of the throttle class. See explaination below
+  private final Turn m_turn = new Turn();
+  private final DriveCommand m_driveCommand = new DriveCommand(m_driveTrain, m_throttle, m_turn); 
+
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings
