@@ -19,7 +19,6 @@ import edu.wpi.first.math.util.Units;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-
     // Temporary Encoder's Distance Per Pulse for simulation
     public static final double ENCODER_DISTANCE_PER_PULSE = Units.inchesToMeters(Math.PI * 6.0 / 1024);
 
@@ -39,20 +38,21 @@ public final class Constants {
     public static final double kTrackwidth = 0.6604;
 
 
-    // Following four CAN IDs are for the drivetrain
-    public static final int LEADER_LEFT_CAN_ID = 1; 
-    public static final int LEADER_RIGHT_CAN_ID = 4;
-    public static final int FOLLOWER_LEFT_CAN_ID = 2;
-    public static final int FOLLOWER_RIGHT_CAN_ID = 3;
+    // Following four CAN IDs are for the drivetrain subsystem
+    public static final int LEADER_LEFT_CAN_ID = 9; 
+    public static final int LEADER_RIGHT_CAN_ID = 11;
+    public static final int FOLLOWER_LEFT_CAN_ID = 12;
+    public static final int FOLLOWER_RIGHT_CAN_ID = 8;
 
     // Following four CAN IDs are for the climber subsystem
-    public static final int ELEVATOR_LEADER_CAN_ID = 5;
-    public static final int ELEVATOR_FOLLOWER_CAN_ID = 6;
+    public static final int ELEVATOR_LEADER_CAN_ID = 1;
+    public static final int ELEVATOR_FOLLOWER_CAN_ID = 2;
     public static final int ARM_LEADER_CAN_ID = 7;
-    public static final int ARM_FOLLOWER_CAN_ID = 8;
+    public static final int ARM_FOLLOWER_CAN_ID = 10;
 
-    // Intake subsystem
-    public static final int INTAKE_MOTOR_CAN_ID = 9; //temporary value
+    // intake subsystem
+    public static final int INTAKE_MOTOR_CAN_ID = 5; 
+    public static final double INTAKE_SHOOTING_SPEED = 5.0;
 
     // drivetrain encoders
     public static final int[] LEFT_ENCODER_PORTS = new int[]{0, 1};
@@ -60,14 +60,14 @@ public final class Constants {
     public static final int LIMIT_SWITCH_ONE = 4; // Limit Switch 1
     public static final int LIMIT_SWITCH_TWO = 5; // Limit Switch 2
 
-    public static final int SHOOTER_ONE_CAN_ID = 10; // Motor 1 on shooter
-    public static final int SHOOTER_TWO_CAN_ID = 11; // Motor 2 on shooter
+    // Following two CAN IDs are for the shooter subsystem
+    public static final int TOP_SHOOTER_CAN_ID = 3; 
+    public static final int BOTTOM_SHOOTER_CAN_ID = 4;
 
-    public static final int HOPPER_ONE_CAN_ID = 12; // Motor 1 on hopper
-    public static final int HOPPER_TWO_CAN_ID = 13; // Motor 2 on hopper
+    // chute subsystem
+    public static final int CHUTE_CAN_ID = 6; 
 
     public static final int GRAYHILL_ENCODER_DISTANCE_PER_PULSE = 1; //TODO: Replace this value with a correct one 
 
-    
-
+    public static final int XBOX_A = 1;
 }

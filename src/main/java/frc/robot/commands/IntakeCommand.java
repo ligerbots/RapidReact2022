@@ -5,44 +5,42 @@ import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Climber;
 
 public class IntakeCommand extends CommandBase {
-  /**
-   * Creates a new IntakeCommand.
-  */
+    /**
+     * Creates a new IntakeCommand.
+     */
 
-  Intake m_intake;
-  Climber m_climber;
-  double m_speed;
-  public IntakeCommand(Intake intake, double speed) {
-    m_intake = intake;
-    //this.climber = climber;
-    m_speed = speed;
-    // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(intake);
-  }
+    Intake m_intake;
+    double m_speed;
 
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {
-    //climber.shoulder.setIdleMode(IdleMode.kCoast);
-    m_intake.run(m_speed);
-  }
+    public IntakeCommand(Intake intake, double speed) {
+        m_intake = intake;
+        m_speed = speed;
+        // Use addRequirements() here to declare subsystem dependencies.
+        addRequirements(intake);
+    }
 
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {
+    // Called when the command is initially scheduled.
+    @Override
+    public void initialize() {
+        m_intake.run(m_speed);
+    }
 
-  }
+    // Called every time the scheduler runs while the command is scheduled.
+    @Override
+    public void execute() {
+    }
 
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {
-    m_intake.run(0);
-      //climber.shoulder.setIdleMode(IdleMode.kBrake);
-  }
+    // Called once the command ends or is interrupted.
+    @Override
+    public void end(boolean interrupted) {
+        if (interrupted) {
+            m_intake.run(0);
+        }
+    }
 
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return false;
-  }
+    // Returns true when the command should end.
+    @Override
+    public boolean isFinished() {
+        return false;
+    }
 }
