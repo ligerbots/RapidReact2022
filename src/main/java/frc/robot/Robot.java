@@ -78,7 +78,6 @@ public class Robot extends TimedRobot {
     AutoCommandInterface autoCommandInterface = m_chosenAuto.getSelected();
     if (autoCommandInterface != null && autoCommandInterface != m_prevAutoCommand) {
       m_robotContainer.getDriveTrain().setPose(autoCommandInterface.getInitialPose());
-      System.out.println("POSE SET "+ autoCommandInterface.getInitialPose().getTranslation().minus(FieldInformation.fieldCenter).getNorm());
       m_prevAutoCommand = autoCommandInterface;
 
       if (Robot.isSimulation()) {

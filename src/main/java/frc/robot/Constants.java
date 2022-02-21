@@ -62,6 +62,7 @@ public final class Constants {
     // intake subsystem
     public static final int INTAKE_MOTOR_CAN_ID = 5; 
     public static final double INTAKE_SHOOTING_SPEED = 5.0;
+    public static final double INTAKE_SPEED = 5.0;
 
     // drivetrain encoders
     public static final int[] LEFT_ENCODER_PORTS = new int[]{0, 1};

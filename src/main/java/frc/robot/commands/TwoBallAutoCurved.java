@@ -12,9 +12,7 @@ import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.math.trajectory.constraint.DifferentialDriveVoltageConstraint;
 import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
-import edu.wpi.first.wpilibj2.command.SelectCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Constants;
 import frc.robot.FieldInformation;
 import frc.robot.subsystems.DriveTrain;
@@ -23,8 +21,7 @@ import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Vision;
 
 public class TwoBallAutoCurved extends SequentialCommandGroup implements AutoCommandInterface {
-    static final double DISTANCE_BACK = 1.4;
-    Trajectory trajectory;
+    Trajectory m_trajectory;
     public TwoBallAutoCurved(Shooter shooter, Intake intake, DriveTrain driveTrain, Vision vision) {
         var autoVoltageConstraint =
         new DifferentialDriveVoltageConstraint(
@@ -41,7 +38,7 @@ public class TwoBallAutoCurved extends SequentialCommandGroup implements AutoCom
                 .addConstraint(autoVoltageConstraint)
                 .setReversed(true);
 
-        trajectory = TrajectoryGenerator.generateTrajectory(
+        m_trajectory = TrajectoryGenerator.generateTrajectory(
             getInitialPose(), 
             List.of(),
             FieldInformation.middleBlueBall,
@@ -49,7 +46,7 @@ public class TwoBallAutoCurved extends SequentialCommandGroup implements AutoCom
         ); 
 
         RamseteCommand ramseteCommand = new RamseteCommand(
-            trajectory,
+            m_trajectory,
             driveTrain::getPose,
             new RamseteController(Constants.kRamseteB, Constants.kRamseteZeta),
             new SimpleMotorFeedforward(Constants.ksVolts,
@@ -65,14 +62,11 @@ public class TwoBallAutoCurved extends SequentialCommandGroup implements AutoCom
 
         addCommands(
             new ParallelDeadlineGroup(
-                new SequentialCommandGroup(
-                    ramseteCommand.andThen(() -> driveTrain.tankDriveVolts(0, 0)),
-                    new WaitCommand(0.5) // for the ball to enter the hopper
-                ), 
-                new IntakeCommand(intake, Constants.INTAKE_SHOOTING_SPEED)
+                ramseteCommand.andThen(() -> driveTrain.tankDriveVolts(0, 0)),
+                new IntakeCommand(intake, Constants.INTAKE_SPEED)
             ),
             new TurnTowardsHub(driveTrain, vision).withTimeout(Constants.TURN_TIMEOUT_SECS),
-            new SelectCommand(() -> new ShooterCommand(shooter, intake, vision, Shooter.calculateShooterSpeeds(vision.getDistance())))
+            new ShooterCommand(shooter, intake, vision)
         );
     }
 
@@ -82,6 +76,6 @@ public class TwoBallAutoCurved extends SequentialCommandGroup implements AutoCom
     }
     @Override
     public void plotTrajectory(TrajectoryPlotter plotter) {
-        plotter.plotTrajectory(trajectory);
+        plotter.plotTrajectory(m_trajectory);
     }
 }

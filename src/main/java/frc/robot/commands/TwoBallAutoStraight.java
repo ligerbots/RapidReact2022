@@ -12,9 +12,7 @@ import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.math.trajectory.constraint.DifferentialDriveVoltageConstraint;
 import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
-import edu.wpi.first.wpilibj2.command.SelectCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Constants;
 import frc.robot.FieldInformation;
 import frc.robot.subsystems.DriveTrain;
@@ -24,6 +22,7 @@ import frc.robot.subsystems.Vision;
 
 public class TwoBallAutoStraight extends SequentialCommandGroup implements AutoCommandInterface {
     static final double DISTANCE_BACK = 1.4;
+    Trajectory m_trajectory;
     public TwoBallAutoStraight(Shooter shooter, Intake intake, DriveTrain driveTrain, Vision vision) {
         var autoVoltageConstraint =
         new DifferentialDriveVoltageConstraint(
@@ -45,7 +44,7 @@ public class TwoBallAutoStraight extends SequentialCommandGroup implements AutoC
             initialPose.getX() - initialPose.getRotation().getCos() * DISTANCE_BACK, 
             initialPose.getY() - initialPose.getRotation().getSin() * DISTANCE_BACK, 
             initialPose.getRotation());
-        Trajectory trajectory = TrajectoryGenerator.generateTrajectory(
+        m_trajectory = TrajectoryGenerator.generateTrajectory(
             initialPose, 
             List.of(),
             finalPose,
@@ -53,7 +52,7 @@ public class TwoBallAutoStraight extends SequentialCommandGroup implements AutoC
         ); 
 
         RamseteCommand ramseteCommand = new RamseteCommand(
-            trajectory,
+            m_trajectory,
             driveTrain::getPose,
             new RamseteController(Constants.kRamseteB, Constants.kRamseteZeta),
             new SimpleMotorFeedforward(Constants.ksVolts,
@@ -69,19 +68,20 @@ public class TwoBallAutoStraight extends SequentialCommandGroup implements AutoC
 
         addCommands(
             new ParallelDeadlineGroup(
-                new SequentialCommandGroup(
-                    ramseteCommand.andThen(() -> driveTrain.tankDriveVolts(0, 0)),
-                    new WaitCommand(0.5) // for the ball to enter the hopper
-                ), 
-                new IntakeCommand(intake, Constants.INTAKE_SHOOTING_SPEED)
+                ramseteCommand.andThen(() -> driveTrain.tankDriveVolts(0, 0)),
+                new IntakeCommand(intake, Constants.INTAKE_SPEED)
             ),
             new TurnTowardsHub(driveTrain, vision).withTimeout(Constants.TURN_TIMEOUT_SECS),
-            new SelectCommand(() -> new ShooterCommand(shooter, intake, vision, Shooter.calculateShooterSpeeds(vision.getDistance())))
+            new ShooterCommand(shooter, intake, vision)
         );
     }
 
     @Override
     public Pose2d getInitialPose() {
         return FieldInformation.lowerBlueStart;
+    }
+    @Override
+    public void plotTrajectory(TrajectoryPlotter plotter) {
+        plotter.plotTrajectory(m_trajectory);
     }
 }

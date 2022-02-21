@@ -11,7 +11,7 @@ public class ShooterCommand extends CommandBase{
     Intake m_intake;
     Vision m_vision;
 
-    public ShooterCommand(Shooter shooter, Intake intake, Vision vision, Shooter.ShooterSpeeds speeds) {
+    public ShooterCommand(Shooter shooter, Intake intake, Vision vision) {
         m_shooter = shooter;
         m_intake = intake;
         m_vision = vision;
