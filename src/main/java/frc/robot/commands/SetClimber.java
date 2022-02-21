@@ -41,6 +41,6 @@ public class SetClimber extends CommandBase {
   public boolean isFinished() {
     // is finished if the distance between the getElevatorHeight()
 
-    return (Math.abs(m_rungHeight - m_climber.getElevatorHeight()) < Constants.ARM_ANGLE_TOLERANCE);
+    return Math.abs(m_rungHeight - m_climber.getElevatorHeight()) < Constants.ARM_ANGLE_TOLERANCE;
   }
 }
