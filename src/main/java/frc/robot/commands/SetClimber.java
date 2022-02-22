@@ -1,47 +1,26 @@
+// Copyright (c) FIRST and other WPILib contributors.
+// Open Source Software; you can modify and/or share it under the terms of
+// the WPILib BSD license file in the root directory of this project.
+
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
 import frc.robot.subsystems.Climber;
 
-public class SetClimber extends CommandBase {
+// NOTE:  Consider using this command inline, rather than writing a subclass.  For more
+// information, see:
+// https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
+public class SetClimber extends SequentialCommandGroup {
   Climber m_climber;
-  double m_rungHeight;
-  double m_angle = Constants.CLIMBER_ANGLE;
+  /** Creates a new SetClimber. */
+  public SetClimber(Climber climber) {
+    // Add your commands in the addCommands() call, e.g.
+    // addCommands(new FooCommand(), new BarCommand());
+    addCommands(// rotates arm to leave spaces for the elevator to raise up
+    new SetArmAngle(m_climber, Constants.ARM_ANGLE_FOR_ELEVATOR_CLEARANCE),
 
-  public SetClimber(Climber climber, double rungHeight) {
-    m_climber = climber;
-    m_rungHeight = rungHeight;
-    addRequirements(climber);
-  }
-
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {
-    // only called at beginning when driver clicks button, only needs to execute
-    // once
-
-    m_climber.setArmAngle(m_angle);
-    m_climber.setElevatorHeight(m_rungHeight);
-  }
-
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {
-
-  }
-
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {
-  }
-
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    // is finished if the distance between the getElevatorHeight()
-
-    return Math.abs(m_rungHeight - m_climber.getElevatorHeight()) < Constants.ELEVATOR_HEIGHT_TOLERANCE
-     && Math.abs(m_angle - m_climber.getArmAngle()) < Constants.ARM_ANGLE_TOLERANCE;
+    // extends elevator to reach for Mid Rung
+    new SetElevatorHeight(m_climber, Constants.MID_RUNG));
   }
 }
