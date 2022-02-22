@@ -19,6 +19,7 @@ import edu.wpi.first.math.util.Units;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
+
     // Temporary Encoder's Distance Per Pulse for simulation
     public static final double ENCODER_DISTANCE_PER_PULSE = Units.inchesToMeters(Math.PI * 6.0 / 1024);
 
@@ -38,21 +39,20 @@ public final class Constants {
     public static final double kTrackwidth = 0.6604;
 
 
-    // Following four CAN IDs are for the drivetrain subsystem
+    // Following four CAN IDs are for the drivetrain
     public static final int LEADER_LEFT_CAN_ID = 9; 
     public static final int LEADER_RIGHT_CAN_ID = 11;
     public static final int FOLLOWER_LEFT_CAN_ID = 12;
     public static final int FOLLOWER_RIGHT_CAN_ID = 8;
 
     // Following four CAN IDs are for the climber subsystem
-    public static final int ELEVATOR_LEADER_CAN_ID = 1;
-    public static final int ELEVATOR_FOLLOWER_CAN_ID = 2;
+    public static final int ELEVATOR_LEADER_CAN_ID = 5;
+    public static final int ELEVATOR_FOLLOWER_CAN_ID = 6;
     public static final int ARM_LEADER_CAN_ID = 7;
-    public static final int ARM_FOLLOWER_CAN_ID = 10;
+    public static final int ARM_FOLLOWER_CAN_ID = 8;
 
-    // intake subsystem
-    public static final int INTAKE_MOTOR_CAN_ID = 5; 
-    public static final double INTAKE_SHOOTING_SPEED = 5.0;
+    // Intake subsystem
+    public static final int INTAKE_MOTOR_CAN_ID = 9; //temporary value
 
     // drivetrain encoders
     public static final int[] LEFT_ENCODER_PORTS = new int[]{0, 1};
@@ -60,16 +60,14 @@ public final class Constants {
     public static final int LIMIT_SWITCH_ONE = 1; // Limit Switch 1
     public static final int LIMIT_SWITCH_TWO = 2; // Limit Switch 2
 
-    // Following two CAN IDs are for the shooter subsystem
-    public static final int TOP_SHOOTER_CAN_ID = 3; 
-    public static final int BOTTOM_SHOOTER_CAN_ID = 4;
+    public static final int SHOOTER_ONE_CAN_ID = 3; // Motor 1 on shooter
+    public static final int SHOOTER_TWO_CAN_ID = 4; // Motor 2 on shooter
 
-    // chute subsystem
-    public static final int CHUTE_CAN_ID = 6; 
+    public static final int HOPPER_ONE_CAN_ID = 5; // Motor 1 on hopper
+    public static final int HOPPER_TWO_CAN_ID = 6; // Motor 2 on hopper
 
     public static final int GRAYHILL_ENCODER_DISTANCE_PER_PULSE = 1; //TODO: Replace this value with a correct one 
 
-<<<<<<< HEAD
     //define constants for high, low, and mid rung
     public static final int HIGH_RUNG = 192;//192 cm
     public static final int MID_RUNG = 153;//153 cm
@@ -89,7 +87,4 @@ public final class Constants {
     public static final double ARM_ANGLE_TO_NEXT_BAR = 130.0;
     public static final double ARM_ADJUST_ANGLE = 160.0; // the angle the arm needs to rotate to follow the motion of the elevator when retracting
 
-=======
-    public static final int XBOX_A = 1;
->>>>>>> main
 }
