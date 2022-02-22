@@ -87,4 +87,5 @@ public final class Constants {
     public static final double ARM_ANGLE_TO_NEXT_BAR = 130.0;
     public static final double ARM_ADJUST_ANGLE = 160.0; // the angle the arm needs to rotate to follow the motion of the elevator when retracting
 
+    public static final int XBOX_A = 1;
 }
