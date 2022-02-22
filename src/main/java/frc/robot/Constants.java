@@ -69,7 +69,6 @@ public final class Constants {
 
     public static final int GRAYHILL_ENCODER_DISTANCE_PER_PULSE = 1; //TODO: Replace this value with a correct one 
 
-<<<<<<< HEAD
     //define constants for high, low, and mid rung
     public static final int HIGH_RUNG = 192;//192 cm
     public static final int MID_RUNG = 153;//153 cm
@@ -89,7 +88,5 @@ public final class Constants {
     public static final double ARM_ANGLE_TO_NEXT_BAR = 130.0;
     public static final double ARM_ADJUST_ANGLE = 160.0; // the angle the arm needs to rotate to follow the motion of the elevator when retracting
 
-=======
     public static final int XBOX_A = 1;
->>>>>>> main
 }
