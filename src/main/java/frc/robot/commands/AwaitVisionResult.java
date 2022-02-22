@@ -17,14 +17,12 @@ public class AwaitVisionResult extends CommandBase {
     }
     @Override
     public boolean isFinished() {
-        return m_vision.getStatus();
+        return m_vision.getStatus() && m_vision.getDistance() > 0;
     }
     @Override
     public void execute() {
     }
     @Override
     public void end(boolean interrupted) {
-        if(interrupted) m_vision.setMode(Vision.DEFAULT_MODE);
-        // this command does not reset the mode unless it is interrupted (for use in SequentialCommandGroups)
     }
 }

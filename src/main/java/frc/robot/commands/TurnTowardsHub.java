@@ -38,7 +38,6 @@ public class TurnTowardsHub extends SequentialCommandGroup{
         @Override
         public void end(boolean interrupted) {
             m_driveTrain.drive(0, 0, false);
-            m_vision.setMode(Vision.VisionMode.INTAKE);
         }
 
         // Returns true when the command should end.

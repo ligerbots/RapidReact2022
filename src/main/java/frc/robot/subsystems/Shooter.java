@@ -26,6 +26,7 @@ public class Shooter extends SubsystemBase {
     // WPI_TalonFX for the shooter
     WPI_TalonFX m_topShooterMotor, m_bottomShooterMotor;
     // Limit Switch for Intake
+    // TODO: change to color sensor
     DigitalInput m_limitSwitch1, m_limitSwitch2;
     
     static TreeMap<Double, ShooterSpeeds> shooterSpeeds = new TreeMap<>(Map.ofEntries(
@@ -63,7 +64,7 @@ public class Shooter extends SubsystemBase {
     public static ShooterSpeeds calculateShooterSpeeds(double distance){
         Map.Entry<Double, ShooterSpeeds> before = shooterSpeeds.floorEntry(distance);
         Map.Entry<Double, ShooterSpeeds> after = shooterSpeeds.ceilingEntry(distance);
-        if (before == null && after == null) return null;
+        if (before == null && after == null) return new ShooterSpeeds(0, 0, 0); // this should never happen b/c shooterSpeeds should have at least 1 element
         if (before == null) return after.getValue();
         if (after == null) return before.getValue();
         double ratio = (distance - before.getKey()) / (after.getKey() - before.getKey());
