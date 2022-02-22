@@ -5,8 +5,15 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.commands.AutoCommandInterface;
+import frc.robot.commands.OneBallAuto;
+import frc.robot.commands.TrajectoryPlotter;
+import frc.robot.commands.TwoBallAutoCurved;
+import frc.robot.commands.TwoBallAutoStraight;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -16,8 +23,10 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
  */
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
-
   private RobotContainer m_robotContainer;
+  private TrajectoryPlotter m_plotter;
+  private SendableChooser<AutoCommandInterface> m_chosenAuto = new SendableChooser<>();
+  private AutoCommandInterface m_prevAutoCommand = null;
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -28,6 +37,19 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
+
+    m_chosenAuto.addOption("OneBallAuto", 
+      new OneBallAuto(m_robotContainer.getShooter(), m_robotContainer.getIntake(), m_robotContainer.getDriveTrain(), m_robotContainer.getVision())
+    );
+    m_chosenAuto.addOption("TwoBallAutoStraight", 
+      new TwoBallAutoStraight(m_robotContainer.getShooter(), m_robotContainer.getIntake(), m_robotContainer.getDriveTrain(), m_robotContainer.getVision())
+    );
+    m_chosenAuto.setDefaultOption("TwoBallAutoCurved", 
+      new TwoBallAutoCurved(m_robotContainer.getShooter(), m_robotContainer.getIntake(), m_robotContainer.getDriveTrain(), m_robotContainer.getVision())
+    );
+    SmartDashboard.putData("Chosen Auto", m_chosenAuto);
+
+    m_plotter = new TrajectoryPlotter(m_robotContainer.getDriveTrain().getField2d());
   }
 
   /**
@@ -48,20 +70,35 @@ public class Robot extends TimedRobot {
 
   /** This function is called once each time the robot enters Disabled mode. */
   @Override
-  public void disabledInit() {}
+  public void disabledInit() {
+  }
 
   @Override
-  public void disabledPeriodic() {}
+  public void disabledPeriodic() {
+    AutoCommandInterface autoCommandInterface = m_chosenAuto.getSelected();
+    if (autoCommandInterface != null && autoCommandInterface != m_prevAutoCommand) {
+      m_robotContainer.getDriveTrain().setPose(autoCommandInterface.getInitialPose());
+      m_prevAutoCommand = autoCommandInterface;
+
+      if (Robot.isSimulation()) {
+        m_plotter.clear();
+        autoCommandInterface.plotTrajectory(m_plotter);
+      }
+    }    
+  }
 
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
-    //m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+    // Cancel the DriveCommand so that the joystick can't override this command
+    // group
+    m_robotContainer.getDriveCommand().cancel();
 
-    // schedule the autonomous command (example)
-    //if (m_autonomousCommand != null) {
-    //  m_autonomousCommand.schedule();
-    //}
+    // schedule the autonomous command
+    m_autonomousCommand = m_chosenAuto.getSelected();
+    if (m_autonomousCommand != null) {
+      m_autonomousCommand.schedule();
+    }
   }
 
   /** This function is called periodically during autonomous. */
