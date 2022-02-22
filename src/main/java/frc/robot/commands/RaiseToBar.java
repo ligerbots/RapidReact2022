@@ -19,7 +19,7 @@ public class RaiseToBar extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
       // rotates arm to leave spaces for the elevator to raise up
-      new SetArmAngle(m_climber, 90.0),
+      new SetArmAngle(m_climber, Constants.ARM_ANGLE_FOR_ELEVATOR_CLEARANCE),
 
       // extends elevator to reach for Mid Rung
       new SetElevatorHeight(m_climber, Constants.MID_RUNG),
@@ -28,7 +28,7 @@ public class RaiseToBar extends SequentialCommandGroup {
       new SetElevatorHeight(m_climber, Constants.ELEVATOR_MIN_HEIGHT),
 
       // rotates arm to grab on to the bar
-      new SetArmAngle(m_climber, 100.0));
+      new SetArmAngle(m_climber, Constants.ARM_GRAB_THE_BAR));
   }
 }						
 					;

@@ -30,12 +30,12 @@ public class ClimbToNextBar extends SequentialCommandGroup {
       new RetractElevatorAdjustArm(m_climber),
 
       // rotate the arm to leave the previous bar and get to the side of the next bar
-      new SetArmAngle(m_climber, 45.0),
+      new SetArmAngle(m_climber, Constants.ARM_TO_THE_LEFT_ANGLE),
 
       // fully retract the elevator
       new SetElevatorHeight(m_climber, Constants.ELEVATOR_MIN_HEIGHT),
 
       // rotate the arm back to grab on to the bar
-      new SetArmAngle(m_climber, 90.0));
+      new SetArmAngle(m_climber, Constants.ARM_GRAB_THE_BAR));
   }
 }

@@ -23,6 +23,6 @@ public class RetractElevatorAdjustArm extends ParallelCommandGroup {
 				// command to rotate the arm
 				new SetArmAngle(m_climber, Constants.ARM_ADJUST_ANGLE),
 				// command to retract the elevator, while leave some spaces for arms to get to the other side of the bar later
-				new SetElevatorHeight(m_climber, Constants.ELEVATOR_MIN_HEIGHT + 20.0));
+				new SetElevatorHeight(m_climber, Constants.ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE));
 	}
 }
