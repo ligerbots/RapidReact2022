@@ -28,7 +28,7 @@ public class TuneShooterCommand extends CommandBase{
     
         double top = SmartDashboard.getNumber("shooter/Shooter Top Speed", 0);
         double bottom = SmartDashboard.getNumber("shooter/Shooter Bottom Speed", 0);
-        m_shooter.setShooterMotors(top, bottom);
+        m_shooter.setShooterRpms(top, bottom);
     }
 
     // Called every time the scheduler runs while the command is scheduled.
@@ -48,7 +48,7 @@ public class TuneShooterCommand extends CommandBase{
     @Override
     public void end(boolean interrupted) {
         m_shooter.setChuteSpeed(0.0);
-        m_shooter.setShooterMotors(0.0, 0.0);
+        m_shooter.setShooterRpms(0.0, 0.0);
         m_intake.run(0.0);
     }
 
