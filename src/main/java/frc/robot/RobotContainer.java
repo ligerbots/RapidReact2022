@@ -38,7 +38,7 @@ public class RobotContainer {
     private final Climber m_climber = new Climber();
     private final Shooter m_shooter = new Shooter();
     private final Intake m_intake = new Intake();
-    
+    private final TuneShooterCommand m_tuneShooter = new TuneShooterCommand(m_shooter, m_intake);
     private final DriveCommand m_driveCommand = new DriveCommand(m_driveTrain, new Throttle(), new Turn());
 
     /**
@@ -59,7 +59,8 @@ public class RobotContainer {
      */
     private void configureButtonBindings() {
         JoystickButton m_xboxAButton = new JoystickButton(m_xbox, Constants.XBOX_A);
-        m_xboxAButton.whileHeld(new TuneShooterCommand(m_shooter, m_intake));
+        // only want to create tune shooter once
+        m_xboxAButton.whileHeld(m_tuneShooter);
 
         JoystickButton m_bumperRight = new JoystickButton(m_xbox, Constants.XBOX_RB);
         m_bumperRight.whileHeld(new IntakeCommand(m_intake, Constants.INTAKE_SPEED));
