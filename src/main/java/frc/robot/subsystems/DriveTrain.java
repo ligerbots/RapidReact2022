@@ -5,6 +5,7 @@ import edu.wpi.first.hal.SimDouble;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
+import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.RobotController;
@@ -20,6 +21,7 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import frc.robot.Constants;
+import frc.robot.Robot;
 
 public class DriveTrain extends SubsystemBase {
 
@@ -70,7 +72,6 @@ public class DriveTrain extends SubsystemBase {
 
             m_leftEncoderSim = new EncoderSim(m_leftEncoder);
             m_rightEncoderSim = new EncoderSim(m_rightEncoder);
-
             m_gyroAngleSim = new SimDeviceSim("navX-Sensor[0]").getDouble("Yaw");
 
             m_fieldSim = new Field2d();
@@ -112,6 +113,7 @@ public class DriveTrain extends SubsystemBase {
     public void setPose(Pose2d pose) {
         m_leftEncoder.reset();
         m_rightEncoder.reset();
+        if(Robot.isSimulation()) m_differentialDriveSim.setPose(new Pose2d()); // drive sim doesn't seem to get reset anymore?
         m_odometry.resetPosition(pose, Rotation2d.fromDegrees(getGyroAngle()));
     }
 
@@ -144,6 +146,14 @@ public class DriveTrain extends SubsystemBase {
         m_differentialDrive.arcadeDrive(throttle, -rotate, squaredInput);
     }
 
+    public void tankDriveVolts (double leftVolts, double rightVolts) {
+        m_leftMotors.setVoltage(leftVolts);
+        m_rightMotors.setVoltage(rightVolts);
+        m_differentialDrive.feed();
+    }
+    public DifferentialDriveWheelSpeeds getWheelSpeeds () {
+        return new DifferentialDriveWheelSpeeds(m_leftEncoder.getRate(), m_rightEncoder.getRate());
+    }
     @Override
     public void simulationPeriodic() {
         // Set the inputs to the system. Note that we need to convert
@@ -166,4 +176,7 @@ public class DriveTrain extends SubsystemBase {
         m_fieldSim.setRobotPose(m_odometry.getPoseMeters());
     }
 
+    public Field2d getField2d() {
+        return m_fieldSim;
+    }
 }

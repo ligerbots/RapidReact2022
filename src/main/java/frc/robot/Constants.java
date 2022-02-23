@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.math.numbers.N2;
 import edu.wpi.first.math.system.LinearSystem;
 import edu.wpi.first.math.system.plant.DCMotor;
@@ -36,7 +37,15 @@ public final class Constants {
     public static final double kDriveGearing = 8;
     public static final double kWheelDiameterMeters = 0.1016;
     public static final double kTrackwidth = 0.6604;
+    // more fake values for ramsete
+    public static final double ksVolts = 0.182; 
+    public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(kTrackwidth);
+    public static final double kMaxSpeed = 1.75;
+    public static final double kMaxAcceleration = 1.5;
+    public static final double kPDriveVel = 6; 
 
+    public static final double kRamseteB = 2; // generic ramsete values
+    public static final double kRamseteZeta = 0.7; // generic ramsete values
 
     // Following four CAN IDs are for the drivetrain subsystem
     public static final int LEADER_LEFT_CAN_ID = 9; 
@@ -53,12 +62,13 @@ public final class Constants {
     // intake subsystem
     public static final int INTAKE_MOTOR_CAN_ID = 5; 
     public static final double INTAKE_SHOOTING_SPEED = 5.0;
+    public static final double INTAKE_SPEED = 5.0;
 
     // drivetrain encoders
     public static final int[] LEFT_ENCODER_PORTS = new int[]{0, 1};
     public static final int[] RIGHT_ENCODER_PORTS = new int[]{2, 3};
-    public static final int LIMIT_SWITCH_ONE = 1; // Limit Switch 1
-    public static final int LIMIT_SWITCH_TWO = 2; // Limit Switch 2
+    public static final int LIMIT_SWITCH_ONE = 4; // Limit Switch 1
+    public static final int LIMIT_SWITCH_TWO = 5; // Limit Switch 2
 
     // Following two CAN IDs are for the shooter subsystem
     public static final int TOP_SHOOTER_CAN_ID = 3; 
@@ -97,4 +107,9 @@ public final class Constants {
     public static final double ARM_ANGLE_FOR_ELEVATOR_CLEARANCE = ARM_GRAB_THE_BAR - 10.0;
 
     public static final int XBOX_A = 1;
+
+    // drivetrain turning constants
+    public static final double TURN_TOLERANCE_DEG = 5.;
+    public static final double TURN_STABILIZE_SECS = .5;
+    public static final double TURN_TIMEOUT_SECS = 3;
 }
