@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.XboxController;
 //import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.DriveCommand;
+import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.TuneShooterCommand;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.DriveTrain;
@@ -59,6 +60,12 @@ public class RobotContainer {
     private void configureButtonBindings() {
         JoystickButton m_xboxAButton = new JoystickButton(m_xbox, Constants.XBOX_A);
         m_xboxAButton.whileHeld(new TuneShooterCommand(m_shooter, m_intake));
+
+        JoystickButton m_bumperRight = new JoystickButton(m_xbox, Constants.XBOX_RB);
+        m_bumperRight.whileHeld(new IntakeCommand(m_intake, Constants.INTAKE_SPEED));
+    
+        JoystickButton m_bumperLeft = new JoystickButton(m_xbox, Constants.XBOX_LB);
+        m_bumperLeft.whileHeld(new IntakeCommand(m_intake, -Constants.INTAKE_SPEED));
     }
 
     private class Throttle implements DoubleSupplier {
