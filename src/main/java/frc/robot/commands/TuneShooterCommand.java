@@ -9,6 +9,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class TuneShooterCommand extends CommandBase{
     Shooter m_shooter;
     Intake m_intake;
+    LigerTimer m_shootDelay = new LigerTimer(0.5);
+    LigerTimer m_intakeDelay = new LigerTimer(0.75);
 
     public TuneShooterCommand(Shooter shooter, Intake intake){
         m_shooter = shooter;
@@ -21,22 +23,32 @@ public class TuneShooterCommand extends CommandBase{
 
     @Override
     public void initialize() {
+        m_shootDelay.start();
+        m_intakeDelay.start();
+    
+        double top = SmartDashboard.getNumber("shooter/Shooter Top Speed", 0);
+        double bottom = SmartDashboard.getNumber("shooter/Shooter Bottom Speed", 0);
+        m_shooter.setShooterMotors(top, bottom);
     }
 
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        double top = SmartDashboard.getNumber("shooter/Shooter Top Speed", 0);
-        double bottom = SmartDashboard.getNumber("shooter/Shooter Bottom Speed", 0);
-        double chute = SmartDashboard.getNumber("shooter/Chute Speed", 0);
-        m_intake.run(Constants.INTAKE_SHOOTING_SPEED);
-        m_shooter.shoot(top,bottom,chute);
+        if (m_shootDelay.hasElapsed()){
+            double chute = SmartDashboard.getNumber("shooter/Chute Speed", 0);
+            m_shooter.setChuteSpeed(chute);
+        }
+        
+        if (m_intakeDelay.hasElapsed()) {
+            m_intake.run(Constants.INTAKE_SHOOTING_SPEED);
+        }
     }
 
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-        m_shooter.shoot(0,0,0);
+        m_shooter.setChuteSpeed(0.0);
+        m_shooter.setShooterMotors(0.0, 0.0);
         m_intake.run(0.0);
     }
 

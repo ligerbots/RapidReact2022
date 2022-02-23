@@ -3,13 +3,15 @@ package frc.robot.commands;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Vision;
-
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class ShooterCommand extends CommandBase{
     Shooter m_shooter;
     Intake m_intake;
     Vision m_vision;
+    Timer m_shootDelay = new Timer();
+    static final double DELAYTIME = 0.1;
 
     public ShooterCommand(Shooter shooter, Intake intake, Vision vision) {
         m_shooter = shooter;
@@ -20,6 +22,7 @@ public class ShooterCommand extends CommandBase{
     @Override
     public void initialize() {
         System.out.println("*sound of shooter shooting*"); // debugging
+        m_shootDelay.reset();
     }
     // Called every time the scheduler runs while the command is scheduled.
     @Override

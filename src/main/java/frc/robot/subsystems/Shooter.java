@@ -15,6 +15,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import frc.robot.Constants;
@@ -74,12 +75,23 @@ public class Shooter extends SubsystemBase {
     //periodically update the values of motors for shooter to SmartDashboard
     @Override
     public void periodic() {
+        SmartDashboard.putNumber("shooter/bottom_rpm", m_bottomShooterMotor.getSelectedSensorVelocity());
+        SmartDashboard.putNumber("shooter/top_rpm", m_topShooterMotor.getSelectedSensorVelocity());
     }
 
     //shoot the ball into the high hub for certain distance
-    public void shoot(double top, double bottom, double chute) {
+    // public void shoot(double top, double bottom, double chute) {
+    //     m_topShooterMotor.set(top);
+    //     m_bottomShooterMotor.set(bottom);
+    //     m_chuteMotor.set(chute);
+    // }
+
+    public void setShooterMotors(double top, double bottom) {
         m_topShooterMotor.set(top);
         m_bottomShooterMotor.set(bottom);
+    }
+
+    public void setChuteSpeed(double chute) {
         m_chuteMotor.set(chute);
     }
 
