@@ -101,19 +101,19 @@ public class Climber extends SubsystemBase {
 
   }
   
-  // rotates the arms a certain degree
-  public void rotateArm(double degree){
+  // rotates the arms to a certain angle
+  public void setArmAngle(double degree){
 
   }
 
   // returns the currrent height of the elevator
-  public void getElevatorHeight(){
-
+  public double getElevatorHeight(){
+    return 0.0;
   }
 
   //returns the current angle of the arm
-  public void getArmAngle(){
-
+  public double getArmAngle(){
+    return 0.0;
   }
 
   private void checkArmPIDVal(){

@@ -75,6 +75,33 @@ public final class Constants {
 
     public static final int GRAYHILL_ENCODER_DISTANCE_PER_PULSE = 1; //TODO: Replace this value with a correct one 
 
+    //define constants for high, low, and mid rung
+    public static final int HIGH_RUNG = 192;//192 cm
+    public static final int MID_RUNG = 153;//153 cm
+    public static final int LOW_RUNG = 124;//Top of rung is 124cm
+    public static final double CLIMBER_ANGLE = 22.0;//angle for setClimber()
+    
+    
+    public static final double ELEVATOR_HEIGHT_TOLERANCE = 0.5;//tolerance for elevator
+    public static final double ARM_ANGLE_TOLERANCE = 0.5;
+
+    public static final double RUNG_ANGLE = -22.0;//angle to clamp back on rung for raiseToBar command
+    
+    public static final double ELEVATOR_MAX_HEIGHT = 200.0;//length of elevator when fully extended
+    public static final double ELEVATOR_MIN_HEIGHT = 100.0;//length of elevator when fully retracted
+
+    //the angle for the arm to rotate to turn the elevator towards the next bar
+    public static final double ARM_ANGLE_TO_NEXT_BAR = 130.0;
+    public static final double ARM_ADJUST_ANGLE = 160.0; // the angle the arm needs to rotate to follow the motion of the elevator when retracting
+
+    //the angle for the arm to rotate to the left side of the next bar
+    public static final double ARM_TO_THE_LEFT_ANGLE = 45.0;
+    public static final double ARM_GRAB_THE_BAR = 90.0;
+
+    //the height of the elevator to retract down to certain point where the arm can get to the other side of the bar
+    public static final double ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE = ELEVATOR_MIN_HEIGHT + 20.0;
+    public static final double ARM_ANGLE_FOR_ELEVATOR_CLEARANCE = ARM_GRAB_THE_BAR - 10.0;
+
     // drivetrain turning constants
     public static final double TURN_TOLERANCE_DEG = 5.;
     public static final double TURN_STABILIZE_SECS = .5;
