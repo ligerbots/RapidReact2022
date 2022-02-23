@@ -1,7 +1,3 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 package frc.robot;
 
 import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
@@ -106,10 +102,25 @@ public final class Constants {
     public static final double ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE = ELEVATOR_MIN_HEIGHT + 20.0;
     public static final double ARM_ANGLE_FOR_ELEVATOR_CLEARANCE = ARM_GRAB_THE_BAR - 10.0;
 
-    public static final int XBOX_A = 1;
-
     // drivetrain turning constants
     public static final double TURN_TOLERANCE_DEG = 5.;
     public static final double TURN_STABILIZE_SECS = .5;
     public static final double TURN_TIMEOUT_SECS = 3;
+    
+    //Xbox button mapping
+    public static final int XBOX_A = 1;
+    public static final int XBOX_B = 2;
+    public static final int XBOX_X = 3;
+    public static final int XBOX_Y = 4;
+
+    // bumpers
+    public static final int XBOX_LB = 5;
+    public static final int XBOX_RB = 6;
+    
+    public static final int XBOX_BACK = 7;
+    public static final int XBOX_START = 8;
+
+    // joy stick button
+    public static final int XBOX_JL = 9;
+    public static final int XBOX_JR = 10;
 }
