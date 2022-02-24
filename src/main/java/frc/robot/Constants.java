@@ -71,9 +71,9 @@ public final class Constants {
     // Following two CAN IDs are for the shooter subsystem
     public static final int TOP_SHOOTER_CAN_ID = 3; 
     public static final int BOTTOM_SHOOTER_CAN_ID = 4;
-    public static final double SHOOTER_KP = 0.1;     // CTRE example = 0.1
-    public static final double SHOOTER_KI = 0.001;   // CTRE example = 0.001
-    public static final double SHOOTER_KD = 5.0;     // CTRE example = 5.0
+    public static final double SHOOTER_KP = 0.03;     // CTRE example = 0.1
+    public static final double SHOOTER_KI = 0.0;   // CTRE example = 0.001
+    public static final double SHOOTER_KD = 0.0;     // CTRE example = 5.0
     // From example code: kF: 1023 represents output value to Talon at 100%, 20660 represents Velocity units at 100% output
     public static final double SHOOTER_KF = 1023.0/20660.0;  // CTRE example = 1023.0/20660.0
 
