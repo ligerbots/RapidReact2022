@@ -39,6 +39,7 @@ public class RobotContainer {
     private final Climber m_climber = new Climber();
     private final Shooter m_shooter = new Shooter();
     private final Intake m_intake = new Intake();
+    
     private final DriveCommand m_driveCommand = new DriveCommand(m_driveTrain, new Throttle(), new Turn());
 
     /**
@@ -59,17 +60,18 @@ public class RobotContainer {
      */
     private void configureButtonBindings() {
         // only used for tuning
-        JoystickButton m_xboxAButton = new JoystickButton(m_xbox, Constants.XBOX_A);
-        m_xboxAButton.whileHeld(new TuneShooterCommand(m_shooter, m_intake));
+        JoystickButton xboxAButton = new JoystickButton(m_xbox, Constants.XBOX_A);
+        xboxAButton.whileHeld(new TuneShooterCommand(m_shooter, m_intake));
 
         // actual shooter command
-        // JoystickButton m_xboxAButton = new JoystickButton(m_xbox, Constants.XBOX_A);
-        // m_xboxAButton.whenPressed(new ShooterCommand(m_shooter, m_intake, m_vision));
-        JoystickButton m_bumperRight = new JoystickButton(m_xbox, Constants.XBOX_RB);
-        m_bumperRight.whileHeld(new IntakeCommand(m_intake, Constants.INTAKE_SPEED));
+        JoystickButton xboxXButton = new JoystickButton(m_xbox, Constants.XBOX_X);
+        xboxXButton.whenPressed(new ShooterCommand(m_shooter, m_intake, m_vision));
+
+        JoystickButton bumperRight = new JoystickButton(m_xbox, Constants.XBOX_RB);
+        bumperRight.whileHeld(new IntakeCommand(m_intake, Constants.INTAKE_SPEED));
     
-        JoystickButton m_bumperLeft = new JoystickButton(m_xbox, Constants.XBOX_LB);
-        m_bumperLeft.whileHeld(new IntakeCommand(m_intake, -Constants.INTAKE_SPEED));
+        JoystickButton bumperLeft = new JoystickButton(m_xbox, Constants.XBOX_LB);
+        bumperLeft.whileHeld(new IntakeCommand(m_intake, -Constants.INTAKE_SPEED));
     }
 
     private class Throttle implements DoubleSupplier {

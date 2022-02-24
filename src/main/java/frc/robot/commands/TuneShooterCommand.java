@@ -1,16 +1,17 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import frc.robot.Constants;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class TuneShooterCommand extends CommandBase{
     Shooter m_shooter;
     Intake m_intake;
-    LigerTimer m_shootDelay = new LigerTimer(0.5);
-    LigerTimer m_intakeDelay = new LigerTimer(0.75);
+    LigerTimer m_shootDelay = new LigerTimer(Constants.SHOOTER_MOTOR_WAIT_TIME);
+    LigerTimer m_intakeDelay = new LigerTimer(Constants.SHOOTER_MOTOR_WAIT_TIME + Constants.SHOOTER_INTAKE_WAIT_TIME);
 
     public TuneShooterCommand(Shooter shooter, Intake intake){
         m_shooter = shooter;

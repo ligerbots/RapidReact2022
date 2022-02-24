@@ -1,8 +1,8 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+
 import frc.robot.Constants;
-import frc.robot.Robot;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Vision;
@@ -16,10 +16,9 @@ public class ShooterCommand extends CommandBase {
     Intake m_intake;
     Vision m_vision;
 
-    double m_shooterStartTime;
-    double m_chuteIntakeStartTime;
-
-    double m_distance;
+    LigerTimer m_shootDelay = new LigerTimer(Constants.SHOOTER_MOTOR_WAIT_TIME);
+    LigerTimer m_intakeDelay = new LigerTimer(Constants.SHOOTER_INTAKE_WAIT_TIME);
+    LigerTimer m_shotTime = new LigerTimer(Constants.SHOTS_WAIT_TIME);
 
     ShooterSpeeds m_shooterSpeeds;
 
@@ -38,9 +37,8 @@ public class ShooterCommand extends CommandBase {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-        m_distance = m_vision.getDistance();
-
-        m_shooterSpeeds = Shooter.calculateShooterSpeeds(m_distance);
+        double distance = m_vision.getDistance();
+        m_shooterSpeeds = Shooter.calculateShooterSpeeds(distance);
 
         m_state = State.SPEED_UP_SHOOTER;
     }
@@ -52,32 +50,37 @@ public class ShooterCommand extends CommandBase {
             case SPEED_UP_SHOOTER:
                 // turn on the two motors on the shooter, let the chute and intake wait for the
                 // shots
-                m_shooter.shoot(m_shooterSpeeds.top, m_shooterSpeeds.bottom, 0.0);
+                m_shooter.setShooterRpms(m_shooterSpeeds.top, m_shooterSpeeds.bottom);
                 m_state = State.WAIT_FOR_SHOOTER;
-                m_shooterStartTime = Robot.time();
+                m_shootDelay.start();
+                // TODO: comment why this is a fall through
+
             case WAIT_FOR_SHOOTER:
-                if (Robot.time() - m_shooterStartTime > Constants.SHOOTER_MOTOR_WAIT_TIME)
+                if (m_shootDelay.hasElapsed())
                     m_state = State.TURN_ON_CHUTE_INTAKE;
                 break;
+
             case TURN_ON_CHUTE_INTAKE:
                 // turn on the chute once the shooter is ready
-                m_shooter.shoot(m_shooterSpeeds.top, m_shooterSpeeds.bottom, m_shooterSpeeds.chute);
-                m_intake.intakeCargo();
-                m_chuteIntakeStartTime = Robot.time();
+                m_shooter.setChuteSpeed(m_shooterSpeeds.chute);
+                m_intake.run(Constants.INTAKE_SHOOTING_SPEED);
                 m_state = State.WAIT_FOR_SHOTS;
+                m_shotTime.start();
+                break;
         }
     }
 
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-        m_shooter.shoot(0.0, 0.0, 0.0);
+        m_shooter.setShooterRpms(0.0, 0.0);
+        m_shooter.setChuteSpeed(0.0);
         m_intake.run(0.0);
     }
 
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        return m_state == State.WAIT_FOR_SHOTS && Robot.time() - m_chuteIntakeStartTime > Constants.SHOTS_WAIT_TIME;
+        return m_state == State.WAIT_FOR_SHOTS && m_shotTime.hasElapsed();
     }
 }
