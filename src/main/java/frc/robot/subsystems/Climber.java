@@ -182,8 +182,11 @@ public class Climber extends SubsystemBase {
       * the control type to kSmartMotion
       */
     //TODO: this setReference stuff should be put into the setArmAngle method
-     m_armPIDController.setReference(setPoint, CANSparkMax.ControlType.kSmartMotion);
-     processVariable = m_armEncoder.getPosition();
+    if(m_armTooFar)
+      m_armMotorLeader.stopMotor();// double check if the arm goes too far
+    else 
+      m_armPIDController.setReference(setPoint, CANSparkMax.ControlType.kSmartMotion);
+    processVariable = m_armEncoder.getPosition();
    }
    
    SmartDashboard.putNumber("SetPoint", setPoint);
