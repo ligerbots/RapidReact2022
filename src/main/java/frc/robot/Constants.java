@@ -19,7 +19,9 @@ public final class Constants {
     // Temporary Encoder's Distance Per Pulse for simulation
     public static final double ENCODER_DISTANCE_PER_PULSE = Units.inchesToMeters(Math.PI * 6.0 / 1024);
 
-    //Temporary variable values for simulation
+    public static final double FALCON_UNITS_PER_RPM = 2048.0 / 600.0;
+
+    // Temporary variable values for simulation
     public static final double kvVoltSecondsPerMeter = 2.64; 
     public static final double kaVoltSecondsSquaredPerMeter = 0.324; 
     public static final double kvVoltSecondsPerRadian = 3.0;
@@ -57,8 +59,8 @@ public final class Constants {
 
     // intake subsystem
     public static final int INTAKE_MOTOR_CAN_ID = 5; 
-    public static final double INTAKE_SHOOTING_SPEED = 5.0;
-    public static final double INTAKE_SPEED = 5.0;
+    public static final double INTAKE_SHOOTING_SPEED = 0.4;
+    public static final double INTAKE_SPEED = 0.4;
 
     // drivetrain encoders
     public static final int[] LEFT_ENCODER_PORTS = new int[]{0, 1};
@@ -69,11 +71,43 @@ public final class Constants {
     // Following two CAN IDs are for the shooter subsystem
     public static final int TOP_SHOOTER_CAN_ID = 3; 
     public static final int BOTTOM_SHOOTER_CAN_ID = 4;
+    public static final double SHOOTER_KP = 0.03;     // CTRE example = 0.1
+    public static final double SHOOTER_KI = 0.0;   // CTRE example = 0.001
+    public static final double SHOOTER_KD = 0.0;     // CTRE example = 5.0
+    // From example code: kF: 1023 represents output value to Talon at 100%, 20660 represents Velocity units at 100% output
+    public static final double SHOOTER_KF = 1023.0/20660.0;  // CTRE example = 1023.0/20660.0
 
     // chute subsystem
     public static final int CHUTE_CAN_ID = 6; 
 
     public static final int GRAYHILL_ENCODER_DISTANCE_PER_PULSE = 1; //TODO: Replace this value with a correct one 
+
+    //define constants for high, low, and mid rung
+    public static final int HIGH_RUNG = 192;//192 cm
+    public static final int MID_RUNG = 153;//153 cm
+    public static final int LOW_RUNG = 124;//Top of rung is 124cm
+    public static final double CLIMBER_ANGLE = 22.0;//angle for setClimber()
+    
+    
+    public static final double ELEVATOR_HEIGHT_TOLERANCE = 0.5;//tolerance for elevator
+    public static final double ARM_ANGLE_TOLERANCE = 0.5;
+
+    public static final double RUNG_ANGLE = -22.0;//angle to clamp back on rung for raiseToBar command
+    
+    public static final double ELEVATOR_MAX_HEIGHT = 200.0;//length of elevator when fully extended
+    public static final double ELEVATOR_MIN_HEIGHT = 100.0;//length of elevator when fully retracted
+
+    //the angle for the arm to rotate to turn the elevator towards the next bar
+    public static final double ARM_ANGLE_TO_NEXT_BAR = 130.0;
+    public static final double ARM_ADJUST_ANGLE = 160.0; // the angle the arm needs to rotate to follow the motion of the elevator when retracting
+
+    //the angle for the arm to rotate to the left side of the next bar
+    public static final double ARM_TO_THE_LEFT_ANGLE = 45.0;
+    public static final double ARM_GRAB_THE_BAR = 90.0;
+
+    //the height of the elevator to retract down to certain point where the arm can get to the other side of the bar
+    public static final double ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE = ELEVATOR_MIN_HEIGHT + 20.0;
+    public static final double ARM_ANGLE_FOR_ELEVATOR_CLEARANCE = ARM_GRAB_THE_BAR - 10.0;
 
     // drivetrain turning constants
     public static final double TURN_TOLERANCE_DEG = 5.;
