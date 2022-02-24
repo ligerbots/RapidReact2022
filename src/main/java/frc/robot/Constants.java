@@ -85,4 +85,7 @@ public final class Constants {
     public static final double TURN_TOLERANCE_DEG = 5.;
     public static final double TURN_STABILIZE_SECS = .5;
     public static final double TURN_TIMEOUT_SECS = 3;
+
+    public static final double SHOOTER_MOTOR_WAIT_TIME = 2.0; // amount of time to wait for the motors on shooters to speed up, later replaced with checking RPM
+    public static final double SHOTS_WAIT_TIME = 2.0; // time to wait for the shots from the shooter
 }

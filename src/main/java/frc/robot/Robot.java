@@ -52,6 +52,10 @@ public class Robot extends TimedRobot {
     m_plotter = new TrajectoryPlotter(m_robotContainer.getDriveTrain().getField2d());
   }
 
+  public static double time() {
+    return System.nanoTime() * 1.0e-9;
+  }
+
   /**
    * This function is called every robot packet, no matter the mode. Use this for items like
    * diagnostics that you want ran during disabled, autonomous, teleoperated and test.
