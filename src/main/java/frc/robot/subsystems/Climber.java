@@ -5,12 +5,10 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMax.IdleMode;;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-import edu.wpi.first.math.estimator.KalmanFilterLatencyCompensator;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -45,6 +43,8 @@ public class Climber extends SubsystemBase {
 
   double m_armAllowedErr = 0;
 
+  boolean m_armTooFar = false;
+
 
   public Climber() {
     m_armMotorLeader = new CANSparkMax(Constants.ARM_LEADER_CAN_ID, MotorType.kBrushless);
@@ -52,6 +52,7 @@ public class Climber extends SubsystemBase {
     m_elevatorMotorLeader = new CANSparkMax(Constants.ELEVATOR_LEADER_CAN_ID,MotorType.kBrushless);
     m_elevatorMotorFollower = new CANSparkMax(Constants.ELEVATOR_FOLLOWER_CAN_ID,MotorType.kBrushless);
 
+    // This will reset the encoder value to 0
     m_armMotorLeader.restoreFactoryDefaults();
     m_armPIDController = m_armMotorLeader.getPIDController();
     m_armEncoder = m_armMotorLeader.getEncoder();
@@ -96,7 +97,16 @@ public class Climber extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     checkArmPIDVal();
-    
+
+    // If we go too far in either direction, shut it down
+    if (m_armEncoder.getPosition() > Constants.ARM_MAX_ANGLE ||
+    m_armEncoder.getPosition() < Constants.ARM_MIN_ANGLE) {
+      m_armMotorLeader.stopMotor();
+      m_armTooFar = true;
+    } else {
+      m_armTooFar = false;
+    }
+    SmartDashboard.putBoolean("arm/Too Far", m_armTooFar);
   }
   
   // sets the elevator to a certain height
