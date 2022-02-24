@@ -120,9 +120,8 @@ public class Climber extends SubsystemBase {
     m_elevatorPIDController = m_elevatorMotorLeader.getPIDController();
     m_elevatorEncoder = m_elevatorMotorLeader.getEncoder();
 
-    //what is this for the elevator!!!!!!!!!!!!!!!!!!!!!!
-    // gear Ratio for Arm is 25::1 Max Planetary and 60::16 chain reduction
-    m_elevatorEncoder.setPositionConversionFactor((1.0/(25.0*60.0/16.0))*360.0);
+    // gear Ratio for Elevator is 72::12, assuming only one wrap of the rope
+    m_elevatorEncoder.setPositionConversionFactor((12.0/72.0)*Math.PI*0.75);
 
     System.out.println("Get Position Conversion Factor For Elevator");
     m_elevatorPIDController.setP(m_kPElevator);
