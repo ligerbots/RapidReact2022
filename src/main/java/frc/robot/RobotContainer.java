@@ -6,12 +6,13 @@ package frc.robot;
 
 import java.util.function.DoubleSupplier;
 
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 //import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.DriveCommand;
+import frc.robot.commands.IntakeCommand;
+import frc.robot.commands.TuneShooterCommand;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Intake;
@@ -33,14 +34,11 @@ public class RobotContainer {
 
     // The robot's subsystems and commands are defined here...
     private final DriveTrain m_driveTrain = new DriveTrain();
-    // private final Vision m_vision = new Vision(m_driveTrain);
-    // private final Intake m_intake = new Intake();
-    // private final Shooter m_shooter = new Shooter(m_vision);
+    private final Vision m_vision = new Vision(m_driveTrain);
     private final Climber m_climber = new Climber();
-
-    private final Throttle m_throttle = new Throttle(); // create an instance of the throttle class. 
-    private final Turn m_turn = new Turn();
-    private final DriveCommand m_driveCommand = new DriveCommand(m_driveTrain, m_throttle, m_turn);
+    private final Shooter m_shooter = new Shooter();
+    private final Intake m_intake = new Intake();
+    private final DriveCommand m_driveCommand = new DriveCommand(m_driveTrain, new Throttle(), new Turn());
 
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -59,6 +57,14 @@ public class RobotContainer {
      * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
      */
     private void configureButtonBindings() {
+        JoystickButton m_xboxAButton = new JoystickButton(m_xbox, Constants.XBOX_A);
+        m_xboxAButton.whileHeld(new TuneShooterCommand(m_shooter, m_intake));
+
+        JoystickButton m_bumperRight = new JoystickButton(m_xbox, Constants.XBOX_RB);
+        m_bumperRight.whileHeld(new IntakeCommand(m_intake, Constants.INTAKE_SPEED));
+    
+        JoystickButton m_bumperLeft = new JoystickButton(m_xbox, Constants.XBOX_LB);
+        m_bumperLeft.whileHeld(new IntakeCommand(m_intake, -Constants.INTAKE_SPEED));
     }
 
     private class Throttle implements DoubleSupplier {
@@ -77,14 +83,35 @@ public class RobotContainer {
     }
 
     /*
-     * The getter for m_driveCommand. Notice that it's public, meaning that
+     * Getters for Commands and Subsystems. Notice that it's public, meaning that
      * outsiders can access it.
      */
+    
     public DriveCommand getDriveCommand() {
         return m_driveCommand;
     }
 
-    //
+    public DriveTrain getDriveTrain(){
+        return m_driveTrain;
+    }
+    
+    public Vision getVision() {
+        return m_vision;
+    }
+    
+    public Climber getClimber(){
+        return m_climber;
+    }
+
+    public Shooter getShooter(){
+        return m_shooter;
+    }
+
+    public Intake getIntake(){
+        return m_intake;
+    }
+
+    
     // LigerBots: we don't use this function.
     // Autonomous is controlled by a Chooser defined in Robot.
     //

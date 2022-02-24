@@ -5,11 +5,12 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.IdleMode;;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
+import edu.wpi.first.math.estimator.KalmanFilterLatencyCompensator;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -20,6 +21,7 @@ public class Climber extends SubsystemBase {
   CANSparkMax m_elevatorMotorFollower;
   CANSparkMax m_armMotorLeader;
   CANSparkMax m_armMotorFollower;
+  DutyCycleEncoder throughBoreEncoder;
   RelativeEncoder m_winchEncoder;
   RelativeEncoder m_armEncoder;
   SmartDashboard smartDashboard;
@@ -53,7 +55,8 @@ public class Climber extends SubsystemBase {
     m_armMotorLeader.restoreFactoryDefaults();
     m_armPIDController = m_armMotorLeader.getPIDController();
     m_armEncoder = m_armMotorLeader.getEncoder();
-    m_armEncoder.setPositionConversionFactor((1.0/25.0)*360.0);
+    // gear Rtio for Arm is 25::1 Max Planetary and 60::16 chain reduction
+    m_armEncoder.setPositionConversionFactor((1.0/(25.0*60.0/16.0))*360.0);
     System.out.println("Get Position Conversion Factor");
     m_armPIDController.setP(m_kPArm);
     m_armPIDController.setI(m_kIArm);
@@ -101,19 +104,27 @@ public class Climber extends SubsystemBase {
 
   }
   
-  // rotates the arms a certain degree
-  public void rotateArm(double degree){
+  // rotates the arms to a certain angle
+  public void setArmAngle(double degree){
 
   }
 
   // returns the currrent height of the elevator
-  public void getElevatorHeight(){
-
+  public double getElevatorHeight(){
+    return 0.0;
   }
 
   //returns the current angle of the arm
-  public void getArmAngle(){
+  public double getArmAngle(){
+    return 0.0;
+  }
 
+  // Set idle mode of all motors
+  public void setBrakeMode(boolean brake){
+    m_armMotorLeader.setIdleMode(brake ? CANSparkMax.IdleMode.kBrake : CANSparkMax.IdleMode.kCoast);
+    m_armMotorFollower.setIdleMode(brake ? CANSparkMax.IdleMode.kBrake : CANSparkMax.IdleMode.kCoast);
+    m_elevatorMotorLeader.setIdleMode(brake ? CANSparkMax.IdleMode.kBrake : CANSparkMax.IdleMode.kCoast);
+    m_elevatorMotorFollower.setIdleMode(brake ? CANSparkMax.IdleMode.kBrake : CANSparkMax.IdleMode.kCoast);
   }
 
   private void checkArmPIDVal(){
@@ -153,11 +164,14 @@ public class Climber extends SubsystemBase {
      processVariable = m_armEncoder.getVelocity();
    } else {
      setPoint = SmartDashboard.getNumber("Set Position", 0);
+     // Make sure we don't over-rotate the arm
+     setPoint = Math.max(Math.min(setPoint,Constants.ARM_MAX_ANGLE),Constants.ARM_MIN_ANGLE);
      /**
       * As with other PID modes, Smart Motion is set by calling the
       * setReference method on an existing pid object and setting
       * the control type to kSmartMotion
       */
+    //TODO: this setReference stuff should be put into the setArmAngle method
      m_armPIDController.setReference(setPoint, CANSparkMax.ControlType.kSmartMotion);
      processVariable = m_armEncoder.getPosition();
    }

@@ -6,10 +6,14 @@
 /*----------------------------------------------------------------------------*/
 package frc.robot.subsystems;
 
+
+
+import java.util.Map;
+import java.util.TreeMap;
+
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -17,26 +21,54 @@ import frc.robot.Constants;
 
 
 public class Shooter extends SubsystemBase {
-
-    //CANSparkMax for the hopper
-    CANSparkMax m_motor1, m_motor2;
-    //WPI_TalonFX for the shooter
-    WPI_TalonFX m_motor3, m_motor4;
-    //Limit Switch for Intake
+    // CANSparkMax for the hopper
+    CANSparkMax m_chuteMotor;
+    // WPI_TalonFX for the shooter
+    WPI_TalonFX m_topShooterMotor, m_bottomShooterMotor;
+    // Limit Switch for Intake
+    // TODO: change to color sensor
     DigitalInput m_limitSwitch1, m_limitSwitch2;
-
-
+    
+    static TreeMap<Double, ShooterSpeeds> shooterSpeeds = new TreeMap<>(Map.ofEntries(
+        Map.entry(1., new ShooterSpeeds(0.5, 0.5, 0.5)),
+        Map.entry(2., new ShooterSpeeds(0.5, 0.5, 0.5)),
+        Map.entry(3., new ShooterSpeeds(0.5, 0.5, 0.5))
+    ));
     //Shooter class constructor, initialize arrays for motors controllers, encoders, and SmartDashboard data
-    public Shooter(Vision vision) {
+    public Shooter() {
+        m_chuteMotor = new CANSparkMax(Constants.CHUTE_CAN_ID, MotorType.kBrushless);
 
-        m_motor1 = new CANSparkMax(Constants.HOPPER_ONE_CAN_ID, MotorType.kBrushless);
-        m_motor2 = new CANSparkMax(Constants.HOPPER_TWO_CAN_ID, MotorType.kBrushless);
-
-        m_motor3 = new WPI_TalonFX(Constants.SHOOTER_ONE_CAN_ID);
-        m_motor4 = new WPI_TalonFX(Constants.SHOOTER_TWO_CAN_ID);
+        m_topShooterMotor = new WPI_TalonFX(Constants.TOP_SHOOTER_CAN_ID);
+        m_bottomShooterMotor = new WPI_TalonFX(Constants.BOTTOM_SHOOTER_CAN_ID);
 
         m_limitSwitch1 = new DigitalInput(Constants.LIMIT_SWITCH_ONE);
         m_limitSwitch2 = new DigitalInput(Constants.LIMIT_SWITCH_TWO);
+    }
+
+    public static class ShooterSpeeds {
+        double top, bottom, chute;
+        public ShooterSpeeds(double top, double bottom, double chute) {
+            this.top = top;
+            this.bottom = bottom;
+            this.chute = chute;
+        }
+        public ShooterSpeeds interpolate(ShooterSpeeds other, double ratio) {
+            return new ShooterSpeeds(
+                top + (other.top - top) * ratio,
+                bottom + (other.bottom - bottom) * ratio,
+                chute + (other.chute - chute) * ratio
+            );
+        }
+    }
+
+    public static ShooterSpeeds calculateShooterSpeeds(double distance){
+        Map.Entry<Double, ShooterSpeeds> before = shooterSpeeds.floorEntry(distance);
+        Map.Entry<Double, ShooterSpeeds> after = shooterSpeeds.ceilingEntry(distance);
+        if (before == null && after == null) return new ShooterSpeeds(0, 0, 0); // this should never happen b/c shooterSpeeds should have at least 1 element
+        if (before == null) return after.getValue();
+        if (after == null) return before.getValue();
+        double ratio = (distance - before.getKey()) / (after.getKey() - before.getKey());
+        return before.getValue().interpolate(after.getValue(), ratio);
     }
 
     //periodically update the values of motors for shooter to SmartDashboard
@@ -45,8 +77,10 @@ public class Shooter extends SubsystemBase {
     }
 
     //shoot the ball into the high hub for certain distance
-    public void shoot(double distance) {
-
+    public void shoot(double top, double bottom, double chute) {
+        m_topShooterMotor.set(top);
+        m_bottomShooterMotor.set(bottom);
+        m_chuteMotor.set(chute);
     }
 
     //dump the balls into the low hub
