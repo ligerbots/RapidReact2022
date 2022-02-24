@@ -5,10 +5,12 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.IdleMode;;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.math.estimator.KalmanFilterLatencyCompensator;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -53,7 +55,8 @@ public class Climber extends SubsystemBase {
     m_armMotorLeader.restoreFactoryDefaults();
     m_armPIDController = m_armMotorLeader.getPIDController();
     m_armEncoder = m_armMotorLeader.getEncoder();
-    m_armEncoder.setPositionConversionFactor((1.0/25.0)*360.0);
+    // gear Rtio for Arm is 25::1 Max Planetary and 60::16 chain reduction
+    m_armEncoder.setPositionConversionFactor((1.0/(25.0*60.0/16.0))*360.0);
     System.out.println("Get Position Conversion Factor");
     m_armPIDController.setP(m_kPArm);
     m_armPIDController.setI(m_kIArm);
@@ -116,6 +119,14 @@ public class Climber extends SubsystemBase {
     return 0.0;
   }
 
+  // Set idle mode of all motors
+  public void setBrakeMode(boolean brake){
+    m_armMotorLeader.setIdleMode(brake ? CANSparkMax.IdleMode.kBrake : CANSparkMax.IdleMode.kCoast);
+    m_armMotorFollower.setIdleMode(brake ? CANSparkMax.IdleMode.kBrake : CANSparkMax.IdleMode.kCoast);
+    m_elevatorMotorLeader.setIdleMode(brake ? CANSparkMax.IdleMode.kBrake : CANSparkMax.IdleMode.kCoast);
+    m_elevatorMotorFollower.setIdleMode(brake ? CANSparkMax.IdleMode.kBrake : CANSparkMax.IdleMode.kCoast);
+  }
+
   private void checkArmPIDVal(){
    // read PID coefficients from SmartDashboard
    double p = SmartDashboard.getNumber("P Gain", 0);
@@ -153,6 +164,8 @@ public class Climber extends SubsystemBase {
      processVariable = m_armEncoder.getVelocity();
    } else {
      setPoint = SmartDashboard.getNumber("Set Position", 0);
+     // Make sure we don't over-rotate the arm
+     setPoint = Math.max(Math.min(setPoint,Constants.ARM_MAX_ANGLE),Constants.ARM_MIN_ANGLE);
      /**
       * As with other PID modes, Smart Motion is set by calling the
       * setReference method on an existing pid object and setting

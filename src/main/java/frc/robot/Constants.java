@@ -90,6 +90,10 @@ public final class Constants {
     public static final double ELEVATOR_MAX_HEIGHT = 200.0;//length of elevator when fully extended
     public static final double ELEVATOR_MIN_HEIGHT = 100.0;//length of elevator when fully retracted
 
+    // Limit the amr rotation
+    public static final double ARM_MAX_ANGLE = 165.0;
+    public static final double ARM_MIN_ANGLE = 40.0;
+
     //the angle for the arm to rotate to turn the elevator towards the next bar
     public static final double ARM_ANGLE_TO_NEXT_BAR = 130.0;
     public static final double ARM_ADJUST_ANGLE = 160.0; // the angle the arm needs to rotate to follow the motion of the elevator when retracting

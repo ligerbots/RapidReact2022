@@ -50,6 +50,9 @@ public class Robot extends TimedRobot {
     SmartDashboard.putData("Chosen Auto", m_chosenAuto);
 
     m_plotter = new TrajectoryPlotter(m_robotContainer.getDriveTrain().getField2d());
+
+    // Set climber motors to coast so we can move them if we need to.
+    m_robotContainer.getClimber().setBrakeMode(false);
   }
 
   /**
@@ -115,7 +118,11 @@ public class Robot extends TimedRobot {
       m_autonomousCommand.cancel();
     }
     m_robotContainer.getDriveCommand().schedule();
+
+    // Set Climber motors to Brake mode
+    m_robotContainer.getClimber().setBrakeMode(true);
   }
+
 
   /** This function is called periodically during operator control. */
   @Override
