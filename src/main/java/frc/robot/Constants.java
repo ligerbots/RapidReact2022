@@ -50,8 +50,8 @@ public final class Constants {
     public static final int FOLLOWER_RIGHT_CAN_ID = 8;
 
     // Following four CAN IDs are for the climber subsystem
-    public static final int ELEVATOR_LEADER_CAN_ID = 1;
-    public static final int ELEVATOR_FOLLOWER_CAN_ID = 2;
+    public static final int ELEVATOR_LEADER_CAN_ID = 2;
+    public static final int ELEVATOR_FOLLOWER_CAN_ID = 1;
     public static final int ARM_LEADER_CAN_ID = 7;
     public static final int ARM_FOLLOWER_CAN_ID = 10;
 
@@ -87,9 +87,10 @@ public final class Constants {
 
     public static final double RUNG_ANGLE = -22.0;//angle to clamp back on rung for raiseToBar command
     
-    public static final double ELEVATOR_MAX_HEIGHT = 200.0;//length of elevator when fully extended
-    public static final double ELEVATOR_MIN_HEIGHT = 100.0;//length of elevator when fully retracted
-
+    public static final double ELEVATOR_MAX_HEIGHT = 100.0;// 23.5in = length of elevator when fully extended
+    public static final double ELEVATOR_MIN_HEIGHT = -100.0;// 0in = length of elevator when fully retracted
+    // right elevator 0 to -21.5
+     
     // Limit the amr rotation
     // TODO: This is relative to 0 starting position. Need to use absolute encoder and get better values
     public static final double ARM_MAX_ANGLE = 20.0;

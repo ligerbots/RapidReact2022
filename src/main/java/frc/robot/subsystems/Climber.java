@@ -65,6 +65,7 @@ public class Climber extends SubsystemBase {
 
   boolean m_elevatorTooFar = false;
 
+  double m_elevatorEncoderValue = 0;
 
   public Climber() {
     m_armMotorLeader = new CANSparkMax(Constants.ARM_LEADER_CAN_ID, MotorType.kBrushless);
@@ -72,7 +73,7 @@ public class Climber extends SubsystemBase {
     m_elevatorMotorLeader = new CANSparkMax(Constants.ELEVATOR_LEADER_CAN_ID,MotorType.kBrushless);
     m_elevatorMotorFollower = new CANSparkMax(Constants.ELEVATOR_FOLLOWER_CAN_ID,MotorType.kBrushless);
 
-    
+    m_armMotorFollower.follow(m_armMotorLeader, true);
     // This will reset the encoder value to 0
     m_armMotorLeader.restoreFactoryDefaults();
     m_armPIDController = m_armMotorLeader.getPIDController();
@@ -115,11 +116,12 @@ public class Climber extends SubsystemBase {
     SmartDashboard.putBoolean("arm/Mode", true);
 
 
-    // This will reset the encoder value to 0
+    // This will reset the encoder value to 0 (lie)
     m_elevatorMotorLeader.restoreFactoryDefaults();
     m_elevatorPIDController = m_elevatorMotorLeader.getPIDController();
     m_elevatorEncoder = m_elevatorMotorLeader.getEncoder();
-
+    m_elevatorEncoder.setPosition(m_elevatorEncoderValue);
+    SmartDashboard.putNumber("elevator/Encoder Value", m_elevatorEncoderValue);
     // gear Ratio for Elevator is 72::12, assuming only one wrap of the rope
     m_elevatorEncoder.setPositionConversionFactor((12.0/72.0)*Math.PI*0.75);
 
@@ -132,7 +134,7 @@ public class Climber extends SubsystemBase {
     m_elevatorPIDController.setOutputRange(m_kMinOutputElevator, m_kMaxOutputElevator);
 
     //set elevator PID smartMotion Coefficients
-    int smartMotionSlotElevator = 1;
+    int smartMotionSlotElevator = 0;
     m_elevatorPIDController.setSmartMotionMaxVelocity(m_elevatorMaxVel, smartMotionSlotElevator);
     m_elevatorPIDController.setSmartMotionMinOutputVelocity(m_elevatorMinVel, smartMotionSlotElevator);
     m_elevatorPIDController.setSmartMotionMaxAccel(m_elevatorMaxAcc, smartMotionSlotElevator);
@@ -177,14 +179,21 @@ public class Climber extends SubsystemBase {
     checkElevatorPIDVal();
 
     // If we go too far in either direction, shut it down
+    /*
     if (m_elevatorEncoder.getPosition() > Constants.ELEVATOR_MAX_HEIGHT ||
     m_elevatorEncoder.getPosition() < Constants.ELEVATOR_MIN_HEIGHT) {
       m_elevatorMotorLeader.stopMotor();
       m_elevatorTooFar = true;
     } else {
       m_elevatorTooFar = false;
-    }
+    }*/
     SmartDashboard.putBoolean("elevator/Too Far", m_elevatorTooFar);
+
+    if(SmartDashboard.getNumber("elevator/Encoder Value", 0) != m_elevatorEncoderValue){
+      m_elevatorEncoderValue = SmartDashboard.getNumber("elevator/Encoder Value", 0);
+      m_elevatorEncoder.setPosition(m_elevatorEncoderValue);
+
+    }
   }
   
   // sets the elevator to a certain height
