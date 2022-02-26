@@ -73,9 +73,15 @@ public class Climber extends SubsystemBase {
     m_elevatorMotorLeader = new CANSparkMax(Constants.ELEVATOR_LEADER_CAN_ID,MotorType.kBrushless);
     m_elevatorMotorFollower = new CANSparkMax(Constants.ELEVATOR_FOLLOWER_CAN_ID,MotorType.kBrushless);
 
-    m_armMotorFollower.follow(m_armMotorLeader, true);
     // This will reset the encoder value to 0
     m_armMotorLeader.restoreFactoryDefaults();
+    m_armMotorFollower.restoreFactoryDefaults();
+    
+    // Set right arm to follow left arm and invert
+    m_armMotorFollower.follow(m_armMotorLeader, true);
+    // Set right elevator to follow left elevator and invert
+    m_elevatorMotorFollower.follow(m_elevatorMotorLeader, true);
+    
     m_armPIDController = m_armMotorLeader.getPIDController();
     m_armEncoder = m_armMotorLeader.getEncoder();
     // gear Ratio for Arm is 25::1 Max Planetary and 60::16 chain reduction

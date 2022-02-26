@@ -50,8 +50,8 @@ public final class Constants {
     public static final int FOLLOWER_RIGHT_CAN_ID = 8;
 
     // Following four CAN IDs are for the climber subsystem
-    public static final int ELEVATOR_LEADER_CAN_ID = 2;
-    public static final int ELEVATOR_FOLLOWER_CAN_ID = 1;
+    public static final int ELEVATOR_LEADER_CAN_ID = 1;
+    public static final int ELEVATOR_FOLLOWER_CAN_ID = 2;
     public static final int ARM_LEADER_CAN_ID = 7;
     public static final int ARM_FOLLOWER_CAN_ID = 10;
 
