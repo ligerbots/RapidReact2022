@@ -774,6 +774,116 @@
               "_source0": "network_table:///SmartDashboard/elevator/Encoder Value",
               "_title": "elevator/Encoder Value"
             }
+          },
+          "14,7": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/elevator/Encoder Value0",
+              "_title": "elevator/Encoder Value0"
+            }
+          },
+          "16,7": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/elevator/Encoder Value1",
+              "_title": "elevator/Encoder Value1"
+            }
+          },
+          "18,7": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/arm/Process Variable0",
+              "_title": "arm/Process Variable0"
+            }
+          },
+          "0,8": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/arm/Output0",
+              "_title": "arm/Output0"
+            }
+          },
+          "2,8": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/elevator/Process Variable0",
+              "_title": "elevator/Process Variable0"
+            }
+          },
+          "4,8": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/elevator/Output0",
+              "_title": "elevator/Output0"
+            }
+          },
+          "6,8": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/arm/Process Variable1",
+              "_title": "arm/Process Variable1"
+            }
+          },
+          "8,8": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/arm/Output1",
+              "_title": "arm/Output1"
+            }
+          },
+          "10,8": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/elevator/Process Variable1",
+              "_title": "elevator/Process Variable1"
+            }
+          },
+          "12,8": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/elevator/Output1",
+              "_title": "elevator/Output1"
+            }
           }
         }
       }
@@ -954,17 +1064,6 @@
               "_title": "SetPoint"
             }
           },
-          "9,2": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/arm/Process Variable",
-              "_title": "Process Variable"
-            }
-          },
           "6,0": {
             "size": [
               2,
@@ -976,17 +1075,85 @@
               "_title": "Output"
             }
           },
+          "8,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/arm/Process Variable1",
+              "_title": "Process Variable1"
+            }
+          },
           "0,2": {
             "size": [
-              2,
-              2
+              1,
+              1
             ],
             "content": {
               "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/arm/Too Far",
-              "_title": "Too Far",
+              "_source0": "network_table:///SmartDashboard/arm/Too Far0",
+              "_title": "/SmartDashboard/arm/Too Far0",
               "Colors/Color when true": "#7CFC00FF",
               "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "0,3": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/arm/Too Far1",
+              "_title": "/SmartDashboard/arm/Too Far1",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "12,1": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/arm/Process Variable0",
+              "_title": "/SmartDashboard/arm/Process Variable0"
+            }
+          },
+          "12,2": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/arm/Process Variable1",
+              "_title": "/SmartDashboard/arm/Process Variable1"
+            }
+          },
+          "12,3": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/arm/Output0",
+              "_title": "/SmartDashboard/arm/Output0"
+            }
+          },
+          "12,4": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/arm/Output1",
+              "_title": "/SmartDashboard/arm/Output1"
             }
           }
         }
@@ -1157,7 +1324,7 @@
               "_title": "Mode"
             }
           },
-          "9,4": {
+          "9,5": {
             "size": [
               2,
               1
@@ -1179,17 +1346,96 @@
               "_title": "Output"
             }
           },
-          "0,2": {
+          "12,0": {
             "size": [
               2,
-              2
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/elevator/Process Variable0",
+              "_title": "/SmartDashboard/elevator/Process Variable0"
+            }
+          },
+          "12,1": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/elevator/Process Variable1",
+              "_title": "/SmartDashboard/elevator/Process Variable1"
+            }
+          },
+          "0,2": {
+            "size": [
+              1,
+              1
             ],
             "content": {
               "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/elevator/Too Far",
-              "_title": "Too Far",
+              "_source0": "network_table:///SmartDashboard/elevator/Too Far0",
+              "_title": "/SmartDashboard/elevator/Too Far0",
               "Colors/Color when true": "#7CFC00FF",
               "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "0,3": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/elevator/Too Far1",
+              "_title": "/SmartDashboard/elevator/Too Far1",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "9,2": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/elevator/Encoder Value0",
+              "_title": "/SmartDashboard/elevator/Encoder Value0"
+            }
+          },
+          "9,3": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/elevator/Encoder Value1",
+              "_title": "/SmartDashboard/elevator/Encoder Value1"
+            }
+          },
+          "12,2": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/elevator/Output0",
+              "_title": "/SmartDashboard/elevator/Output0"
+            }
+          },
+          "12,3": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/elevator/Output1",
+              "_title": "/SmartDashboard/elevator/Output1"
             }
           },
           "2,0": {
@@ -1202,37 +1448,15 @@
               "_source0": "network_table:///SmartDashboard/elevator/Encoder Value",
               "_title": "Encoder Value"
             }
-          },
-          "9,5": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/elevator/Encoder Value",
-              "_title": "/SmartDashboard/elevator/Encoder Value"
-            }
-          },
-          "9,2": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/elevator/Process Variable",
-              "_title": "SmartDashboard/elevator/Process Variable"
-            }
           }
         }
       }
     }
   ],
   "windowGeometry": {
-    "x": 137.60000610351562,
-    "y": 112.0,
-    "width": 1013.5999755859375,
-    "height": 688.0
+    "x": 0.4000000059604645,
+    "y": 2.799999952316284,
+    "width": 1263.5999755859375,
+    "height": 651.2000122070312
   }
 }
