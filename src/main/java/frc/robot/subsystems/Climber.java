@@ -47,7 +47,7 @@ public class Climber extends SubsystemBase {
 
   double m_armAllowedErr = 0;
 
-  boolean[] m_armTooFar = new boolean[]{false, false};
+  boolean[] m_armTooFar = new boolean[] { false, false };
 
   // PID coefficients for Elevator
   double m_kPElevator = 5e-5;
@@ -67,7 +67,7 @@ public class Climber extends SubsystemBase {
 
   double m_elevatorAllowedErr = 0;
 
-  boolean[] m_elevatorTooFar = new boolean[] {false, false};
+  boolean[] m_elevatorTooFar = new boolean[] { false, false };
 
   double[] m_elevatorEncoderValue = new double[2];
   double[] m_armEncoderValue = new double[2];
@@ -135,7 +135,7 @@ public class Climber extends SubsystemBase {
       m_elevatorPIDControllers[i] = m_elevatorMotors[i].getPIDController();
       m_elevatorEncoders[i] = m_elevatorMotors[i].getEncoder();
       m_elevatorEncoders[i].setPosition(m_elevatorEncoderValue[i]);
-      SmartDashboard.putNumber("elevator/Encoder Value"+i, m_elevatorEncoderValue[i]);
+      SmartDashboard.putNumber("elevator/Encoder Value" + i, m_elevatorEncoderValue[i]);
       // gear Ratio for Elevator is 72::12, assuming only one wrap of the rope
       m_elevatorEncoders[i].setPositionConversionFactor((12.0 / 72.0) * Math.PI * 0.75);
 
@@ -179,40 +179,40 @@ public class Climber extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
 
-    for (int i=0; i<2; i++){
-    checkArmPIDVal(i);
+    for (int i = 0; i < 2; i++) {
+      checkArmPIDVal(i);
 
-    // If we go too far in either direction, shut it down
-    if (m_armEncoders[i].getPosition() > Constants.ARM_MAX_ANGLE ||
-        m_armEncoders[i].getPosition() < Constants.ARM_MIN_ANGLE) {
-      m_armMotors[i].stopMotor();
-      m_armTooFar[i] = true;
-    } else {
-      m_armTooFar[i] = false;
+      // If we go too far in either direction, shut it down
+      if (m_armEncoders[i].getPosition() > Constants.ARM_MAX_ANGLE ||
+          m_armEncoders[i].getPosition() < Constants.ARM_MIN_ANGLE) {
+        m_armMotors[i].stopMotor();
+        m_armTooFar[i] = true;
+      } else {
+        m_armTooFar[i] = false;
+      }
+      SmartDashboard.putBoolean("arm/Too Far" + i, m_armTooFar[i]);
+
+      // This method will be called once per scheduler run
+      checkElevatorPIDVal(i);
+
+      // If we go too far in either direction, shut it down
+      /*
+       * if (m_elevatorEncoder.getPosition() > Constants.ELEVATOR_MAX_HEIGHT ||
+       * m_elevatorEncoder.getPosition() < Constants.ELEVATOR_MIN_HEIGHT) {
+       * m_elevatorMotorLeader.stopMotor();
+       * m_elevatorTooFar = true;
+       * } else {
+       * m_elevatorTooFar = false;
+       * }
+       */
+      SmartDashboard.putBoolean("elevator/Too Far" + i, m_elevatorTooFar[i]);
+
+      if (SmartDashboard.getNumber("elevator/Encoder Value" + i, 0) != m_elevatorEncoderValue[i]) {
+        m_elevatorEncoderValue[i] = SmartDashboard.getNumber("elevator/Encoder Value" + i, 0);
+        m_elevatorEncoders[i].setPosition(m_elevatorEncoderValue[i]);
+
+      }
     }
-    SmartDashboard.putBoolean("arm/Too Far"+i, m_armTooFar[i]);
-
-    // This method will be called once per scheduler run
-    checkElevatorPIDVal(i);
-
-    // If we go too far in either direction, shut it down
-    /*
-     * if (m_elevatorEncoder.getPosition() > Constants.ELEVATOR_MAX_HEIGHT ||
-     * m_elevatorEncoder.getPosition() < Constants.ELEVATOR_MIN_HEIGHT) {
-     * m_elevatorMotorLeader.stopMotor();
-     * m_elevatorTooFar = true;
-     * } else {
-     * m_elevatorTooFar = false;
-     * }
-     */
-    SmartDashboard.putBoolean("elevator/Too Far"+i, m_elevatorTooFar[i]);
-
-    if (SmartDashboard.getNumber("elevator/Encoder Value"+i, 0) != m_elevatorEncoderValue[i]) {
-      m_elevatorEncoderValue[i] = SmartDashboard.getNumber("elevator/Encoder Value"+i, 0);
-      m_elevatorEncoders[i].setPosition(m_elevatorEncoderValue[i]);
-
-    }
-  }
   }
 
   // sets the elevator to a certain height
@@ -325,8 +325,8 @@ public class Climber extends SubsystemBase {
     }
 
     SmartDashboard.putNumber("arm/SetPoint", setPoint);
-    SmartDashboard.putNumber("arm/Process Variable"+j, processVariable);
-    SmartDashboard.putNumber("arm/Output"+j, m_armMotors[j].getAppliedOutput());
+    SmartDashboard.putNumber("arm/Process Variable" + j, processVariable);
+    SmartDashboard.putNumber("arm/Output" + j, m_armMotors[j].getAppliedOutput());
   }
 
   private void checkElevatorPIDVal(int j) {
@@ -411,7 +411,7 @@ public class Climber extends SubsystemBase {
     }
 
     SmartDashboard.putNumber("elevator/SetPoint", setPoint);
-    SmartDashboard.putNumber("elevator/Process Variable"+j, processVariable);
-    SmartDashboard.putNumber("elevator/Output"+j, m_elevatorMotors[j].getAppliedOutput());
+    SmartDashboard.putNumber("elevator/Process Variable" + j, processVariable);
+    SmartDashboard.putNumber("elevator/Output" + j, m_elevatorMotors[j].getAppliedOutput());
   }
 }
