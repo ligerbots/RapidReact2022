@@ -81,10 +81,10 @@ public final class Constants {
     public static final double SHOOTER_MOTOR_WAIT_TIME = 0.5;
     // time to wait for the shots from the shooter
     public static final double SHOOTER_INTAKE_WAIT_TIME = 0.25;
-    // amount of time after spin-up to do 2 shots
-    public static final double SHOTS_WAIT_TIME = 0.5;
-    // amount of time for the intake to carry the next ball to the chute
-    public static final double INTAKE_WAIT_TIME = 0.5;
+    // amount of times to shoot the first ball
+    public static final double SHOOT_BALL1_WAIT_TIME = 0.5;
+    // amount of time to shoot the second ball
+    public static final double SHOOT_BALL2_WAIT_TIME = 0.5;
     
 
     // chute subsystem

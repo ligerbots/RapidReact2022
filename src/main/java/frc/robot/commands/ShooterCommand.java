@@ -20,13 +20,16 @@ public class ShooterCommand extends CommandBase {
 
     LigerTimer m_shootDelay = new LigerTimer(Constants.SHOOTER_MOTOR_WAIT_TIME);
     LigerTimer m_intakeDelay = new LigerTimer(Constants.SHOOTER_INTAKE_WAIT_TIME);
-    LigerTimer m_shotTime = new LigerTimer(Constants.SHOTS_WAIT_TIME);
-    LigerTimer m_intakeTime = new LigerTimer(Constants.INTAKE_WAIT_TIME);
+    LigerTimer m_shootBall1Time = new LigerTimer(Constants.SHOOT_BALL1_WAIT_TIME);
+    LigerTimer m_shootBall2Time = new LigerTimer(Constants.SHOOT_BALL2_WAIT_TIME);
+    LigerTimer m_visionTime = new LigerTimer(2.0); // give the vision at most 2 seconds to find the target
 
     ShooterSpeeds m_shooterSpeeds;
 
+    final double DEFAULT_DISTANCE_TO_THE_HUB = 9.0; // 9 feet
+
     enum State {
-        FINDING_VISION_TARGET, SPEED_UP_SHOOTER, WAIT_FOR_SHOOTER, TURN_ON_CHUTE, TURN_ON_INTAKE, WAIT_FOR_SHOTS, WAIT_FOR_INTAKE;
+        FINDING_VISION_TARGET, SPEED_UP_SHOOTER, WAIT_FOR_SHOOTER, TURN_ON_CHUTE, TURN_ON_INTAKE, WAIT_FOR_SHOOT_BALL1, WAIT_FOR_SHOOT_BALL2;
     }
 
     State m_state;
@@ -40,7 +43,8 @@ public class ShooterCommand extends CommandBase {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-        m_state = State.SPEED_UP_SHOOTER;
+        m_visionTime.start();
+        m_state = State.FINDING_VISION_TARGET;
     }
 
     // Called every time the scheduler runs while the command is scheduled.
@@ -49,9 +53,16 @@ public class ShooterCommand extends CommandBase {
         switch (m_state) {
             case FINDING_VISION_TARGET:
                 m_distance = m_vision.getDistance();
+                // go to the next state once the target is found
                 if(m_distance != 0.0)
                     m_state = State.SPEED_UP_SHOOTER;
-                break;
+                else if(m_visionTime.hasElapsed()){
+                    m_state = State.SPEED_UP_SHOOTER;
+                    // if still can't find the target, just use 9ft as the distance
+                    m_distance = DEFAULT_DISTANCE_TO_THE_HUB;
+                }
+                else break;
+                // allows fall through to the next state if found the target
             case SPEED_UP_SHOOTER:
                 m_shooterSpeeds = Shooter.calculateShooterSpeeds(m_distance);
                 // turn on the two motors on the shooter, let the chute and intake wait for the
@@ -70,22 +81,24 @@ public class ShooterCommand extends CommandBase {
             case TURN_ON_CHUTE:
                 // turn on the chute once the shooter is ready
                 m_shooter.setChuteSpeed(m_shooterSpeeds.chute);
-                m_state = State.WAIT_FOR_SHOTS;
-                m_shotTime.start();
+                m_state = State.WAIT_FOR_SHOOT_BALL1;
+                m_shootBall1Time.start();
                 // same logics, able to go to the next state directly
                 
-            case WAIT_FOR_SHOTS:
-                if(m_shotTime.hasElapsed())
+            case WAIT_FOR_SHOOT_BALL1:
+                if(m_shootBall1Time.hasElapsed())
                     m_state = State.TURN_ON_INTAKE;
                 break;
             
             case TURN_ON_INTAKE:
                 m_intake.run(Constants.INTAKE_SHOOTING_SPEED);
-                m_intakeTime.start();
-                m_state = State.WAIT_FOR_INTAKE;
+                m_shootBall2Time.start();
+                m_state = State.WAIT_FOR_SHOOT_BALL2;
                 break;
 
-            // State.WAIT_FOR_INTAKE checked in isFinished method
+            case WAIT_FOR_SHOOT_BALL2:
+                //State.WAIT_FOR_SHOOT_BALL2 checked in isFinished method
+                break;
         }
     }
 
@@ -100,6 +113,6 @@ public class ShooterCommand extends CommandBase {
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        return m_state == State.WAIT_FOR_INTAKE && m_intakeTime.hasElapsed();
+        return m_state == State.WAIT_FOR_SHOOT_BALL2 && m_shootBall2Time.hasElapsed();
     }
 }
