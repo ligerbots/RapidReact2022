@@ -52,11 +52,9 @@ public final class Constants {
     public static final int FOLLOWER_RIGHT_CAN_ID = 8;
 
     // Following four CAN IDs are for the climber subsystem
-    public static final int ELEVATOR_LEADER_CAN_ID = 1;
-    public static final int ELEVATOR_FOLLOWER_CAN_ID = 2;
-    public static final int ARM_LEADER_CAN_ID = 7;
-    public static final int ARM_FOLLOWER_CAN_ID = 10;
-
+    public static final int[] ELEVATOR_CAN_IDS = new int[] {1,2};
+    public static final int[] ARM_CAN_IDS = new int[] {7,10};
+    
     // intake subsystem
     public static final int INTAKE_MOTOR_CAN_ID = 5; 
     public static final double INTAKE_SHOOTING_SPEED = 0.4;
@@ -98,7 +96,19 @@ public final class Constants {
     public static final double ELEVATOR_MIN_HEIGHT = -100.0;// 0in = length of elevator when fully retracted
     // right elevator 0 to -21.5
      
-    // Limit the amr rotation
+    // Feedforward constants for the each Climber Arm
+    public static final double ARM_KS = 0.182; // TODO: This may need to be tuned
+    // The following constants are computed from https://www.reca.lc/arm
+    public static final double ARM_KG = 2.17;
+    public static final double ARM_KV = 1.8;
+    public static final double ARM_KA = 0.07;
+
+    // Constants to limit the arm rotation speed
+    public static final double ARM_MAX_VEL_RAD_PER_SEC = Math.toRadians(30.0);
+    public static final double ARM_MAX_ACC_RAD_PER_SEC_SQ = Math.toRadians(30.0);
+    public static final double ARM_OFFSET_RAD = Math.toRadians(80.0);
+
+    // Limit the arm rotation
     // TODO: This is relative to 0 starting position. Need to use absolute encoder and get better values
     public static final double ARM_MAX_ANGLE = 20.0;
     public static final double ARM_MIN_ANGLE = -20.0;

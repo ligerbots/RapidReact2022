@@ -15,13 +15,9 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Climber extends SubsystemBase {
-  // CANSparkMax m_elevatorMotorLeader;
-  // CANSparkMax m_elevatorMotorFollower;
   CANSparkMax[] m_elevatorMotors = new CANSparkMax[2];
-  // CANSparkMax m_armMotorLeader;
-  // CANSparkMax m_armMotorFollower;
   CANSparkMax[] m_armMotors = new CANSparkMax[2];
-  DutyCycleEncoder throughBoreEncoder;
+  DutyCycleEncoder[] throughBoreEncoder = new DutyCycleEncoder[2];
   RelativeEncoder[] m_elevatorEncoders = new RelativeEncoder[2]; // it is used on the winch on the actual robot
   RelativeEncoder[] m_armEncoders = new RelativeEncoder[2];
   SmartDashboard smartDashboard;
@@ -75,8 +71,8 @@ public class Climber extends SubsystemBase {
   public Climber() {
     m_armMotors[0] = new CANSparkMax(Constants.ARM_LEADER_CAN_ID, MotorType.kBrushless);
     m_armMotors[1] = new CANSparkMax(Constants.ARM_FOLLOWER_CAN_ID, MotorType.kBrushless);
-    m_elevatorMotors[0] = new CANSparkMax(Constants.ELEVATOR_LEADER_CAN_ID, MotorType.kBrushless);
-    m_elevatorMotors[1] = new CANSparkMax(Constants.ELEVATOR_FOLLOWER_CAN_ID, MotorType.kBrushless);
+    m_elevatorMotors[0] = new CANSparkMax(Constants.ELEVATOR_LEFT_CAN_ID, MotorType.kBrushless);
+    m_elevatorMotors[1] = new CANSparkMax(Constants.ELEVATOR_RIGHT_CAN_ID, MotorType.kBrushless);
 
     // This will reset the encoder value to 0
     // m_armMotorLeader.restoreFactoryDefaults();
