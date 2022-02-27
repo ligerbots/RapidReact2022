@@ -46,6 +46,7 @@ public class ShooterCommand extends CommandBase {
     public void initialize() {
         m_visionTime.start();
         m_state = State.FINDING_VISION_TARGET;
+        // TODO: do we want to turn on shooter to some moderate speed? Need to see if it affects the camera
     }
 
     // Called every time the scheduler runs while the command is scheduled.
@@ -64,7 +65,7 @@ public class ShooterCommand extends CommandBase {
                 }
                 else break;
                 // allows fall through to the next state if found the target
-                
+
             case SPEED_UP_SHOOTER:
                 m_shooterSpeeds = Shooter.calculateShooterSpeeds(m_distance);
                 // turn on the two motors on the shooter, let the chute and intake wait for the
