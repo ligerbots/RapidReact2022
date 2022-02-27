@@ -46,13 +46,15 @@ public class ClimberArm extends TrapezoidProfileSubsystem {
     // Calculate the feedforward fromteh setPoint
     double feedforward = m_Feedforward.calculate(setPoint.position, setPoint.velocity);
     // Add the feedforward to the PID output to get the motor output
-    m_motor.getPIDController().setReference(setPoint.position, ControlType.kPosition, 0, feedforward / 12.0);
+    // The ArmFeedForward computes in radians. We need to convert back to degrees.
+    // Remember that the encoder was already set to account for the gear ratios.
+    m_PIDController.setReference(setPoint.position, ControlType.kPosition, 0, feedforward / 12.0);
   }
 
    @Override
   public void periodic() {
     // Execute the super class periodic method
     super.periodic();
-    
+
   }
 }
