@@ -59,8 +59,8 @@ public class Shooter extends SubsystemBase {
     }
 
     public static class ShooterSpeeds {
-        double top, bottom, chute;
-
+        public double top, bottom, chute;
+        
         public ShooterSpeeds(double top, double bottom, double chute) {
             this.top = top;
             this.bottom = bottom;

@@ -22,12 +22,4 @@ public class Intake extends SubsystemBase {
     public void run(double speed) {
         m_intakeMotor.set(-speed);
     }
-
-    public void intakeCargo() {
-        run(0.25);
-    }
-
-    public void outputCargo() {
-        run(-0.25);
-    }
 }
