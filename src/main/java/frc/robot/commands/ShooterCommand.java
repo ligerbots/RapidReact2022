@@ -26,10 +26,11 @@ public class ShooterCommand extends CommandBase {
 
     ShooterSpeeds m_shooterSpeeds;
 
-    final double DEFAULT_DISTANCE_TO_THE_HUB = 9.0; // 9 feet
+    static final double DEFAULT_DISTANCE_TO_THE_HUB = 9.0 * 12.0; // 9 feet
 
     enum State {
-        FINDING_VISION_TARGET, SPEED_UP_SHOOTER, WAIT_FOR_SHOOTER, TURN_ON_CHUTE, TURN_ON_INTAKE, WAIT_FOR_SHOOT_BALL1, WAIT_FOR_SHOOT_BALL2;
+        FINDING_VISION_TARGET, SPEED_UP_SHOOTER, WAIT_FOR_SHOOTER, TURN_ON_CHUTE, TURN_ON_INTAKE, 
+        WAIT_FOR_SHOOT_BALL1, WAIT_FOR_SHOOT_BALL2;
     }
 
     State m_state;
@@ -45,6 +46,7 @@ public class ShooterCommand extends CommandBase {
     public void initialize() {
         m_visionTime.start();
         m_state = State.FINDING_VISION_TARGET;
+        // TODO: do we want to turn on shooter to some moderate speed? Need to see if it affects the camera
     }
 
     // Called every time the scheduler runs while the command is scheduled.
@@ -63,6 +65,7 @@ public class ShooterCommand extends CommandBase {
                 }
                 else break;
                 // allows fall through to the next state if found the target
+
             case SPEED_UP_SHOOTER:
                 m_shooterSpeeds = Shooter.calculateShooterSpeeds(m_distance);
                 // turn on the two motors on the shooter, let the chute and intake wait for the
