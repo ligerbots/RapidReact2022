@@ -99,9 +99,9 @@ public final class Constants {
     // Feedforward constants for the each Climber Arm
     public static final double ARM_KS = 0.182; // TODO: This may need to be tuned
     // The following constants are computed from https://www.reca.lc/arm
-    public static final double ARM_KG = 2.17;
-    public static final double ARM_KV = 1.8;
-    public static final double ARM_KA = 0.07;
+    public static final double ARM_KG = 2.07;
+    public static final double ARM_KV = 1.83;
+    public static final double ARM_KA = 0.08;
 
     // Constants to limit the arm rotation speed
     public static final double ARM_MAX_VEL_RAD_PER_SEC = Math.toRadians(30.0);
@@ -111,9 +111,9 @@ public final class Constants {
     // PID Constants for the Arm PID controller
     // Since we're using Trapeziodal control, all values will be 0 except for P
     public static final double ARM_K_P = 5.0e-5;
-    public static final double ARM_K_I = 5.0e-5;
-    public static final double ARM_K_D = 5.0e-5;
-    public static final double ARM_K_FF = 5.0e-5;
+    public static final double ARM_K_I = 0.0;
+    public static final double ARM_K_D = 0.0;
+    public static final double ARM_K_FF = 0.0;
 
     // Limit the arm rotation
     // TODO: This is relative to 0 starting position. Need to use absolute encoder and get better values
@@ -131,6 +131,25 @@ public final class Constants {
     //the height of the elevator to retract down to certain point where the arm can get to the other side of the bar
     public static final double ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE = ELEVATOR_MIN_HEIGHT + 20.0;
     public static final double ARM_ANGLE_FOR_ELEVATOR_CLEARANCE = ARM_GRAB_THE_BAR - 10.0;
+
+    // Feedforward constants for the each Climber Arm
+    public static final double ELEVATOR_KS = 0.182; // TODO: This may need to be tuned
+    // The following constants are computed from https://www.reca.lc/arm
+    public static final double ELEVATOR_KG = 1.19;
+    public static final double ELEVATOR_KV = 7.67;
+    public static final double ELEVATOR_KA = 0.19;
+
+    // Constants to limit the arm rotation speed
+    public static final double ELEVATOR_MAX_VEL_METER_PER_SEC = 0.254; // 10"
+    public static final double ELEVATOR_MAX_ACC_METER_PER_SEC_SQ = 0.254; // 10.0";
+    public static final double ELEVATOR_OFFSET_METER = 0.0;
+
+    // PID Constants for the Arm PID controller
+    // Since we're using Trapeziodal control, all values will be 0 except for P
+    public static final double ELEVATOR_K_P = 5.0e-5;
+    public static final double ELEVATOR_K_I = 0.0;
+    public static final double ELEVATOR_K_D = 0.0;
+    public static final double ELEVATOR_K_FF = 0.0;
 
     // drivetrain turning constants
     public static final double TURN_TOLERANCE_DEG = 5.;
