@@ -42,7 +42,7 @@ public class Climber extends SubsystemBase {
     m_arm[0] = new ClimberArm(0, false);
     m_arm[1] = new ClimberArm(1, true);
     m_elevator[0] = new Elevator(0, false);
-    m_elevator[1] = new Elevator(1, false);
+    m_elevator[1] = new Elevator(1, true);
 
     SmartDashboard.putNumber("arm/goal", m_armGoal);
     SmartDashboard.putNumber("elevator/goal", m_elevatorGoal);
