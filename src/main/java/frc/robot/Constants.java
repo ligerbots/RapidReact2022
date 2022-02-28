@@ -75,12 +75,22 @@ public final class Constants {
     // From example code: kF: 1023 represents output value to Talon at 100%, 20660 represents Velocity units at 100% output
     public static final double SHOOTER_KF = 1023.0/20660.0;  // CTRE example = 1023.0/20660.0
 
+    // amount of time to wait for the motors on shooters to speed up, later replaced with checking RPM
+    public static final double SHOOTER_MOTOR_WAIT_TIME = 0.5;
+    // time to wait for the shots from the shooter
+    public static final double SHOOTER_INTAKE_WAIT_TIME = 0.25;
+    // amount of times to shoot the first ball
+    public static final double SHOOT_BALL1_WAIT_TIME = 0.5;
+    // amount of time to shoot the second ball
+    public static final double SHOOT_BALL2_WAIT_TIME = 0.5;
+    
+
     // chute subsystem
     public static final int CHUTE_CAN_ID = 6; 
 
     public static final int GRAYHILL_ENCODER_DISTANCE_PER_PULSE = 1; //TODO: Replace this value with a correct one 
 
-    //define constants for high, low, and mid rung
+    // define constants for high, low, and mid rung
     public static final int HIGH_RUNG = 192;//192 cm
     public static final int MID_RUNG = 153;//153 cm
     public static final int LOW_RUNG = 124;//Top of rung is 124cm
@@ -120,15 +130,15 @@ public final class Constants {
     public static final double ARM_MAX_ANGLE = 20.0;
     public static final double ARM_MIN_ANGLE = -20.0;
 
-    //the angle for the arm to rotate to turn the elevator towards the next bar
+    // the angle for the arm to rotate to turn the elevator towards the next bar
     public static final double ARM_ANGLE_TO_NEXT_BAR = 130.0;
     public static final double ARM_ADJUST_ANGLE = 160.0; // the angle the arm needs to rotate to follow the motion of the elevator when retracting
 
-    //the angle for the arm to rotate to the left side of the next bar
+    // the angle for the arm to rotate to the left side of the next bar
     public static final double ARM_TO_THE_LEFT_ANGLE = 45.0;
     public static final double ARM_GRAB_THE_BAR = 90.0;
 
-    //the height of the elevator to retract down to certain point where the arm can get to the other side of the bar
+    // the height of the elevator to retract down to certain point where the arm can get to the other side of the bar
     public static final double ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE = ELEVATOR_MIN_HEIGHT + 20.0;
     public static final double ARM_ANGLE_FOR_ELEVATOR_CLEARANCE = ARM_GRAB_THE_BAR - 10.0;
 
@@ -155,8 +165,8 @@ public final class Constants {
     public static final double TURN_TOLERANCE_DEG = 5.;
     public static final double TURN_STABILIZE_SECS = .5;
     public static final double TURN_TIMEOUT_SECS = 3;
-    
-    //Xbox button mapping
+
+    // Xbox button mapping
     public static final int XBOX_A = 1;
     public static final int XBOX_B = 2;
     public static final int XBOX_X = 3;
