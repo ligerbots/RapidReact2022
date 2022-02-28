@@ -108,6 +108,13 @@ public final class Constants {
     public static final double ARM_MAX_ACC_RAD_PER_SEC_SQ = Math.toRadians(30.0);
     public static final double ARM_OFFSET_RAD = Math.toRadians(80.0);
 
+    // PID Constants for the Arm PID controller
+    // Since we're using Trapeziodal control, all values will be 0 except for P
+    public static final double ARM_K_P = 5.0e-5;
+    public static final double ARM_K_I = 5.0e-5;
+    public static final double ARM_K_D = 5.0e-5;
+    public static final double ARM_K_FF = 5.0e-5;
+
     // Limit the arm rotation
     // TODO: This is relative to 0 starting position. Need to use absolute encoder and get better values
     public static final double ARM_MAX_ANGLE = 20.0;
