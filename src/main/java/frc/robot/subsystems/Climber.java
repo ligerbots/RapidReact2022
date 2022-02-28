@@ -46,23 +46,22 @@ public class Climber extends SubsystemBase {
 
     SmartDashboard.putNumber("arm/goal", m_armGoal);
     SmartDashboard.putNumber("elevator/goal", m_elevatorGoal);
-    
   }
 
   public void periodic() {
     // All of the control should be done in the Trapeziodal subsystems
     // Check to see if the requested position has changed and then pass it to the Arm subsystems if needed
     double goal = SmartDashboard.getNumber("arm/goal", 0);
-    double goalUnits = Units.degreesToRadians(goal);
     if (goal != m_armGoal) {
+      double goalUnits = Units.degreesToRadians(goal);
       m_arm[0].setGoal(goalUnits);
       m_arm[1].setGoal(goalUnits);
       m_armGoal = goal;
-      SmartDashboard.putNumber("arm/goal", goal);
     }
+
     goal = SmartDashboard.getNumber("elevator/goal", 0);
-    goalUnits = Units.feetToMeters(goal/12.0);
     if (goal != m_elevatorGoal) {
+      double goalUnits = Units.inchesToMeters(goal);
       m_elevator[0].setGoal(goalUnits);
       m_elevator[1].setGoal(goalUnits);
       m_elevatorGoal = goal;

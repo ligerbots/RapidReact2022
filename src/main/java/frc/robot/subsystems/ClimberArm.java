@@ -46,34 +46,45 @@ public class ClimberArm extends TrapezoidProfileSubsystem {
     // Create the motor, PID Controller and encoder.
     m_motor = new CANSparkMax(Constants.ARM_CAN_IDS[m_index], MotorType.kBrushless);
     m_motor.restoreFactoryDefaults();
+    m_motor.setInverted(inverted);
+
     m_PIDController = m_motor.getPIDController();
     m_PIDController.setP(m_kPArm);
     m_PIDController.setI(Constants.ARM_K_I);
     m_PIDController.setD(Constants.ARM_K_D);
     m_PIDController.setFF(Constants.ARM_K_FF);
+
     m_encoder = m_motor.getEncoder();
     // Set the position conversion factor. Note that the Trapezoidal control
     // expects angles in radians.
     m_encoder.setPositionConversionFactor((1.0 / (25.0 * 60.0 / 16.0)) * 2.0 * Math.PI);
-    
 
-    SmartDashboard.putNumber("arm/P Gain", Constants.ARM_K_P);
+    SmartDashboard.putNumber("arm" + m_index + "/P Gain", m_kPArm);
   }
 
   @Override
   public void periodic() {
+    double encoderValue = m_encoder.getPosition();
+    double encoderDegrees = encoderValue; // TODO FIX ME
+
+    // Display current values on the Mart Dashboard
+    SmartDashboard.putNumber("arm" + m_index + "/Output" + m_index, m_motor.getAppliedOutput());
+    SmartDashboard.putNumber("arm" + m_index + "/Encoder" + m_index, encoderValue);
 
     // First check if we've gone too far. If we have, reset the setPoint to the limit.
-    if (m_encoder.getPosition() > Constants.ARM_MAX_ANGLE) {
+    m_tooFarForward = encoderDegrees > Constants.ARM_MAX_ANGLE;
+    SmartDashboard.putBoolean("arm" + m_index + "/too Forward", m_tooFarForward);
+    if (m_tooFarForward) {
+      // TODO: convert MAX to encoder position
       m_PIDController.setReference(Constants.ARM_MAX_ANGLE, ControlType.kPosition, 0, 0.0);
-      m_tooFarForward = true;
-      SmartDashboard.putBoolean("arm/too Forward", m_tooFarForward);
-      return;
+      return; // Do we really not want to run super.periodic()?
     }
-    if (m_encoder.getPosition() < Constants.ARM_MIN_ANGLE) {
+
+    m_tooFarBack = encoderDegrees < Constants.ARM_MIN_ANGLE;
+    SmartDashboard.putBoolean("arm" + m_index + "/too Backward", m_tooFarBack);
+    if (m_tooFarBack) {
+      // TODO: convert MIN to encoder position
       m_PIDController.setReference(Constants.ARM_MIN_ANGLE, ControlType.kPosition, 0, 0.0);
-      m_tooFarBack = true;
-      SmartDashboard.putBoolean("arm/too Backward", m_tooFarBack);
       return;
     }
     
@@ -85,26 +96,24 @@ public class ClimberArm extends TrapezoidProfileSubsystem {
     // Each increment will only change the set point position a little bit.
 
     checkPIDVal();
-
-    // Display current values on the Mart Dashboard
-    SmartDashboard.putNumber("arm/Output" + m_index, m_motor.getAppliedOutput());
-    SmartDashboard.putNumber("arm/Encoder" + m_index, m_encoder.getPosition());
   }
 
   @Override
   protected void useState(TrapezoidProfile.State setPoint) {
     // Calculate the feedforward fromteh setPoint
     double feedforward = m_Feedforward.calculate(setPoint.position, setPoint.velocity);
+
     // Add the feedforward to the PID output to get the motor output
     // The ArmFeedForward computes in radians. We need to convert back to degrees.
     // Remember that the encoder was already set to account for the gear ratios.
+    
+    // TODO: if the "12.0" is volts, should use RobotController.getBatteryVoltage()
     m_PIDController.setReference(setPoint.position, ControlType.kPosition, 0, feedforward / 12.0);
   }
 
   private void checkPIDVal() {
-    double p = SmartDashboard.getNumber("arm/P Gain", 0);
-    // if PID coefficients on SmartDashboard have changed, write new values to
-    // controller
+    double p = SmartDashboard.getNumber("arm" + m_index + "/P Gain", 0);
+    // if PID coefficients on SmartDashboard have changed, write new values to controller
     if ((p != m_kPArm)) {
       m_PIDController.setP(p);
       m_kPArm = p;
