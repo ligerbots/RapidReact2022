@@ -6,6 +6,7 @@ package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
 
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -52,15 +53,18 @@ public class Climber extends SubsystemBase {
     // All of the control should be done in the Trapeziodal subsystems
     // Check to see if the requested position has changed and then pass it to the Arm subsystems if needed
     double goal = SmartDashboard.getNumber("arm/goal", 0);
+    double goalUnits = Units.degreesToRadians(goal);
     if (goal != m_armGoal) {
-      m_arm[0].setGoal(goal);
-      m_arm[1].setGoal(goal);
+      m_arm[0].setGoal(goalUnits);
+      m_arm[1].setGoal(goalUnits);
       m_armGoal = goal;
+      SmartDashboard.putNumber("arm/goal", goal);
     }
     goal = SmartDashboard.getNumber("elevator/goal", 0);
+    goalUnits = Units.feetToMeters(goal/12.0);
     if (goal != m_elevatorGoal) {
-      m_elevator[0].setGoal(goal);
-      m_elevator[1].setGoal(goal);
+      m_elevator[0].setGoal(goalUnits);
+      m_elevator[1].setGoal(goalUnits);
       m_elevatorGoal = goal;
     }
   }
