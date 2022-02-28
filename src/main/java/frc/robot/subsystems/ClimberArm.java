@@ -28,6 +28,9 @@ public class ClimberArm extends TrapezoidProfileSubsystem {
 
   private double m_kPArm = Constants.ARM_K_P;
   private int m_index;
+
+  private boolean m_tooFarForward = false;
+  private boolean m_tooFarBack = false;
   
   /** Creates a new ClimberArm. */
   public ClimberArm(int index, boolean inverted) {
@@ -58,6 +61,37 @@ public class ClimberArm extends TrapezoidProfileSubsystem {
   }
 
   @Override
+  public void periodic() {
+
+    // First check if we've gone too far. If we have, reset the setPoint to the limit.
+    if (m_encoder.getPosition() > Constants.ARM_MAX_ANGLE) {
+      m_PIDController.setReference(Constants.ARM_MAX_ANGLE, ControlType.kPosition, 0, 0.0);
+      m_tooFarForward = true;
+      SmartDashboard.putBoolean("arm/too Forward", m_tooFarForward);
+      return;
+    }
+    if (m_encoder.getPosition() < Constants.ARM_MIN_ANGLE) {
+      m_PIDController.setReference(Constants.ARM_MIN_ANGLE, ControlType.kPosition, 0, 0.0);
+      m_tooFarBack = true;
+      SmartDashboard.putBoolean("arm/too Backward", m_tooFarBack);
+      return;
+    }
+    
+    // Execute the super class periodic method
+    super.periodic();
+
+    // Here we can check the SmartDashboard for any updates to the PIC constants.
+    // Note that since this is Trapezoidal control, we only need to set P.
+    // Each increment will only change the set point position a little bit.
+
+    checkPIDVal();
+
+    // Display current values on the Mart Dashboard
+    SmartDashboard.putNumber("arm/Output" + m_index, m_motor.getAppliedOutput());
+    SmartDashboard.putNumber("arm/Encoder", m_encoder.getPosition());
+  }
+
+  @Override
   protected void useState(TrapezoidProfile.State setPoint) {
     // Calculate the feedforward fromteh setPoint
     double feedforward = m_Feedforward.calculate(setPoint.position, setPoint.velocity);
@@ -67,23 +101,7 @@ public class ClimberArm extends TrapezoidProfileSubsystem {
     m_PIDController.setReference(setPoint.position, ControlType.kPosition, 0, feedforward / 12.0);
   }
 
-   @Override
-  public void periodic() {
-    // Execute the super class periodic method
-    super.periodic();
-
-    // Here we can check the SmartDashboard for any updates to the PIC constants.
-    // Note that since this is Trapezoidal control, we only need to set P.
-    // Each increment will only change the set point position a little bit.
-
-    checkArmPIDVal();
-
-    // Display current values on the Mart Dashboard
-    SmartDashboard.putNumber("arm/Output" + m_index, m_motor.getAppliedOutput());
-    SmartDashboard.putNumber("arm/Encoder", m_encoder.getPosition());
-  }
-
-  private void checkArmPIDVal() {
+  private void checkPIDVal() {
     double p = SmartDashboard.getNumber("arm/P Gain", 0);
     // if PID coefficients on SmartDashboard have changed, write new values to
     // controller
@@ -91,6 +109,10 @@ public class ClimberArm extends TrapezoidProfileSubsystem {
       m_PIDController.setP(p);
       m_kPArm = p;
     }
+  }
+
+  public CANSparkMax getMotor() {
+    return m_motor;
   }
 
 }
