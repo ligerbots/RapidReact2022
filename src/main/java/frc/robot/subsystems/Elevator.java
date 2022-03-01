@@ -44,7 +44,7 @@ public class Elevator extends TrapezoidProfileSubsystem {
     m_index = index;
 
     // Create the motor, PID Controller and encoder.
-    m_motor = new CANSparkMax(Constants.ARM_CAN_IDS[m_index], MotorType.kBrushless);
+    m_motor = new CANSparkMax(Constants.ELEVATOR_CAN_IDS[m_index], MotorType.kBrushless);
     m_motor.restoreFactoryDefaults();
     m_motor.setInverted(inverted);
 
