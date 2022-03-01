@@ -54,8 +54,8 @@ public final class Constants {
     // Following four CAN IDs are for the climber subsystem
     public static final int ELEVATOR_LEADER_CAN_ID = 1;
     public static final int ELEVATOR_FOLLOWER_CAN_ID = 2;
-    public static final int ARM_LEADER_CAN_ID = 7;
-    public static final int ARM_FOLLOWER_CAN_ID = 10;
+    public static final int ARM_LEADER_CAN_ID = 7; //7
+    public static final int ARM_FOLLOWER_CAN_ID = 10; //10
 
     // intake subsystem
     public static final int INTAKE_MOTOR_CAN_ID = 5; 
@@ -100,8 +100,8 @@ public final class Constants {
      
     // Limit the amr rotation
     // TODO: This is relative to 0 starting position. Need to use absolute encoder and get better values
-    public static final double ARM_MAX_ANGLE = 20.0;
-    public static final double ARM_MIN_ANGLE = -20.0;
+    public static final double ARM_MAX_ANGLE = 70.0;
+    public static final double ARM_MIN_ANGLE = -70.0;
 
     //the angle for the arm to rotate to turn the elevator towards the next bar
     public static final double ARM_ANGLE_TO_NEXT_BAR = 130.0;

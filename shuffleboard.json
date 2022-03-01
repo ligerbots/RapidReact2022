@@ -884,6 +884,41 @@
               "_source0": "network_table:///SmartDashboard/elevator/Output1",
               "_title": "elevator/Output1"
             }
+          },
+          "14,8": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/shooter/top_rpm",
+              "_title": "shooter/top_rpm"
+            }
+          },
+          "16,8": {
+            "size": [
+              2,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/elevator/Too Far0",
+              "_title": "elevator/Too Far0",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "0,9": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/shooter/bottom_rpm",
+              "_title": "shooter/bottom_rpm"
+            }
           }
         }
       }
@@ -1154,6 +1189,17 @@
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/arm/Output1",
               "_title": "/SmartDashboard/arm/Output1"
+            }
+          },
+          "9,5": {
+            "size": [
+              2,
+              2
+            ],
+            "content": {
+              "_type": "Toggle Button",
+              "_source0": "network_table:///SmartDashboard/arm/Coast",
+              "_title": "Coast"
             }
           }
         }
@@ -1454,9 +1500,9 @@
     }
   ],
   "windowGeometry": {
-    "x": 0.4000000059604645,
-    "y": 2.799999952316284,
-    "width": 1263.5999755859375,
-    "height": 651.2000122070312
+    "x": -8.0,
+    "y": -8.0,
+    "width": 1382.0,
+    "height": 736.0
   }
 }

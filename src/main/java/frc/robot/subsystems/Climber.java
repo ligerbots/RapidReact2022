@@ -73,11 +73,14 @@ public class Climber extends SubsystemBase {
   double[] m_armEncoderValue = new double[2];
 
   public Climber() {
+    SmartDashboard.putBoolean("arm/Coast", false);
+    
     m_armMotors[0] = new CANSparkMax(Constants.ARM_LEADER_CAN_ID, MotorType.kBrushless);
     m_armMotors[1] = new CANSparkMax(Constants.ARM_FOLLOWER_CAN_ID, MotorType.kBrushless);
     m_elevatorMotors[0] = new CANSparkMax(Constants.ELEVATOR_LEADER_CAN_ID, MotorType.kBrushless);
     m_elevatorMotors[1] = new CANSparkMax(Constants.ELEVATOR_FOLLOWER_CAN_ID, MotorType.kBrushless);
 
+    setBrakeMode(false);
     // This will reset the encoder value to 0
     // m_armMotorLeader.restoreFactoryDefaults();
     // m_armMotorFollower.restoreFactoryDefaults();
@@ -88,9 +91,11 @@ public class Climber extends SubsystemBase {
     }
 
     // Set right arm to follow left arm and invert
-    m_armMotors[1].follow(m_armMotors[0], true);
+    // m_armMotors[1].follow(m_armMotors[0], true);
+    m_armMotors[1].setInverted(true);
     // Set right elevator to follow left elevator and invert
-    m_elevatorMotors[1].follow(m_elevatorMotors[0], true);
+    // m_elevatorMotors[1].follow(m_elevatorMotors[0], true);
+    m_elevatorMotors[1].setInverted(true);
 
     for (int i = 0; i < 2; i++) {
       m_armPIDControllers[i] = m_armMotors[i].getPIDController();
@@ -319,8 +324,13 @@ public class Climber extends SubsystemBase {
       // TODO: this setReference stuff should be put into the setArmAngle method
       if (m_armTooFar[j])
         m_armMotors[j].stopMotor();// double check if the arm goes too far
-      else
-        m_armPIDControllers[j].setReference(setPoint, CANSparkMax.ControlType.kSmartMotion);
+      else{
+        if(SmartDashboard.getBoolean("arm/Coast", false)){
+          m_armMotors[j].stopMotor();
+        }else {
+          m_armPIDControllers[j].setReference(setPoint, CANSparkMax.ControlType.kSmartMotion);
+        }
+      }
       processVariable = m_armEncoders[j].getPosition();
     }
 
