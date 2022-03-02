@@ -105,6 +105,7 @@ public class Elevator extends TrapezoidProfileSubsystem {
     // Add the feedforward to the PID output to get the motor output
     // Remember that the encoder was already set to account for the gear ratios.
     m_PIDController.setReference(setPoint.position, ControlType.kPosition, 0, feedforward / 12.0);
+    SmartDashboard.putNumber("elevator" + m_index + "/feedforward" + m_index, feedforward);
     SmartDashboard.putNumber("elevator" + m_index + "/setPoint" + m_index, Units.metersToInches(setPoint.position));
     SmartDashboard.putNumber("elevator" + m_index + "/velocity" + m_index, Units.metersToInches(setPoint.velocity));
   }

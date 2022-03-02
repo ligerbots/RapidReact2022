@@ -108,6 +108,7 @@ public class ClimberArm extends TrapezoidProfileSubsystem {
     
     // TODO: if the "12.0" is volts, should use RobotController.getBatteryVoltage()
     m_PIDController.setReference(setPoint.position, ControlType.kPosition, 0, feedforward / 12.0);
+    SmartDashboard.putNumber("arm" + m_index + "/feedforward" + m_index, feedforward);
     SmartDashboard.putNumber("arm" + m_index + "/setPoint" + m_index, Units.metersToInches(setPoint.position));
     SmartDashboard.putNumber("arm" + m_index + "/velocity" + m_index, Units.metersToInches(setPoint.velocity));
 }
