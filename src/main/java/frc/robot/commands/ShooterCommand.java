@@ -15,7 +15,7 @@ public class ShooterCommand extends CommandBase {
     Shooter m_shooter;
     Intake m_intake;
     Vision m_vision;
-
+    boolean m_upperHub;
     double m_distance;
 
     LigerTimer m_shootDelay = new LigerTimer(Constants.SHOOTER_MOTOR_WAIT_TIME);
@@ -25,7 +25,7 @@ public class ShooterCommand extends CommandBase {
     LigerTimer m_visionTime = new LigerTimer(2.0); // give the vision at most 2 seconds to find the target
 
     ShooterSpeeds m_shooterSpeeds;
-
+    
     static final double DEFAULT_DISTANCE_TO_THE_HUB = 9.0 * 12.0; // 9 feet
 
     enum State {
@@ -35,10 +35,11 @@ public class ShooterCommand extends CommandBase {
 
     State m_state;
 
-    public ShooterCommand(Shooter shooter, Intake intake, Vision vision) {
+    public ShooterCommand(Shooter shooter, Intake intake, Vision vision, boolean upperHub) {
         m_shooter = shooter;
         m_intake = intake;
         m_vision = vision;
+        m_upperHub = upperHub;
     }
 
     // Called when the command is initially scheduled.
@@ -51,10 +52,12 @@ public class ShooterCommand extends CommandBase {
 
     // Called every time the scheduler runs while the command is scheduled.
     @Override
+    
     public void execute() {
         switch (m_state) {
             case FINDING_VISION_TARGET:
-                m_distance = m_vision.getDistance();
+        
+                
                 // go to the next state once the target is found
                 if(m_distance != 0.0)
                     m_state = State.SPEED_UP_SHOOTER;
