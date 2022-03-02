@@ -91,9 +91,9 @@ public final class Constants {
     public static final int GRAYHILL_ENCODER_DISTANCE_PER_PULSE = 1; //TODO: Replace this value with a correct one 
 
     // define constants for high, low, and mid rung
-    public static final int HIGH_RUNG = 1.92;//192 cm
-    public static final int MID_RUNG = 1.53;//153 cm
-    public static final int LOW_RUNG = 1.24;//Top of rung is 124cm
+    public static final double HIGH_RUNG = 1.92;//192 cm
+    public static final double MID_RUNG = 1.53;//153 cm
+    public static final double LOW_RUNG = 1.24;//Top of rung is 124cm
     public static final double CLIMBER_ANGLE = Units.degreesToRadians(22.0);//angle for setClimber()
     
     
