@@ -56,7 +56,13 @@ public class ShooterCommand extends CommandBase {
     public void execute() {
         switch (m_state) {
             case FINDING_VISION_TARGET:
-        
+                
+                if(m_upperHub == false){//shoot to lower
+                    //set distance to 2 feet?
+                    m_distance = Constants.LOWER_SHOOT_DISTANCE;
+                }else{
+                    m_distance = m_vision.getDistance();
+                }
                 
                 // go to the next state once the target is found
                 if(m_distance != 0.0)

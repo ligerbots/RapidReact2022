@@ -30,16 +30,12 @@ public class Shooter extends SubsystemBase {
     // TODO: change to color sensor
     DigitalInput m_limitSwitch1, m_limitSwitch2;
 
-    static TreeMap<Double, ShooterSpeeds> shooterSpeedsUpper = new TreeMap<>(Map.ofEntries(//table for upper hub
+    static TreeMap<Double, ShooterSpeeds> shooterSpeeds = new TreeMap<>(Map.ofEntries(//table for upper hub
             Map.entry(1., new ShooterSpeeds(0.5, 0.5, 0.5)),
             Map.entry(2., new ShooterSpeeds(0.5, 0.5, 0.5)),
             Map.entry(3., new ShooterSpeeds(0.5, 0.5, 0.5))
             ));
-    static TreeMap<Double, ShooterSpeeds> shooterSpeedsLower = new TreeMap<>(Map.ofEntries(//table for lower hub
-            Map.entry(1., new ShooterSpeeds(0.5, 0.5, 0.5)),
-            Map.entry(2., new ShooterSpeeds(0.5, 0.5, 0.5)),
-            Map.entry(3., new ShooterSpeeds(0.5, 0.5, 0.5))
-            ));
+   
     
 
     // Shooter class constructor, initialize arrays for motors controllers,
@@ -86,8 +82,8 @@ public class Shooter extends SubsystemBase {
 
 
     public static ShooterSpeeds calculateShooterSpeeds(double distance) {
-        Map.Entry<Double, ShooterSpeeds> before = shooterSpeedsUpper.floorEntry(distance);
-        Map.Entry<Double, ShooterSpeeds> after = shooterSpeedsUpper.ceilingEntry(distance);
+        Map.Entry<Double, ShooterSpeeds> before = shooterSpeeds.floorEntry(distance);
+        Map.Entry<Double, ShooterSpeeds> after = shooterSpeeds.ceilingEntry(distance);
         if (before == null && after == null)
             return new ShooterSpeeds(0, 0, 0); // this should never happen b/c shooterSpeeds should have at least 1 element
         if (before == null)
