@@ -54,8 +54,9 @@ public class Elevator extends TrapezoidProfileSubsystem {
     m_PIDController.setD(Constants.ELEVATOR_K_D);
     m_PIDController.setFF(Constants.ELEVATOR_K_FF);
     m_encoder = m_motor.getEncoder();
+    m_encoder.setPosition(0.0);
     // Set the position conversion factor.
-    m_encoder.setPositionConversionFactor(72.0 / 12.0);
+    m_encoder.setPositionConversionFactor((12.0 / 72.0) * (5.0/8.0) * Math.PI);
 
     SmartDashboard.putNumber("elevator" + m_index + "/P Gain", m_kPElevator);
   }
@@ -84,6 +85,8 @@ public class Elevator extends TrapezoidProfileSubsystem {
     // Execute the super class periodic method
     super.periodic();
 
+    SmartDashboard.putNumber("elevator" + m_index + "/current", m_motor.getOutputCurrent());
+
     // Here we can check the SmartDashboard for any updates to the PIC constants.
     // Note that since this is Trapezoidal control, we only need to set P.
     // Each increment will only change the set point position a little bit.
@@ -99,6 +102,8 @@ public class Elevator extends TrapezoidProfileSubsystem {
     // Add the feedforward to the PID output to get the motor output
     // Remember that the encoder was already set to account for the gear ratios.
     m_PIDController.setReference(setPoint.position, ControlType.kPosition, 0, feedforward / 12.0);
+    SmartDashboard.putNumber("elevator" + m_index + "/setPoint" + m_index, setPoint.position);
+    SmartDashboard.putNumber("elevator" + m_index + "/velocity" + m_index, setPoint.velocity);
   }
 
   private void checkPIDVal() {

@@ -884,6 +884,138 @@
               "_source0": "network_table:///SmartDashboard/elevator/Output1",
               "_title": "elevator/Output1"
             }
+          },
+          "14,8": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/shooter/top_rpm",
+              "_title": "shooter/top_rpm"
+            }
+          },
+          "16,8": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/shooter/bottom_rpm",
+              "_title": "shooter/bottom_rpm"
+            }
+          },
+          "18,8": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/arm0/P Gain",
+              "_title": "arm0/P Gain"
+            }
+          },
+          "0,9": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/arm1/P Gain",
+              "_title": "arm1/P Gain"
+            }
+          },
+          "2,9": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/elevator0/P Gain",
+              "_title": "elevator0/P Gain"
+            }
+          },
+          "4,9": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/elevator1/P Gain",
+              "_title": "elevator1/P Gain"
+            }
+          },
+          "6,9": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/arm/goal",
+              "_title": "arm/goal"
+            }
+          },
+          "8,9": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/elevator/goal",
+              "_title": "elevator/goal"
+            }
+          },
+          "10,9": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/arm0/Output0",
+              "_title": "arm0/Output0"
+            }
+          },
+          "12,9": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/arm0/Encoder0",
+              "_title": "arm0/Encoder0"
+            }
+          },
+          "14,9": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/arm1/Output1",
+              "_title": "arm1/Output1"
+            }
+          },
+          "16,9": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/arm1/Encoder1",
+              "_title": "arm1/Encoder1"
+            }
           }
         }
       }
@@ -1155,6 +1287,30 @@
               "_source0": "network_table:///SmartDashboard/arm/Output1",
               "_title": "/SmartDashboard/arm/Output1"
             }
+          },
+          "14,0": {
+            "size": [
+              2,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/arm/Coast",
+              "_title": "Coast",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "2,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/arm/goal",
+              "_title": "goal"
+            }
           }
         }
       }
@@ -1170,117 +1326,7 @@
         "vgap": 16.0,
         "titleType": 0,
         "tiles": {
-          "3,0": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/elevator/P Gain",
-              "_title": "P Gain"
-            }
-          },
-          "3,1": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/elevator/I Gain",
-              "_title": "I Gain"
-            }
-          },
-          "3,2": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/elevator/D Gain",
-              "_title": "D Gain"
-            }
-          },
-          "3,3": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/elevator/I Zone",
-              "_title": "I Zone"
-            }
-          },
-          "3,4": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/elevator/Feed Forward",
-              "_title": "Feed Forward"
-            }
-          },
-          "6,1": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/elevator/Max Output",
-              "_title": "Max Output"
-            }
-          },
-          "6,2": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/elevator/Min Output",
-              "_title": "Min Output"
-            }
-          },
-          "6,3": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/elevator/Max Velocity",
-              "_title": "Max Velocity"
-            }
-          },
-          "6,4": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/elevator/Min Velocity",
-              "_title": "Min Velocity"
-            }
-          },
-          "6,5": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/elevator/Max Acceleration",
-              "_title": "Max Acceleration"
-            }
-          },
-          "0,5": {
+          "0,4": {
             "size": [
               4,
               1
@@ -1291,162 +1337,129 @@
               "_title": "Allowed Closed Loop Error"
             }
           },
-          "9,1": {
+          "2,0": {
             "size": [
               2,
               1
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/elevator/Set Position",
-              "_title": "Set Position"
-            }
-          },
-          "9,0": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/elevator/Set Velocity",
-              "_title": "Set Velocity"
+              "_source0": "network_table:///SmartDashboard/elevator/goal",
+              "_title": "goal"
             }
           },
           "0,0": {
             "size": [
               2,
-              2
-            ],
-            "content": {
-              "_type": "Toggle Button",
-              "_source0": "network_table:///SmartDashboard/elevator/Mode",
-              "_title": "Mode"
-            }
-          },
-          "9,5": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/elevator/SetPoint",
-              "_title": "SetPoint"
-            }
-          },
-          "6,0": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/elevator/Output",
-              "_title": "Output"
-            }
-          },
-          "12,0": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/elevator/Process Variable0",
-              "_title": "/SmartDashboard/elevator/Process Variable0"
-            }
-          },
-          "12,1": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/elevator/Process Variable1",
-              "_title": "/SmartDashboard/elevator/Process Variable1"
-            }
-          },
-          "0,2": {
-            "size": [
-              1,
               1
             ],
             "content": {
               "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/elevator/Too Far0",
-              "_title": "/SmartDashboard/elevator/Too Far0",
+              "_source0": "network_table:///SmartDashboard/elevator0/too High",
+              "_title": "SmartDashboard/elevator0/too High",
               "Colors/Color when true": "#7CFC00FF",
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "0,3": {
+          "0,1": {
             "size": [
-              1,
+              2,
               1
             ],
             "content": {
               "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/elevator/Too Far1",
-              "_title": "/SmartDashboard/elevator/Too Far1",
+              "_source0": "network_table:///SmartDashboard/elevator1/too High",
+              "_title": "SmartDashboard/elevator1/too High",
               "Colors/Color when true": "#7CFC00FF",
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "9,2": {
+          "7,0": {
             "size": [
               2,
               1
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/elevator/Encoder Value0",
-              "_title": "/SmartDashboard/elevator/Encoder Value0"
+              "_source0": "network_table:///SmartDashboard/elevator1/Encoder1",
+              "_title": "SmartDashboard/elevator1/Encoder1"
             }
           },
-          "9,3": {
+          "5,0": {
             "size": [
               2,
               1
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/elevator/Encoder Value1",
-              "_title": "/SmartDashboard/elevator/Encoder Value1"
+              "_source0": "network_table:///SmartDashboard/elevator0/Encoder0",
+              "_title": "SmartDashboard/elevator0/Encoder0"
             }
           },
-          "12,2": {
+          "5,3": {
             "size": [
               2,
               1
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/elevator/Output0",
-              "_title": "/SmartDashboard/elevator/Output0"
+              "_source0": "network_table:///SmartDashboard/elevator0/P Gain",
+              "_title": "SmartDashboard/elevator0/P Gain"
             }
           },
-          "12,3": {
+          "7,2": {
             "size": [
               2,
               1
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/elevator/Output1",
-              "_title": "/SmartDashboard/elevator/Output1"
+              "_source0": "network_table:///SmartDashboard/elevator1/Output1",
+              "_title": "SmartDashboard/elevator1/Output1"
             }
           },
-          "2,0": {
+          "7,3": {
             "size": [
-              1,
+              2,
               1
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/elevator/Encoder Value",
-              "_title": "Encoder Value"
+              "_source0": "network_table:///SmartDashboard/elevator1/P Gain",
+              "_title": "SmartDashboard/elevator1/P Gain"
+            }
+          },
+          "7,1": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/elevator1/setPoint1",
+              "_title": "SmartDashboard/elevator1/setPoint1"
+            }
+          },
+          "5,2": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/elevator0/Output0",
+              "_title": "SmartDashboard/elevator0/Output0"
+            }
+          },
+          "5,1": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/elevator0/setPoint0",
+              "_title": "SmartDashboard/elevator0/setPoint0"
             }
           }
         }
@@ -1456,7 +1469,7 @@
   "windowGeometry": {
     "x": 0.4000000059604645,
     "y": 2.799999952316284,
-    "width": 1263.5999755859375,
-    "height": 651.2000122070312
+    "width": 1428.800048828125,
+    "height": 575.5999755859375
   }
 }
