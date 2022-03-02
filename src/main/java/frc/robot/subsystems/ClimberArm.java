@@ -65,14 +65,13 @@ public class ClimberArm extends TrapezoidProfileSubsystem {
   @Override
   public void periodic() {
     double encoderValue = m_encoder.getPosition();
-    double encoderDegrees = encoderValue; // TODO FIX ME
-
-    // Display current values on the Mart Dashboard
+    
+    // Display current values on the SmartDashboard
     SmartDashboard.putNumber("arm" + m_index + "/Output" + m_index, m_motor.getAppliedOutput());
-    SmartDashboard.putNumber("arm" + m_index + "/Encoder" + m_index, encoderValue);
+    SmartDashboard.putNumber("arm" + m_index + "/Encoder" + m_index, Units.radiansToDegrees(encoderValue));
 
     // First check if we've gone too far. If we have, reset the setPoint to the limit.
-    m_tooFarForward = encoderDegrees > Constants.ARM_MAX_ANGLE;
+    m_tooFarForward = encoderValue > Constants.ARM_MAX_ANGLE;
     SmartDashboard.putBoolean("arm" + m_index + "/too Forward", m_tooFarForward);
     if (m_tooFarForward) {
       // TODO: convert MAX to encoder position
@@ -80,7 +79,7 @@ public class ClimberArm extends TrapezoidProfileSubsystem {
       return; // Do we really not want to run super.periodic()?
     }
 
-    m_tooFarBack = encoderDegrees < Constants.ARM_MIN_ANGLE;
+    m_tooFarBack = encoderValue < Constants.ARM_MIN_ANGLE;
     SmartDashboard.putBoolean("arm" + m_index + "/too Backward", m_tooFarBack);
     if (m_tooFarBack) {
       // TODO: convert MIN to encoder position
@@ -109,7 +108,9 @@ public class ClimberArm extends TrapezoidProfileSubsystem {
     
     // TODO: if the "12.0" is volts, should use RobotController.getBatteryVoltage()
     m_PIDController.setReference(setPoint.position, ControlType.kPosition, 0, feedforward / 12.0);
-  }
+    SmartDashboard.putNumber("arm" + m_index + "/setPoint" + m_index, Units.metersToInches(setPoint.position));
+    SmartDashboard.putNumber("arm" + m_index + "/velocity" + m_index, Units.metersToInches(setPoint.velocity));
+}
 
   private void checkPIDVal() {
     double p = SmartDashboard.getNumber("arm" + m_index + "/P Gain", 0);
