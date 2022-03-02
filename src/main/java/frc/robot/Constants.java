@@ -114,8 +114,8 @@ public final class Constants {
     public static final double ARM_KA = 0.08;
 
     // Constants to limit the arm rotation speed
-    public static final double ARM_MAX_VEL_RAD_PER_SEC = Math.toRadians(30.0);
-    public static final double ARM_MAX_ACC_RAD_PER_SEC_SQ = Math.toRadians(30.0);
+    public static final double ARM_MAX_VEL_RAD_PER_SEC = Math.toRadians(5.0);
+    public static final double ARM_MAX_ACC_RAD_PER_SEC_SQ = Math.toRadians(2.5);
     public static final double ARM_OFFSET_RAD = Math.toRadians(80.0);
 
     // PID Constants for the Arm PID controller
@@ -150,8 +150,8 @@ public final class Constants {
     public static final double ELEVATOR_KA = 0.19;
 
     // Constants to limit the arm rotation speed
-    public static final double ELEVATOR_MAX_VEL_METER_PER_SEC = 0.254; // 10"
-    public static final double ELEVATOR_MAX_ACC_METER_PER_SEC_SQ = 0.254; // 10.0";
+    public static final double ELEVATOR_MAX_VEL_METER_PER_SEC = 0.0254; // 1.0"
+    public static final double ELEVATOR_MAX_ACC_METER_PER_SEC_SQ = 0.0254; // 1.0";
     public static final double ELEVATOR_OFFSET_METER = 0.0;
 
     // PID Constants for the Arm PID controller
