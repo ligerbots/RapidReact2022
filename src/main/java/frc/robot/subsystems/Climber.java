@@ -9,6 +9,7 @@ import com.revrobotics.CANSparkMax;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 public class Climber extends SubsystemBase {
 
@@ -41,7 +42,7 @@ public class Climber extends SubsystemBase {
     // Construct the arm trapezoid subsystems
     m_arm[0] = new ClimberArm(0, false);
     m_arm[1] = new ClimberArm(1, true);
-    m_elevator[0] = new Elevator(0, false);
+    //m_elevator[0] = new Elevator(0, false);
     m_elevator[1] = new Elevator(1, true);
 
     SmartDashboard.putNumber("arm/goal", m_armGoal);
@@ -51,31 +52,33 @@ public class Climber extends SubsystemBase {
   public void periodic() {
     // All of the control should be done in the Trapeziodal subsystems
     // Check to see if the requested position has changed and then pass it to the Arm subsystems if needed
-    double goal = SmartDashboard.getNumber("arm/goal", 0);
-    if (goal != m_armGoal) {
-      double goalUnits = Units.degreesToRadians(goal);
-      m_arm[0].setGoal(goalUnits);
-      m_arm[1].setGoal(goalUnits);
-      m_armGoal = goal;
-    }
+    // double goal = SmartDashboard.getNumber("arm/goal", Math.toDegrees(Constants.ARM_OFFSET_RAD));
+    // if (goal != m_armGoal) {
+    //   double goalUnits = Units.degreesToRadians(goal);
+    //   m_arm[0].setGoal(goalUnits);
+    //   m_arm[1].setGoal(goalUnits);
+    //   m_armGoal = goal;
+    // }
 
-    goal = SmartDashboard.getNumber("elevator/goal", 0);
-    if (goal != m_elevatorGoal) {
-      double goalUnits = Units.inchesToMeters(goal);
-      m_elevator[0].setGoal(goalUnits);
-      m_elevator[1].setGoal(goalUnits);
-      m_elevatorGoal = goal;
-    }
+    // goal = SmartDashboard.getNumber("elevator/goal", 0);
+    // if (goal != m_elevatorGoal) {
+    //   double goalUnits = Units.inchesToMeters(goal);
+    //   //m_elevator[0].setGoal(goalUnits);
+    //   m_elevator[1].setGoal(goalUnits); //* (20.1/18.45) factor for lowest point
+    //   m_elevatorGoal = goal;
+    // }
   }
 
   // sets the elevator to a certain height
   public void setElevatorHeight(double height) {
-
+    //m_elevator[0].setGoal(height);
+    m_elevator[1].setGoal(height);
   }
 
   // rotates the arms to a certain angle
   public void setArmAngle(double degree) {
-
+    m_arm[0].setGoal(degree);
+    m_arm[1].setGoal(degree);
   }
 
   // returns the currrent height of the elevator
@@ -92,7 +95,13 @@ public class Climber extends SubsystemBase {
   public void setBrakeMode(boolean brake) {
     m_arm[0].getMotor().setIdleMode(brake ? CANSparkMax.IdleMode.kBrake : CANSparkMax.IdleMode.kCoast);
     m_arm[1].getMotor().setIdleMode(brake ? CANSparkMax.IdleMode.kBrake : CANSparkMax.IdleMode.kCoast);
-    m_elevator[0].getMotor().setIdleMode(brake ? CANSparkMax.IdleMode.kBrake : CANSparkMax.IdleMode.kCoast);
+    // m_elevator[0].getMotor().setIdleMode(brake ? CANSparkMax.IdleMode.kBrake : CANSparkMax.IdleMode.kCoast);
     m_elevator[1].getMotor().setIdleMode(brake ? CANSparkMax.IdleMode.kBrake : CANSparkMax.IdleMode.kCoast);
+  }
+
+  public void idleArm() {
+    m_arm[0].getMotor().setIdleMode(CANSparkMax.IdleMode.kCoast);
+    m_arm[1].getMotor().setIdleMode(CANSparkMax.IdleMode.kCoast);
+    
   }
 }

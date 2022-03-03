@@ -114,8 +114,8 @@ public final class Constants {
     public static final double ARM_KA = 0.08;
 
     // Constants to limit the arm rotation speed
-    public static final double ARM_MAX_VEL_RAD_PER_SEC = Math.toRadians(5.0);
-    public static final double ARM_MAX_ACC_RAD_PER_SEC_SQ = Math.toRadians(2.5);
+    public static final double ARM_MAX_VEL_RAD_PER_SEC = Math.toRadians(20.0);
+    public static final double ARM_MAX_ACC_RAD_PER_SEC_SQ = Math.toRadians(5);
     public static final double ARM_OFFSET_RAD = Math.toRadians(80.0);
 
     // PID Constants for the Arm PID controller
@@ -127,8 +127,8 @@ public final class Constants {
 
     // Limit the arm rotation
     // TODO: This is relative to 0 starting position. Need to use absolute encoder and get better values
-    public static final double ARM_MAX_ANGLE = Units.degreesToRadians(20.0);
-    public static final double ARM_MIN_ANGLE = Units.degreesToRadians(-20.0);
+    public static final double ARM_MAX_ANGLE = Units.degreesToRadians(160.0);
+    public static final double ARM_MIN_ANGLE = Units.degreesToRadians(20.0);
 
     // the angle for the arm to rotate to turn the elevator towards the next bar
     public static final double ARM_ANGLE_TO_NEXT_BAR = Units.degreesToRadians(130.0);
@@ -150,13 +150,14 @@ public final class Constants {
     public static final double ELEVATOR_KA = 0.19;
 
     // Constants to limit the arm rotation speed
-    public static final double ELEVATOR_MAX_VEL_METER_PER_SEC = Units.inchesToMeters(5.0);
+    public static final double ELEVATOR_MAX_VEL_METER_PER_SEC = Units.inchesToMeters(10.0);
     public static final double ELEVATOR_MAX_ACC_METER_PER_SEC_SQ = Units.inchesToMeters(10.0);
     public static final double ELEVATOR_OFFSET_METER = 0.0;
 
     // PID Constants for the Arm PID controller
     // Since we're using Trapeziodal control, all values will be 0 except for P
-    public static final double ELEVATOR_K_P = 5.0e-5;
+    public static final double ELEVATOR_K_P0 = 18;
+    public static final double ELEVATOR_K_P1 = 10;
     public static final double ELEVATOR_K_I = 0.0;
     public static final double ELEVATOR_K_D = 0.0;
     public static final double ELEVATOR_K_FF = 0.0;

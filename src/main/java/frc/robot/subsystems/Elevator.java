@@ -27,7 +27,7 @@ public class Elevator extends TrapezoidProfileSubsystem {
   private final ElevatorFeedforward m_Feedforward = 
     new ElevatorFeedforward(Constants.ELEVATOR_KS, Constants.ELEVATOR_KG, Constants.ELEVATOR_KV, Constants.ELEVATOR_KA);
 
-  private double m_kPElevator = Constants.ELEVATOR_K_P;
+  private double m_kPElevator;
   private int m_index;
 
   private boolean m_tooHigh = false;
@@ -43,6 +43,7 @@ public class Elevator extends TrapezoidProfileSubsystem {
       Constants.ELEVATOR_OFFSET_METER);
 
     m_index = index;
+    m_kPElevator = m_index == 0 ? Constants.ELEVATOR_K_P0 : Constants.ELEVATOR_K_P1;
 
     // Create the motor, PID Controller and encoder.
     m_motor = new CANSparkMax(Constants.ELEVATOR_CAN_IDS[m_index], MotorType.kBrushless);

@@ -11,6 +11,9 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.AutoCommandInterface;
 import frc.robot.commands.OneBallAuto;
+import frc.robot.commands.RaiseToBar;
+import frc.robot.commands.RetractElevatorAdjustArm;
+import frc.robot.commands.SetClimber;
 import frc.robot.commands.TrajectoryPlotter;
 import frc.robot.commands.TwoBallAutoCurved;
 import frc.robot.commands.TwoBallAutoStraight;
@@ -25,7 +28,7 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
   private RobotContainer m_robotContainer;
   private TrajectoryPlotter m_plotter;
-  private SendableChooser<AutoCommandInterface> m_chosenAuto = new SendableChooser<>();
+  private SendableChooser<Command> m_chosenAuto = new SendableChooser<>();
   private AutoCommandInterface m_prevAutoCommand = null;
 
   /**
@@ -38,15 +41,26 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
 
-    m_chosenAuto.addOption("OneBallAuto", 
-      new OneBallAuto(m_robotContainer.getShooter(), m_robotContainer.getIntake(), m_robotContainer.getDriveTrain(), m_robotContainer.getVision())
-    );
-    m_chosenAuto.addOption("TwoBallAutoStraight", 
-      new TwoBallAutoStraight(m_robotContainer.getShooter(), m_robotContainer.getIntake(), m_robotContainer.getDriveTrain(), m_robotContainer.getVision())
-    );
-    m_chosenAuto.setDefaultOption("TwoBallAutoCurved", 
-      new TwoBallAutoCurved(m_robotContainer.getShooter(), m_robotContainer.getIntake(), m_robotContainer.getDriveTrain(), m_robotContainer.getVision())
-    );
+    // m_chosenAuto.addOption("OneBallAuto", 
+    //   new OneBallAuto(m_robotContainer.getShooter(), m_robotContainer.getIntake(), m_robotContainer.getDriveTrain(), m_robotContainer.getVision())
+    // );
+    // m_chosenAuto.addOption("TwoBallAutoStraight", 
+    //   new TwoBallAutoStraight(m_robotContainer.getShooter(), m_robotContainer.getIntake(), m_robotContainer.getDriveTrain(), m_robotContainer.getVision())
+    // );
+    // m_chosenAuto.setDefaultOption("TwoBallAutoCurved", 
+    //   new TwoBallAutoCurved(m_robotContainer.getShooter(), m_robotContainer.getIntake(), m_robotContainer.getDriveTrain(), m_robotContainer.getVision())
+    // );
+
+    m_chosenAuto.addOption("SetClimber", 
+    new SetClimber(m_robotContainer.getClimber())
+  );
+  m_chosenAuto.addOption("RaiseToBar", 
+    new RaiseToBar(m_robotContainer.getClimber())
+  );
+  m_chosenAuto.addOption("RetractElevatorAdjustArm", 
+    new RetractElevatorAdjustArm(m_robotContainer.getClimber())
+  );
+  
     SmartDashboard.putData("Chosen Auto", m_chosenAuto);
 
     m_plotter = new TrajectoryPlotter(m_robotContainer.getDriveTrain().getField2d());
@@ -78,16 +92,16 @@ public class Robot extends TimedRobot {
 
   @Override
   public void disabledPeriodic() {
-    AutoCommandInterface autoCommandInterface = m_chosenAuto.getSelected();
-    if (autoCommandInterface != null && autoCommandInterface != m_prevAutoCommand) {
-      m_robotContainer.getDriveTrain().setPose(autoCommandInterface.getInitialPose());
-      m_prevAutoCommand = autoCommandInterface;
+    // AutoCommandInterface autoCommandInterface = m_chosenAuto.getSelected();
+    // if (autoCommandInterface != null && autoCommandInterface != m_prevAutoCommand) {
+    //   m_robotContainer.getDriveTrain().setPose(autoCommandInterface.getInitialPose());
+    //   m_prevAutoCommand = autoCommandInterface;
 
-      if (Robot.isSimulation()) {
-        m_plotter.clear();
-        autoCommandInterface.plotTrajectory(m_plotter);
-      }
-    }    
+    //   if (Robot.isSimulation()) {
+    //     m_plotter.clear();
+    //     autoCommandInterface.plotTrajectory(m_plotter);
+    //   }
+    // }    
   }
 
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
