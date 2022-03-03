@@ -86,11 +86,6 @@ public final class Constants {
     // amount of time to shoot the second ball
     public static final double SHOOT_BALL2_WAIT_TIME = 0.5;
     
-    //shoot lower constants
-    public static final double LOWER_SHOOT_TOP = 1.0;
-    public static final double LOWER_SHOOT_BOTTOM = 1.0;
-    public static final double LOWER_SHOOT_CHUTE = 1.0;
-    public static final double LOWER_SHOOT_DISTANCE = 1.0;
 
     // chute subsystem
     public static final int CHUTE_CAN_ID = 6; 

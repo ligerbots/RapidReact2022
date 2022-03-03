@@ -46,7 +46,12 @@ public class ShooterCommand extends CommandBase {
     @Override
     public void initialize() {
         m_visionTime.start();
-        m_state = State.FINDING_VISION_TARGET;
+        if(m_upperHub==true){ 
+            m_state = State.FINDING_VISION_TARGET;
+        }else{//if lowerhub then skip FINDING_VISION_TARGET
+            m_state = State.SPEED_UP_SHOOTER;
+        }
+        
         // TODO: do we want to turn on shooter to some moderate speed? Need to see if it affects the camera
     }
 
@@ -57,13 +62,7 @@ public class ShooterCommand extends CommandBase {
         switch (m_state) {
             case FINDING_VISION_TARGET:
                 
-                if(m_upperHub == false){//shoot to lower
-                    //set distance to 2 feet?
-                    m_distance = Constants.LOWER_SHOOT_DISTANCE;
-                }else{
-                    m_distance = m_vision.getDistance();
-                }
-                
+                m_distance = m_vision.getDistance();
                 // go to the next state once the target is found
                 if(m_distance != 0.0)
                     m_state = State.SPEED_UP_SHOOTER;
@@ -76,7 +75,7 @@ public class ShooterCommand extends CommandBase {
                 // allows fall through to the next state if found the target
 
             case SPEED_UP_SHOOTER:
-                m_shooterSpeeds = Shooter.calculateShooterSpeeds(m_distance);
+                m_shooterSpeeds = Shooter.calculateShooterSpeeds(m_distance, m_upperHub);
                 // turn on the two motors on the shooter, let the chute and intake wait for the
                 // shots
                 m_shooter.setShooterRpms(m_shooterSpeeds.top, m_shooterSpeeds.bottom);
