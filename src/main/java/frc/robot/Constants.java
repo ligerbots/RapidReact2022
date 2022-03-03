@@ -136,10 +136,13 @@ public final class Constants {
     // the angle for the arm to rotate to the left side of the next bar
     public static final double ARM_TO_THE_LEFT_ANGLE = Units.degreesToRadians(45.0);
     public static final double ARM_GRAB_THE_BAR = Units.degreesToRadians(90.0);
+    public static final double ARM_ROTATION_ELEVATOR_TOUCH_BAR = Units.degreesToRadians(100.0);
 
     // the height of the elevator to retract down to certain point where the arm can get to the other side of the bar
     public static final double ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE = ELEVATOR_MIN_HEIGHT + Units.inchesToMeters(10.0);
     public static final double ARM_ANGLE_FOR_ELEVATOR_CLEARANCE = ARM_GRAB_THE_BAR - Units.degreesToRadians(10.0);
+
+    public static final double ELEVATOR_HEIGHT_SECURE_ON_BAR = Units.inchesToMeters(0.0);
 
     // Feedforward constants for the each Climber Arm
     public static final double ELEVATOR_KS = 0.182; // TODO: This may need to be tuned
