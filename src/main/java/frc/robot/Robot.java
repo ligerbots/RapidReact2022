@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.AutoCommandInterface;
 import frc.robot.commands.OneBallAuto;
 import frc.robot.commands.RaiseToBar;
-import frc.robot.commands.RetractElevatorAdjustArm;
+import frc.robot.commands.RetractElevatorArmCoastMode;
 import frc.robot.commands.SetClimber;
 import frc.robot.commands.TrajectoryPlotter;
 import frc.robot.commands.TwoBallAutoCurved;
@@ -57,8 +57,8 @@ public class Robot extends TimedRobot {
   m_chosenAuto.addOption("RaiseToBar", 
     new RaiseToBar(m_robotContainer.getClimber())
   );
-  m_chosenAuto.addOption("RetractElevatorAdjustArm", 
-    new RetractElevatorAdjustArm(m_robotContainer.getClimber())
+  m_chosenAuto.addOption("RetractElevatorArmCoastMode", 
+    new RetractElevatorArmCoastMode(m_robotContainer.getClimber(), Constants.ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE)
   );
   
     SmartDashboard.putData("Chosen Auto", m_chosenAuto);

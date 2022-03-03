@@ -27,7 +27,7 @@ public class ClimbToNextBar extends SequentialCommandGroup {
       new SetElevatorHeight(m_climber, Constants.ELEVATOR_MAX_HEIGHT),
 
       // parallel command group, to have the arm rotate while elevator retracts
-      new RetractElevatorAdjustArm(m_climber),
+      new RetractElevatorArmCoastMode(m_climber, Constants.ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE),
 
       // rotate the arm to leave the previous bar and get to the side of the next bar
       new SetArmAngle(m_climber, Constants.ARM_TO_THE_LEFT_ANGLE),

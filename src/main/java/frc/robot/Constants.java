@@ -132,7 +132,6 @@ public final class Constants {
 
     // the angle for the arm to rotate to turn the elevator towards the next bar
     public static final double ARM_ANGLE_TO_NEXT_BAR = Units.degreesToRadians(130.0);
-    public static final double ARM_ADJUST_ANGLE = Units.degreesToRadians(160.0); // the angle the arm needs to rotate to follow the motion of the elevator when retracting
 
     // the angle for the arm to rotate to the left side of the next bar
     public static final double ARM_TO_THE_LEFT_ANGLE = Units.degreesToRadians(45.0);

@@ -32,6 +32,8 @@ public class ClimberArm extends TrapezoidProfileSubsystem {
 
   private boolean m_tooFarForward = false;
   private boolean m_tooFarBack = false;
+
+  private boolean m_coastMode = false;
   
   /** Creates a new ClimberArm. */
   public ClimberArm(int index, boolean inverted) {
@@ -70,7 +72,11 @@ public class ClimberArm extends TrapezoidProfileSubsystem {
     // Display current values on the SmartDashboard
     SmartDashboard.putNumber("arm" + m_index + "/Output" + m_index, m_motor.getAppliedOutput());
     SmartDashboard.putNumber("arm" + m_index + "/Encoder" + m_index, Units.radiansToDegrees(encoderValue));
+    SmartDashboard.putBoolean("arm" + m_index + "/CoastMode" + m_index, m_coastMode);
 
+    // if in coast mode, stop the periodic() here to prevent the PID from setReference()
+    if (m_coastMode)  return;
+      
     // First check if we've gone too far. If we have, reset the setPoint to the limit.
     m_tooFarForward = encoderValue > Constants.ARM_MAX_ANGLE;
     SmartDashboard.putBoolean("arm" + m_index + "/too Forward", m_tooFarForward);
@@ -127,4 +133,16 @@ public class ClimberArm extends TrapezoidProfileSubsystem {
     return m_motor;
   }
 
+  public void idleMotor(){
+    m_coastMode = true;
+    // set the motor to coast mode 
+    m_motor.setIdleMode(CANSparkMax.IdleMode.kCoast);
+    // stop the motor to prevent the last PID setReference() to drive the motor
+    m_motor.stopMotor();
+  }
+
+  public void unIdleMotor(){
+    m_coastMode = false;
+    m_motor.setIdleMode(CANSparkMax.IdleMode.kBrake);
+  }
 }

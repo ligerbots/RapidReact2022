@@ -99,9 +99,13 @@ public class Climber extends SubsystemBase {
     m_elevator[1].getMotor().setIdleMode(brake ? CANSparkMax.IdleMode.kBrake : CANSparkMax.IdleMode.kCoast);
   }
 
-  public void idleArm() {
-    m_arm[0].getMotor().setIdleMode(CANSparkMax.IdleMode.kCoast);
-    m_arm[1].getMotor().setIdleMode(CANSparkMax.IdleMode.kCoast);
-    
+  public void setArmCoastMode(){
+    m_arm[0].idleMotor();
+    m_arm[1].idleMotor();
+  }
+
+  public void unsetArmCoastMode(){
+    m_arm[0].unIdleMotor();
+    m_arm[1].unIdleMotor();
   }
 }
