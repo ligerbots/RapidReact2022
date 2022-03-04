@@ -71,24 +71,34 @@ public class Climber extends SubsystemBase {
 
   // sets the elevator to a certain height
   public void setElevatorHeight(double height) {
-    //m_elevator[0].setGoal(height);
-    m_elevator[1].setGoal(height);
+    double goal = SmartDashboard.getNumber("elevator/goal", 0);
+    if (goal != m_elevatorGoal) {
+      double goalUnits = Units.inchesToMeters(goal);
+      //m_elevator[0].setGoal(goalUnits);
+      m_elevator[1].setGoal(goalUnits); //* (20.1/18.45) factor for lowest point
+      m_elevatorGoal = goal;
+    }
   }
 
   // rotates the arms to a certain angle
   public void setArmAngle(double degree) {
-    m_arm[0].setGoal(degree);
-    m_arm[1].setGoal(degree);
+    double goal = SmartDashboard.getNumber("arm/goal", Math.toDegrees(Constants.ARM_OFFSET_RAD));
+    if (goal != m_armGoal) {
+      double goalUnits = Units.degreesToRadians(goal);
+      m_arm[0].setGoal(goalUnits);
+      m_arm[1].setGoal(goalUnits);
+      m_armGoal = goal;
+    }
   }
 
   // returns the currrent height of the elevator
-  public double getElevatorHeight() {
-    return 0.0;
+  public double[] getElevatorHeight() {
+    return new double[] {SmartDashboard.getNumber("elevator0/Encoder0", 0.0), SmartDashboard.getNumber("elevator1/Encoder1", 0.0)};
   }
 
   // returns the current angle of the arm
-  public double getArmAngle() {
-    return 0.0;
+  public double[] getArmAngle() {
+    return new double[] {SmartDashboard.getNumber("arm0/Encoder0", 0.0), SmartDashboard.getNumber("arm1/Encoder1", 0.0)};
   }
 
   // Set idle mode of all motors

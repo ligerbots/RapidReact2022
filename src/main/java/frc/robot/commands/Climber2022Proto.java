@@ -33,7 +33,7 @@ public class Climber2022Proto extends CommandBase {
     // Set to brake mode
     m_climber.setBrakeMode(true);
     
-    m_armAngle = m_climber.getArmAngle();
+    //m_armAngle = m_climber.getArmAngle();
     // in fraction from 0 to 1
     m_reference = m_armAngle;
     // put this initial valuer to SmartDashboard for reference

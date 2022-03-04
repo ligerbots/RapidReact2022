@@ -36,6 +36,8 @@ public class SetArmAngle extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return Math.abs(m_climber.getArmAngle() - m_angle) < Constants.ARM_ANGLE_TOLERANCE;
+    double[] arr = m_climber.getArmAngle();
+    return Math.abs(arr[0] - m_angle) < Constants.ARM_ANGLE_TOLERANCE
+    && Math.abs(arr[1] - m_angle) < Constants.ARM_ANGLE_TOLERANCE;
   }
 }
