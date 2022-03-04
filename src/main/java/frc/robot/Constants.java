@@ -115,6 +115,8 @@ public final class Constants {
     public static final double ARM_TO_THE_LEFT_ANGLE = 45.0;
     public static final double ARM_GRAB_THE_BAR = 90.0;
 
+
+
     // the height of the elevator to retract down to certain point where the arm can get to the other side of the bar
     public static final double ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE = ELEVATOR_MIN_HEIGHT + 20.0;
     public static final double ARM_ANGLE_FOR_ELEVATOR_CLEARANCE = ARM_GRAB_THE_BAR - 10.0;
