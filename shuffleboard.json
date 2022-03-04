@@ -1016,6 +1016,127 @@
               "_source0": "network_table:///SmartDashboard/arm1/Encoder1",
               "_title": "arm1/Encoder1"
             }
+          },
+          "18,9": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/arm1/velocity1",
+              "_title": "arm1/velocity1"
+            }
+          },
+          "0,10": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/elevator0/velocity0",
+              "_title": "elevator0/velocity0"
+            }
+          },
+          "2,10": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/elevator0/Output0",
+              "_title": "elevator0/Output0"
+            }
+          },
+          "4,10": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/arm0/setPoint0",
+              "_title": "arm0/setPoint0"
+            }
+          },
+          "6,10": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/elevator1/Encoder1",
+              "_title": "elevator1/Encoder1"
+            }
+          },
+          "8,10": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/elevator0/current",
+              "_title": "elevator0/current"
+            }
+          },
+          "10,10": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/elevator1/setPoint1",
+              "_title": "elevator1/setPoint1"
+            }
+          },
+          "12,10": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/arm0/velocity0",
+              "_title": "arm0/velocity0"
+            }
+          },
+          "14,10": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/arm1/feedforward1",
+              "_title": "arm1/feedforward1"
+            }
+          },
+          "16,10": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/elevator1/feedforward1",
+              "_title": "elevator1/feedforward1"
+            }
+          },
+          "18,10": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/elevator1/Output1",
+              "_title": "elevator1/Output1"
+            }
           }
         }
       }
@@ -1031,59 +1152,15 @@
         "vgap": 16.0,
         "titleType": 0,
         "tiles": {
-          "3,0": {
+          "2,2": {
             "size": [
-              2,
+              3,
               1
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/arm/P Gain",
-              "_title": "P Gain"
-            }
-          },
-          "3,1": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/arm/I Gain",
-              "_title": "I Gain"
-            }
-          },
-          "3,2": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/arm/D Gain",
-              "_title": "D Gain"
-            }
-          },
-          "3,3": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/arm/I Zone",
-              "_title": "I Zone"
-            }
-          },
-          "3,4": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/arm/Feed Forward",
-              "_title": "Feed Forward"
+              "_source0": "network_table:///SmartDashboard/arm/goal",
+              "_title": "SmartDashboard/arm/goal"
             }
           },
           "6,1": {
@@ -1093,8 +1170,8 @@
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/arm/Max Output",
-              "_title": "Max Output"
+              "_source0": "network_table:///SmartDashboard/arm0/Encoder0",
+              "_title": "SmartDashboard/arm0/Encoder0"
             }
           },
           "6,2": {
@@ -1104,8 +1181,8 @@
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/arm/Min Output",
-              "_title": "Min Output"
+              "_source0": "network_table:///SmartDashboard/arm0/Output0",
+              "_title": "SmartDashboard/arm0/Output0"
             }
           },
           "6,3": {
@@ -1115,8 +1192,34 @@
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/arm/Max Velocity",
-              "_title": "Max Velocity"
+              "_source0": "network_table:///SmartDashboard/arm0/P Gain",
+              "_title": "SmartDashboard/arm0/P Gain"
+            }
+          },
+          "4,3": {
+            "size": [
+              2,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/arm0/too Backward",
+              "_title": "SmartDashboard/arm0/too Backward",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "4,5": {
+            "size": [
+              2,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/arm0/too Forward",
+              "_title": "SmartDashboard/arm0/too Forward",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
             }
           },
           "6,4": {
@@ -1126,190 +1229,78 @@
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/arm/Min Velocity",
-              "_title": "Min Velocity"
+              "_source0": "network_table:///SmartDashboard/arm0/velocity0",
+              "_title": "SmartDashboard/arm0/velocity0"
             }
           },
-          "6,5": {
+          "11,1": {
             "size": [
               2,
               1
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/arm/Max Acceleration",
-              "_title": "Max Acceleration"
+              "_source0": "network_table:///SmartDashboard/arm1/Encoder1",
+              "_title": "SmartDashboard/arm1/Encoder1"
             }
           },
-          "0,5": {
-            "size": [
-              4,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/arm/Allowed Closed Loop Error",
-              "_title": "Allowed Closed Loop Error"
-            }
-          },
-          "9,1": {
+          "11,2": {
             "size": [
               2,
               1
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/arm/Set Position",
-              "_title": "Set Position"
+              "_source0": "network_table:///SmartDashboard/arm1/Output1",
+              "_title": "SmartDashboard/arm1/Output1"
             }
           },
-          "9,0": {
+          "11,3": {
             "size": [
               2,
               1
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/arm/Set Velocity",
-              "_title": "Set Velocity"
+              "_source0": "network_table:///SmartDashboard/arm1/P Gain",
+              "_title": "SmartDashboard/arm1/P Gain"
             }
           },
-          "0,0": {
-            "size": [
-              2,
-              2
-            ],
-            "content": {
-              "_type": "Toggle Button",
-              "_source0": "network_table:///SmartDashboard/arm/Mode",
-              "_title": "Mode"
-            }
-          },
-          "9,4": {
+          "11,4": {
             "size": [
               2,
               1
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/arm/SetPoint",
-              "_title": "SetPoint"
+              "_source0": "network_table:///SmartDashboard/arm1/velocity1",
+              "_title": "SmartDashboard/arm1/velocity1"
             }
           },
-          "6,0": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/arm/Output",
-              "_title": "Output"
-            }
-          },
-          "8,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/arm/Process Variable1",
-              "_title": "Process Variable1"
-            }
-          },
-          "0,2": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/arm/Too Far0",
-              "_title": "/SmartDashboard/arm/Too Far0",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "0,3": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/arm/Too Far1",
-              "_title": "/SmartDashboard/arm/Too Far1",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "12,1": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/arm/Process Variable0",
-              "_title": "/SmartDashboard/arm/Process Variable0"
-            }
-          },
-          "12,2": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/arm/Process Variable1",
-              "_title": "/SmartDashboard/arm/Process Variable1"
-            }
-          },
-          "12,3": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/arm/Output0",
-              "_title": "/SmartDashboard/arm/Output0"
-            }
-          },
-          "12,4": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/arm/Output1",
-              "_title": "/SmartDashboard/arm/Output1"
-            }
-          },
-          "14,0": {
+          "13,3": {
             "size": [
               2,
               2
             ],
             "content": {
               "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/arm/Coast",
-              "_title": "Coast",
+              "_source0": "network_table:///SmartDashboard/arm1/too Backward",
+              "_title": "SmartDashboard/arm1/too Backward",
               "Colors/Color when true": "#7CFC00FF",
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "2,0": {
+          "13,5": {
             "size": [
-              1,
-              1
+              2,
+              2
             ],
             "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/arm/goal",
-              "_title": "goal"
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/arm1/too Forward",
+              "_title": "SmartDashboard/arm1/too Forward",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
             }
           }
         }
@@ -1467,9 +1458,9 @@
     }
   ],
   "windowGeometry": {
-    "x": 0.4000000059604645,
-    "y": 2.799999952316284,
-    "width": 1428.800048828125,
-    "height": 575.5999755859375
+    "x": -6.400000095367432,
+    "y": -6.400000095367432,
+    "width": 1548.800048828125,
+    "height": 836.7999877929688
   }
 }
