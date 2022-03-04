@@ -52,8 +52,8 @@ public final class Constants {
     public static final int FOLLOWER_RIGHT_CAN_ID = 8;
 
     // Following four CAN IDs are for the climber subsystem
-    public static final int[] ELEVATOR_CAN_IDS = new int[] {1,2};
-    public static final int[] ARM_CAN_IDS = new int[] {7,10};
+    public static final int[] ELEVATOR_CAN_IDS = new int[] {7,10}; // 1, 2
+    public static final int[] ARM_CAN_IDS = new int[] {1, 2}; // 7, 10
     
     // intake subsystem
     public static final int INTAKE_MOTOR_CAN_ID = 5; 
@@ -127,8 +127,8 @@ public final class Constants {
 
     // Limit the arm rotation
     // TODO: This is relative to 0 starting position. Need to use absolute encoder and get better values
-    public static final double ARM_MAX_ANGLE = Units.degreesToRadians(20.0);
-    public static final double ARM_MIN_ANGLE = Units.degreesToRadians(-20.0);
+    public static final double ARM_MAX_ANGLE = Units.degreesToRadians(160.0);
+    public static final double ARM_MIN_ANGLE = Units.degreesToRadians(30.0);
 
     // the angle for the arm to rotate to turn the elevator towards the next bar
     public static final double ARM_ANGLE_TO_NEXT_BAR = Units.degreesToRadians(130.0);

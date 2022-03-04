@@ -9,6 +9,7 @@ import com.revrobotics.CANSparkMax;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 public class Climber extends SubsystemBase {
 
@@ -17,7 +18,7 @@ public class Climber extends SubsystemBase {
 
   double m_armMaxRPM = 5700;
 
-  private double m_armGoal = 0.0;
+  private double m_armGoal = Units.radiansToDegrees(Constants.ARM_OFFSET_RAD);
   private double m_elevatorGoal = 0.0;
 
   // Smart Motion Coefficients for Arm

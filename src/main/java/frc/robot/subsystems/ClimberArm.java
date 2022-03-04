@@ -59,6 +59,7 @@ public class ClimberArm extends TrapezoidProfileSubsystem {
     // Set the position conversion factor. Note that the Trapezoidal control
     // expects angles in radians.
     m_encoder.setPositionConversionFactor((1.0 / (25.0 * 60.0 / 16.0)) * 2.0 * Math.PI);
+    m_encoder.setPosition(Constants.ARM_OFFSET_RAD);
 
     SmartDashboard.putNumber("arm" + m_index + "/P Gain", m_kPArm);
   }
