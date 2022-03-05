@@ -58,16 +58,16 @@ public class Robot extends TimedRobot {
     m_chosenAuto.addOption("SetClimber", 
     new SetClimber(m_robotContainer.getClimber())
   );
-  m_chosenAuto.addOption("SetElevatorHeight", 
+  m_chosenAuto.addOption("SetElevatorHeightTest", 
   new SetElevatorHeight(m_robotContainer.getClimber(), Constants.MID_RUNG)
   );
-  m_chosenAuto.addOption("SetArmAngle", 
+  m_chosenAuto.addOption("SetArmAngleTest", 
     new SetArmAngle(m_robotContainer.getClimber(), Constants.ARM_GRAB_THE_BAR)
   );
   m_chosenAuto.addOption("RaiseToBar", 
     new RaiseToBar(m_robotContainer.getClimber())
   );
-  m_chosenAuto.addOption("RetractElevatorArmCoastMode", 
+  m_chosenAuto.addOption("RetractElevatorArmCoastModeTest", 
     new RetractElevatorArmCoastMode(m_robotContainer.getClimber(), Constants.ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE)
   );
   m_chosenAuto.addOption("SetGoal", 
@@ -85,6 +85,10 @@ public class Robot extends TimedRobot {
   SmartDashboard.putNumber("Constants/ARM_TO_THE_LEFT_ANGLE", Units.radiansToDegrees(Constants.ARM_TO_THE_LEFT_ANGLE));
   SmartDashboard.putNumber("Constants/MID_RUNG", Units.metersToInches(Constants.MID_RUNG));
   
+  SmartDashboard.putNumber("Constants/SetElevatorHeightTest", 0.0);
+  SmartDashboard.putNumber("Constants/SetArmAngleTest", 80.0);
+  SmartDashboard.putNumber("Constants/RetractElevatorArmCoastModeTest", 12.0);
+
     SmartDashboard.putData("Chosen Auto", m_chosenAuto);
 
     m_plotter = new TrajectoryPlotter(m_robotContainer.getDriveTrain().getField2d());
@@ -117,7 +121,7 @@ public class Robot extends TimedRobot {
     Constants.ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE = Units.inchesToMeters(SmartDashboard.getNumber("Constants/ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE", Constants.ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE));
     Constants.ARM_TO_THE_LEFT_ANGLE = Units.degreesToRadians(SmartDashboard.getNumber("Constants/ARM_TO_THE_LEFT_ANGLE", Constants.ARM_TO_THE_LEFT_ANGLE));
     Constants.MID_RUNG = Units.inchesToMeters(SmartDashboard.getNumber("Constants/MID_RUNG", Constants.MID_RUNG));
-    System.out.println("MID_RUNG = " + Constants.MID_RUNG);
+    // System.out.println("MID_RUNG = " + Constants.MID_RUNG);
   }
 
   /** This function is called once each time the robot enters Disabled mode. */

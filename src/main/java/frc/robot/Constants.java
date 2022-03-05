@@ -92,7 +92,7 @@ public final class Constants {
 
     // define constants for high, low, and mid rung
     public static final double HIGH_RUNG = 1.92;//192 cm
-    public static double MID_RUNG = Units.inchesToMeters(5.0);//153 cm
+    public static double MID_RUNG = Units.inchesToMeters(18.0);//153 cm
     public static final double LOW_RUNG = 1.24;//Top of rung is 124cm
     public static final double CLIMBER_ANGLE = Units.degreesToRadians(22.0);//angle for setClimber()
     

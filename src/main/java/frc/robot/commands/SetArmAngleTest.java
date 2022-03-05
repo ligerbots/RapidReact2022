@@ -4,24 +4,28 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.math.util.Units;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Climber;
 
-public class SetArmAngle extends CommandBase {
+public class SetArmAngleTest extends CommandBase {
   /** Creates a new SetArmAngle. */
   Climber m_climber;
   double m_angle;
-  public SetArmAngle(Climber climber, double angle) {
+  String m_key;
+  public SetArmAngleTest(Climber climber, String key) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_climber = climber;
-    m_angle = angle;
+    m_key = key;
     addRequirements(m_climber);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    m_angle = Units.degreesToRadians(SmartDashboard.getNumber(m_key, 0.0));
     m_climber.setArmAngle(m_angle);
   }
 
