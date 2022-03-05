@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -13,7 +14,10 @@ import frc.robot.commands.AutoCommandInterface;
 import frc.robot.commands.OneBallAuto;
 import frc.robot.commands.RaiseToBar;
 import frc.robot.commands.RetractElevatorArmCoastMode;
+import frc.robot.commands.SetArmAngle;
 import frc.robot.commands.SetClimber;
+import frc.robot.commands.SetElevatorHeight;
+import frc.robot.commands.SetGoal;
 import frc.robot.commands.TrajectoryPlotter;
 import frc.robot.commands.TwoBallAutoCurved;
 import frc.robot.commands.TwoBallAutoStraight;
@@ -54,12 +58,32 @@ public class Robot extends TimedRobot {
     m_chosenAuto.addOption("SetClimber", 
     new SetClimber(m_robotContainer.getClimber())
   );
+  m_chosenAuto.addOption("SetElevatorHeight", 
+  new SetElevatorHeight(m_robotContainer.getClimber(), Constants.MID_RUNG)
+  );
+  m_chosenAuto.addOption("SetArmAngle", 
+    new SetArmAngle(m_robotContainer.getClimber(), Constants.ARM_GRAB_THE_BAR)
+  );
   m_chosenAuto.addOption("RaiseToBar", 
     new RaiseToBar(m_robotContainer.getClimber())
   );
   m_chosenAuto.addOption("RetractElevatorArmCoastMode", 
     new RetractElevatorArmCoastMode(m_robotContainer.getClimber(), Constants.ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE)
   );
+  m_chosenAuto.addOption("SetGoal", 
+    new SetGoal(m_robotContainer.getClimber())
+  );
+
+  SmartDashboard.putNumber("Constants/ARM_ANGLE_FOR_ELEVATOR_CLEARANCE", Units.radiansToDegrees(Constants.ARM_ANGLE_FOR_ELEVATOR_CLEARANCE));
+  SmartDashboard.putNumber("Constants/ARM_GRAB_THE_BAR", Units.radiansToDegrees(Constants.ARM_GRAB_THE_BAR));
+  SmartDashboard.putNumber("Constants/ARM_ANGLE_TO_NEXT_BAR", Units.radiansToDegrees(Constants.ARM_ANGLE_TO_NEXT_BAR));
+  SmartDashboard.putNumber("Constants/ELEVATOR_ALL_THE_WAY_UP", Units.metersToInches(Constants.ELEVATOR_ALL_THE_WAY_UP));
+  SmartDashboard.putNumber("Constants/ELEVATOR_ALL_THE_WAY_DOWN", Units.metersToInches(Constants.ELEVATOR_ALL_THE_WAY_DOWN));
+  SmartDashboard.putNumber("Constants/ARM_ROTATION_ELEVATOR_TOUCH_BAR", Units.radiansToDegrees(Constants.ARM_ROTATION_ELEVATOR_TOUCH_BAR));
+  SmartDashboard.putNumber("Constants/ELEVATOR_HEIGHT_SECURE_ON_BAR", Units.metersToInches(Constants.ELEVATOR_HEIGHT_SECURE_ON_BAR));
+  SmartDashboard.putNumber("Constants/ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE", Units.metersToInches(Constants.ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE));
+  SmartDashboard.putNumber("Constants/ARM_TO_THE_LEFT_ANGLE", Units.radiansToDegrees(Constants.ARM_TO_THE_LEFT_ANGLE));
+  SmartDashboard.putNumber("Constants/MID_RUNG", Units.metersToInches(Constants.MID_RUNG));
   
     SmartDashboard.putData("Chosen Auto", m_chosenAuto);
 
@@ -83,6 +107,17 @@ public class Robot extends TimedRobot {
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
+    Constants.ARM_ANGLE_FOR_ELEVATOR_CLEARANCE = Units.degreesToRadians(SmartDashboard.getNumber("Constants/ARM_ANGLE_FOR_ELEVATOR_CLEARANCE", Constants.ARM_ANGLE_FOR_ELEVATOR_CLEARANCE));
+    Constants.ARM_GRAB_THE_BAR = Units.degreesToRadians(SmartDashboard.getNumber("Constants/ARM_GRAB_THE_BAR", Constants.ARM_GRAB_THE_BAR));
+    Constants.ARM_ANGLE_TO_NEXT_BAR = Units.degreesToRadians(SmartDashboard.getNumber("Constants/ARM_ANGLE_TO_NEXT_BAR", Constants.ARM_ANGLE_TO_NEXT_BAR));
+    Constants.ELEVATOR_ALL_THE_WAY_UP = Units.inchesToMeters(SmartDashboard.getNumber("Constants/ELEVATOR_ALL_THE_WAY_UP", Constants.ELEVATOR_ALL_THE_WAY_UP));
+    Constants.ELEVATOR_ALL_THE_WAY_DOWN = Units.inchesToMeters(SmartDashboard.getNumber("Constants/ELEVATOR_ALL_THE_WAY_DOWN", Constants.ELEVATOR_ALL_THE_WAY_DOWN));
+    Constants.ARM_ROTATION_ELEVATOR_TOUCH_BAR = Units.degreesToRadians(SmartDashboard.getNumber("Constants/ARM_ROTATION_ELEVATOR_TOUCH_BAR", Constants.ARM_ROTATION_ELEVATOR_TOUCH_BAR));
+    Constants.ELEVATOR_HEIGHT_SECURE_ON_BAR = Units.inchesToMeters(SmartDashboard.getNumber("Constants/ELEVATOR_HEIGHT_SECURE_ON_BAR", Constants.ELEVATOR_HEIGHT_SECURE_ON_BAR));
+    Constants.ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE = Units.inchesToMeters(SmartDashboard.getNumber("Constants/ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE", Constants.ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE));
+    Constants.ARM_TO_THE_LEFT_ANGLE = Units.degreesToRadians(SmartDashboard.getNumber("Constants/ARM_TO_THE_LEFT_ANGLE", Constants.ARM_TO_THE_LEFT_ANGLE));
+    Constants.MID_RUNG = Units.inchesToMeters(SmartDashboard.getNumber("Constants/MID_RUNG", Constants.MID_RUNG));
+    System.out.println("MID_RUNG = " + Constants.MID_RUNG);
   }
 
   /** This function is called once each time the robot enters Disabled mode. */
@@ -136,30 +171,13 @@ public class Robot extends TimedRobot {
     // Set Climber motors to Brake mode
     m_robotContainer.getClimber().setBrakeMode(true);
     
-    SmartDashboard.putNumber("Constants/ARM_ANGLE_FOR_ELEVATOR_CLEARANCE", Constants.ARM_ANGLE_FOR_ELEVATOR_CLEARANCE);
-    SmartDashboard.putNumber("Constants/ARM_GRAB_THE_BAR", Constants.ARM_GRAB_THE_BAR);
-    SmartDashboard.putNumber("Constants/ARM_ANGLE_TO_NEXT_BAR", Constants.ARM_ANGLE_TO_NEXT_BAR);
-    SmartDashboard.putNumber("Constants/ELEVATOR_ALL_THE_WAY_UP", Constants.ELEVATOR_ALL_THE_WAY_UP);
-    SmartDashboard.putNumber("Constants/ELEVATOR_ALL_THE_WAY_DOWN", Constants.ELEVATOR_ALL_THE_WAY_DOWN);
-    SmartDashboard.putNumber("Constants/ARM_ROTATION_ELEVATOR_TOUCH_BAR", Constants.ARM_ROTATION_ELEVATOR_TOUCH_BAR);
-    SmartDashboard.putNumber("Constants/ELEVATOR_HEIGHT_SECURE_ON_BAR", Constants.ELEVATOR_HEIGHT_SECURE_ON_BAR);
-    SmartDashboard.putNumber("Constants/ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE", Constants.ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE);
-    SmartDashboard.putNumber("Constants/ARM_TO_THE_LEFT_ANGLE", Constants.ARM_TO_THE_LEFT_ANGLE);
+    
   }
 
 
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
-    Constants.ARM_ANGLE_FOR_ELEVATOR_CLEARANCE = SmartDashboard.getNumber("Constants/ARM_ANGLE_FOR_ELEVATOR_CLEARANCE", Constants.ARM_ANGLE_FOR_ELEVATOR_CLEARANCE);
-    Constants.ARM_GRAB_THE_BAR = SmartDashboard.getNumber("Constants/ARM_GRAB_THE_BAR", Constants.ARM_GRAB_THE_BAR);
-    Constants.ARM_ANGLE_TO_NEXT_BAR = SmartDashboard.getNumber("Constants/ARM_ANGLE_TO_NEXT_BAR", Constants.ARM_ANGLE_TO_NEXT_BAR);
-    Constants.ELEVATOR_ALL_THE_WAY_UP = SmartDashboard.getNumber("Constants/ELEVATOR_ALL_THE_WAY_UP", Constants.ELEVATOR_ALL_THE_WAY_UP);
-    Constants.ELEVATOR_ALL_THE_WAY_DOWN = SmartDashboard.getNumber("Constants/ELEVATOR_ALL_THE_WAY_DOWN", Constants.ELEVATOR_ALL_THE_WAY_DOWN);
-    Constants.ARM_ROTATION_ELEVATOR_TOUCH_BAR = SmartDashboard.getNumber("Constants/ARM_ROTATION_ELEVATOR_TOUCH_BAR", Constants.ARM_ROTATION_ELEVATOR_TOUCH_BAR);
-    Constants.ELEVATOR_HEIGHT_SECURE_ON_BAR = SmartDashboard.getNumber("Constants/ELEVATOR_HEIGHT_SECURE_ON_BAR", Constants.ELEVATOR_HEIGHT_SECURE_ON_BAR);
-    Constants.ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE = SmartDashboard.getNumber("Constants/ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE", Constants.ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE);
-    Constants.ARM_TO_THE_LEFT_ANGLE = SmartDashboard.getNumber("Constants/ARM_TO_THE_LEFT_ANGLE", Constants.ARM_TO_THE_LEFT_ANGLE);
   }
 
   @Override

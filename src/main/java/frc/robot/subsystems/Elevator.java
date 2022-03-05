@@ -124,4 +124,7 @@ public class Elevator extends TrapezoidProfileSubsystem {
   public CANSparkMax getMotor() {
     return m_motor;
   }
+  public RelativeEncoder getEncoder() {
+    return m_encoder;
+  }
 }

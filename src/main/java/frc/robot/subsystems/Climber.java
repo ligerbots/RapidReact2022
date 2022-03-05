@@ -14,7 +14,7 @@ import frc.robot.Constants;
 public class Climber extends SubsystemBase {
 
   ClimberArm[] m_arm = new ClimberArm[2];
-  Elevator[] m_elevator = new Elevator[2];
+  public Elevator[] m_elevator = new Elevator[2];
 
   double m_armMaxRPM = 5700;
 
@@ -71,34 +71,25 @@ public class Climber extends SubsystemBase {
 
   // sets the elevator to a certain height
   public void setElevatorHeight(double height) {
-    double goal = SmartDashboard.getNumber("elevator/goal", 0);
-    if (goal != m_elevatorGoal) {
-      double goalUnits = Units.inchesToMeters(goal);
-      m_elevator[0].setGoal(goalUnits);
-      m_elevator[1].setGoal(goalUnits); //* (20.1/18.45) factor for lowest point
-      m_elevatorGoal = goal;
-    }
+      m_elevator[0].setGoal(height);
+      m_elevator[1].setGoal(height); //* (20.1/18.45) factor for lowest point
   }
 
   // rotates the arms to a certain angle
   public void setArmAngle(double degree) {
-    double goal = SmartDashboard.getNumber("arm/goal", Math.toDegrees(Constants.ARM_OFFSET_RAD));
-    if (goal != m_armGoal) {
-      double goalUnits = Units.degreesToRadians(goal);
-      m_arm[0].setGoal(goalUnits);
-      m_arm[1].setGoal(goalUnits);
-      m_armGoal = goal;
-    }
+      m_arm[0].setGoal(degree);
+      m_arm[1].setGoal(degree);
+
   }
 
   // returns the currrent height of the elevator
   public double[] getElevatorHeight() {
-    return new double[] {SmartDashboard.getNumber("elevator0/Encoder0", 0.0), SmartDashboard.getNumber("elevator1/Encoder1", 0.0)};
+    return new double[] {m_elevator[0].getEncoder().getPosition(), m_elevator[1].getEncoder().getPosition()};
   }
 
   // returns the current angle of the arm
   public double[] getArmAngle() {
-    return new double[] {SmartDashboard.getNumber("arm0/Encoder0", 0.0), SmartDashboard.getNumber("arm1/Encoder1", 0.0)};
+    return new double[] {m_arm[0].getEncoder().getPosition(), m_arm[1].getEncoder().getPosition()};
   }
 
   // Set idle mode of all motors

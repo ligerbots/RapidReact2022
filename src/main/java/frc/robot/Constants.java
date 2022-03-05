@@ -52,8 +52,8 @@ public final class Constants {
     public static final int FOLLOWER_RIGHT_CAN_ID = 8;
 
     // Following four CAN IDs are for the climber subsystem
-    public static final int[] ELEVATOR_CAN_IDS = new int[] {1,2};
-    public static final int[] ARM_CAN_IDS = new int[] {7,10};
+    public static final int[] ELEVATOR_CAN_IDS = new int[] {7,10}; //{1,2};
+    public static final int[] ARM_CAN_IDS = new int[] {1,2}; //{7,10};
     
     // intake subsystem
     public static final int INTAKE_MOTOR_CAN_ID = 5; 
@@ -92,13 +92,13 @@ public final class Constants {
 
     // define constants for high, low, and mid rung
     public static final double HIGH_RUNG = 1.92;//192 cm
-    public static final double MID_RUNG = 1.53;//153 cm
+    public static double MID_RUNG = Units.inchesToMeters(5.0);//153 cm
     public static final double LOW_RUNG = 1.24;//Top of rung is 124cm
     public static final double CLIMBER_ANGLE = Units.degreesToRadians(22.0);//angle for setClimber()
     
     
-    public static final double ELEVATOR_HEIGHT_TOLERANCE = 0.5;//tolerance for elevator
-    public static final double ARM_ANGLE_TOLERANCE = 0.5;
+    public static final double ELEVATOR_HEIGHT_TOLERANCE = Units.inchesToMeters(0.5);//tolerance for elevator
+    public static final double ARM_ANGLE_TOLERANCE = Units.degreesToRadians(0.5);
 
     public static final double RUNG_ANGLE = Units.degreesToRadians(-22.0);//angle to clamp back on rung for raiseToBar command
     
@@ -106,8 +106,8 @@ public final class Constants {
     public static final double ELEVATOR_MIN_HEIGHT = -100.0;// 0in = length of elevator when fully retracted
     // right elevator 0 to -21.5
 
-    public static double ELEVATOR_ALL_THE_WAY_DOWN = 0.0;
-    public static double ELEVATOR_ALL_THE_WAY_UP = 18.0;
+    public static double ELEVATOR_ALL_THE_WAY_DOWN = Units.inchesToMeters(0.0);
+    public static double ELEVATOR_ALL_THE_WAY_UP = Units.inchesToMeters(18.0);
     
     // Feedforward constants for the each Climber Arm
     public static final double ARM_KS = 0.182; // TODO: This may need to be tuned
@@ -161,8 +161,8 @@ public final class Constants {
 
     // PID Constants for the Arm PID controller
     // Since we're using Trapeziodal control, all values will be 0 except for P
-    public static final double ELEVATOR_K_P0 = 18;
-    public static final double ELEVATOR_K_P1 = 10;
+    public static final double ELEVATOR_K_P0 = 15;
+    public static final double ELEVATOR_K_P1 = 15;
     public static final double ELEVATOR_K_I = 0.0;
     public static final double ELEVATOR_K_D = 0.0;
     public static final double ELEVATOR_K_FF = 0.0;

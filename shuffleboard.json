@@ -1457,7 +1457,7 @@
       }
     },
     {
-      "title": "Tab 4",
+      "title": "Commands",
       "autoPopulate": false,
       "autoPopulatePrefix": "",
       "widgetPane": {
@@ -1575,6 +1575,17 @@
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Constants/ELEVATOR_HEIGHT_SECURE_ON_BAR",
               "_title": "SmartDashboard/Constants/ELEVATOR_HEIGHT_SECURE_ON_BAR"
+            }
+          },
+          "0,1": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/elevator/goal",
+              "_title": "SmartDashboard/elevator/goal"
             }
           }
         }

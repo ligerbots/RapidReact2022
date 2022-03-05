@@ -133,6 +133,11 @@ public class ClimberArm extends TrapezoidProfileSubsystem {
     return m_motor;
   }
 
+  public RelativeEncoder getEncoder() {
+    return m_encoder
+    ;
+  }
+
   public void idleMotor(){
     m_coastMode = true;
     // set the motor to coast mode 
