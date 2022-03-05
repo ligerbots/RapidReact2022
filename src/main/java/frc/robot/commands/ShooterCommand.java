@@ -15,7 +15,7 @@ public class ShooterCommand extends CommandBase {
     Shooter m_shooter;
     Intake m_intake;
     Vision m_vision;
-
+    boolean m_upperHub;
     double m_distance;
 
     LigerTimer m_shootDelay = new LigerTimer(Constants.SHOOTER_MOTOR_WAIT_TIME);
@@ -25,7 +25,7 @@ public class ShooterCommand extends CommandBase {
     LigerTimer m_visionTime = new LigerTimer(2.0); // give the vision at most 2 seconds to find the target
 
     ShooterSpeeds m_shooterSpeeds;
-
+    
     static final double DEFAULT_DISTANCE_TO_THE_HUB = 9.0 * 12.0; // 9 feet
 
     enum State {
@@ -35,25 +35,33 @@ public class ShooterCommand extends CommandBase {
 
     State m_state;
 
-    public ShooterCommand(Shooter shooter, Intake intake, Vision vision) {
+    public ShooterCommand(Shooter shooter, Intake intake, Vision vision, boolean upperHub) {
         m_shooter = shooter;
         m_intake = intake;
         m_vision = vision;
+        m_upperHub = upperHub;
     }
 
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
         m_visionTime.start();
-        m_state = State.FINDING_VISION_TARGET;
+        if(m_upperHub==true){ 
+            m_state = State.FINDING_VISION_TARGET;
+        }else{//if lowerhub then skip FINDING_VISION_TARGET
+            m_state = State.SPEED_UP_SHOOTER;
+        }
+        
         // TODO: do we want to turn on shooter to some moderate speed? Need to see if it affects the camera
     }
 
     // Called every time the scheduler runs while the command is scheduled.
     @Override
+    
     public void execute() {
         switch (m_state) {
             case FINDING_VISION_TARGET:
+                
                 m_distance = m_vision.getDistance();
                 // go to the next state once the target is found
                 if(m_distance != 0.0)
@@ -67,7 +75,7 @@ public class ShooterCommand extends CommandBase {
                 // allows fall through to the next state if found the target
 
             case SPEED_UP_SHOOTER:
-                m_shooterSpeeds = Shooter.calculateShooterSpeeds(m_distance);
+                m_shooterSpeeds = Shooter.calculateShooterSpeeds(m_distance, m_upperHub);
                 // turn on the two motors on the shooter, let the chute and intake wait for the
                 // shots
                 m_shooter.setShooterRpms(m_shooterSpeeds.top, m_shooterSpeeds.bottom);

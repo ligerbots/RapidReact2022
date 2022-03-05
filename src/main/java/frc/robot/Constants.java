@@ -141,6 +141,8 @@ public final class Constants {
     public static double ARM_GRAB_THE_BAR = Units.degreesToRadians(90.0);
     public static double ARM_ROTATION_ELEVATOR_TOUCH_BAR = Units.degreesToRadians(110.0);
 
+
+
     // the height of the elevator to retract down to certain point where the arm can get to the other side of the bar
     public static double ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE = ELEVATOR_ALL_THE_WAY_DOWN + Units.inchesToMeters(10.0);
     public static double ARM_ANGLE_FOR_ELEVATOR_CLEARANCE = ARM_GRAB_THE_BAR - Units.degreesToRadians(20.0);

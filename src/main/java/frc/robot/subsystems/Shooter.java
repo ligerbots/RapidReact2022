@@ -21,6 +21,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Shooter extends SubsystemBase {
+    
     // CANSparkMax for the hopper
     CANSparkMax m_chuteMotor;
     // WPI_TalonFX for the shooter
@@ -29,11 +30,13 @@ public class Shooter extends SubsystemBase {
     // TODO: change to color sensor
     DigitalInput m_limitSwitch1, m_limitSwitch2;
 
-    static TreeMap<Double, ShooterSpeeds> shooterSpeeds = new TreeMap<>(Map.ofEntries(
+    static TreeMap<Double, ShooterSpeeds> shooterSpeeds = new TreeMap<>(Map.ofEntries(//table for upper hub
             Map.entry(1., new ShooterSpeeds(0.5, 0.5, 0.5)),
             Map.entry(2., new ShooterSpeeds(0.5, 0.5, 0.5)),
             Map.entry(3., new ShooterSpeeds(0.5, 0.5, 0.5))
             ));
+   
+    
 
     // Shooter class constructor, initialize arrays for motors controllers,
     // encoders, and SmartDashboard data
@@ -65,17 +68,23 @@ public class Shooter extends SubsystemBase {
             this.top = top;
             this.bottom = bottom;
             this.chute = chute;
+            
+
         }
 
         public ShooterSpeeds interpolate(ShooterSpeeds other, double ratio) {
             return new ShooterSpeeds(
-                    top + (other.top - top) * ratio,
+                    top + (other.top - top) * ratio, //get ratiod
                     bottom + (other.bottom - bottom) * ratio,
                     chute + (other.chute - chute) * ratio);
         }
     }
 
-    public static ShooterSpeeds calculateShooterSpeeds(double distance) {
+
+    public static ShooterSpeeds calculateShooterSpeeds(double distance, boolean upperHub) {
+        if(upperHub == false){//if shooting to lowerHub, then return shooterSpeed with values for lowerHub
+            return new ShooterSpeeds(0, 0, 0);//values for lowerHub, change later
+        }
         Map.Entry<Double, ShooterSpeeds> before = shooterSpeeds.floorEntry(distance);
         Map.Entry<Double, ShooterSpeeds> after = shooterSpeeds.ceilingEntry(distance);
         if (before == null && after == null)
