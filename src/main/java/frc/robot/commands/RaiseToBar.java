@@ -15,6 +15,7 @@ public class RaiseToBar extends SequentialCommandGroup {
   /** Creates a new RaiseToBar. */
   Climber m_climber;
   public RaiseToBar(Climber climber) {
+
     m_climber = climber;
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());

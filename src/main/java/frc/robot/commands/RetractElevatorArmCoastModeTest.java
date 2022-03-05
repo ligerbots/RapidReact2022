@@ -29,6 +29,7 @@ public class RetractElevatorArmCoastModeTest extends CommandBase {
     m_climber.setArmCoastMode();
     m_height = Units.inchesToMeters(SmartDashboard.getNumber(m_key, 0.0));
     m_climber.setElevatorHeight(m_height);
+    System.out.println("RetractElevatorArmCoastModeTest executed!");
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -47,6 +48,6 @@ public class RetractElevatorArmCoastModeTest extends CommandBase {
   public boolean isFinished() {
     double[] arr = m_climber.getElevatorHeight();
     return Math.abs(arr[0] - m_height) < Constants.ELEVATOR_HEIGHT_TOLERANCE
-    && Math.abs(arr[1] - m_height) < Constants.ELEVATOR_HEIGHT_TOLERANCE;
+    || Math.abs(arr[1] - m_height) < Constants.ELEVATOR_HEIGHT_TOLERANCE;
   }
 }

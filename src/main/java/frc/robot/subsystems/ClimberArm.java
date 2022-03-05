@@ -34,6 +34,8 @@ public class ClimberArm extends TrapezoidProfileSubsystem {
   private boolean m_tooFarBack = false;
 
   private boolean m_coastMode = false;
+
+  private boolean m_resetArmPos = false;
   
   /** Creates a new ClimberArm. */
   public ClimberArm(int index, boolean inverted) {
@@ -114,10 +116,16 @@ public class ClimberArm extends TrapezoidProfileSubsystem {
     // Remember that the encoder was already set to account for the gear ratios.
     
     // TODO: if the "12.0" is volts, should use RobotController.getBatteryVoltage()
+    if(m_resetArmPos){
+      setPoint.position = m_encoder.getPosition();
+      super.setGoal(m_encoder.getPosition());
+    }
     m_PIDController.setReference(setPoint.position, ControlType.kPosition, 0, feedforward / 12.0);
     SmartDashboard.putNumber("arm" + m_index + "/feedforward" + m_index, feedforward);
     SmartDashboard.putNumber("arm" + m_index + "/setPoint" + m_index, Units.metersToInches(setPoint.position));
     SmartDashboard.putNumber("arm" + m_index + "/velocity" + m_index, Units.metersToInches(setPoint.velocity));
+
+    if(m_resetArmPos) m_resetArmPos = false;
 }
 
   private void checkPIDVal() {
@@ -134,8 +142,7 @@ public class ClimberArm extends TrapezoidProfileSubsystem {
   }
 
   public RelativeEncoder getEncoder() {
-    return m_encoder
-    ;
+    return m_encoder;
   }
 
   public void idleMotor(){
@@ -149,5 +156,6 @@ public class ClimberArm extends TrapezoidProfileSubsystem {
   public void unIdleMotor(){
     m_coastMode = false;
     m_motor.setIdleMode(CANSparkMax.IdleMode.kBrake);
+    m_resetArmPos = true;
   }
 }

@@ -27,6 +27,8 @@ public class SetGoal extends CommandBase {
     m_climber.m_elevator[0].setGoal(m_goalUnits);
     m_climber.m_elevator[1].setGoal(m_goalUnits);
     m_arr = m_climber.getElevatorHeight();
+    System.out.println("SetGoal executed!");
+
   }
 
   // Called every time the scheduler runs while the command is scheduled.

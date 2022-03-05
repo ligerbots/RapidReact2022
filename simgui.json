@@ -3,7 +3,9 @@
     "types": {
       "/FMSInfo": "FMSInfo",
       "/LiveWindow/Climber": "Subsystem",
+      "/LiveWindow/ClimberArm": "Subsystem",
       "/LiveWindow/DriveTrain": "Subsystem",
+      "/LiveWindow/Elevator": "Subsystem",
       "/LiveWindow/Intake": "Subsystem",
       "/LiveWindow/Shooter": "Subsystem",
       "/LiveWindow/Ungrouped/DifferentialDrive[1]": "DifferentialDrive",
@@ -22,11 +24,6 @@
       "/SmartDashboard/Field": "Field2d"
     },
     "windows": {
-      "/SmartDashboard/Chosen Auto": {
-        "window": {
-          "visible": true
-        }
-      },
       "/SmartDashboard/Field": {
         "Robot": {
           "arrowSize": 55,

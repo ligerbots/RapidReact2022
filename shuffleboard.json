@@ -1400,6 +1400,93 @@
               "_source0": "network_table:///SmartDashboard/Constants/SetArmAngleTest",
               "_title": "Constants/SetArmAngleTest"
             }
+          },
+          "20,0": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Constants/ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE",
+              "_title": "Constants/ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE"
+            }
+          },
+          "20,1": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Constants/MID_RUNG",
+              "_title": "Constants/MID_RUNG"
+            }
+          },
+          "20,2": {
+            "size": [
+              2,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/arm0/too Forward",
+              "_title": "arm0/too Forward",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "20,4": {
+            "size": [
+              2,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/arm0/too Backward",
+              "_title": "arm0/too Backward",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "20,6": {
+            "size": [
+              2,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/arm1/CoastMode1",
+              "_title": "arm1/CoastMode1",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "20,8": {
+            "size": [
+              2,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/elevator0/too Low",
+              "_title": "elevator0/too Low",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "20,10": {
+            "size": [
+              2,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/elevator1/too Low",
+              "_title": "elevator1/too Low",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
           }
         }
       }
@@ -1785,7 +1872,7 @@
               "_title": "/SmartDashboard/Constants/ARM_ROTATION_ELEVATOR_TOUCH_BAR"
             }
           },
-          "6,3": {
+          "4,4": {
             "size": [
               2,
               1
@@ -1840,7 +1927,7 @@
               "_title": "/SmartDashboard/Constants/ELEVATOR_HEIGHT_SECURE_ON_BAR"
             }
           },
-          "0,1": {
+          "7,1": {
             "size": [
               1,
               1
@@ -1861,15 +1948,74 @@
               "_source0": "network_table:///SmartDashboard/Constants/MID_RUNG",
               "_title": "/SmartDashboard/Constants/MID_RUNG"
             }
+          },
+          "8,3": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/arm0/CoastMode0",
+              "_title": "SmartDashboard/arm0/CoastMode0",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "8,4": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/arm1/CoastMode1",
+              "_title": "SmartDashboard/arm1/CoastMode1",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "10,1": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Constants/RetractElevatorArmCoastModeTest",
+              "_title": "SmartDashboard/Constants/RetractElevatorArmCoastModeTest"
+            }
+          },
+          "9,1": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Constants/SetArmAngleTest",
+              "_title": "SmartDashboard/Constants/SetArmAngleTest"
+            }
+          },
+          "8,1": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Constants/SetElevatorHeightTest",
+              "_title": "SmartDashboard/Constants/SetElevatorHeightTest"
+            }
           }
         }
       }
     }
   ],
   "windowGeometry": {
-    "x": -140.0,
-    "y": 36.0,
-    "width": 1386.0,
-    "height": 788.0
+    "x": -6.222222328186035,
+    "y": -6.222222328186035,
+    "width": 1719.111083984375,
+    "height": 932.4444580078125
   }
 }

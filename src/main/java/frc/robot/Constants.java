@@ -123,7 +123,7 @@ public final class Constants {
 
     // PID Constants for the Arm PID controller
     // Since we're using Trapeziodal control, all values will be 0 except for P
-    public static final double ARM_K_P = 5.0e-5;
+    public static final double ARM_K_P = 10.0;
     public static final double ARM_K_I = 0.0;
     public static final double ARM_K_D = 0.0;
     public static final double ARM_K_FF = 0.0;
@@ -143,9 +143,9 @@ public final class Constants {
 
     // the height of the elevator to retract down to certain point where the arm can get to the other side of the bar
     public static double ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE = ELEVATOR_ALL_THE_WAY_DOWN + Units.inchesToMeters(10.0);
-    public static double ARM_ANGLE_FOR_ELEVATOR_CLEARANCE = ARM_GRAB_THE_BAR - Units.degreesToRadians(10.0);
+    public static double ARM_ANGLE_FOR_ELEVATOR_CLEARANCE = ARM_GRAB_THE_BAR - Units.degreesToRadians(20.0);
 
-    public static double ELEVATOR_HEIGHT_SECURE_ON_BAR = Units.inchesToMeters(0.0);
+    public static double ELEVATOR_HEIGHT_SECURE_ON_BAR = Units.inchesToMeters(15.0);
 
     // Feedforward constants for the each Climber Arm
     public static final double ELEVATOR_KS = 0.182; // TODO: This may need to be tuned

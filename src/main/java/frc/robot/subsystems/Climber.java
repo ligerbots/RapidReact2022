@@ -13,7 +13,7 @@ import frc.robot.Constants;
 
 public class Climber extends SubsystemBase {
 
-  ClimberArm[] m_arm = new ClimberArm[2];
+  public ClimberArm[] m_arm = new ClimberArm[2];
   public Elevator[] m_elevator = new Elevator[2];
 
   double m_armMaxRPM = 5700;

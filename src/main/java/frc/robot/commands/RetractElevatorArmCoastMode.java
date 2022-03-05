@@ -43,6 +43,6 @@ public class RetractElevatorArmCoastMode extends CommandBase {
   public boolean isFinished() {
     double[] arr = m_climber.getElevatorHeight();
     return Math.abs(arr[0] - m_height) < Constants.ELEVATOR_HEIGHT_TOLERANCE
-    && Math.abs(arr[1] - m_height) < Constants.ELEVATOR_HEIGHT_TOLERANCE;
+    || Math.abs(arr[1] - m_height) < Constants.ELEVATOR_HEIGHT_TOLERANCE;
   }
 }

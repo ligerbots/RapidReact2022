@@ -175,7 +175,10 @@ public class Robot extends TimedRobot {
     // Set Climber motors to Brake mode
     m_robotContainer.getClimber().setBrakeMode(true);
     
-    
+    m_robotContainer.getClimber().m_elevator[0].resetElevatorPos();
+    m_robotContainer.getClimber().m_elevator[1].resetElevatorPos();  
+    m_robotContainer.getClimber().m_arm[0].unIdleMotor();
+    m_robotContainer.getClimber().m_arm[1].unIdleMotor();  
   }
 
 

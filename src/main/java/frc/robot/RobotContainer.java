@@ -7,12 +7,25 @@ package frc.robot;
 import java.util.function.DoubleSupplier;
 
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 //import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.ClimbToNextBar;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.ShooterCommand;
 import frc.robot.commands.IntakeCommand;
+import frc.robot.commands.RaiseToBar;
+import frc.robot.commands.ResetElevatorEncoder;
+import frc.robot.commands.RetractElevatorArmCoastMode;
+import frc.robot.commands.RetractElevatorArmCoastModeTest;
+import frc.robot.commands.SetArmAngleTest;
+import frc.robot.commands.SetArmBrake;
+import frc.robot.commands.SetArmCoast;
+import frc.robot.commands.SetClimber;
+import frc.robot.commands.SetElevatorHeight;
+import frc.robot.commands.SetElevatorHeightTest;
+import frc.robot.commands.SetGoal;
 import frc.robot.commands.TuneShooterCommand;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.DriveTrain;
@@ -32,6 +45,7 @@ import frc.robot.subsystems.Vision;
 public class RobotContainer {
 
     XboxController m_xbox = new XboxController(0);
+    Joystick m_farm = new Joystick(1);
 
     // The robot's subsystems and commands are defined here...
     private final DriveTrain m_driveTrain = new DriveTrain();
@@ -72,6 +86,34 @@ public class RobotContainer {
     
         JoystickButton bumperLeft = new JoystickButton(m_xbox, Constants.XBOX_LB);
         bumperLeft.whileHeld(new IntakeCommand(m_intake, -Constants.INTAKE_SPEED));
+
+        // farm controller
+        JoystickButton farm1 = new JoystickButton(m_farm, 1);
+        farm1.whenPressed(new SetElevatorHeightTest(m_climber, "Constants/SetElevatorHeightTest"));
+
+        JoystickButton farm2 = new JoystickButton(m_farm, 2);
+        farm2.whenPressed(new SetArmAngleTest(m_climber, "Constants/SetArmAngleTest"));
+
+        JoystickButton farm3 = new JoystickButton(m_farm, 3);
+        farm3.whenPressed(new RetractElevatorArmCoastModeTest(m_climber, "Constants/SetElevatorHeightTest"));
+
+        JoystickButton farm6 = new JoystickButton(m_farm, 6);
+        farm6.whenPressed(new SetClimber(m_climber));
+
+        JoystickButton farm7 = new JoystickButton(m_farm, 7);
+        farm7.whenPressed(new RaiseToBar(m_climber));
+
+        JoystickButton farm8 = new JoystickButton(m_farm, 8);
+        farm8.whenPressed(new ClimbToNextBar(m_climber));
+
+        JoystickButton farm11 = new JoystickButton(m_farm, 11);
+        farm11.whenPressed(new ResetElevatorEncoder(m_climber));
+
+        JoystickButton farm13 = new JoystickButton(m_farm, 13);
+        farm13.whenPressed(new SetArmCoast(m_climber));
+
+        JoystickButton farm15 = new JoystickButton(m_farm, 15);
+        farm15.whenPressed(new SetArmBrake(m_climber));
     }
 
     private class Throttle implements DoubleSupplier {

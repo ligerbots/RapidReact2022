@@ -32,6 +32,8 @@ public class Elevator extends TrapezoidProfileSubsystem {
 
   private boolean m_tooHigh = false;
   private boolean m_tooLow = false;
+
+  private boolean m_resetElevatorPos = false;
   
   /** Creates a new Elevator. */
   public Elevator(int index, boolean inverted) {
@@ -106,10 +108,17 @@ public class Elevator extends TrapezoidProfileSubsystem {
 
     // Add the feedforward to the PID output to get the motor output
     // Remember that the encoder was already set to account for the gear ratios.
+
+    if(m_resetElevatorPos){
+      setPoint.position = m_encoder.getPosition();
+      super.setGoal(m_encoder.getPosition());
+    }
     m_PIDController.setReference(setPoint.position, ControlType.kPosition, 0, feedforward / 12.0);
     SmartDashboard.putNumber("elevator" + m_index + "/feedforward" + m_index, feedforward);
     SmartDashboard.putNumber("elevator" + m_index + "/setPoint" + m_index, Units.metersToInches(setPoint.position));
     SmartDashboard.putNumber("elevator" + m_index + "/velocity" + m_index, Units.metersToInches(setPoint.velocity));
+
+    if(m_resetElevatorPos) m_resetElevatorPos = false;
   }
 
   private void checkPIDVal() {
@@ -126,5 +135,9 @@ public class Elevator extends TrapezoidProfileSubsystem {
   }
   public RelativeEncoder getEncoder() {
     return m_encoder;
+  }
+
+  public void resetElevatorPos(){
+    m_resetElevatorPos = true;
   }
 }
