@@ -134,12 +134,12 @@ public final class Constants {
     public static final double ARM_MIN_ANGLE = Units.degreesToRadians(20.0);
 
     // the angle for the arm to rotate to turn the elevator towards the next bar
-    public static double ARM_ANGLE_TO_NEXT_BAR = Units.degreesToRadians(130.0);
+    public static double ARM_ANGLE_TO_NEXT_BAR = Units.degreesToRadians(120.0);
 
     // the angle for the arm to rotate to the left side of the next bar
-    public static double ARM_TO_THE_LEFT_ANGLE = Units.degreesToRadians(45.0);
+    public static double ARM_TO_THE_LEFT_ANGLE = Units.degreesToRadians(120.0);
     public static double ARM_GRAB_THE_BAR = Units.degreesToRadians(90.0);
-    public static double ARM_ROTATION_ELEVATOR_TOUCH_BAR = Units.degreesToRadians(100.0);
+    public static double ARM_ROTATION_ELEVATOR_TOUCH_BAR = Units.degreesToRadians(110.0);
 
     // the height of the elevator to retract down to certain point where the arm can get to the other side of the bar
     public static double ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE = ELEVATOR_ALL_THE_WAY_DOWN + Units.inchesToMeters(10.0);
