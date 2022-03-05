@@ -1160,7 +1160,7 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/arm/goal",
-              "_title": "SmartDashboard/arm/goal"
+              "_title": "/SmartDashboard/arm/goal"
             }
           },
           "6,1": {
@@ -1171,7 +1171,7 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/arm0/Encoder0",
-              "_title": "SmartDashboard/arm0/Encoder0"
+              "_title": "/SmartDashboard/arm0/Encoder0"
             }
           },
           "6,2": {
@@ -1182,7 +1182,7 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/arm0/Output0",
-              "_title": "SmartDashboard/arm0/Output0"
+              "_title": "/SmartDashboard/arm0/Output0"
             }
           },
           "6,3": {
@@ -1193,7 +1193,7 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/arm0/P Gain",
-              "_title": "SmartDashboard/arm0/P Gain"
+              "_title": "/SmartDashboard/arm0/P Gain"
             }
           },
           "4,3": {
@@ -1204,7 +1204,7 @@
             "content": {
               "_type": "Boolean Box",
               "_source0": "network_table:///SmartDashboard/arm0/too Backward",
-              "_title": "SmartDashboard/arm0/too Backward",
+              "_title": "/SmartDashboard/arm0/too Backward",
               "Colors/Color when true": "#7CFC00FF",
               "Colors/Color when false": "#8B0000FF"
             }
@@ -1217,7 +1217,7 @@
             "content": {
               "_type": "Boolean Box",
               "_source0": "network_table:///SmartDashboard/arm0/too Forward",
-              "_title": "SmartDashboard/arm0/too Forward",
+              "_title": "/SmartDashboard/arm0/too Forward",
               "Colors/Color when true": "#7CFC00FF",
               "Colors/Color when false": "#8B0000FF"
             }
@@ -1230,7 +1230,7 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/arm0/velocity0",
-              "_title": "SmartDashboard/arm0/velocity0"
+              "_title": "/SmartDashboard/arm0/velocity0"
             }
           },
           "11,1": {
@@ -1241,7 +1241,7 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/arm1/Encoder1",
-              "_title": "SmartDashboard/arm1/Encoder1"
+              "_title": "/SmartDashboard/arm1/Encoder1"
             }
           },
           "11,2": {
@@ -1252,7 +1252,7 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/arm1/Output1",
-              "_title": "SmartDashboard/arm1/Output1"
+              "_title": "/SmartDashboard/arm1/Output1"
             }
           },
           "11,3": {
@@ -1263,7 +1263,7 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/arm1/P Gain",
-              "_title": "SmartDashboard/arm1/P Gain"
+              "_title": "/SmartDashboard/arm1/P Gain"
             }
           },
           "11,4": {
@@ -1274,7 +1274,7 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/arm1/velocity1",
-              "_title": "SmartDashboard/arm1/velocity1"
+              "_title": "/SmartDashboard/arm1/velocity1"
             }
           },
           "13,3": {
@@ -1285,7 +1285,7 @@
             "content": {
               "_type": "Boolean Box",
               "_source0": "network_table:///SmartDashboard/arm1/too Backward",
-              "_title": "SmartDashboard/arm1/too Backward",
+              "_title": "/SmartDashboard/arm1/too Backward",
               "Colors/Color when true": "#7CFC00FF",
               "Colors/Color when false": "#8B0000FF"
             }
@@ -1298,7 +1298,7 @@
             "content": {
               "_type": "Boolean Box",
               "_source0": "network_table:///SmartDashboard/arm1/too Forward",
-              "_title": "SmartDashboard/arm1/too Forward",
+              "_title": "/SmartDashboard/arm1/too Forward",
               "Colors/Color when true": "#7CFC00FF",
               "Colors/Color when false": "#8B0000FF"
             }
@@ -1475,10 +1475,10 @@
             "content": {
               "_type": "ComboBox Chooser",
               "_source0": "network_table:///SmartDashboard/Chosen Auto",
-              "_title": "SmartDashboard/Chosen Auto"
+              "_title": "/SmartDashboard/Chosen Auto"
             }
           },
-          "2,0": {
+          "8,2": {
             "size": [
               2,
               1
@@ -1486,7 +1486,7 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Constants/ARM_ANGLE_FOR_ELEVATOR_CLEARANCE",
-              "_title": "SmartDashboard/Constants/ARM_ANGLE_FOR_ELEVATOR_CLEARANCE"
+              "_title": "/SmartDashboard/Constants/ARM_ANGLE_FOR_ELEVATOR_CLEARANCE"
             }
           },
           "2,2": {
@@ -1497,7 +1497,7 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Constants/ARM_ANGLE_TO_NEXT_BAR",
-              "_title": "SmartDashboard/Constants/ARM_ANGLE_TO_NEXT_BAR"
+              "_title": "/SmartDashboard/Constants/ARM_ANGLE_TO_NEXT_BAR"
             }
           },
           "2,3": {
@@ -1508,7 +1508,7 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Constants/ARM_GRAB_THE_BAR",
-              "_title": "SmartDashboard/Constants/ARM_GRAB_THE_BAR"
+              "_title": "/SmartDashboard/Constants/ARM_GRAB_THE_BAR"
             }
           },
           "2,4": {
@@ -1519,7 +1519,7 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Constants/ARM_ROTATION_ELEVATOR_TOUCH_BAR",
-              "_title": "SmartDashboard/Constants/ARM_ROTATION_ELEVATOR_TOUCH_BAR"
+              "_title": "/SmartDashboard/Constants/ARM_ROTATION_ELEVATOR_TOUCH_BAR"
             }
           },
           "2,1": {
@@ -1530,7 +1530,7 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Constants/ARM_TO_THE_LEFT_ANGLE",
-              "_title": "SmartDashboard/Constants/ARM_TO_THE_LEFT_ANGLE"
+              "_title": "/SmartDashboard/Constants/ARM_TO_THE_LEFT_ANGLE"
             }
           },
           "5,0": {
@@ -1541,7 +1541,7 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Constants/ELEVATOR_ALL_THE_WAY_DOWN",
-              "_title": "SmartDashboard/Constants/ELEVATOR_ALL_THE_WAY_DOWN"
+              "_title": "/SmartDashboard/Constants/ELEVATOR_ALL_THE_WAY_DOWN"
             }
           },
           "5,1": {
@@ -1552,7 +1552,7 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Constants/ELEVATOR_ALL_THE_WAY_UP",
-              "_title": "SmartDashboard/Constants/ELEVATOR_ALL_THE_WAY_UP"
+              "_title": "/SmartDashboard/Constants/ELEVATOR_ALL_THE_WAY_UP"
             }
           },
           "5,2": {
@@ -1563,7 +1563,7 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Constants/ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE",
-              "_title": "SmartDashboard/Constants/ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE"
+              "_title": "/SmartDashboard/Constants/ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE"
             }
           },
           "5,3": {
@@ -1574,7 +1574,7 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Constants/ELEVATOR_HEIGHT_SECURE_ON_BAR",
-              "_title": "SmartDashboard/Constants/ELEVATOR_HEIGHT_SECURE_ON_BAR"
+              "_title": "/SmartDashboard/Constants/ELEVATOR_HEIGHT_SECURE_ON_BAR"
             }
           },
           "0,1": {
@@ -1585,7 +1585,18 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/elevator/goal",
-              "_title": "SmartDashboard/elevator/goal"
+              "_title": "/SmartDashboard/elevator/goal"
+            }
+          },
+          "8,1": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Constants/MID_RUNG",
+              "_title": "/SmartDashboard/Constants/MID_RUNG"
             }
           }
         }
