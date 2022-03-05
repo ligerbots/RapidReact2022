@@ -1487,6 +1487,17 @@
               "Colors/Color when true": "#7CFC00FF",
               "Colors/Color when false": "#8B0000FF"
             }
+          },
+          "18,12": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Message",
+              "_title": "Message"
+            }
           }
         }
       }
@@ -1651,6 +1662,28 @@
               "_title": "/SmartDashboard/arm1/too Forward",
               "Colors/Color when true": "#7CFC00FF",
               "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "6,5": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/arm0/setPoint0",
+              "_title": "/SmartDashboard/arm0/setPoint0"
+            }
+          },
+          "11,5": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/arm1/setPoint1",
+              "_title": "/SmartDashboard/arm1/setPoint1"
             }
           }
         }
