@@ -20,7 +20,7 @@ public class RaiseToBar extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(      
       // retract the elevator
-      new SetElevatorHeight(m_climber, Constants.ELEVATOR_MIN_HEIGHT),
+      new SetElevatorHeight(m_climber, Constants.ELEVATOR_ALL_THE_WAY_DOWN),
 
       // rotates arm to grab on to the bar
       new SetArmAngle(m_climber, Constants.ARM_GRAB_THE_BAR));

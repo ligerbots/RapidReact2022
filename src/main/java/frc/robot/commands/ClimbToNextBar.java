@@ -24,7 +24,7 @@ public class ClimbToNextBar extends SequentialCommandGroup {
       new SetArmAngle(m_climber, Constants.ARM_ANGLE_TO_NEXT_BAR),
 
       // extend the elevator
-      new SetElevatorHeight(m_climber, Constants.ELEVATOR_MAX_HEIGHT),
+      new SetElevatorHeight(m_climber, Constants.ELEVATOR_ALL_THE_WAY_UP),
 
       // rotate the robot to make the elevator touch the bar first
       new SetArmAngle(m_climber, Constants.ARM_ROTATION_ELEVATOR_TOUCH_BAR),
@@ -39,7 +39,7 @@ public class ClimbToNextBar extends SequentialCommandGroup {
       new SetArmAngle(m_climber, Constants.ARM_TO_THE_LEFT_ANGLE),
 
       // fully retract the elevator
-      new SetElevatorHeight(m_climber, Constants.ELEVATOR_MIN_HEIGHT),
+      new SetElevatorHeight(m_climber, Constants.ELEVATOR_ALL_THE_WAY_DOWN),
 
       // rotate the arm back to grab on to the bar
       new SetArmAngle(m_climber, Constants.ARM_GRAB_THE_BAR));

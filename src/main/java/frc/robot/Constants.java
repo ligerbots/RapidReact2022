@@ -105,7 +105,10 @@ public final class Constants {
     public static final double ELEVATOR_MAX_HEIGHT = 100.0;// 23.5in = length of elevator when fully extended
     public static final double ELEVATOR_MIN_HEIGHT = -100.0;// 0in = length of elevator when fully retracted
     // right elevator 0 to -21.5
-     
+
+    public static double ELEVATOR_ALL_THE_WAY_DOWN = 0.0;
+    public static double ELEVATOR_ALL_THE_WAY_UP = 18.0;
+    
     // Feedforward constants for the each Climber Arm
     public static final double ARM_KS = 0.182; // TODO: This may need to be tuned
     // The following constants are computed from https://www.reca.lc/arm
@@ -131,18 +134,18 @@ public final class Constants {
     public static final double ARM_MIN_ANGLE = Units.degreesToRadians(20.0);
 
     // the angle for the arm to rotate to turn the elevator towards the next bar
-    public static final double ARM_ANGLE_TO_NEXT_BAR = Units.degreesToRadians(130.0);
+    public static double ARM_ANGLE_TO_NEXT_BAR = Units.degreesToRadians(130.0);
 
     // the angle for the arm to rotate to the left side of the next bar
-    public static final double ARM_TO_THE_LEFT_ANGLE = Units.degreesToRadians(45.0);
-    public static final double ARM_GRAB_THE_BAR = Units.degreesToRadians(90.0);
-    public static final double ARM_ROTATION_ELEVATOR_TOUCH_BAR = Units.degreesToRadians(100.0);
+    public static double ARM_TO_THE_LEFT_ANGLE = Units.degreesToRadians(45.0);
+    public static double ARM_GRAB_THE_BAR = Units.degreesToRadians(90.0);
+    public static double ARM_ROTATION_ELEVATOR_TOUCH_BAR = Units.degreesToRadians(100.0);
 
     // the height of the elevator to retract down to certain point where the arm can get to the other side of the bar
-    public static final double ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE = ELEVATOR_MIN_HEIGHT + Units.inchesToMeters(10.0);
-    public static final double ARM_ANGLE_FOR_ELEVATOR_CLEARANCE = ARM_GRAB_THE_BAR - Units.degreesToRadians(10.0);
+    public static double ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE = ELEVATOR_ALL_THE_WAY_DOWN + Units.inchesToMeters(10.0);
+    public static double ARM_ANGLE_FOR_ELEVATOR_CLEARANCE = ARM_GRAB_THE_BAR - Units.degreesToRadians(10.0);
 
-    public static final double ELEVATOR_HEIGHT_SECURE_ON_BAR = Units.inchesToMeters(0.0);
+    public static double ELEVATOR_HEIGHT_SECURE_ON_BAR = Units.inchesToMeters(0.0);
 
     // Feedforward constants for the each Climber Arm
     public static final double ELEVATOR_KS = 0.182; // TODO: This may need to be tuned

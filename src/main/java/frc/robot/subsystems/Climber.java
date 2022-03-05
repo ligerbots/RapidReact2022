@@ -42,7 +42,7 @@ public class Climber extends SubsystemBase {
     // Construct the arm trapezoid subsystems
     m_arm[0] = new ClimberArm(0, false);
     m_arm[1] = new ClimberArm(1, true);
-    //m_elevator[0] = new Elevator(0, false);
+    m_elevator[0] = new Elevator(0, false);
     m_elevator[1] = new Elevator(1, true);
 
     SmartDashboard.putNumber("arm/goal", m_armGoal);
@@ -74,7 +74,7 @@ public class Climber extends SubsystemBase {
     double goal = SmartDashboard.getNumber("elevator/goal", 0);
     if (goal != m_elevatorGoal) {
       double goalUnits = Units.inchesToMeters(goal);
-      //m_elevator[0].setGoal(goalUnits);
+      m_elevator[0].setGoal(goalUnits);
       m_elevator[1].setGoal(goalUnits); //* (20.1/18.45) factor for lowest point
       m_elevatorGoal = goal;
     }
@@ -105,7 +105,7 @@ public class Climber extends SubsystemBase {
   public void setBrakeMode(boolean brake) {
     m_arm[0].getMotor().setIdleMode(brake ? CANSparkMax.IdleMode.kBrake : CANSparkMax.IdleMode.kCoast);
     m_arm[1].getMotor().setIdleMode(brake ? CANSparkMax.IdleMode.kBrake : CANSparkMax.IdleMode.kCoast);
-    // m_elevator[0].getMotor().setIdleMode(brake ? CANSparkMax.IdleMode.kBrake : CANSparkMax.IdleMode.kCoast);
+    m_elevator[0].getMotor().setIdleMode(brake ? CANSparkMax.IdleMode.kBrake : CANSparkMax.IdleMode.kCoast);
     m_elevator[1].getMotor().setIdleMode(brake ? CANSparkMax.IdleMode.kBrake : CANSparkMax.IdleMode.kCoast);
   }
 

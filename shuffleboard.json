@@ -1017,7 +1017,7 @@
               "_title": "arm1/Encoder1"
             }
           },
-          "0,10": {
+          "18,9": {
             "size": [
               2,
               1
@@ -1028,7 +1028,7 @@
               "_title": "arm1/velocity1"
             }
           },
-          "2,10": {
+          "0,10": {
             "size": [
               2,
               1
@@ -1039,7 +1039,7 @@
               "_title": "elevator0/velocity0"
             }
           },
-          "4,10": {
+          "2,10": {
             "size": [
               2,
               1
@@ -1050,7 +1050,7 @@
               "_title": "elevator0/Output0"
             }
           },
-          "6,10": {
+          "4,10": {
             "size": [
               2,
               1
@@ -1061,7 +1061,7 @@
               "_title": "arm0/setPoint0"
             }
           },
-          "8,10": {
+          "6,10": {
             "size": [
               2,
               1
@@ -1072,7 +1072,7 @@
               "_title": "elevator1/Encoder1"
             }
           },
-          "10,10": {
+          "8,10": {
             "size": [
               2,
               1
@@ -1083,7 +1083,7 @@
               "_title": "elevator0/current"
             }
           },
-          "12,10": {
+          "10,10": {
             "size": [
               2,
               1
@@ -1094,7 +1094,7 @@
               "_title": "elevator1/setPoint1"
             }
           },
-          "14,10": {
+          "12,10": {
             "size": [
               2,
               1
@@ -1105,7 +1105,7 @@
               "_title": "arm0/velocity0"
             }
           },
-          "16,10": {
+          "14,10": {
             "size": [
               2,
               1
@@ -1114,6 +1114,28 @@
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/arm1/feedforward1",
               "_title": "arm1/feedforward1"
+            }
+          },
+          "16,10": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/elevator1/feedforward1",
+              "_title": "elevator1/feedforward1"
+            }
+          },
+          "18,10": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/elevator1/Output1",
+              "_title": "elevator1/Output1"
             }
           }
         }
@@ -1130,7 +1152,18 @@
         "vgap": 16.0,
         "titleType": 0,
         "tiles": {
-          "6,0": {
+          "2,2": {
+            "size": [
+              3,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/arm/goal",
+              "_title": "SmartDashboard/arm/goal"
+            }
+          },
+          "6,1": {
             "size": [
               2,
               1
@@ -1141,7 +1174,7 @@
               "_title": "SmartDashboard/arm0/Encoder0"
             }
           },
-          "6,1": {
+          "6,2": {
             "size": [
               2,
               1
@@ -1152,17 +1185,6 @@
               "_title": "SmartDashboard/arm0/Output0"
             }
           },
-          "6,2": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/arm0/P Gain",
-              "_title": "/SmartDashboard/arm0/P Gain"
-            }
-          },
           "6,3": {
             "size": [
               2,
@@ -1170,24 +1192,11 @@
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/arm0/setPoint0",
-              "_title": "SmartDashboard/arm0/setPoint0"
+              "_source0": "network_table:///SmartDashboard/arm0/P Gain",
+              "_title": "SmartDashboard/arm0/P Gain"
             }
           },
-          "1,3": {
-            "size": [
-              2,
-              2
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/arm0/too Forward",
-              "_title": "SmartDashboard/arm0/too Forward",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "1,1": {
+          "4,3": {
             "size": [
               2,
               2
@@ -1196,6 +1205,19 @@
               "_type": "Boolean Box",
               "_source0": "network_table:///SmartDashboard/arm0/too Backward",
               "_title": "SmartDashboard/arm0/too Backward",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "4,5": {
+            "size": [
+              2,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/arm0/too Forward",
+              "_title": "SmartDashboard/arm0/too Forward",
               "Colors/Color when true": "#7CFC00FF",
               "Colors/Color when false": "#8B0000FF"
             }
@@ -1211,7 +1233,7 @@
               "_title": "SmartDashboard/arm0/velocity0"
             }
           },
-          "10,0": {
+          "11,1": {
             "size": [
               2,
               1
@@ -1222,7 +1244,7 @@
               "_title": "SmartDashboard/arm1/Encoder1"
             }
           },
-          "10,1": {
+          "11,2": {
             "size": [
               2,
               1
@@ -1233,7 +1255,7 @@
               "_title": "SmartDashboard/arm1/Output1"
             }
           },
-          "10,2": {
+          "11,3": {
             "size": [
               2,
               1
@@ -1241,21 +1263,21 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/arm1/P Gain",
-              "_title": "/SmartDashboard/arm1/P Gain"
+              "_title": "SmartDashboard/arm1/P Gain"
             }
           },
-          "10,3": {
+          "11,4": {
             "size": [
               2,
               1
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/arm1/setPoint1",
-              "_title": "SmartDashboard/arm1/setPoint1"
+              "_source0": "network_table:///SmartDashboard/arm1/velocity1",
+              "_title": "SmartDashboard/arm1/velocity1"
             }
           },
-          "13,1": {
+          "13,3": {
             "size": [
               2,
               2
@@ -1268,7 +1290,7 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "13,3": {
+          "13,5": {
             "size": [
               2,
               2
@@ -1279,28 +1301,6 @@
               "_title": "SmartDashboard/arm1/too Forward",
               "Colors/Color when true": "#7CFC00FF",
               "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "10,4": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/arm1/velocity1",
-              "_title": "SmartDashboard/arm1/velocity1"
-            }
-          },
-          "2,0": {
-            "size": [
-              3,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/arm/goal",
-              "_title": "/SmartDashboard/arm/goal"
             }
           }
         }
@@ -1365,7 +1365,7 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "8,0": {
+          "7,0": {
             "size": [
               2,
               1
@@ -1376,7 +1376,7 @@
               "_title": "SmartDashboard/elevator1/Encoder1"
             }
           },
-          "4,0": {
+          "5,0": {
             "size": [
               2,
               1
@@ -1387,7 +1387,7 @@
               "_title": "SmartDashboard/elevator0/Encoder0"
             }
           },
-          "4,3": {
+          "5,3": {
             "size": [
               2,
               1
@@ -1398,7 +1398,7 @@
               "_title": "SmartDashboard/elevator0/P Gain"
             }
           },
-          "8,2": {
+          "7,2": {
             "size": [
               2,
               1
@@ -1409,7 +1409,7 @@
               "_title": "SmartDashboard/elevator1/Output1"
             }
           },
-          "8,3": {
+          "7,3": {
             "size": [
               2,
               1
@@ -1420,7 +1420,7 @@
               "_title": "SmartDashboard/elevator1/P Gain"
             }
           },
-          "8,1": {
+          "7,1": {
             "size": [
               2,
               1
@@ -1431,7 +1431,7 @@
               "_title": "SmartDashboard/elevator1/setPoint1"
             }
           },
-          "4,2": {
+          "5,2": {
             "size": [
               2,
               1
@@ -1442,7 +1442,7 @@
               "_title": "SmartDashboard/elevator0/Output0"
             }
           },
-          "4,1": {
+          "5,1": {
             "size": [
               2,
               1
@@ -1452,49 +1452,129 @@
               "_source0": "network_table:///SmartDashboard/elevator0/setPoint0",
               "_title": "SmartDashboard/elevator0/setPoint0"
             }
-          },
-          "6,0": {
+          }
+        }
+      }
+    },
+    {
+      "title": "Tab 4",
+      "autoPopulate": false,
+      "autoPopulatePrefix": "",
+      "widgetPane": {
+        "gridSize": 128.0,
+        "showGrid": true,
+        "hgap": 16.0,
+        "vgap": 16.0,
+        "titleType": 0,
+        "tiles": {
+          "0,0": {
             "size": [
               2,
               1
             ],
             "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/elevator0/feedforward0",
-              "_title": "SmartDashboard/elevator0/feedforward0"
+              "_type": "ComboBox Chooser",
+              "_source0": "network_table:///SmartDashboard/Chosen Auto",
+              "_title": "SmartDashboard/Chosen Auto"
             }
           },
-          "6,1": {
+          "2,0": {
             "size": [
               2,
               1
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/elevator0/velocity0",
-              "_title": "SmartDashboard/elevator0/velocity0"
+              "_source0": "network_table:///SmartDashboard/Constants/ARM_ANGLE_FOR_ELEVATOR_CLEARANCE",
+              "_title": "SmartDashboard/Constants/ARM_ANGLE_FOR_ELEVATOR_CLEARANCE"
             }
           },
-          "10,0": {
+          "2,2": {
             "size": [
               2,
               1
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/elevator1/feedforward1",
-              "_title": "SmartDashboard/elevator1/feedforward1"
+              "_source0": "network_table:///SmartDashboard/Constants/ARM_ANGLE_TO_NEXT_BAR",
+              "_title": "SmartDashboard/Constants/ARM_ANGLE_TO_NEXT_BAR"
             }
           },
-          "10,1": {
+          "2,3": {
             "size": [
               2,
               1
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/elevator1/velocity1",
-              "_title": "SmartDashboard/elevator1/velocity1"
+              "_source0": "network_table:///SmartDashboard/Constants/ARM_GRAB_THE_BAR",
+              "_title": "SmartDashboard/Constants/ARM_GRAB_THE_BAR"
+            }
+          },
+          "2,4": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Constants/ARM_ROTATION_ELEVATOR_TOUCH_BAR",
+              "_title": "SmartDashboard/Constants/ARM_ROTATION_ELEVATOR_TOUCH_BAR"
+            }
+          },
+          "2,1": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Constants/ARM_TO_THE_LEFT_ANGLE",
+              "_title": "SmartDashboard/Constants/ARM_TO_THE_LEFT_ANGLE"
+            }
+          },
+          "5,0": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Constants/ELEVATOR_ALL_THE_WAY_DOWN",
+              "_title": "SmartDashboard/Constants/ELEVATOR_ALL_THE_WAY_DOWN"
+            }
+          },
+          "5,1": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Constants/ELEVATOR_ALL_THE_WAY_UP",
+              "_title": "SmartDashboard/Constants/ELEVATOR_ALL_THE_WAY_UP"
+            }
+          },
+          "5,2": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Constants/ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE",
+              "_title": "SmartDashboard/Constants/ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE"
+            }
+          },
+          "5,3": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Constants/ELEVATOR_HEIGHT_SECURE_ON_BAR",
+              "_title": "SmartDashboard/Constants/ELEVATOR_HEIGHT_SECURE_ON_BAR"
             }
           }
         }
@@ -1502,9 +1582,9 @@
     }
   ],
   "windowGeometry": {
-    "x": 0.4000000059604645,
-    "y": 2.799999952316284,
-    "width": 1428.800048828125,
-    "height": 572.7999877929688
+    "x": -6.400000095367432,
+    "y": -6.400000095367432,
+    "width": 1548.800048828125,
+    "height": 836.7999877929688
   }
 }

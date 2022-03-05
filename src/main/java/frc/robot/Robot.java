@@ -66,7 +66,7 @@ public class Robot extends TimedRobot {
     m_plotter = new TrajectoryPlotter(m_robotContainer.getDriveTrain().getField2d());
 
     // Set climber motors to coast so we can move them if we need to.
-    m_robotContainer.getClimber().setBrakeMode(false);
+    m_robotContainer.getClimber().setBrakeMode(true);
   }
 
   /**
@@ -135,12 +135,32 @@ public class Robot extends TimedRobot {
 
     // Set Climber motors to Brake mode
     m_robotContainer.getClimber().setBrakeMode(true);
+    
+    SmartDashboard.putNumber("Constants/ARM_ANGLE_FOR_ELEVATOR_CLEARANCE", Constants.ARM_ANGLE_FOR_ELEVATOR_CLEARANCE);
+    SmartDashboard.putNumber("Constants/ARM_GRAB_THE_BAR", Constants.ARM_GRAB_THE_BAR);
+    SmartDashboard.putNumber("Constants/ARM_ANGLE_TO_NEXT_BAR", Constants.ARM_ANGLE_TO_NEXT_BAR);
+    SmartDashboard.putNumber("Constants/ELEVATOR_ALL_THE_WAY_UP", Constants.ELEVATOR_ALL_THE_WAY_UP);
+    SmartDashboard.putNumber("Constants/ELEVATOR_ALL_THE_WAY_DOWN", Constants.ELEVATOR_ALL_THE_WAY_DOWN);
+    SmartDashboard.putNumber("Constants/ARM_ROTATION_ELEVATOR_TOUCH_BAR", Constants.ARM_ROTATION_ELEVATOR_TOUCH_BAR);
+    SmartDashboard.putNumber("Constants/ELEVATOR_HEIGHT_SECURE_ON_BAR", Constants.ELEVATOR_HEIGHT_SECURE_ON_BAR);
+    SmartDashboard.putNumber("Constants/ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE", Constants.ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE);
+    SmartDashboard.putNumber("Constants/ARM_TO_THE_LEFT_ANGLE", Constants.ARM_TO_THE_LEFT_ANGLE);
   }
 
 
   /** This function is called periodically during operator control. */
   @Override
-  public void teleopPeriodic() {}
+  public void teleopPeriodic() {
+    Constants.ARM_ANGLE_FOR_ELEVATOR_CLEARANCE = SmartDashboard.getNumber("Constants/ARM_ANGLE_FOR_ELEVATOR_CLEARANCE", Constants.ARM_ANGLE_FOR_ELEVATOR_CLEARANCE);
+    Constants.ARM_GRAB_THE_BAR = SmartDashboard.getNumber("Constants/ARM_GRAB_THE_BAR", Constants.ARM_GRAB_THE_BAR);
+    Constants.ARM_ANGLE_TO_NEXT_BAR = SmartDashboard.getNumber("Constants/ARM_ANGLE_TO_NEXT_BAR", Constants.ARM_ANGLE_TO_NEXT_BAR);
+    Constants.ELEVATOR_ALL_THE_WAY_UP = SmartDashboard.getNumber("Constants/ELEVATOR_ALL_THE_WAY_UP", Constants.ELEVATOR_ALL_THE_WAY_UP);
+    Constants.ELEVATOR_ALL_THE_WAY_DOWN = SmartDashboard.getNumber("Constants/ELEVATOR_ALL_THE_WAY_DOWN", Constants.ELEVATOR_ALL_THE_WAY_DOWN);
+    Constants.ARM_ROTATION_ELEVATOR_TOUCH_BAR = SmartDashboard.getNumber("Constants/ARM_ROTATION_ELEVATOR_TOUCH_BAR", Constants.ARM_ROTATION_ELEVATOR_TOUCH_BAR);
+    Constants.ELEVATOR_HEIGHT_SECURE_ON_BAR = SmartDashboard.getNumber("Constants/ELEVATOR_HEIGHT_SECURE_ON_BAR", Constants.ELEVATOR_HEIGHT_SECURE_ON_BAR);
+    Constants.ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE = SmartDashboard.getNumber("Constants/ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE", Constants.ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE);
+    Constants.ARM_TO_THE_LEFT_ANGLE = SmartDashboard.getNumber("Constants/ARM_TO_THE_LEFT_ANGLE", Constants.ARM_TO_THE_LEFT_ANGLE);
+  }
 
   @Override
   public void testInit() {
