@@ -19,6 +19,8 @@ public class SetArmBrake extends CommandBase {
   @Override
   public void initialize() {
     m_climber.unsetArmCoastMode();
+    m_climber.m_arm[0].resetArmPos();
+    m_climber.m_arm[1].resetArmPos();
   }
 
   // Called every time the scheduler runs while the command is scheduled.

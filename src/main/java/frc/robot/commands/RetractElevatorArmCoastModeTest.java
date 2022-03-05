@@ -41,6 +41,8 @@ public class RetractElevatorArmCoastModeTest extends CommandBase {
   public void end(boolean interrupted) {
     // reactivate the arm motors once the elevator hangs onto the bar
     m_climber.unsetArmCoastMode();
+    m_climber.m_arm[0].resetArmPos();
+    m_climber.m_arm[1].resetArmPos();
   }
 
   // Returns true when the command should end.

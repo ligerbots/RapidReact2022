@@ -119,13 +119,13 @@ public class ClimberArm extends TrapezoidProfileSubsystem {
     if(m_resetArmPos){
       setPoint.position = m_encoder.getPosition();
       super.setGoal(m_encoder.getPosition());
+      m_resetArmPos = false;
     }
     m_PIDController.setReference(setPoint.position, ControlType.kPosition, 0, feedforward / 12.0);
     SmartDashboard.putNumber("arm" + m_index + "/feedforward" + m_index, feedforward);
     SmartDashboard.putNumber("arm" + m_index + "/setPoint" + m_index, Units.metersToInches(setPoint.position));
     SmartDashboard.putNumber("arm" + m_index + "/velocity" + m_index, Units.metersToInches(setPoint.velocity));
-
-    if(m_resetArmPos) m_resetArmPos = false;
+   
 }
 
   private void checkPIDVal() {
@@ -156,6 +156,9 @@ public class ClimberArm extends TrapezoidProfileSubsystem {
   public void unIdleMotor(){
     m_coastMode = false;
     m_motor.setIdleMode(CANSparkMax.IdleMode.kBrake);
+  }
+
+  public void resetArmPos(){
     m_resetArmPos = true;
   }
 }

@@ -177,8 +177,8 @@ public class Robot extends TimedRobot {
     
     m_robotContainer.getClimber().m_elevator[0].resetElevatorPos();
     m_robotContainer.getClimber().m_elevator[1].resetElevatorPos();  
-    m_robotContainer.getClimber().m_arm[0].unIdleMotor();
-    m_robotContainer.getClimber().m_arm[1].unIdleMotor();  
+    m_robotContainer.getClimber().m_arm[0].resetArmPos();
+    m_robotContainer.getClimber().m_arm[1].resetArmPos();  
   }
 
 

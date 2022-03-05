@@ -112,13 +112,12 @@ public class Elevator extends TrapezoidProfileSubsystem {
     if(m_resetElevatorPos){
       setPoint.position = m_encoder.getPosition();
       super.setGoal(m_encoder.getPosition());
+      m_resetElevatorPos = false;
     }
     m_PIDController.setReference(setPoint.position, ControlType.kPosition, 0, feedforward / 12.0);
     SmartDashboard.putNumber("elevator" + m_index + "/feedforward" + m_index, feedforward);
     SmartDashboard.putNumber("elevator" + m_index + "/setPoint" + m_index, Units.metersToInches(setPoint.position));
     SmartDashboard.putNumber("elevator" + m_index + "/velocity" + m_index, Units.metersToInches(setPoint.velocity));
-
-    if(m_resetElevatorPos) m_resetElevatorPos = false;
   }
 
   private void checkPIDVal() {
