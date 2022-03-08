@@ -117,7 +117,6 @@ public class ElevatorDescend extends TrapezoidProfileSubsystem {
 
     if(m_resetElevatorPos){
       setPoint.position = m_encoder.getPosition();
-      super.setGoal(m_encoder.getPosition());
       m_resetElevatorPos = false;
     }
     m_PIDController.setReference(setPoint.position, ControlType.kPosition, 0, feedforward / 12.0);

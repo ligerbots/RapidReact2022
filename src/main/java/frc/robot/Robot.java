@@ -157,12 +157,18 @@ public class Robot extends TimedRobot {
     // Set Climber motors to Brake mode
     m_robotContainer.getClimber().setBrakeMode(true);
     
+    double elevatorCurPos = m_robotContainer.getClimber().getElevatorHeight()[0];
+    m_robotContainer.getClimber().m_elevatorAscend[1].resetElevatorPos();
     if(m_robotContainer.getClimber().m_elevatorAscend[0].m_elevatorAscending){
       m_robotContainer.getClimber().m_elevatorAscend[0].resetElevatorPos();
       m_robotContainer.getClimber().m_elevatorAscend[1].resetElevatorPos(); 
+      m_robotContainer.getClimber().m_elevatorAscend[0].setGoal(elevatorCurPos);
+      m_robotContainer.getClimber().m_elevatorAscend[1].setGoal(elevatorCurPos);
     }else{
       m_robotContainer.getClimber().m_elevatorDescend[0].resetElevatorPos();
       m_robotContainer.getClimber().m_elevatorDescend[1].resetElevatorPos(); 
+      m_robotContainer.getClimber().m_elevatorDescend[0].setGoal(elevatorCurPos);
+      m_robotContainer.getClimber().m_elevatorDescend[1].setGoal(elevatorCurPos);
     }
      
     m_robotContainer.getClimber().m_arm[0].resetArmPos();

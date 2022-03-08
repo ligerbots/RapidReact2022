@@ -4,17 +4,13 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.math.util.Units;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
 import frc.robot.subsystems.Climber;
 
 public class ResetElevatorEncoder extends CommandBase {
   /** Creates a new SetGoal. */
   Climber m_climber;
   double m_goalUnits;
-  double[] m_arr;
   public ResetElevatorEncoder(Climber climber) {
     m_climber = climber; 
   }
