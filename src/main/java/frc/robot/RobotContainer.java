@@ -25,7 +25,6 @@ import frc.robot.commands.SetArmCoast;
 import frc.robot.commands.SetClimber;
 import frc.robot.commands.SetElevatorHeight;
 import frc.robot.commands.SetElevatorHeightTest;
-import frc.robot.commands.SetGoal;
 import frc.robot.commands.TuneShooterCommand;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.DriveTrain;

@@ -19,7 +19,8 @@ import frc.robot.Constants;
 
 public class ElevatorDescend extends TrapezoidProfileSubsystem {
   public boolean m_elevatorDescending = false;
-  public ElevatorAscend m_elevatorAscend;
+  Climber m_climber;
+  
   // Define the motor and encoders
   private final CANSparkMax m_motor;
   private final RelativeEncoder m_encoder;
@@ -37,7 +38,7 @@ public class ElevatorDescend extends TrapezoidProfileSubsystem {
   private boolean m_resetElevatorPos = false;
   
   /** Creates a new Elevator. */
-  public ElevatorDescend(int index, boolean inverted, ElevatorAscend elevatorAscend) {
+  public ElevatorDescend(int index, boolean inverted, Climber climber) {
 
     super(
       // The constraints for the generated profiles
@@ -45,7 +46,7 @@ public class ElevatorDescend extends TrapezoidProfileSubsystem {
       // The initial position of the mechanism
       Constants.ELEVATOR_OFFSET_METER);
 
-    m_elevatorAscend = elevatorAscend;
+    m_climber = climber;
     m_index = index;
     m_kPElevator = m_index == 0 ? Constants.ELEVATOR_K_P0 : Constants.ELEVATOR_K_P1;
 
@@ -70,6 +71,9 @@ public class ElevatorDescend extends TrapezoidProfileSubsystem {
 
   @Override
   public void periodic() {
+    if(m_climber.m_elevatorAscend[m_index].m_elevatorAscending){
+      return;
+    }
     double encoderValue = m_encoder.getPosition();
     
     // Display current values on the SmartDashboard
@@ -144,7 +148,7 @@ public class ElevatorDescend extends TrapezoidProfileSubsystem {
 
   public void elevatorDescending(){
     m_elevatorDescending = true;
-    m_elevatorAscend.elevatorStop();
+    m_climber.m_elevatorAscend[m_index].elevatorStop();
   }
 
   public void elevatorStop(){

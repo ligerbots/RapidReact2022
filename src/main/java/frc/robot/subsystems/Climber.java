@@ -78,11 +78,15 @@ public class Climber extends SubsystemBase {
   public void setElevatorHeight(double height) {
     double curHeight = getElevatorHeight()[0];//both motors are similar, getting current height  
     if(height>curHeight){
+        m_elevatorAscend[0].resetElevatorPos();
+        m_elevatorAscend[1].resetElevatorPos();
         m_elevatorAscend[0].elevatorAscending();//either ascending or descending
         m_elevatorAscend[1].elevatorAscending();
         m_elevatorAscend[0].setGoal(height);
         m_elevatorAscend[1].setGoal(height);
       }else{
+        m_elevatorDescend[0].resetElevatorPos();
+        m_elevatorDescend[1].resetElevatorPos();
         m_elevatorDescend[0].elevatorDescending();
         m_elevatorDescend[1].elevatorDescending();
         m_elevatorDescend[0].setGoal(height);

@@ -156,10 +156,16 @@ public final class Constants {
     public static final double ELEVATOR_KV = 7.67;
     public static final double ELEVATOR_KA = 0.19;
 
-    // Constants to limit the arm rotation speed
-    public static final double ELEVATOR_MAX_VEL_METER_PER_SEC = Units.inchesToMeters(10.0);
-    public static final double ELEVATOR_MAX_ACC_METER_PER_SEC_SQ = Units.inchesToMeters(10.0);
+    // Constants to limit the elevator veocity and accel
+
+    public static final double ELEVATOR_MAX_VEL_METER_PER_SEC_ASCEND = Units.inchesToMeters(10.0);
+    public static final double ELEVATOR_MAX_ACC_METER_PER_SEC_SQ_ASCEND = Units.inchesToMeters(10.0);
+
+    public static final double ELEVATOR_MAX_VEL_METER_PER_SEC_DESCEND = Units.inchesToMeters(5.0);
+    public static final double ELEVATOR_MAX_ACC_METER_PER_SEC_SQ_DESCEND = Units.inchesToMeters(5.0);
     public static final double ELEVATOR_OFFSET_METER = 0.0;
+
+
 
     // PID Constants for the Arm PID controller
     // Since we're using Trapeziodal control, all values will be 0 except for P
