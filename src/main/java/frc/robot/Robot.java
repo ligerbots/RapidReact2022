@@ -17,7 +17,6 @@ import frc.robot.commands.RetractElevatorArmCoastMode;
 import frc.robot.commands.SetArmAngle;
 import frc.robot.commands.SetClimber;
 import frc.robot.commands.SetElevatorHeight;
-import frc.robot.commands.SetGoal;
 import frc.robot.commands.TrajectoryPlotter;
 import frc.robot.commands.TwoBallAutoCurved;
 import frc.robot.commands.TwoBallAutoStraight;
@@ -55,24 +54,7 @@ public class Robot extends TimedRobot {
     //   new TwoBallAutoCurved(m_robotContainer.getShooter(), m_robotContainer.getIntake(), m_robotContainer.getDriveTrain(), m_robotContainer.getVision())
     // );
 
-    m_chosenAuto.addOption("SetClimber", 
-    new SetClimber(m_robotContainer.getClimber())
-  );
-  m_chosenAuto.addOption("SetElevatorHeightTest", 
-  new SetElevatorHeight(m_robotContainer.getClimber(), Constants.MID_RUNG)
-  );
-  m_chosenAuto.addOption("SetArmAngleTest", 
-    new SetArmAngle(m_robotContainer.getClimber(), Constants.ARM_GRAB_THE_BAR)
-  );
-  m_chosenAuto.addOption("RaiseToBar", 
-    new RaiseToBar(m_robotContainer.getClimber())
-  );
-  m_chosenAuto.addOption("RetractElevatorArmCoastModeTest", 
-    new RetractElevatorArmCoastMode(m_robotContainer.getClimber(), Constants.ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE)
-  );
-  m_chosenAuto.addOption("SetGoal", 
-    new SetGoal(m_robotContainer.getClimber())
-  );
+   
 
   SmartDashboard.putNumber("Constants/ARM_ANGLE_FOR_ELEVATOR_CLEARANCE", Units.radiansToDegrees(Constants.ARM_ANGLE_FOR_ELEVATOR_CLEARANCE));
   SmartDashboard.putNumber("Constants/ARM_GRAB_THE_BAR", Units.radiansToDegrees(Constants.ARM_GRAB_THE_BAR));
@@ -175,8 +157,14 @@ public class Robot extends TimedRobot {
     // Set Climber motors to Brake mode
     m_robotContainer.getClimber().setBrakeMode(true);
     
-    m_robotContainer.getClimber().m_elevator[0].resetElevatorPos();
-    m_robotContainer.getClimber().m_elevator[1].resetElevatorPos();  
+    if(m_robotContainer.getClimber().m_elevatorAscend[0].m_elevatorAscending){
+      m_robotContainer.getClimber().m_elevatorAscend[0].resetElevatorPos();
+      m_robotContainer.getClimber().m_elevatorAscend[1].resetElevatorPos(); 
+    }else{
+      m_robotContainer.getClimber().m_elevatorDescend[0].resetElevatorPos();
+      m_robotContainer.getClimber().m_elevatorDescend[1].resetElevatorPos(); 
+    }
+     
     m_robotContainer.getClimber().m_arm[0].resetArmPos();
     m_robotContainer.getClimber().m_arm[1].resetArmPos();  
   }

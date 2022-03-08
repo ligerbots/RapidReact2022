@@ -31,10 +31,15 @@ public class ResetElevatorEncoder extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_climber.m_elevator[0].getEncoder().setPosition(0.0);
-    m_climber.m_elevator[1].getEncoder().setPosition(0.0);
-    m_climber.m_elevator[0].setGoal(0.0);
-    m_climber.m_elevator[1].setGoal(0.0);
+    m_climber.m_elevatorAscend[0].getEncoder().setPosition(0.0);
+    m_climber.m_elevatorAscend[1].getEncoder().setPosition(0.0);
+    m_climber.m_elevatorAscend[0].setGoal(0.0);
+    m_climber.m_elevatorAscend[1].setGoal(0.0);
+
+    m_climber.m_elevatorDescend[0].getEncoder().setPosition(0.0);
+    m_climber.m_elevatorDescend[1].getEncoder().setPosition(0.0);
+    m_climber.m_elevatorDescend[0].setGoal(0.0);
+    m_climber.m_elevatorDescend[1].setGoal(0.0);
   }
 
   // Returns true when the command should end.

@@ -14,7 +14,10 @@ import frc.robot.Constants;
 public class Climber extends SubsystemBase {
 
   public ClimberArm[] m_arm = new ClimberArm[2];
-  public Elevator[] m_elevator = new Elevator[2];
+  public ElevatorAscend[] m_elevatorAscend = new ElevatorAscend[2];
+
+  
+  public ElevatorDescend[] m_elevatorDescend = new ElevatorDescend[2];
 
   double m_armMaxRPM = 5700;
 
@@ -42,8 +45,10 @@ public class Climber extends SubsystemBase {
     // Construct the arm trapezoid subsystems
     m_arm[0] = new ClimberArm(0, false);
     m_arm[1] = new ClimberArm(1, true);
-    m_elevator[0] = new Elevator(0, false);
-    m_elevator[1] = new Elevator(1, true);
+    m_elevatorAscend[0] = new ElevatorAscend(0, false, this);
+    m_elevatorAscend[1] = new ElevatorAscend(1, true, this);
+    m_elevatorDescend[0] = new ElevatorDescend(0, false, this);
+    m_elevatorDescend[1] = new ElevatorDescend(1, true, this);
 
     SmartDashboard.putNumber("arm/goal", m_armGoal);
     SmartDashboard.putNumber("elevator/goal", m_elevatorGoal);
@@ -71,8 +76,19 @@ public class Climber extends SubsystemBase {
 
   // sets the elevator to a certain height
   public void setElevatorHeight(double height) {
-      m_elevator[0].setGoal(height);
-      m_elevator[1].setGoal(height); //* (20.1/18.45) factor for lowest point
+    double curHeight = getElevatorHeight()[0];//both motors are similar, getting current height  
+    if(height>curHeight){
+        m_elevatorAscend[0].elevatorAscending();//either ascending or descending
+        m_elevatorAscend[1].elevatorAscending();
+        m_elevatorAscend[0].setGoal(height);
+        m_elevatorAscend[1].setGoal(height);
+      }else{
+        m_elevatorDescend[0].elevatorDescending();
+        m_elevatorDescend[1].elevatorDescending();
+        m_elevatorDescend[0].setGoal(height);
+        m_elevatorDescend[1].setGoal(height);
+      }
+      
   }
 
   // rotates the arms to a certain angle
@@ -84,7 +100,7 @@ public class Climber extends SubsystemBase {
 
   // returns the currrent height of the elevator
   public double[] getElevatorHeight() {
-    return new double[] {m_elevator[0].getEncoder().getPosition(), m_elevator[1].getEncoder().getPosition()};
+    return new double[] {m_elevatorAscend[0].getEncoder().getPosition(), m_elevatorAscend[1].getEncoder().getPosition()};//does not matter bc both elevatorAscend and elevatorDescend share same motor
   }
 
   // returns the current angle of the arm
@@ -96,8 +112,8 @@ public class Climber extends SubsystemBase {
   public void setBrakeMode(boolean brake) {
     m_arm[0].getMotor().setIdleMode(brake ? CANSparkMax.IdleMode.kBrake : CANSparkMax.IdleMode.kCoast);
     m_arm[1].getMotor().setIdleMode(brake ? CANSparkMax.IdleMode.kBrake : CANSparkMax.IdleMode.kCoast);
-    m_elevator[0].getMotor().setIdleMode(brake ? CANSparkMax.IdleMode.kBrake : CANSparkMax.IdleMode.kCoast);
-    m_elevator[1].getMotor().setIdleMode(brake ? CANSparkMax.IdleMode.kBrake : CANSparkMax.IdleMode.kCoast);
+    m_elevatorAscend[0].getMotor().setIdleMode(brake ? CANSparkMax.IdleMode.kBrake : CANSparkMax.IdleMode.kCoast);//does not matter bc both elevatorAscend and elevatorDescend share same motor
+    m_elevatorAscend[1].getMotor().setIdleMode(brake ? CANSparkMax.IdleMode.kBrake : CANSparkMax.IdleMode.kCoast);
   }
 
   public void setArmCoastMode(){
