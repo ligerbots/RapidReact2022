@@ -6,9 +6,12 @@ package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
+import com.revrobotics.SparkMaxLimitSwitch;
 import com.revrobotics.SparkMaxPIDController;
+import com.revrobotics.CANDigitalInput.LimitSwitchPolarity;
 import com.revrobotics.CANSparkMax.ControlType;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.revrobotics.SparkMaxLimitSwitch.Type;
 
 import edu.wpi.first.math.controller.ElevatorFeedforward;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
@@ -25,6 +28,8 @@ public class ElevatorDescend extends TrapezoidProfileSubsystem {
   private final CANSparkMax m_motor;
   private final RelativeEncoder m_encoder;
   private final SparkMaxPIDController m_PIDController;
+
+  private SparkMaxLimitSwitch m_limitSwitch;
 
   private final ElevatorFeedforward m_Feedforward = 
     new ElevatorFeedforward(Constants.ELEVATOR_KS, Constants.ELEVATOR_KG, Constants.ELEVATOR_KV, Constants.ELEVATOR_KA);
@@ -55,6 +60,9 @@ public class ElevatorDescend extends TrapezoidProfileSubsystem {
     m_motor.restoreFactoryDefaults();
     m_motor.setInverted(inverted);
 
+    m_limitSwitch = m_motor.getForwardLimitSwitch(Type.kNormallyOpen);
+    m_limitSwitch.enableLimitSwitch(true);
+
     m_PIDController = m_motor.getPIDController();
     m_PIDController.setP(m_kPElevator);
     m_PIDController.setI(Constants.ELEVATOR_K_I);
@@ -71,9 +79,7 @@ public class ElevatorDescend extends TrapezoidProfileSubsystem {
 
   @Override
   public void periodic() {
-    if(m_climber.m_elevatorAscend[m_index].m_elevatorAscending){
-      return;
-    }
+    if(m_climber.m_elevatorAscend[m_index].m_elevatorAscending) return;
     double encoderValue = m_encoder.getPosition();
     
     // Display current values on the SmartDashboard
@@ -93,6 +99,13 @@ public class ElevatorDescend extends TrapezoidProfileSubsystem {
     if (m_tooLow) {
       m_PIDController.setReference(Constants.ELEVATOR_MIN_HEIGHT, ControlType.kPosition, 0, 0.0);
       return;
+    }
+
+    SmartDashboard.putBoolean("elevator" + m_index + "/limitSwitchPressed", m_limitSwitch.isPressed());
+    if (m_limitSwitch.isPressed()) {
+      m_resetElevatorPos = true;
+      m_encoder.setPosition(0.0);
+      super.setGoal(0.0);
     }
     
     // Execute the super class periodic method
