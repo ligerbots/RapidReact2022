@@ -72,7 +72,7 @@ public class TwoBallAutoStraight extends SequentialCommandGroup implements AutoC
                 new IntakeCommand(intake, Constants.INTAKE_SPEED)
             ),
             new TurnTowardsHub(driveTrain, vision).withTimeout(Constants.TURN_TIMEOUT_SECS),
-            new ShooterCommand(shooter, intake, vision, true)
+            new ShooterCommand(shooter, intake, vision, true, false)
         );
     }
 

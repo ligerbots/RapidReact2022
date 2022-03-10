@@ -14,7 +14,7 @@ public class OneBallAuto extends SequentialCommandGroup implements AutoCommandIn
     public OneBallAuto(Shooter shooter, Intake intake, DriveTrain driveTrain, Vision vision) {
         addCommands(
             new TurnTowardsHub(driveTrain, vision).withTimeout(Constants.TURN_TIMEOUT_SECS),
-            new ShooterCommand(shooter, intake, vision, true)
+            new ShooterCommand(shooter, intake, vision, true, false)
         );
     }
 
