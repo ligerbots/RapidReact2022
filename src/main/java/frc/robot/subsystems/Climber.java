@@ -5,6 +5,7 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -33,22 +34,26 @@ public class Climber extends SubsystemBase {
 
   boolean[] m_armTooFar = new boolean[] { false, false };
 
-   double m_elevatorAllowedErr = 0;
+  double m_elevatorAllowedErr = 0;
 
   boolean[] m_elevatorTooFar = new boolean[] { false, false };
 
   double[] m_elevatorEncoderValue = new double[2];
   double[] m_armEncoderValue = new double[2];
 
+  CANSparkMax[] m_elevatorMotor;
+
   public Climber() {
     
     // Construct the arm trapezoid subsystems
     m_arm[0] = new ClimberArm(0, false);
     m_arm[1] = new ClimberArm(1, true);
-    m_elevatorAscend[0] = new ElevatorAscend(0, false, this);
-    m_elevatorAscend[1] = new ElevatorAscend(1, true, this);
-    m_elevatorDescend[0] = new ElevatorDescend(0, false, this);
-    m_elevatorDescend[1] = new ElevatorDescend(1, true, this);
+    m_elevatorMotor = new CANSparkMax[] {new CANSparkMax(Constants.ELEVATOR_CAN_IDS[0], MotorType.kBrushless), new CANSparkMax(Constants.ELEVATOR_CAN_IDS[1], MotorType.kBrushless)};
+    
+    m_elevatorAscend[0] = new ElevatorAscend(0, false, this, m_elevatorMotor[0]);
+    m_elevatorAscend[1] = new ElevatorAscend(1, true, this, m_elevatorMotor[1]);
+    m_elevatorDescend[0] = new ElevatorDescend(0, false, this, m_elevatorMotor[0]);
+    m_elevatorDescend[1] = new ElevatorDescend(1, true, this, m_elevatorMotor[1]);
 
     SmartDashboard.putNumber("arm/goal", m_armGoal);
     SmartDashboard.putNumber("elevator/goal", m_elevatorGoal);
@@ -92,7 +97,6 @@ public class Climber extends SubsystemBase {
         m_elevatorDescend[0].setGoal(height);
         m_elevatorDescend[1].setGoal(height);
       }
-      
   }
 
   // rotates the arms to a certain angle

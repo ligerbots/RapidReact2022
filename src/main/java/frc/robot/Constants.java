@@ -52,8 +52,8 @@ public final class Constants {
     public static final int FOLLOWER_RIGHT_CAN_ID = 8;
 
     // Following four CAN IDs are for the climber subsystem
-    public static final int[] ELEVATOR_CAN_IDS = new int[] {7,10}; //{1,2};
-    public static final int[] ARM_CAN_IDS = new int[] {1,2}; //{7,10};
+    public static final int[] ELEVATOR_CAN_IDS = new int[] {7,2}; //{1,2};
+    public static final int[] ARM_CAN_IDS = new int[] {1,10}; //{7,10};
     
     // intake subsystem
     public static final int INTAKE_MOTOR_CAN_ID = 5; 
@@ -92,7 +92,7 @@ public final class Constants {
 
     // define constants for high, low, and mid rung
     public static final double HIGH_RUNG = 1.92;//192 cm
-    public static double MID_RUNG = Units.inchesToMeters(18.0);//153 cm
+    public static double MID_RUNG = Units.inchesToMeters(23.0);//153 cm
     public static final double LOW_RUNG = 1.24;//Top of rung is 124cm
     public static final double CLIMBER_ANGLE = Units.degreesToRadians(22.0);//angle for setClimber()
     
@@ -102,12 +102,9 @@ public final class Constants {
 
     public static final double RUNG_ANGLE = Units.degreesToRadians(-22.0);//angle to clamp back on rung for raiseToBar command
     
-    public static final double ELEVATOR_MAX_HEIGHT = 100.0;// 23.5in = length of elevator when fully extended
-    public static final double ELEVATOR_MIN_HEIGHT = -100.0;// 0in = length of elevator when fully retracted
+    public static final double ELEVATOR_MAX_HEIGHT = Units.inchesToMeters(24.0);// 23.5in = length of elevator when fully extended
+    public static final double ELEVATOR_MIN_HEIGHT = Units.inchesToMeters(0.5);// 0in = length of elevator when fully retracted
     // right elevator 0 to -21.5
-
-    public static double ELEVATOR_ALL_THE_WAY_DOWN = Units.inchesToMeters(0.0);
-    public static double ELEVATOR_ALL_THE_WAY_UP = Units.inchesToMeters(18.0);
     
     // Feedforward constants for the each Climber Arm
     public static final double ARM_KS = 0.182; // TODO: This may need to be tuned
@@ -141,13 +138,11 @@ public final class Constants {
     public static double ARM_GRAB_THE_BAR = Units.degreesToRadians(90.0);
     public static double ARM_ROTATION_ELEVATOR_TOUCH_BAR = Units.degreesToRadians(110.0);
 
-
-
     // the height of the elevator to retract down to certain point where the arm can get to the other side of the bar
-    public static double ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE = ELEVATOR_ALL_THE_WAY_DOWN + Units.inchesToMeters(10.0);
-    public static double ARM_ANGLE_FOR_ELEVATOR_CLEARANCE = ARM_GRAB_THE_BAR - Units.degreesToRadians(20.0);
+    public static double ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE = Units.inchesToMeters(8.0);
+    public static double ARM_ANGLE_FOR_ELEVATOR_CLEARANCE = Units.degreesToRadians(70.0);
 
-    public static double ELEVATOR_HEIGHT_SECURE_ON_BAR = Units.inchesToMeters(15.0);
+    public static double ELEVATOR_HEIGHT_SECURE_ON_BAR = Units.inchesToMeters(18.0);
 
     // Feedforward constants for the each Climber Arm
     public static final double ELEVATOR_KS = 0.182; // TODO: This may need to be tuned
@@ -158,11 +153,11 @@ public final class Constants {
 
     // Constants to limit the elevator veocity and accel
 
-    public static final double ELEVATOR_MAX_VEL_METER_PER_SEC_ASCEND = Units.inchesToMeters(10.0);
-    public static final double ELEVATOR_MAX_ACC_METER_PER_SEC_SQ_ASCEND = Units.inchesToMeters(10.0);
+    public static final double ELEVATOR_MAX_VEL_METER_PER_SEC_ASCEND = Units.inchesToMeters(5.0);
+    public static final double ELEVATOR_MAX_ACC_METER_PER_SEC_SQ_ASCEND = Units.inchesToMeters(5.0);
 
-    public static final double ELEVATOR_MAX_VEL_METER_PER_SEC_DESCEND = Units.inchesToMeters(5.0);
-    public static final double ELEVATOR_MAX_ACC_METER_PER_SEC_SQ_DESCEND = Units.inchesToMeters(5.0);
+    public static final double ELEVATOR_MAX_VEL_METER_PER_SEC_DESCEND = Units.inchesToMeters(10.0);
+    public static final double ELEVATOR_MAX_ACC_METER_PER_SEC_SQ_DESCEND = Units.inchesToMeters(10.0);
     public static final double ELEVATOR_OFFSET_METER = 0.0;
 
 

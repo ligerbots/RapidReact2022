@@ -1498,6 +1498,32 @@
               "_source0": "network_table:///SmartDashboard/Message",
               "_title": "Message"
             }
+          },
+          "20,12": {
+            "size": [
+              2,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/elevator0/limitSwitchPressed",
+              "_title": "elevator0/limitSwitchPressed",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "18,13": {
+            "size": [
+              2,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/elevator1/limitSwitchPressed",
+              "_title": "elevator1/limitSwitchPressed",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
           }
         }
       }
@@ -1934,7 +1960,7 @@
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Constants/ELEVATOR_ALL_THE_WAY_UP",
+              "_source0": "network_table:///SmartDashboard/Message",
               "_title": "/SmartDashboard/Constants/ELEVATOR_ALL_THE_WAY_UP"
             }
           },
@@ -2039,6 +2065,17 @@
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Constants/SetElevatorHeightTest",
               "_title": "SmartDashboard/Constants/SetElevatorHeightTest"
+            }
+          },
+          "7,0": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Message",
+              "_title": "/SmartDashboard/Message"
             }
           }
         }

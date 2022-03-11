@@ -56,20 +56,20 @@ public class Robot extends TimedRobot {
 
    
 
-  SmartDashboard.putNumber("Constants/ARM_ANGLE_FOR_ELEVATOR_CLEARANCE", Units.radiansToDegrees(Constants.ARM_ANGLE_FOR_ELEVATOR_CLEARANCE));
-  SmartDashboard.putNumber("Constants/ARM_GRAB_THE_BAR", Units.radiansToDegrees(Constants.ARM_GRAB_THE_BAR));
-  SmartDashboard.putNumber("Constants/ARM_ANGLE_TO_NEXT_BAR", Units.radiansToDegrees(Constants.ARM_ANGLE_TO_NEXT_BAR));
-  SmartDashboard.putNumber("Constants/ELEVATOR_ALL_THE_WAY_UP", Units.metersToInches(Constants.ELEVATOR_ALL_THE_WAY_UP));
-  SmartDashboard.putNumber("Constants/ELEVATOR_ALL_THE_WAY_DOWN", Units.metersToInches(Constants.ELEVATOR_ALL_THE_WAY_DOWN));
-  SmartDashboard.putNumber("Constants/ARM_ROTATION_ELEVATOR_TOUCH_BAR", Units.radiansToDegrees(Constants.ARM_ROTATION_ELEVATOR_TOUCH_BAR));
-  SmartDashboard.putNumber("Constants/ELEVATOR_HEIGHT_SECURE_ON_BAR", Units.metersToInches(Constants.ELEVATOR_HEIGHT_SECURE_ON_BAR));
-  SmartDashboard.putNumber("Constants/ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE", Units.metersToInches(Constants.ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE));
-  SmartDashboard.putNumber("Constants/ARM_TO_THE_LEFT_ANGLE", Units.radiansToDegrees(Constants.ARM_TO_THE_LEFT_ANGLE));
-  SmartDashboard.putNumber("Constants/MID_RUNG", Units.metersToInches(Constants.MID_RUNG));
+  // SmartDashboard.putNumber("Constants/ARM_ANGLE_FOR_ELEVATOR_CLEARANCE", Units.radiansToDegrees(Constants.ARM_ANGLE_FOR_ELEVATOR_CLEARANCE));
+  // SmartDashboard.putNumber("Constants/ARM_GRAB_THE_BAR", Units.radiansToDegrees(Constants.ARM_GRAB_THE_BAR));
+  // SmartDashboard.putNumber("Constants/ARM_ANGLE_TO_NEXT_BAR", Units.radiansToDegrees(Constants.ARM_ANGLE_TO_NEXT_BAR));
+  // SmartDashboard.putNumber("Constants/ELEVATOR_ALL_THE_WAY_UP", Units.metersToInches(Constants.ELEVATOR_ALL_THE_WAY_UP));
+  // SmartDashboard.putNumber("Constants/ELEVATOR_ALL_THE_WAY_DOWN", Units.metersToInches(Constants.ELEVATOR_ALL_THE_WAY_DOWN));
+  // SmartDashboard.putNumber("Constants/ARM_ROTATION_ELEVATOR_TOUCH_BAR", Units.radiansToDegrees(Constants.ARM_ROTATION_ELEVATOR_TOUCH_BAR));
+  // SmartDashboard.putNumber("Constants/ELEVATOR_HEIGHT_SECURE_ON_BAR", Units.metersToInches(Constants.ELEVATOR_HEIGHT_SECURE_ON_BAR));
+  // SmartDashboard.putNumber("Constants/ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE", Units.metersToInches(Constants.ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE));
+  // SmartDashboard.putNumber("Constants/ARM_TO_THE_LEFT_ANGLE", Units.radiansToDegrees(Constants.ARM_TO_THE_LEFT_ANGLE));
+  // SmartDashboard.putNumber("Constants/MID_RUNG", Units.metersToInches(Constants.MID_RUNG));
   
   SmartDashboard.putNumber("Constants/SetElevatorHeightTest", 0.0);
   SmartDashboard.putNumber("Constants/SetArmAngleTest", 80.0);
-  SmartDashboard.putNumber("Constants/RetractElevatorArmCoastModeTest", 12.0);
+  // SmartDashboard.putNumber("Constants/RetractElevatorArmCoastModeTest", 12.0);
 
     SmartDashboard.putData("Chosen Auto", m_chosenAuto);
 
@@ -93,16 +93,16 @@ public class Robot extends TimedRobot {
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
-    Constants.ARM_ANGLE_FOR_ELEVATOR_CLEARANCE = Units.degreesToRadians(SmartDashboard.getNumber("Constants/ARM_ANGLE_FOR_ELEVATOR_CLEARANCE", Constants.ARM_ANGLE_FOR_ELEVATOR_CLEARANCE));
-    Constants.ARM_GRAB_THE_BAR = Units.degreesToRadians(SmartDashboard.getNumber("Constants/ARM_GRAB_THE_BAR", Constants.ARM_GRAB_THE_BAR));
-    Constants.ARM_ANGLE_TO_NEXT_BAR = Units.degreesToRadians(SmartDashboard.getNumber("Constants/ARM_ANGLE_TO_NEXT_BAR", Constants.ARM_ANGLE_TO_NEXT_BAR));
-    Constants.ELEVATOR_ALL_THE_WAY_UP = Units.inchesToMeters(SmartDashboard.getNumber("Constants/ELEVATOR_ALL_THE_WAY_UP", Constants.ELEVATOR_ALL_THE_WAY_UP));
-    Constants.ELEVATOR_ALL_THE_WAY_DOWN = Units.inchesToMeters(SmartDashboard.getNumber("Constants/ELEVATOR_ALL_THE_WAY_DOWN", Constants.ELEVATOR_ALL_THE_WAY_DOWN));
-    Constants.ARM_ROTATION_ELEVATOR_TOUCH_BAR = Units.degreesToRadians(SmartDashboard.getNumber("Constants/ARM_ROTATION_ELEVATOR_TOUCH_BAR", Constants.ARM_ROTATION_ELEVATOR_TOUCH_BAR));
-    Constants.ELEVATOR_HEIGHT_SECURE_ON_BAR = Units.inchesToMeters(SmartDashboard.getNumber("Constants/ELEVATOR_HEIGHT_SECURE_ON_BAR", Constants.ELEVATOR_HEIGHT_SECURE_ON_BAR));
-    Constants.ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE = Units.inchesToMeters(SmartDashboard.getNumber("Constants/ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE", Constants.ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE));
-    Constants.ARM_TO_THE_LEFT_ANGLE = Units.degreesToRadians(SmartDashboard.getNumber("Constants/ARM_TO_THE_LEFT_ANGLE", Constants.ARM_TO_THE_LEFT_ANGLE));
-    Constants.MID_RUNG = Units.inchesToMeters(SmartDashboard.getNumber("Constants/MID_RUNG", Constants.MID_RUNG));
+    // Constants.ARM_ANGLE_FOR_ELEVATOR_CLEARANCE = Units.degreesToRadians(SmartDashboard.getNumber("Constants/ARM_ANGLE_FOR_ELEVATOR_CLEARANCE", Constants.ARM_ANGLE_FOR_ELEVATOR_CLEARANCE));
+    // Constants.ARM_GRAB_THE_BAR = Units.degreesToRadians(SmartDashboard.getNumber("Constants/ARM_GRAB_THE_BAR", Constants.ARM_GRAB_THE_BAR));
+    // Constants.ARM_ANGLE_TO_NEXT_BAR = Units.degreesToRadians(SmartDashboard.getNumber("Constants/ARM_ANGLE_TO_NEXT_BAR", Constants.ARM_ANGLE_TO_NEXT_BAR));
+    // Constants.ELEVATOR_ALL_THE_WAY_UP = Units.inchesToMeters(SmartDashboard.getNumber("Constants/ELEVATOR_ALL_THE_WAY_UP", Constants.ELEVATOR_ALL_THE_WAY_UP));
+    // Constants.ELEVATOR_ALL_THE_WAY_DOWN = Units.inchesToMeters(SmartDashboard.getNumber("Constants/ELEVATOR_ALL_THE_WAY_DOWN", Constants.ELEVATOR_ALL_THE_WAY_DOWN));
+    // Constants.ARM_ROTATION_ELEVATOR_TOUCH_BAR = Units.degreesToRadians(SmartDashboard.getNumber("Constants/ARM_ROTATION_ELEVATOR_TOUCH_BAR", Constants.ARM_ROTATION_ELEVATOR_TOUCH_BAR));
+    // Constants.ELEVATOR_HEIGHT_SECURE_ON_BAR = Units.inchesToMeters(SmartDashboard.getNumber("Constants/ELEVATOR_HEIGHT_SECURE_ON_BAR", Constants.ELEVATOR_HEIGHT_SECURE_ON_BAR));
+    // Constants.ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE = Units.inchesToMeters(SmartDashboard.getNumber("Constants/ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE", Constants.ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE));
+    // Constants.ARM_TO_THE_LEFT_ANGLE = Units.degreesToRadians(SmartDashboard.getNumber("Constants/ARM_TO_THE_LEFT_ANGLE", Constants.ARM_TO_THE_LEFT_ANGLE));
+    // Constants.MID_RUNG = Units.inchesToMeters(SmartDashboard.getNumber("Constants/MID_RUNG", Constants.MID_RUNG));
     // System.out.println("MID_RUNG = " + Constants.MID_RUNG);
   }
 

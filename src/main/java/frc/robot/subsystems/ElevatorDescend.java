@@ -43,7 +43,7 @@ public class ElevatorDescend extends TrapezoidProfileSubsystem {
   private boolean m_resetElevatorPos = false;
   
   /** Creates a new Elevator. */
-  public ElevatorDescend(int index, boolean inverted, Climber climber) {
+  public ElevatorDescend(int index, boolean inverted, Climber climber, CANSparkMax motor) {
 
     super(
       // The constraints for the generated profiles
@@ -56,7 +56,7 @@ public class ElevatorDescend extends TrapezoidProfileSubsystem {
     m_kPElevator = m_index == 0 ? Constants.ELEVATOR_K_P0 : Constants.ELEVATOR_K_P1;
 
     // Create the motor, PID Controller and encoder.
-    m_motor = new CANSparkMax(Constants.ELEVATOR_CAN_IDS[m_index], MotorType.kBrushless);
+    m_motor = motor;
     m_motor.restoreFactoryDefaults();
     m_motor.setInverted(inverted);
 

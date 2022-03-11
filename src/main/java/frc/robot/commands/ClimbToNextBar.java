@@ -20,43 +20,23 @@ public class ClimbToNextBar extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      // // rotate the arm to point elevator towards the next bar
-      // new SetArmAngle(m_climber, Constants.ARM_ANGLE_TO_NEXT_BAR),
-
-      // // extend the elevator
-      // new SetElevatorHeight(m_climber, Constants.ELEVATOR_ALL_THE_WAY_UP),
-
-      // // rotate the robot to make the elevator touch the bar first
-      // new SetArmAngle(m_climber, Constants.ARM_ROTATION_ELEVATOR_TOUCH_BAR),
-
-      // // retract elevator to secure it on the bar
-      // new SetElevatorHeight(m_climber, Constants.ELEVATOR_HEIGHT_SECURE_ON_BAR),
-
-      // // set the arm to coast mode and retract the elevator
-      // new RetractElevatorArmCoastMode(m_climber, Constants.ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE),
-
-      // // rotate the arm to leave the previous bar and get to the side of the next bar
-      // new SetArmAngle(m_climber, Constants.ARM_TO_THE_LEFT_ANGLE),
-
-      // new RaiseToBar(m_climber));
-
       // rotate the arm to point elevator towards the next bar
-      new SetArmAngleTest(m_climber, "Constants/ARM_ANGLE_TO_NEXT_BAR"),
+      new SetArmAngle(m_climber, Constants.ARM_ANGLE_TO_NEXT_BAR),
 
       // extend the elevator
-      new SetElevatorHeightTest(m_climber, "Constants/ELEVATOR_ALL_THE_WAY_UP"),
+      new SetElevatorHeight(m_climber, Constants.ELEVATOR_MAX_HEIGHT),
 
       // rotate the robot to make the elevator touch the bar first
-      new SetArmAngleTest(m_climber, "Constants/ARM_ROTATION_ELEVATOR_TOUCH_BAR"),
+      new SetArmAngle(m_climber, Constants.ARM_ROTATION_ELEVATOR_TOUCH_BAR),
 
       // retract elevator to secure it on the bar
-      new SetElevatorHeightTest(m_climber, "Constants/ELEVATOR_HEIGHT_SECURE_ON_BAR"),
+      new SetElevatorHeight(m_climber, Constants.ELEVATOR_HEIGHT_SECURE_ON_BAR),
 
       // set the arm to coast mode and retract the elevator
-      new RetractElevatorArmCoastModeTest(m_climber, "Constants/ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE"),
+      new RetractElevatorArmCoastMode(m_climber, Constants.ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE),
 
       // rotate the arm to leave the previous bar and get to the side of the next bar
-      new SetArmAngleTest(m_climber, "Constants/ARM_TO_THE_LEFT_ANGLE"),
+      new SetArmAngle(m_climber, Constants.ARM_TO_THE_LEFT_ANGLE),
 
       new RaiseToBar(m_climber));
   }
