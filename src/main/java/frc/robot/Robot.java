@@ -13,7 +13,6 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.AutoCommandInterface;
 import frc.robot.commands.OneBallAuto;
 import frc.robot.commands.RaiseToBar;
-import frc.robot.commands.RetractElevatorArmCoastMode;
 import frc.robot.commands.SetArmAngle;
 import frc.robot.commands.SetClimber;
 import frc.robot.commands.SetElevatorHeight;
@@ -44,17 +43,15 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
 
-    // m_chosenAuto.addOption("OneBallAuto", 
-    //   new OneBallAuto(m_robotContainer.getShooter(), m_robotContainer.getIntake(), m_robotContainer.getDriveTrain(), m_robotContainer.getVision())
-    // );
-    // m_chosenAuto.addOption("TwoBallAutoStraight", 
-    //   new TwoBallAutoStraight(m_robotContainer.getShooter(), m_robotContainer.getIntake(), m_robotContainer.getDriveTrain(), m_robotContainer.getVision())
-    // );
-    // m_chosenAuto.setDefaultOption("TwoBallAutoCurved", 
-    //   new TwoBallAutoCurved(m_robotContainer.getShooter(), m_robotContainer.getIntake(), m_robotContainer.getDriveTrain(), m_robotContainer.getVision())
-    // );
-
-   
+    m_chosenAuto.addOption("OneBallAuto", 
+      new OneBallAuto(m_robotContainer.getShooter(), m_robotContainer.getIntake(), m_robotContainer.getDriveTrain(), m_robotContainer.getVision())
+    );
+    m_chosenAuto.addOption("TwoBallAutoStraight", 
+      new TwoBallAutoStraight(m_robotContainer.getShooter(), m_robotContainer.getIntake(), m_robotContainer.getDriveTrain(), m_robotContainer.getVision())
+    );
+    m_chosenAuto.setDefaultOption("TwoBallAutoCurved", 
+      new TwoBallAutoCurved(m_robotContainer.getShooter(), m_robotContainer.getIntake(), m_robotContainer.getDriveTrain(), m_robotContainer.getVision())
+    );
 
   // SmartDashboard.putNumber("Constants/ARM_ANGLE_FOR_ELEVATOR_CLEARANCE", Units.radiansToDegrees(Constants.ARM_ANGLE_FOR_ELEVATOR_CLEARANCE));
   // SmartDashboard.putNumber("Constants/ARM_GRAB_THE_BAR", Units.radiansToDegrees(Constants.ARM_GRAB_THE_BAR));
@@ -69,7 +66,6 @@ public class Robot extends TimedRobot {
   
   SmartDashboard.putNumber("Constants/SetElevatorHeightTest", 0.0);
   SmartDashboard.putNumber("Constants/SetArmAngleTest", 80.0);
-  // SmartDashboard.putNumber("Constants/RetractElevatorArmCoastModeTest", 12.0);
 
     SmartDashboard.putData("Chosen Auto", m_chosenAuto);
 
@@ -158,7 +154,6 @@ public class Robot extends TimedRobot {
     m_robotContainer.getClimber().setBrakeMode(true);
     
     double elevatorCurPos = m_robotContainer.getClimber().getElevatorHeight()[0];
-    m_robotContainer.getClimber().m_elevatorAscend[1].resetElevatorPos();
     if(m_robotContainer.getClimber().m_elevatorAscend[0].m_elevatorAscending){
       m_robotContainer.getClimber().m_elevatorAscend[0].resetElevatorPos();
       m_robotContainer.getClimber().m_elevatorAscend[1].resetElevatorPos(); 

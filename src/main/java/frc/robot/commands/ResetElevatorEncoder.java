@@ -18,6 +18,21 @@ public class ResetElevatorEncoder extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    // reset the encoder readings, doesn't matter whether its ascend or descend
+    m_climber.m_elevatorAscend[0].getEncoder().setPosition(0.0);
+    m_climber.m_elevatorAscend[1].getEncoder().setPosition(0.0);
+    
+    // reset the goals
+    m_climber.m_elevatorAscend[0].setGoal(0.0);
+    m_climber.m_elevatorAscend[1].setGoal(0.0);
+    m_climber.m_elevatorDescend[0].setGoal(0.0);
+    m_climber.m_elevatorDescend[1].setGoal(0.0);
+
+    // reset the setpoints, done in useState() in the subsystem
+    m_climber.m_elevatorAscend[0].resetElevatorPos();
+    m_climber.m_elevatorAscend[1].resetElevatorPos();
+    m_climber.m_elevatorDescend[0].resetElevatorPos();
+    m_climber.m_elevatorDescend[1].resetElevatorPos();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -26,17 +41,7 @@ public class ResetElevatorEncoder extends CommandBase {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
-    m_climber.m_elevatorAscend[0].getEncoder().setPosition(0.0);
-    m_climber.m_elevatorAscend[1].getEncoder().setPosition(0.0);
-    m_climber.m_elevatorAscend[0].setGoal(0.0);
-    m_climber.m_elevatorAscend[1].setGoal(0.0);
-
-    m_climber.m_elevatorDescend[0].getEncoder().setPosition(0.0);
-    m_climber.m_elevatorDescend[1].getEncoder().setPosition(0.0);
-    m_climber.m_elevatorDescend[0].setGoal(0.0);
-    m_climber.m_elevatorDescend[1].setGoal(0.0);
-  }
+  public void end(boolean interrupted) {}
 
   // Returns true when the command should end.
   @Override

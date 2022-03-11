@@ -17,8 +17,6 @@ import frc.robot.commands.ShooterCommand;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.RaiseToBar;
 import frc.robot.commands.ResetElevatorEncoder;
-import frc.robot.commands.RetractElevatorArmCoastMode;
-import frc.robot.commands.RetractElevatorArmCoastModeTest;
 import frc.robot.commands.SetArmAngleTest;
 import frc.robot.commands.SetArmBrake;
 import frc.robot.commands.SetArmCoast;
@@ -95,9 +93,6 @@ public class RobotContainer {
 
         JoystickButton farm2 = new JoystickButton(m_farm, 2);
         farm2.whenPressed(new SetArmAngleTest(m_climber, "Constants/SetArmAngleTest"));
-
-        JoystickButton farm3 = new JoystickButton(m_farm, 3);
-        farm3.whenPressed(new RetractElevatorArmCoastModeTest(m_climber, "Constants/SetElevatorHeightTest"));
 
         JoystickButton farm6 = new JoystickButton(m_farm, 6);
         farm6.whenPressed(new SetClimber(m_climber));

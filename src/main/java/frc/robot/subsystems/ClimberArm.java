@@ -118,7 +118,6 @@ public class ClimberArm extends TrapezoidProfileSubsystem {
     // TODO: if the "12.0" is volts, should use RobotController.getBatteryVoltage()
     if(m_resetArmPos){
       setPoint.position = m_encoder.getPosition();
-      super.setGoal(m_encoder.getPosition());
       m_resetArmPos = false;
     }
     m_PIDController.setReference(setPoint.position, ControlType.kPosition, 0, feedforward / 12.0);
@@ -159,6 +158,7 @@ public class ClimberArm extends TrapezoidProfileSubsystem {
   }
 
   public void resetArmPos(){
+    super.setGoal(m_encoder.getPosition());
     m_resetArmPos = true;
   }
 }
