@@ -31,9 +31,12 @@ public class Shooter extends SubsystemBase {
     DigitalInput m_limitSwitch1, m_limitSwitch2;
 
     static TreeMap<Double, ShooterSpeeds> shooterSpeeds = new TreeMap<>(Map.ofEntries(//table for upper hub
-            Map.entry(1., new ShooterSpeeds(0.5, 0.5, 0.5)),
-            Map.entry(2., new ShooterSpeeds(0.5, 0.5, 0.5)),
-            Map.entry(3., new ShooterSpeeds(0.5, 0.5, 0.5))
+            Map.entry(92., new ShooterSpeeds(1600.0, 1600.0, 0.3)),
+            Map.entry(163.0, new ShooterSpeeds(1800.0, 2100.0, 0.3)),
+            Map.entry(84.0, new ShooterSpeeds(1600.0, 1600.0, 0.3)),
+            Map.entry(102.0, new ShooterSpeeds(1700.0, 1700.0, 0.3)),
+            Map.entry(71.0, new ShooterSpeeds(1450.0, 1700.0, 0.3)),
+            Map.entry(62.0, new ShooterSpeeds(900.0, 900.0, 0.3))
             ));
    
     
@@ -123,6 +126,6 @@ public class Shooter extends SubsystemBase {
     }
 
     public void setChuteSpeed(double chute) {
-        m_chuteMotor.set(chute);
+        m_chuteMotor.set(-chute);
     }
 }
