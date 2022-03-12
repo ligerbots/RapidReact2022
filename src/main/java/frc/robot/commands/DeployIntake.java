@@ -5,13 +5,12 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
 import frc.robot.subsystems.DriveTrain;
 
 public class DeployIntake extends CommandBase {
   /** Creates a new DeployIntake. */
   DriveTrain m_driveTrain;
-  LigerTimer m_timer = new LigerTimer(Constants.INTAKE_DEPLOY_DELAY);
+  LigerTimer m_timer = new LigerTimer(0.1);
   public DeployIntake(DriveTrain driveTrain) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_driveTrain = driveTrain;
@@ -21,7 +20,7 @@ public class DeployIntake extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_driveTrain.tankDriveVolts(6.0, 6.0);
+    m_driveTrain.tankDriveVolts(2.0, 2.0);
     m_timer.start();
   }
 
