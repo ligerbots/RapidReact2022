@@ -17,7 +17,7 @@ public class ShooterCommand extends CommandBase {
     Vision m_vision;
     boolean m_upperHub;
     double m_distance;
-   
+    boolean m_vacuum;
 
     LigerTimer m_shootDelay = new LigerTimer(Constants.SHOOTER_MOTOR_WAIT_TIME);
     LigerTimer m_intakeDelay = new LigerTimer(Constants.SHOOTER_INTAKE_WAIT_TIME);
@@ -36,11 +36,12 @@ public class ShooterCommand extends CommandBase {
 
     State m_state;
 
-    public ShooterCommand(Shooter shooter, Intake intake, Vision vision, boolean upperHub) {
+    public ShooterCommand(Shooter shooter, Intake intake, Vision vision, boolean upperHub, boolean vacuum) {
         m_shooter = shooter;
         m_intake = intake;
         m_vision = vision;
         m_upperHub = upperHub;
+        m_vacuum = vacuum;
     }
 
     public ShooterCommand(Shooter shooter, Intake intake, double distance, boolean upperHub) {
@@ -55,9 +56,11 @@ public class ShooterCommand extends CommandBase {
     public void initialize() {
         m_visionTime.start();
 
-        
-        m_state = State.FINDING_VISION_TARGET;
-        
+        if(m_upperHub == false || m_distance>0.0 || m_vacuum == true){//if lowerhub or if distance pre-defined or if vacuum, skip vision
+            m_state = State.SPEED_UP_SHOOTER;
+        }else{
+            m_state = State.FINDING_VISION_TARGET;
+        }
         // TODO: do we want to turn on shooter to some moderate speed? Need to see if it affects the camera
     }
 
@@ -81,7 +84,7 @@ public class ShooterCommand extends CommandBase {
                 // allows fall through to the next state if found the target
 
             case SPEED_UP_SHOOTER:
-                m_shooterSpeeds = Shooter.calculateShooterSpeeds(m_distance, m_upperHub);
+                m_shooterSpeeds = Shooter.calculateShooterSpeeds(m_distance, m_upperHub, m_vacuum);
                 // turn on the two motors on the shooter, let the chute and intake wait for the
                 // shots
                 m_shooter.setShooterRpms(m_shooterSpeeds.top, m_shooterSpeeds.bottom);
@@ -130,7 +133,9 @@ public class ShooterCommand extends CommandBase {
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        
+        if(m_vacuum == true){//if in vacuum state, cannot end
+            return false;
+        }
         return m_state == State.WAIT_FOR_SHOOT_BALL2 && m_shootBall2Time.hasElapsed();
         
     }
