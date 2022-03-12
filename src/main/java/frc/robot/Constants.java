@@ -98,12 +98,12 @@ public final class Constants {
     
     
     public static final double ELEVATOR_HEIGHT_TOLERANCE = Units.inchesToMeters(0.5);//tolerance for elevator
-    public static final double ARM_ANGLE_TOLERANCE = Units.degreesToRadians(0.5);
+    public static final double ARM_ANGLE_TOLERANCE = Units.degreesToRadians(1.0);
 
     public static final double RUNG_ANGLE = Units.degreesToRadians(-22.0);//angle to clamp back on rung for raiseToBar command
     
     public static final double ELEVATOR_MAX_HEIGHT = Units.inchesToMeters(24.0);// 23.5in = length of elevator when fully extended
-    public static final double ELEVATOR_MIN_HEIGHT = Units.inchesToMeters(0.5);// 0in = length of elevator when fully retracted
+    public static final double ELEVATOR_MIN_HEIGHT = Units.inchesToMeters(0.0);// 0in = length of elevator when fully retracted
     // right elevator 0 to -21.5
     
     // Feedforward constants for the each Climber Arm
@@ -114,8 +114,8 @@ public final class Constants {
     public static final double ARM_KA = 0.08;
 
     // Constants to limit the arm rotation speed
-    public static final double ARM_MAX_VEL_RAD_PER_SEC = Math.toRadians(20.0);
-    public static final double ARM_MAX_ACC_RAD_PER_SEC_SQ = Math.toRadians(5);
+    public static final double ARM_MAX_VEL_RAD_PER_SEC = Math.toRadians(80.0);
+    public static final double ARM_MAX_ACC_RAD_PER_SEC_SQ = Math.toRadians(40);
     public static final double ARM_OFFSET_RAD = Math.toRadians(80.0);
 
     // PID Constants for the Arm PID controller
@@ -131,15 +131,15 @@ public final class Constants {
     public static final double ARM_MIN_ANGLE = Units.degreesToRadians(20.0);
 
     // the angle for the arm to rotate to turn the elevator towards the next bar
-    public static double ARM_ANGLE_TO_NEXT_BAR = Units.degreesToRadians(120.0);
+    public static double ARM_ANGLE_TO_NEXT_BAR = Units.degreesToRadians(130.0);
 
     // the angle for the arm to rotate to the left side of the next bar
-    public static double ARM_TO_THE_LEFT_ANGLE = Units.degreesToRadians(120.0);
+    public static double ARM_TO_THE_LEFT_ANGLE = Units.degreesToRadians(70.0);
     public static double ARM_GRAB_THE_BAR = Units.degreesToRadians(90.0);
     public static double ARM_ROTATION_ELEVATOR_TOUCH_BAR = Units.degreesToRadians(110.0);
 
     // the height of the elevator to retract down to certain point where the arm can get to the other side of the bar
-    public static double ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE = Units.inchesToMeters(8.0);
+    public static double ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE = Units.inchesToMeters(4.0);
     public static double ARM_ANGLE_FOR_ELEVATOR_CLEARANCE = Units.degreesToRadians(70.0);
 
     public static double ELEVATOR_HEIGHT_SECURE_ON_BAR = Units.inchesToMeters(18.0);
@@ -153,11 +153,11 @@ public final class Constants {
 
     // Constants to limit the elevator veocity and accel
 
-    public static final double ELEVATOR_MAX_VEL_METER_PER_SEC_ASCEND = Units.inchesToMeters(5.0);
-    public static final double ELEVATOR_MAX_ACC_METER_PER_SEC_SQ_ASCEND = Units.inchesToMeters(5.0);
+    public static final double ELEVATOR_MAX_VEL_METER_PER_SEC_ASCEND = Units.inchesToMeters(15.0);
+    public static final double ELEVATOR_MAX_ACC_METER_PER_SEC_SQ_ASCEND = Units.inchesToMeters(7.5);
 
-    public static final double ELEVATOR_MAX_VEL_METER_PER_SEC_DESCEND = Units.inchesToMeters(10.0);
-    public static final double ELEVATOR_MAX_ACC_METER_PER_SEC_SQ_DESCEND = Units.inchesToMeters(10.0);
+    public static final double ELEVATOR_MAX_VEL_METER_PER_SEC_DESCEND = Units.inchesToMeters(50.0);
+    public static final double ELEVATOR_MAX_ACC_METER_PER_SEC_SQ_DESCEND = Units.inchesToMeters(25.0);
     public static final double ELEVATOR_OFFSET_METER = 0.0;
 
 

@@ -16,12 +16,12 @@ public class SetElevatorHeight extends CommandBase {
     // Use addRequirements() here to declare subsystem dependencies.
     m_climber = climber;
     m_height = height;
-    addRequirements(climber);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    m_climber.m_elevatorTesting = false;
     m_climber.setElevatorHeight(m_height);
   }
 

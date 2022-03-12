@@ -25,6 +25,8 @@ public class Climber extends SubsystemBase {
   private double m_armGoal = 0.0;
   private double m_elevatorGoal = 0.0;
 
+  public boolean m_elevatorTesting;
+
   // Smart Motion Coefficients for Arm
   double m_armMaxVel = 2000; // rpm
   double m_armMinVel = 0;
@@ -44,7 +46,6 @@ public class Climber extends SubsystemBase {
   CANSparkMax[] m_elevatorMotor;
 
   public Climber() {
-    
     // Construct the arm trapezoid subsystems
     m_arm[0] = new ClimberArm(0, false);
     m_arm[1] = new ClimberArm(1, true);
@@ -55,6 +56,7 @@ public class Climber extends SubsystemBase {
     m_elevatorDescend[0] = new ElevatorDescend(0, false, this, m_elevatorMotor[0]);
     m_elevatorDescend[1] = new ElevatorDescend(1, true, this, m_elevatorMotor[1]);
 
+    m_elevatorTesting = false;
     SmartDashboard.putNumber("arm/goal", m_armGoal);
     SmartDashboard.putNumber("elevator/goal", m_elevatorGoal);
   }
@@ -103,7 +105,6 @@ public class Climber extends SubsystemBase {
   public void setArmAngle(double degree) {
       m_arm[0].setGoal(degree);
       m_arm[1].setGoal(degree);
-
   }
 
   // returns the currrent height of the elevator

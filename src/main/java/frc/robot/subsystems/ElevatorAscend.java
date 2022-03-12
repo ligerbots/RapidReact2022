@@ -78,22 +78,25 @@ public class ElevatorAscend extends TrapezoidProfileSubsystem {
     SmartDashboard.putNumber("elevator" + m_index + "/Output" + m_index, m_motor.getAppliedOutput());
     SmartDashboard.putNumber("elevator" + m_index + "/Encoder" + m_index, Units.metersToInches(encoderValue));
 
-    // First check if we've gone too far. If we have, reset the setPoint to the limit.
-    m_tooHigh = encoderValue > Constants.ELEVATOR_MAX_HEIGHT;
-    SmartDashboard.putBoolean("elevator" + m_index + "/too High", m_tooHigh);
-    if (m_tooHigh) {
-      m_PIDController.setReference(Constants.ELEVATOR_MAX_HEIGHT, ControlType.kPosition, 0, 0.0);
-      return;
-    }
+	// if (!m_climber.m_elevatorTesting) {
+	// 	// First check if we've gone too far. If we have, reset the setPoint to the
+	// 	// limit.
+	// 	m_tooHigh = encoderValue > Constants.ELEVATOR_MAX_HEIGHT;
+	// 	SmartDashboard.putBoolean("elevator" + m_index + "/too High", m_tooHigh);
+	// 	if (m_tooHigh) {
+	// 		m_PIDController.setReference(Constants.ELEVATOR_MAX_HEIGHT, ControlType.kPosition, 0, 0.0);
+	// 		return;
+	// 	}
 
-    m_tooLow = encoderValue < Constants.ELEVATOR_MIN_HEIGHT;
-    SmartDashboard.putBoolean("elevator" + m_index + "/too Low", m_tooLow);
-    if (m_tooLow) {
-      m_PIDController.setReference(Constants.ELEVATOR_MIN_HEIGHT, ControlType.kPosition, 0, 0.0);
-      return;
-    }
-    
-    // Execute the super class periodic method
+	// 	m_tooLow = encoderValue < Constants.ELEVATOR_MIN_HEIGHT;
+	// 	SmartDashboard.putBoolean("elevator" + m_index + "/too Low", m_tooLow);
+	// 	if (m_tooLow) {
+	// 		m_PIDController.setReference(Constants.ELEVATOR_MIN_HEIGHT, ControlType.kPosition, 0, 0.0);
+	// 		return;
+	// 	}
+	// }
+
+	// Execute the super class periodic method
     super.periodic();
 
     SmartDashboard.putNumber("elevator" + m_index + "/current", m_motor.getOutputCurrent());

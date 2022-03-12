@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj2.command.CommandGroupBase;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
 import frc.robot.subsystems.Climber;
@@ -20,11 +21,11 @@ public class ClimbToNextBar extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      // rotate the arm to point elevator towards the next bar
-      new SetArmAngle(m_climber, Constants.ARM_ANGLE_TO_NEXT_BAR),
+      // rotate the arm to point elevator towards the next bar and extend the elevator
+      new SetArmAngle(m_climber, Constants.ARM_ANGLE_TO_NEXT_BAR).alongWith(new SetElevatorHeight(m_climber, Constants.ELEVATOR_MAX_HEIGHT)),
 
-      // extend the elevator
-      new SetElevatorHeight(m_climber, Constants.ELEVATOR_MAX_HEIGHT),
+      // clear the command
+      // CommandGroupBase.clearGroupedCommand(Command),
 
       // rotate the robot to make the elevator touch the bar first
       new SetArmAngle(m_climber, Constants.ARM_ROTATION_ELEVATOR_TOUCH_BAR),
@@ -36,13 +37,13 @@ public class ClimbToNextBar extends SequentialCommandGroup {
       new SetArmCoast(m_climber),
 
       // retract the elevator
-      new SetElevatorHeight(m_climber, Constants.ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE),
+      new SetElevatorHeight(m_climber, Constants.ELEVATOR_MIN_HEIGHT), // was Constants.ELEVATOR_FOR_ARM_CLEARANCE
 
       // set the arm to brake mode
       new SetArmBrake(m_climber),
 
       // rotate the arm to leave the previous bar and get to the side of the next bar
-      new SetArmAngle(m_climber, Constants.ARM_TO_THE_LEFT_ANGLE),
+      new SetArmAngle(m_climber, Constants.ARM_TO_THE_LEFT_ANGLE).alongWith(new SetElevatorHeight(m_climber, Constants.ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE)),
 
       // execute RaiseToBar to prepare for the next round of climbing
       new RaiseToBar(m_climber));

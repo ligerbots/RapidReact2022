@@ -16,7 +16,6 @@ public class SetArmAngle extends CommandBase {
     // Use addRequirements() here to declare subsystem dependencies.
     m_climber = climber;
     m_angle = angle;
-    addRequirements(m_climber);
   }
 
   // Called when the command is initially scheduled.
