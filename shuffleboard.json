@@ -1524,6 +1524,116 @@
               "Colors/Color when true": "#7CFC00FF",
               "Colors/Color when false": "#8B0000FF"
             }
+          },
+          "0,14": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/climber/gyro",
+              "_title": "climber/gyro"
+            }
+          },
+          "2,14": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/climber/gyro_pitch",
+              "_title": "climber/gyro_pitch"
+            }
+          },
+          "4,14": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/climber/gyro_roll",
+              "_title": "climber/gyro_roll"
+            }
+          },
+          "6,14": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/gyroTesting",
+              "_title": "gyroTesting"
+            }
+          },
+          "8,14": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/arm0/AbsoluteEncoder0",
+              "_title": "arm0/AbsoluteEncoder0"
+            }
+          },
+          "10,14": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/arm1/AbsoluteEncoder1",
+              "_title": "arm1/AbsoluteEncoder1"
+            }
+          },
+          "12,14": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/arm0/AbsoluteEncoderRaw0",
+              "_title": "arm0/AbsoluteEncoderRaw0"
+            }
+          },
+          "14,14": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/arm1/AbsoluteEncoderRaw1",
+              "_title": "arm1/AbsoluteEncoderRaw1"
+            }
+          },
+          "16,14": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/arm0/AbsoluteEncoderOffSet0",
+              "_title": "arm0/AbsoluteEncoderOffSet0"
+            }
+          },
+          "20,14": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/arm1/AbsoluteEncoderOffSet1",
+              "_title": "arm1/AbsoluteEncoderOffSet1"
+            }
           }
         }
       }
@@ -1913,7 +2023,7 @@
               "_title": "/SmartDashboard/elevator/goal"
             }
           },
-          "8,3": {
+          "7,4": {
             "size": [
               1,
               1
@@ -1981,6 +2091,120 @@
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Message",
               "_title": "/SmartDashboard/Message"
+            }
+          },
+          "3,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/climber/gyro_pitch",
+              "_title": "SmartDashboard/climber/gyro_pitch"
+            }
+          },
+          "4,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/climber/gyro_roll",
+              "_title": "SmartDashboard/climber/gyro_roll"
+            }
+          },
+          "3,2": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/arm0/AbsoluteEncoder0",
+              "_title": "/SmartDashboard/arm0/AbsoluteEncoder0"
+            }
+          },
+          "4,2": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/arm1/AbsoluteEncoder1",
+              "_title": "/SmartDashboard/arm1/AbsoluteEncoder1"
+            }
+          },
+          "3,3": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/arm0/AbsoluteEncoderRaw0",
+              "_title": "/SmartDashboard/arm0/AbsoluteEncoderRaw0"
+            }
+          },
+          "4,3": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/arm1/AbsoluteEncoderRaw1",
+              "_title": "/SmartDashboard/arm1/AbsoluteEncoderRaw1"
+            }
+          },
+          "3,4": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/arm0/AbsoluteEncoderOffSet0",
+              "_title": "/SmartDashboard/arm0/AbsoluteEncoderOffSet0"
+            }
+          },
+          "4,4": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/arm1/AbsoluteEncoderOffSet1",
+              "_title": "/SmartDashboard/arm1/AbsoluteEncoderOffSet1"
+            }
+          },
+          "7,2": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/elevator0/limitSwitchPressed",
+              "_title": "/SmartDashboard/elevator0/limitSwitchPressed",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "8,2": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/elevator1/limitSwitchPressed",
+              "_title": "/SmartDashboard/elevator1/limitSwitchPressed",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
             }
           }
         }

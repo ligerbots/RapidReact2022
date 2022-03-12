@@ -4,10 +4,12 @@
 
 package frc.robot.subsystems;
 
+import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.math.util.Units;
+import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -45,10 +47,23 @@ public class Climber extends SubsystemBase {
 
   CANSparkMax[] m_elevatorMotor;
 
-  public Climber() {
+  private AHRS m_navX;
+
+  private DutyCycleEncoder[] m_absoluteEncoder;
+  
+  public Climber(AHRS navX) {
+    m_navX = navX;
+    m_absoluteEncoder = new DutyCycleEncoder[2];
     // Construct the arm trapezoid subsystems
-    m_arm[0] = new ClimberArm(0, false);
-    m_arm[1] = new ClimberArm(1, true);
+
+    m_absoluteEncoder[0] = new DutyCycleEncoder(4);
+    m_absoluteEncoder[0].setPositionOffset(0.79);
+    m_arm[0] = new ClimberArm(0, false, m_absoluteEncoder[0]);
+
+    m_absoluteEncoder[1] = new DutyCycleEncoder(5);
+    m_absoluteEncoder[1].setPositionOffset(0.038);
+    m_arm[1] = new ClimberArm(1, true, m_absoluteEncoder[1]);
+
     m_elevatorMotor = new CANSparkMax[] {new CANSparkMax(Constants.ELEVATOR_CAN_IDS[0], MotorType.kBrushless), new CANSparkMax(Constants.ELEVATOR_CAN_IDS[1], MotorType.kBrushless)};
     
     m_elevatorAscend[0] = new ElevatorAscend(0, false, this, m_elevatorMotor[0]);
@@ -62,6 +77,8 @@ public class Climber extends SubsystemBase {
   }
 
   public void periodic() {
+    SmartDashboard.putNumber("climber/gyro_pitch", m_navX.getPitch());
+    SmartDashboard.putNumber("climber/gyro_roll", m_navX.getRoll());
     // All of the control should be done in the Trapeziodal subsystems
     // Check to see if the requested position has changed and then pass it to the Arm subsystems if needed
     // double goal = SmartDashboard.getNumber("arm/goal", Math.toDegrees(Constants.ARM_OFFSET_RAD));
@@ -115,6 +132,10 @@ public class Climber extends SubsystemBase {
   // returns the current angle of the arm
   public double[] getArmAngle() {
     return new double[] {m_arm[0].getEncoder().getPosition(), m_arm[1].getEncoder().getPosition()};
+  }
+
+  public double[] getAbsoluteEncoderArmAngle(){
+    return new double[] {m_arm[0].getAbsoluteEncoder().getAbsolutePosition(), m_arm[1].getAbsoluteEncoder().getAbsolutePosition()};
   }
 
   // Set idle mode of all motors

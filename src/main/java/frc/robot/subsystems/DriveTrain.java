@@ -48,7 +48,8 @@ public class DriveTrain extends SubsystemBase {
 
     private AHRS m_navX;
 
-    public DriveTrain() {
+    public DriveTrain(AHRS navX) {
+        m_navX = navX;
 
         m_rightMotors.setInverted(true);
         m_differentialDrive = new DifferentialDrive(m_leftMotors, m_rightMotors);
@@ -58,7 +59,6 @@ public class DriveTrain extends SubsystemBase {
         m_rightEncoder.setDistancePerPulse(Constants.ENCODER_DISTANCE_PER_PULSE);
 
         m_odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(0));
-        m_navX = new AHRS(Port.kMXP, (byte) 200);
 
         if (RobotBase.isSimulation()) {
 

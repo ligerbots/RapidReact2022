@@ -63,8 +63,6 @@ public final class Constants {
     // drivetrain encoders
     public static final int[] LEFT_ENCODER_PORTS = new int[]{0, 1};
     public static final int[] RIGHT_ENCODER_PORTS = new int[]{2, 3};
-    public static final int LIMIT_SWITCH_ONE = 4; // Limit Switch 1
-    public static final int LIMIT_SWITCH_TWO = 5; // Limit Switch 2
 
     // Following two CAN IDs are for the shooter subsystem
     public static final int TOP_SHOOTER_CAN_ID = 3; 
@@ -116,7 +114,11 @@ public final class Constants {
     // Constants to limit the arm rotation speed
     public static final double ARM_MAX_VEL_RAD_PER_SEC = Math.toRadians(80.0);
     public static final double ARM_MAX_ACC_RAD_PER_SEC_SQ = Math.toRadians(40);
-    public static final double ARM_OFFSET_RAD = Math.toRadians(80.0);
+    public static final double ARM_OFFSET_RAD = Math.toRadians(70.0);
+
+    public static final double ARM_INITIAL_POS = Math.toRadians(70.0);
+
+    public static double ARM_1_ABSOLUTE_ENCODER_OFFSET = 0.2;
 
     // PID Constants for the Arm PID controller
     // Since we're using Trapeziodal control, all values will be 0 except for P

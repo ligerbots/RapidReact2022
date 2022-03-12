@@ -46,9 +46,6 @@ public class Shooter extends SubsystemBase {
         m_topShooterMotor = new WPI_TalonFX(Constants.TOP_SHOOTER_CAN_ID);
         m_bottomShooterMotor = new WPI_TalonFX(Constants.BOTTOM_SHOOTER_CAN_ID);
 
-        m_limitSwitch1 = new DigitalInput(Constants.LIMIT_SWITCH_ONE);
-        m_limitSwitch2 = new DigitalInput(Constants.LIMIT_SWITCH_TWO);
-
         // Config the Velocity closed loop gains in slot0
         m_topShooterMotor.config_kP(0, Constants.SHOOTER_KP);
         m_topShooterMotor.config_kI(0, Constants.SHOOTER_KI);

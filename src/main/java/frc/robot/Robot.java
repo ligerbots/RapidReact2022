@@ -168,6 +168,8 @@ public class Robot extends TimedRobot {
      
     m_robotContainer.getClimber().m_arm[0].resetArmPos();
     m_robotContainer.getClimber().m_arm[1].resetArmPos();  
+
+    // m_robotContainer.getClimber().setArmAngle(Constants.ARM_INITIAL_POS);
   }
 
 

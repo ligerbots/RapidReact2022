@@ -102,12 +102,12 @@ public class ElevatorDescend extends TrapezoidProfileSubsystem {
     //   }
     // }
 
-    SmartDashboard.putBoolean("elevator" + m_index + "/limitSwitchPressed", m_limitSwitch.isPressed());
-    if (m_limitSwitch.isPressed()) {
-      m_resetElevatorPos = true;
-      m_encoder.setPosition(0.0);
-      super.setGoal(0.0);
-    }
+    // SmartDashboard.putBoolean("elevator" + m_index + "/limitSwitchPressed", m_limitSwitch.isPressed());
+    // if (m_limitSwitch.isPressed()) {
+    //   m_resetElevatorPos = true;
+    //   m_encoder.setPosition(0.0);
+    //   super.setGoal(0.0);
+    // }
     
     // Execute the super class periodic method
     super.periodic();

@@ -13,6 +13,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.math.controller.ArmFeedforward;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.math.util.Units;
+import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.TrapezoidProfileSubsystem;
 import frc.robot.Constants;
@@ -23,6 +24,8 @@ public class ClimberArm extends TrapezoidProfileSubsystem {
   private final CANSparkMax m_motor;
   private final RelativeEncoder m_encoder;
   private final SparkMaxPIDController m_PIDController;
+
+  private final DutyCycleEncoder m_absoluteEncoder;
 
   private final ArmFeedforward m_Feedforward = 
     new ArmFeedforward(Constants.ARM_KS, Constants.ARM_KG, Constants.ARM_KV, Constants.ARM_KA);
@@ -38,7 +41,7 @@ public class ClimberArm extends TrapezoidProfileSubsystem {
   private boolean m_resetArmPos = false;
   
   /** Creates a new ClimberArm. */
-  public ClimberArm(int index, boolean inverted) {
+  public ClimberArm(int index, boolean inverted, DutyCycleEncoder absoluteEncoder) {
 
     super(
       // The constraints for the generated profiles
@@ -59,6 +62,7 @@ public class ClimberArm extends TrapezoidProfileSubsystem {
     m_PIDController.setD(Constants.ARM_K_D);
     m_PIDController.setFF(Constants.ARM_K_FF);
 
+    m_absoluteEncoder = absoluteEncoder;
     m_encoder = m_motor.getEncoder();
     // Set the position conversion factor. Note that the Trapezoidal control
     // expects angles in radians.
@@ -70,7 +74,9 @@ public class ClimberArm extends TrapezoidProfileSubsystem {
   @Override
   public void periodic() {
     double encoderValue = m_encoder.getPosition();
-    
+    SmartDashboard.putNumber("arm" + m_index + "/AbsoluteEncoder" + m_index, Math.abs((1-m_index) + m_absoluteEncoder.get()) * (16.0 / 60.0)*360.0 + 70.0); 
+    SmartDashboard.putNumber("arm" + m_index + "/AbsoluteEncoderRaw" + m_index, (1-m_index) + m_absoluteEncoder.get());  
+    SmartDashboard.putNumber("arm" + m_index + "/AbsoluteEncoderOffSet" + m_index, m_absoluteEncoder.getPositionOffset());
     // Display current values on the SmartDashboard
     SmartDashboard.putNumber("arm" + m_index + "/Output" + m_index, m_motor.getAppliedOutput());
     SmartDashboard.putNumber("arm" + m_index + "/Encoder" + m_index, Units.radiansToDegrees(encoderValue));
@@ -142,6 +148,10 @@ public class ClimberArm extends TrapezoidProfileSubsystem {
 
   public RelativeEncoder getEncoder() {
     return m_encoder;
+  }
+
+  public DutyCycleEncoder getAbsoluteEncoder(){
+    return m_absoluteEncoder;
   }
 
   public void idleMotor(){

@@ -6,9 +6,13 @@ package frc.robot;
 
 import java.util.function.DoubleSupplier;
 
+import com.kauailabs.navx.frc.AHRS;
+
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.I2C.Port;
+import edu.wpi.first.wpilibj.interfaces.Gyro;
 //import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ClimbToNextBar;
@@ -44,15 +48,15 @@ public class RobotContainer {
     XboxController m_xbox = new XboxController(0);
     Joystick m_farm = new Joystick(1);
 
+    private final AHRS m_navX = new AHRS(Port.kMXP, (byte) 200);
     // The robot's subsystems and commands are defined here...
-    private final DriveTrain m_driveTrain = new DriveTrain();
+    private final DriveTrain m_driveTrain = new DriveTrain(m_navX);
     private final Vision m_vision = new Vision(m_driveTrain);
-    private final Climber m_climber = new Climber();
+    private final Climber m_climber = new Climber(m_navX);
     private final Shooter m_shooter = new Shooter();
     private final Intake m_intake = new Intake();
     
     private final DriveCommand m_driveCommand = new DriveCommand(m_driveTrain, new Throttle(), new Turn());
-
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
      */
