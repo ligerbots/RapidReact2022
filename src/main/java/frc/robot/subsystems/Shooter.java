@@ -26,19 +26,21 @@ public class Shooter extends SubsystemBase {
     CANSparkMax m_chuteMotor;
     // WPI_TalonFX for the shooter
     WPI_TalonFX m_topShooterMotor, m_bottomShooterMotor;
+
     // Limit Switch for Intake
     // TODO: change to color sensor
-    DigitalInput m_limitSwitch1, m_limitSwitch2;
+    // DigitalInput m_limitSwitch1, m_limitSwitch2;
 
-    static TreeMap<Double, ShooterSpeeds> shooterSpeeds = new TreeMap<>(Map.ofEntries(//table for upper hub
-            Map.entry(92., new ShooterSpeeds(1600.0, 1600.0, 0.3)),
-            Map.entry(163.0, new ShooterSpeeds(1800.0, 2100.0, 0.3)),
-            Map.entry(84.0, new ShooterSpeeds(1600.0, 1600.0, 0.3)),
-            Map.entry(102.0, new ShooterSpeeds(1700.0, 1700.0, 0.3)),
+    // lookup table for upper hub speeds
+    static TreeMap<Double, ShooterSpeeds> shooterSpeeds = new TreeMap<>(Map.ofEntries(
+            Map.entry(0.0, new ShooterSpeeds(900.0, 900.0, 0.3)),    // actually lower hub, but safer to include
+            Map.entry(62.0, new ShooterSpeeds(900.0, 900.0, 0.3)),   // actually lower hub, but safer to include
             Map.entry(71.0, new ShooterSpeeds(1450.0, 1700.0, 0.3)),
-            Map.entry(62.0, new ShooterSpeeds(900.0, 900.0, 0.3))
-            ));
-   
+            Map.entry(84.0, new ShooterSpeeds(1600.0, 1600.0, 0.3)),
+            Map.entry(92.0, new ShooterSpeeds(1600.0, 1600.0, 0.3)),
+            Map.entry(102.0, new ShooterSpeeds(1700.0, 1700.0, 0.3)),
+            Map.entry(163.0, new ShooterSpeeds(1800.0, 2100.0, 0.3))));
+
     // values for lowerHub
     static ShooterSpeeds lowHubSpeeds = new ShooterSpeeds(900.0, 900.0, 0.3);
 
@@ -51,8 +53,8 @@ public class Shooter extends SubsystemBase {
         m_topShooterMotor = new WPI_TalonFX(Constants.TOP_SHOOTER_CAN_ID);
         m_bottomShooterMotor = new WPI_TalonFX(Constants.BOTTOM_SHOOTER_CAN_ID);
 
-        m_limitSwitch1 = new DigitalInput(Constants.LIMIT_SWITCH_ONE);
-        m_limitSwitch2 = new DigitalInput(Constants.LIMIT_SWITCH_TWO);
+        // m_limitSwitch1 = new DigitalInput(Constants.LIMIT_SWITCH_ONE);
+        // m_limitSwitch2 = new DigitalInput(Constants.LIMIT_SWITCH_TWO);
 
         // Config the Velocity closed loop gains in slot0
         m_topShooterMotor.config_kP(0, Constants.SHOOTER_KP);
