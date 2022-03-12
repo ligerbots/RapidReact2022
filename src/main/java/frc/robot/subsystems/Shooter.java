@@ -39,7 +39,9 @@ public class Shooter extends SubsystemBase {
             Map.entry(62.0, new ShooterSpeeds(900.0, 900.0, 0.3))
             ));
    
-    
+    // values for lowerHub
+    static ShooterSpeeds lowHubSpeeds = new ShooterSpeeds(900.0, 900.0, 0.3);
+
 
     // Shooter class constructor, initialize arrays for motors controllers,
     // encoders, and SmartDashboard data
@@ -71,8 +73,6 @@ public class Shooter extends SubsystemBase {
             this.top = top;
             this.bottom = bottom;
             this.chute = chute;
-            
-
         }
 
         public ShooterSpeeds interpolate(ShooterSpeeds other, double ratio) {
@@ -83,19 +83,21 @@ public class Shooter extends SubsystemBase {
         }
     }
 
-
     public static ShooterSpeeds calculateShooterSpeeds(double distance, boolean upperHub) {
-        if(upperHub == false){//if shooting to lowerHub, then return shooterSpeed with values for lowerHub
-            return new ShooterSpeeds(0, 0, 0);//values for lowerHub, change later
+        if (upperHub == false) {
+            // if shooting to lowerHub, then return shooterSpeed with values for lowerHub
+            return lowHubSpeeds;
         }
+
         Map.Entry<Double, ShooterSpeeds> before = shooterSpeeds.floorEntry(distance);
         Map.Entry<Double, ShooterSpeeds> after = shooterSpeeds.ceilingEntry(distance);
         if (before == null && after == null)
-            return new ShooterSpeeds(0, 0, 0); // this should never happen b/c shooterSpeeds should have at least 1 element
+            return lowHubSpeeds; // this should never happen b/c shooterSpeeds should have at least 1 element
         if (before == null)
             return after.getValue();
         if (after == null)
             return before.getValue();
+            
         double ratio = (distance - before.getKey()) / (after.getKey() - before.getKey());
         return before.getValue().interpolate(after.getValue(), ratio);
     }

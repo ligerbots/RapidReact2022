@@ -63,13 +63,18 @@ public class RobotContainer {
         JoystickButton xboxAButton = new JoystickButton(m_xbox, Constants.XBOX_A);
         xboxAButton.whileHeld(new TuneShooterCommand(m_shooter, m_intake));
 
-        // actual shooter command
+        // actual shooter commands
+
+        // shooting for upperHub
         JoystickButton xboxXButton = new JoystickButton(m_xbox, Constants.XBOX_X);
-        xboxXButton.whenPressed(new ShooterCommand(m_shooter, m_intake, m_vision, true));//shooting for upperHub
+        xboxXButton.whenPressed(new ShooterCommand(m_shooter, m_intake, m_vision, true));
 
+        // shooting for lowerHub
         JoystickButton xboxYButton = new JoystickButton(m_xbox, Constants.XBOX_Y);
-        xboxYButton.whenPressed(new ShooterCommand(m_shooter, m_intake, m_vision, false));//shooting for lowerHub
+        xboxYButton.whenPressed(new ShooterCommand(m_shooter, m_intake, m_vision, false));
 
+        // Intake commands
+        
         JoystickButton bumperRight = new JoystickButton(m_xbox, Constants.XBOX_RB);
         bumperRight.whileHeld(new IntakeCommand(m_intake, Constants.INTAKE_SPEED));
     
