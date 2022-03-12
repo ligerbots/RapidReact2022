@@ -65,38 +65,7 @@ public class ShooterCommandVacuum extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        if (m_shootDelay.hasElapsed()) {
-            double chute = SmartDashboard.getNumber("shooter/Chute Speed", 0);
-            m_shooter.setChuteSpeed(chute);
-        }
-
-        if (m_intakeDelay.hasElapsed()) {
-            m_intake.run(Constants.INTAKE_SHOOTING_SPEED);
-        }
-
-        while (RobotContainer.bumperRight == true) { //command runs while controller button is held
-            
-            m_distance = m_vision.getDistance();
-
-            m_shooterSpeeds = Shooter.calculateShooterSpeeds(m_distance, false);
-            // turn on the two motors on the shooter, let the chute and intake wait for the
-            // shots
-            m_shooter.setShooterRpms(m_shooterSpeeds.top, m_shooterSpeeds.bottom);
-            m_shootDelay.start();
-            // able to go straight to the next state since this only needs to be called once
-            // and can start checking directly
-
-            // turn on the chute once the shooter is ready
-            m_shooter.setChuteSpeed(m_shooterSpeeds.chute);
-
-            m_shootBall1Time.start();
-            // same logics, able to go to the next state directly
-
-            m_intake.run(Constants.INTAKE_SHOOTING_SPEED);
-            m_shootBall2Time.start();
-
-        }
-
+        
     }
 
     // Called once the command ends or is interrupted.
