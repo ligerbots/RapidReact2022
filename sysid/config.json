@@ -5,7 +5,7 @@
   "gearing denominator": 1.0,
   "gearing numerator": 1.0,
   "gyro": "NavX",
-  "gyro ctor": "SerialPort.kUSB",
+  "gyro ctor": "SerialPort.kMXP",
   "is drivetrain": true,
   "motor controllers": [
     "TalonFX",
@@ -25,7 +25,7 @@
     false,
     false
   ],
-  "secondary encoder inverted": false,
+  "secondary encoder inverted": true,
   "secondary encoder ports": [
     2,
     3
