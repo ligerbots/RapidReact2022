@@ -63,16 +63,12 @@ public class RobotContainer {
         JoystickButton xboxAButton = new JoystickButton(m_xbox, Constants.XBOX_A);
         xboxAButton.whileHeld(new TuneShooterCommand(m_shooter, m_intake));
 
-        //vacuum state(activate shooter, chute, intake, until button released)
-        JoystickButton xboxBButton = new JoystickButton(m_xbox, Constants.XBOX_B);
-        xboxBButton.whileHeld(new ShooterCommand(m_shooter, m_intake, m_vision, false, true));//vacuum mode, lowhub true
-
         // actual shooter command
         JoystickButton xboxXButton = new JoystickButton(m_xbox, Constants.XBOX_X);
-        xboxXButton.whenPressed(new ShooterCommand(m_shooter, m_intake, m_vision, true, false));//shooting for upperHub
+        xboxXButton.whenPressed(new ShooterCommand(m_shooter, m_intake, m_vision, true));//shooting for upperHub
 
         JoystickButton xboxYButton = new JoystickButton(m_xbox, Constants.XBOX_Y);
-        xboxYButton.whenPressed(new ShooterCommand(m_shooter, m_intake, m_vision, false, false));//shooting for lowerHub
+        xboxYButton.whenPressed(new ShooterCommand(m_shooter, m_intake, m_vision, false));//shooting for lowerHub
 
         JoystickButton bumperRight = new JoystickButton(m_xbox, Constants.XBOX_RB);
         bumperRight.whileHeld(new IntakeCommand(m_intake, Constants.INTAKE_SPEED));

@@ -66,7 +66,7 @@ public class TwoBallAutoCurved extends SequentialCommandGroup implements AutoCom
                 new IntakeCommand(intake, Constants.INTAKE_SPEED)
             ),
             new TurnTowardsHub(driveTrain, vision).withTimeout(Constants.TURN_TIMEOUT_SECS),
-            new ShooterCommand(shooter, intake, vision, true, false)
+            new ShooterCommand(shooter, intake, vision, true)
         );
     }
 
