@@ -31,9 +31,9 @@ public final class Constants {
     LinearSystemId.identifyDrivetrainSystem(kvVoltSecondsPerMeter, kaVoltSecondsSquaredPerMeter,
         kvVoltSecondsPerRadian, kaVoltSecondsSquaredPerRadian);
 
-    public static final DCMotor kDriveGearbox = DCMotor.getNEO(2);
+    public static final DCMotor kDriveGearbox = DCMotor.getFalcon500(2);
     public static final double kDriveGearing = 8;
-    public static final double kWheelDiameterMeters = 0.1524;   // 6 inch wheels
+    public static final double kWheelDiameterMeters = Units.inchesToMeters(6.0);   // 6 inch wheels
     public static final double kTrackwidth = 0.6604;
     // more fake values for ramsete
     public static final double ksVolts = 0.182; 
