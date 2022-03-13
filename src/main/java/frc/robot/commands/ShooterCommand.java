@@ -18,6 +18,7 @@ public class ShooterCommand extends CommandBase {
     boolean m_upperHub;
     double m_distance;
 
+
     LigerTimer m_shootDelay = new LigerTimer(Constants.SHOOTER_MOTOR_WAIT_TIME);
     LigerTimer m_intakeDelay = new LigerTimer(Constants.SHOOTER_INTAKE_WAIT_TIME);
     LigerTimer m_shootBall1Time = new LigerTimer(Constants.SHOOT_BALL1_WAIT_TIME);
@@ -42,16 +43,23 @@ public class ShooterCommand extends CommandBase {
         m_upperHub = upperHub;
     }
 
+    public ShooterCommand(Shooter shooter, Intake intake, double distance, boolean upperHub) {
+        m_shooter = shooter;
+        m_intake = intake;
+        m_distance = distance;
+        m_upperHub = upperHub;
+    }
+
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
         m_visionTime.start();
-        if(m_upperHub==true){ 
-            m_state = State.FINDING_VISION_TARGET;
-        }else{//if lowerhub then skip FINDING_VISION_TARGET
+
+        if(m_upperHub == false || m_distance>0.0){//if lowerhub or if distance pre-defined, skip vision
             m_state = State.SPEED_UP_SHOOTER;
+        }else{
+            m_state = State.FINDING_VISION_TARGET;
         }
-        
         // TODO: do we want to turn on shooter to some moderate speed? Need to see if it affects the camera
     }
 
@@ -125,5 +133,6 @@ public class ShooterCommand extends CommandBase {
     @Override
     public boolean isFinished() {
         return m_state == State.WAIT_FOR_SHOOT_BALL2 && m_shootBall2Time.hasElapsed();
+        
     }
 }
