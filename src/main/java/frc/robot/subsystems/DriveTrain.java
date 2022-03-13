@@ -43,7 +43,7 @@ public class DriveTrain extends SubsystemBase {
     private EncoderSim m_rightEncoderSim;
     private Field2d m_fieldSim;
     private SimDouble m_gyroAngleSim;
-
+    
     private DifferentialDriveOdometry m_odometry;
 
     private AHRS m_navX;
@@ -138,10 +138,12 @@ public class DriveTrain extends SubsystemBase {
 
         SmartDashboard.putNumber("driveTrain/left encoder", getLeftEncoderTicks());
         SmartDashboard.putNumber("driveTrain/right encoder", getRightEncoderTicks());
+        SmartDashboard.putNumber("driveTrain/left distance", getLeftEncoderDistance());
+        SmartDashboard.putNumber("driveTrain/right distance", getRightEncoderDistance());
     }
 
     public void drive(double throttle, double rotate, boolean squaredInput) {
-        SmartDashboard.putNumber("driveTrain/throttle", throttle);
+        // SmartDashboard.putNumber("driveTrain/throttle", throttle);
 
         m_differentialDrive.arcadeDrive(throttle, -rotate, squaredInput);
     }
@@ -151,9 +153,11 @@ public class DriveTrain extends SubsystemBase {
         m_rightMotors.setVoltage(rightVolts);
         m_differentialDrive.feed();
     }
+
     public DifferentialDriveWheelSpeeds getWheelSpeeds () {
         return new DifferentialDriveWheelSpeeds(m_leftEncoder.getRate(), m_rightEncoder.getRate());
     }
+
     @Override
     public void simulationPeriodic() {
         // Set the inputs to the system. Note that we need to convert
