@@ -7,9 +7,11 @@ package frc.robot;
 import java.util.function.DoubleSupplier;
 
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 //import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.DeployIntake;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.ShooterCommand;
 import frc.robot.commands.IntakeCommand;
@@ -33,6 +35,7 @@ import frc.robot.subsystems.Vision;
 public class RobotContainer {
 
     XboxController m_xbox = new XboxController(0);
+    Joystick m_farm = new Joystick(1);
 
     // The robot's subsystems and commands are defined here...
     private final DriveTrain m_driveTrain = new DriveTrain();
@@ -69,17 +72,25 @@ public class RobotContainer {
         xboxBButton.whileHeld(new VacuumMode(m_shooter, m_intake));
 
         // actual shooter command
+
+        // shooting for upperHub
         JoystickButton xboxXButton = new JoystickButton(m_xbox, Constants.XBOX_X);
-        xboxXButton.whenPressed(new ShooterCommand(m_shooter, m_intake, m_vision, true));//shooting for upperHub
+        xboxXButton.whenPressed(new ShooterCommand(m_shooter, m_intake, m_vision, true));
 
+        // shooting for lowerHub
         JoystickButton xboxYButton = new JoystickButton(m_xbox, Constants.XBOX_Y);
-        xboxYButton.whenPressed(new ShooterCommand(m_shooter, m_intake, m_vision, false));//shooting for lowerHub
+        xboxYButton.whenPressed(new ShooterCommand(m_shooter, m_intake, m_vision, false));
 
+        // Intake commands
+        
         JoystickButton bumperRight = new JoystickButton(m_xbox, Constants.XBOX_RB);
         bumperRight.whileHeld(new IntakeCommand(m_intake, Constants.INTAKE_SPEED));
     
         JoystickButton bumperLeft = new JoystickButton(m_xbox, Constants.XBOX_LB);
         bumperLeft.whileHeld(new IntakeCommand(m_intake, -Constants.INTAKE_SPEED));
+
+        JoystickButton farm4 = new JoystickButton(m_farm, 4);
+        farm4.whenPressed(new DeployIntake(m_driveTrain));
     }
 
     private class Throttle implements DoubleSupplier {
@@ -93,7 +104,7 @@ public class RobotContainer {
     private class Turn implements DoubleSupplier {
         @Override
         public double getAsDouble() {
-            return -m_xbox.getRightX();
+            return -0.5 * m_xbox.getRightX();
         }
     }
 
