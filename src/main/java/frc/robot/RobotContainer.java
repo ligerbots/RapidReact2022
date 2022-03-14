@@ -16,6 +16,7 @@ import frc.robot.commands.DriveCommand;
 import frc.robot.commands.ShooterCommand;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.TuneShooterCommand;
+import frc.robot.commands.VacuumMode;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Intake;
@@ -66,7 +67,11 @@ public class RobotContainer {
         JoystickButton xboxAButton = new JoystickButton(m_xbox, Constants.XBOX_A);
         xboxAButton.whileHeld(new TuneShooterCommand(m_shooter, m_intake));
 
-        // actual shooter commands
+        //vacuum mode
+        JoystickButton xboxBButton = new JoystickButton(m_xbox, Constants.XBOX_B);
+        xboxBButton.whileHeld(new VacuumMode(m_shooter, m_intake));
+
+        // actual shooter command
 
         // shooting for upperHub
         JoystickButton xboxXButton = new JoystickButton(m_xbox, Constants.XBOX_X);
