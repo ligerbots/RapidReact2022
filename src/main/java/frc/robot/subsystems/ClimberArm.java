@@ -68,6 +68,11 @@ public class ClimberArm extends TrapezoidProfileSubsystem {
     // expects angles in radians.
     m_encoder.setPositionConversionFactor((1.0 / (25.0 * 60.0 / 16.0)) * 2.0 * Math.PI);
     m_encoder.setPosition(initPos);
+
+    System.out.println("Constructor: initPos " + m_index + " " + Units.radiansToDegrees(initPos));
+    System.out.println("Constructor: RelativeEncoder " + m_index + " " + Units.radiansToDegrees(m_encoder.getPosition()));
+    System.out.println("Constructor: AbsoluteEncoder " + m_index + " " + Units.radiansToDegrees(getAbsoluteEncoderArmAngle()));
+
     SmartDashboard.putNumber("RelativeEncoderInitialReading" + m_index, Units.radiansToDegrees(m_encoder.getPosition()));
 
     SmartDashboard.putNumber("arm" + m_index + "/P Gain", m_kPArm);
@@ -107,6 +112,9 @@ public class ClimberArm extends TrapezoidProfileSubsystem {
     // Execute the super class periodic method
     super.periodic();
 
+    // System.out.println("Periodic: RelativeEncoder " + m_index + " " + Units.radiansToDegrees(m_encoder.getPosition()));
+    // System.out.println("Periodic: AbsoluteEncoder " + m_index + " " + Units.radiansToDegrees(getAbsoluteEncoderArmAngle()));
+
     // Here we can check the SmartDashboard for any updates to the PIC constants.
     // Note that since this is Trapezoidal control, we only need to set P.
     // Each increment will only change the set point position a little bit.
@@ -128,6 +136,11 @@ public class ClimberArm extends TrapezoidProfileSubsystem {
       setPoint.position = m_encoder.getPosition();
       m_resetArmPos = false;
     }
+
+    // System.out.println("useState: RelativeEncoder " + m_index + " " + Units.radiansToDegrees(m_encoder.getPosition()));
+    // System.out.println("useState: AbsoluteEncoder " + m_index + " " + Units.radiansToDegrees(getAbsoluteEncoderArmAngle()));
+    // System.out.println("useState: setPoint " + m_index + " " + Units.radiansToDegrees(setPoint.position));
+
     m_PIDController.setReference(setPoint.position, ControlType.kPosition, 0, feedforward / 12.0);
     SmartDashboard.putNumber("arm" + m_index + "/feedforward" + m_index, feedforward);
     SmartDashboard.putNumber("arm" + m_index + "/setPoint" + m_index, Units.radiansToDegrees(setPoint.position));

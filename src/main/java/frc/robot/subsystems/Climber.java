@@ -61,8 +61,10 @@ public class Climber extends SubsystemBase {
     m_absoluteEncoder[1] = new DutyCycleEncoder(5);
     m_absoluteEncoder[1].setPositionOffset(0.038);
 
-    m_arm[0] = new ClimberArm(0, false, m_absoluteEncoder[0], getAbsoluteEncoderArmAngle()[0]);
-    m_arm[1] = new ClimberArm(1, true, m_absoluteEncoder[1], getAbsoluteEncoderArmAngle()[1]);
+    double[] absoluteArmAngle = getAbsoluteEncoderArmAngle();
+
+    m_arm[0] = new ClimberArm(0, false, m_absoluteEncoder[0], absoluteArmAngle[0] % (2*Math.PI));
+    m_arm[1] = new ClimberArm(1, true, m_absoluteEncoder[1], absoluteArmAngle[1]% (2*Math.PI));
 
     m_elevatorMotor = new CANSparkMax[] {new CANSparkMax(Constants.ELEVATOR_CAN_IDS[0], MotorType.kBrushless), new CANSparkMax(Constants.ELEVATOR_CAN_IDS[1], MotorType.kBrushless)};
     
