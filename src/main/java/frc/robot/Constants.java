@@ -114,11 +114,7 @@ public final class Constants {
     // Constants to limit the arm rotation speed
     public static final double ARM_MAX_VEL_RAD_PER_SEC = Math.toRadians(80.0);
     public static final double ARM_MAX_ACC_RAD_PER_SEC_SQ = Math.toRadians(40);
-    public static final double ARM_OFFSET_RAD = Math.toRadians(70.0);
-
-    public static final double ARM_INITIAL_POS = Math.toRadians(70.0);
-
-    public static double ARM_1_ABSOLUTE_ENCODER_OFFSET = 0.2;
+    // public static double ARM_OFFSET_RAD = Math.toRadians(70.0);
 
     // PID Constants for the Arm PID controller
     // Since we're using Trapeziodal control, all values will be 0 except for P
@@ -131,6 +127,8 @@ public final class Constants {
     // TODO: This is relative to 0 starting position. Need to use absolute encoder and get better values
     public static final double ARM_MAX_ANGLE = Units.degreesToRadians(160.0);
     public static final double ARM_MIN_ANGLE = Units.degreesToRadians(20.0);
+
+    public static final double ARM_INIT_POS = Units.degreesToRadians(70.0);
 
     // the angle for the arm to rotate to turn the elevator towards the next bar
     public static double ARM_ANGLE_TO_NEXT_BAR = Units.degreesToRadians(130.0);

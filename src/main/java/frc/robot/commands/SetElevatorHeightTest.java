@@ -25,7 +25,6 @@ public class SetElevatorHeightTest extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_climber.m_elevatorTesting = true;
     m_height = Units.inchesToMeters(SmartDashboard.getNumber(m_key, 0.0));
     m_climber.setElevatorHeight(m_height);
     SmartDashboard.putString("Message", "SetElevatorHeightTest executed!");

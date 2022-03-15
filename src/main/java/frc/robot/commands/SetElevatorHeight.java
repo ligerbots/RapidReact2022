@@ -21,7 +21,6 @@ public class SetElevatorHeight extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_climber.m_elevatorTesting = false;
     m_climber.setElevatorHeight(m_height);
   }
 

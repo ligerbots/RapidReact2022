@@ -27,8 +27,6 @@ public class Climber extends SubsystemBase {
   private double m_armGoal = 0.0;
   private double m_elevatorGoal = 0.0;
 
-  public boolean m_elevatorTesting;
-
   // Smart Motion Coefficients for Arm
   double m_armMaxVel = 2000; // rpm
   double m_armMinVel = 0;
@@ -56,13 +54,15 @@ public class Climber extends SubsystemBase {
     m_absoluteEncoder = new DutyCycleEncoder[2];
     // Construct the arm trapezoid subsystems
 
+    // Set offset of the absolute encoders
     m_absoluteEncoder[0] = new DutyCycleEncoder(4);
     m_absoluteEncoder[0].setPositionOffset(0.79);
-    m_arm[0] = new ClimberArm(0, false, m_absoluteEncoder[0]);
 
     m_absoluteEncoder[1] = new DutyCycleEncoder(5);
     m_absoluteEncoder[1].setPositionOffset(0.038);
-    m_arm[1] = new ClimberArm(1, true, m_absoluteEncoder[1]);
+
+    m_arm[0] = new ClimberArm(0, false, m_absoluteEncoder[0], getAbsoluteEncoderArmAngle()[0]);
+    m_arm[1] = new ClimberArm(1, true, m_absoluteEncoder[1], getAbsoluteEncoderArmAngle()[1]);
 
     m_elevatorMotor = new CANSparkMax[] {new CANSparkMax(Constants.ELEVATOR_CAN_IDS[0], MotorType.kBrushless), new CANSparkMax(Constants.ELEVATOR_CAN_IDS[1], MotorType.kBrushless)};
     
@@ -71,7 +71,6 @@ public class Climber extends SubsystemBase {
     m_elevatorDescend[0] = new ElevatorDescend(0, false, this, m_elevatorMotor[0]);
     m_elevatorDescend[1] = new ElevatorDescend(1, true, this, m_elevatorMotor[1]);
 
-    m_elevatorTesting = false;
     SmartDashboard.putNumber("arm/goal", m_armGoal);
     SmartDashboard.putNumber("elevator/goal", m_elevatorGoal);
   }
@@ -135,7 +134,8 @@ public class Climber extends SubsystemBase {
   }
 
   public double[] getAbsoluteEncoderArmAngle(){
-    return new double[] {m_arm[0].getAbsoluteEncoder().getAbsolutePosition(), m_arm[1].getAbsoluteEncoder().getAbsolutePosition()};
+    return new double[] {Math.abs(1 + m_absoluteEncoder[0].get()) * (16.0 / 60.0)*2.0*Math.PI + Constants.ARM_INIT_POS,
+      Math.abs(m_absoluteEncoder[1].get()) * (16.0 / 60.0)*2.0*Math.PI + Constants.ARM_INIT_POS};
   }
 
   // Set idle mode of all motors

@@ -41,13 +41,13 @@ public class ClimberArm extends TrapezoidProfileSubsystem {
   private boolean m_resetArmPos = false;
   
   /** Creates a new ClimberArm. */
-  public ClimberArm(int index, boolean inverted, DutyCycleEncoder absoluteEncoder) {
+  public ClimberArm(int index, boolean inverted, DutyCycleEncoder absoluteEncoder, double initPos) {
 
     super(
       // The constraints for the generated profiles
       new TrapezoidProfile.Constraints(Constants.ARM_MAX_VEL_RAD_PER_SEC, Constants.ARM_MAX_ACC_RAD_PER_SEC_SQ),
       // The initial position of the mechanism
-      Constants.ARM_OFFSET_RAD);
+      initPos);
 
     m_index = index;
 
@@ -67,14 +67,16 @@ public class ClimberArm extends TrapezoidProfileSubsystem {
     // Set the position conversion factor. Note that the Trapezoidal control
     // expects angles in radians.
     m_encoder.setPositionConversionFactor((1.0 / (25.0 * 60.0 / 16.0)) * 2.0 * Math.PI);
-    m_encoder.setPosition(Constants.ARM_OFFSET_RAD);
+    m_encoder.setPosition(initPos);
+    SmartDashboard.putNumber("RelativeEncoderInitialReading" + m_index, Units.radiansToDegrees(m_encoder.getPosition()));
+
     SmartDashboard.putNumber("arm" + m_index + "/P Gain", m_kPArm);
   }
 
   @Override
   public void periodic() {
     double encoderValue = m_encoder.getPosition();
-    SmartDashboard.putNumber("arm" + m_index + "/AbsoluteEncoder" + m_index, Math.abs((1-m_index) + m_absoluteEncoder.get()) * (16.0 / 60.0)*360.0 + 70.0); 
+    SmartDashboard.putNumber("arm" + m_index + "/AbsoluteEncoder" + m_index, Units.radiansToDegrees(getAbsoluteEncoderArmAngle())); 
     SmartDashboard.putNumber("arm" + m_index + "/AbsoluteEncoderRaw" + m_index, (1-m_index) + m_absoluteEncoder.get());  
     SmartDashboard.putNumber("arm" + m_index + "/AbsoluteEncoderOffSet" + m_index, m_absoluteEncoder.getPositionOffset());
     // Display current values on the SmartDashboard
@@ -128,8 +130,8 @@ public class ClimberArm extends TrapezoidProfileSubsystem {
     }
     m_PIDController.setReference(setPoint.position, ControlType.kPosition, 0, feedforward / 12.0);
     SmartDashboard.putNumber("arm" + m_index + "/feedforward" + m_index, feedforward);
-    SmartDashboard.putNumber("arm" + m_index + "/setPoint" + m_index, Units.metersToInches(setPoint.position));
-    SmartDashboard.putNumber("arm" + m_index + "/velocity" + m_index, Units.metersToInches(setPoint.velocity));
+    SmartDashboard.putNumber("arm" + m_index + "/setPoint" + m_index, Units.radiansToDegrees(setPoint.position));
+    SmartDashboard.putNumber("arm" + m_index + "/velocity" + m_index, Units.radiansToDegrees(setPoint.velocity));
    
 }
 
@@ -170,5 +172,9 @@ public class ClimberArm extends TrapezoidProfileSubsystem {
   public void resetArmPos(){
     super.setGoal(m_encoder.getPosition());
     m_resetArmPos = true;
+  }
+
+  public double getAbsoluteEncoderArmAngle(){
+    return Math.abs((1-m_index) + m_absoluteEncoder.get()) * (16.0 / 60.0)*2.0*Math.PI + Constants.ARM_INIT_POS;
   }
 }

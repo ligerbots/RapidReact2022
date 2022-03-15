@@ -1634,6 +1634,28 @@
               "_source0": "network_table:///SmartDashboard/arm1/AbsoluteEncoderOffSet1",
               "_title": "arm1/AbsoluteEncoderOffSet1"
             }
+          },
+          "0,15": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/RelativeEncoderInitialReading0",
+              "_title": "RelativeEncoderInitialReading0"
+            }
+          },
+          "2,15": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/RelativeEncoderInitialReading1",
+              "_title": "RelativeEncoderInitialReading1"
+            }
           }
         }
       }
@@ -1997,6 +2019,32 @@
               "Colors/Color when true": "#7CFC00FF",
               "Colors/Color when false": "#8B0000FF"
             }
+          },
+          "9,0": {
+            "size": [
+              2,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/elevator0/limitSwitchPressed",
+              "_title": "SmartDashboard/elevator0/limitSwitchPressed",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "11,0": {
+            "size": [
+              2,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/elevator1/limitSwitchPressed",
+              "_title": "SmartDashboard/elevator1/limitSwitchPressed",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
           }
         }
       }
@@ -2115,9 +2163,9 @@
               "_title": "SmartDashboard/climber/gyro_roll"
             }
           },
-          "3,2": {
+          "2,2": {
             "size": [
-              1,
+              2,
               1
             ],
             "content": {
@@ -2128,7 +2176,7 @@
           },
           "4,2": {
             "size": [
-              1,
+              2,
               1
             ],
             "content": {
@@ -2159,28 +2207,6 @@
               "_title": "/SmartDashboard/arm1/AbsoluteEncoderRaw1"
             }
           },
-          "3,4": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/arm0/AbsoluteEncoderOffSet0",
-              "_title": "/SmartDashboard/arm0/AbsoluteEncoderOffSet0"
-            }
-          },
-          "4,4": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/arm1/AbsoluteEncoderOffSet1",
-              "_title": "/SmartDashboard/arm1/AbsoluteEncoderOffSet1"
-            }
-          },
           "7,2": {
             "size": [
               1,
@@ -2205,6 +2231,28 @@
               "_title": "/SmartDashboard/elevator1/limitSwitchPressed",
               "Colors/Color when true": "#7CFC00FF",
               "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "4,1": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/RelativeEncoderInitialReading1",
+              "_title": "SmartDashboard/RelativeEncoderInitialReading1"
+            }
+          },
+          "2,1": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/RelativeEncoderInitialReading0",
+              "_title": "SmartDashboard/RelativeEncoderInitialReading0"
             }
           }
         }

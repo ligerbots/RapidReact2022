@@ -58,7 +58,7 @@ public class ElevatorDescend extends TrapezoidProfileSubsystem {
     m_motor.restoreFactoryDefaults();
     m_motor.setInverted(inverted);
 
-    m_limitSwitch = m_motor.getForwardLimitSwitch(Type.kNormallyOpen);
+    m_limitSwitch = m_motor.getForwardLimitSwitch(Type.kNormallyClosed);
     m_limitSwitch.enableLimitSwitch(true);
 
     m_PIDController = m_motor.getPIDController();
@@ -102,12 +102,14 @@ public class ElevatorDescend extends TrapezoidProfileSubsystem {
     //   }
     // }
 
-    // SmartDashboard.putBoolean("elevator" + m_index + "/limitSwitchPressed", m_limitSwitch.isPressed());
-    // if (m_limitSwitch.isPressed()) {
-    //   m_resetElevatorPos = true;
-    //   m_encoder.setPosition(0.0);
-    //   super.setGoal(0.0);
-    // }
+    SmartDashboard.putBoolean("elevator" + m_index + "/limitSwitchPressed", m_limitSwitch.isPressed());
+    if (m_limitSwitch.isPressed()) {
+      m_resetElevatorPos = true;
+      // m_encoder.setPosition(m_encoder.getPosition());
+      // super.setGoal(m_encoder.getPosition());
+      m_encoder.setPosition(0);
+      super.setGoal(0);
+    }
     
     // Execute the super class periodic method
     super.periodic();
