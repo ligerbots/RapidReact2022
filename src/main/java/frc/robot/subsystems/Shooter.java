@@ -93,14 +93,22 @@ public class Shooter extends SubsystemBase {
 
         Map.Entry<Double, ShooterSpeeds> before = shooterSpeeds.floorEntry(distance);
         Map.Entry<Double, ShooterSpeeds> after = shooterSpeeds.ceilingEntry(distance);
-        if (before == null && after == null)
-            return lowHubSpeeds; // this should never happen b/c shooterSpeeds should have at least 1 element
-        if (before == null)
+        if (before == null) {
+            if (after == null) {
+                return lowHubSpeeds; // this should never happen b/c shooterSpeeds should have at least 1 element
+            }
             return after.getValue();
+        }
         if (after == null)
             return before.getValue();
             
-        double ratio = (distance - before.getKey()) / (after.getKey() - before.getKey());
+        double denom = after.getKey() - before.getKey();
+        if (Math.abs(denom) < 0.1) {
+            // distance must have exactly matched a key
+            return before.getValue();
+        }
+
+        double ratio = (distance - before.getKey()) / denom;
         return before.getValue().interpolate(after.getValue(), ratio);
     }
 
@@ -124,7 +132,7 @@ public class Shooter extends SubsystemBase {
         // double targetVelocity_UnitsPer100ms = leftYstick * 2000.0 * 2048.0 / 600.0;
         double falconTop = topRpm * Constants.FALCON_UNITS_PER_RPM;
         double falconBottom = bottomRpm * Constants.FALCON_UNITS_PER_RPM;
-        System.out.println("setting shooter " + falconTop + " " + falconBottom);
+        System.out.println("setting shooter motor signals " + falconTop + " " + falconBottom);
         m_topShooterMotor.set(ControlMode.Velocity, falconTop);
         m_bottomShooterMotor.set(TalonFXControlMode.Velocity, falconBottom);
     }
