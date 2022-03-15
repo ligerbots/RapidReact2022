@@ -33,7 +33,7 @@ import frc.robot.subsystems.Vision;
 public class RobotContainer {
 
     XboxController m_xbox = new XboxController(0);
-    Joystick m_farm = new Joystick(1);
+    // Joystick m_farm = new Joystick(1);
 
     // The robot's subsystems and commands are defined here...
     private final DriveTrain m_driveTrain = new DriveTrain();
