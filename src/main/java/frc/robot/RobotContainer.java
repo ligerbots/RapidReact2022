@@ -64,12 +64,12 @@ public class RobotContainer {
      */
     private void configureButtonBindings() {
         // only used for tuning
-        JoystickButton xboxAButton = new JoystickButton(m_xbox, Constants.XBOX_A);
-        xboxAButton.whileHeld(new TuneShooterCommand(m_shooter, m_intake));
+        // JoystickButton xboxAButton = new JoystickButton(m_xbox, Constants.XBOX_A);
+        // xboxAButton.whileHeld(new TuneShooterCommand(m_shooter, m_intake));
 
         //vacuum mode
-        JoystickButton xboxBButton = new JoystickButton(m_xbox, Constants.XBOX_B);
-        xboxBButton.whileHeld(new VacuumMode(m_shooter, m_intake));
+        JoystickButton xboxYButton = new JoystickButton(m_xbox, Constants.XBOX_Y);
+        xboxYButton.whileHeld(new VacuumMode(m_shooter, m_intake));
 
         // actual shooter command
 
@@ -77,9 +77,13 @@ public class RobotContainer {
         JoystickButton xboxXButton = new JoystickButton(m_xbox, Constants.XBOX_X);
         xboxXButton.whenPressed(new ShooterCommand(m_shooter, m_intake, m_vision, true));
 
+        // shooting for upperHub from tarmac
+        JoystickButton xboxAButton = new JoystickButton(m_xbox, Constants.XBOX_A);
+        xboxAButton.whenPressed(new ShooterCommand(m_shooter, m_intake, Constants.TARMAC_DEFAULT_DISTANCE, true));
+
         // shooting for lowerHub
-        JoystickButton xboxYButton = new JoystickButton(m_xbox, Constants.XBOX_Y);
-        xboxYButton.whenPressed(new ShooterCommand(m_shooter, m_intake, m_vision, false));
+        JoystickButton xboxBButton = new JoystickButton(m_xbox, Constants.XBOX_B);
+        xboxBButton.whenPressed(new ShooterCommand(m_shooter, m_intake, m_vision, false));
 
         // Intake commands
         
