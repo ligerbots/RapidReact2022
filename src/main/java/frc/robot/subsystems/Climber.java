@@ -25,7 +25,6 @@ public class Climber extends SubsystemBase {
   private double m_armGoal = 0.0;
   private double m_elevatorGoal = 0.0;
 
-  public boolean m_elevatorTesting;
 
   // Smart Motion Coefficients for Arm
   double m_armMaxVel = 2000; // rpm
@@ -56,9 +55,11 @@ public class Climber extends SubsystemBase {
     m_elevatorDescend[0] = new ElevatorDescend(0, false, this, m_elevatorMotor[0]);
     m_elevatorDescend[1] = new ElevatorDescend(1, true, this, m_elevatorMotor[1]);
 
-    m_elevatorTesting = false;
     SmartDashboard.putNumber("arm/goal", m_armGoal);
     SmartDashboard.putNumber("elevator/goal", m_elevatorGoal);
+
+    SmartDashboard.putNumber("ElevatorIndex", 0);
+    SmartDashboard.putNumber("SetOneElevatorHeightTest", 0.0);
   }
 
   public void periodic() {
@@ -98,6 +99,20 @@ public class Climber extends SubsystemBase {
         m_elevatorDescend[1].elevatorDescending();
         m_elevatorDescend[0].setGoal(height);
         m_elevatorDescend[1].setGoal(height);
+      }
+  }
+
+  // sets one of the elevator to a certain height
+  public void setElevatorHeight(int index, double height) {
+    double curHeight = getElevatorHeight()[index];//both motors are similar, getting current height  
+    if(height > curHeight){
+        m_elevatorAscend[index].resetElevatorPos();
+        m_elevatorAscend[index].elevatorAscending();
+        m_elevatorAscend[index].setGoal(height);
+      }else{
+        m_elevatorDescend[index].resetElevatorPos();
+        m_elevatorDescend[index].elevatorDescending();
+        m_elevatorDescend[index].setGoal(height);
       }
   }
 

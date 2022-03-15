@@ -4,24 +4,31 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.math.util.Units;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Climber;
 
-public class SetElevatorHeight extends CommandBase {
+public class SetOneElevatorHeightTest extends CommandBase {
   /** Creates a new SetElevatorHeight. */
   Climber m_climber;
   double m_height;
-  public SetElevatorHeight(Climber climber, double height) {
+  String m_key;
+  int m_index;
+  public SetOneElevatorHeightTest(Climber climber, String key) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_climber = climber;
-    m_height = height;
+    m_key = key;
+    addRequirements(climber);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_climber.setElevatorHeight(m_height);
+    m_height = Units.inchesToMeters(SmartDashboard.getNumber(m_key, 0.0));
+    m_index = (int) SmartDashboard.getNumber("ElevatorIndex", 0);
+    m_climber.setElevatorHeight(m_index, m_height);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -36,7 +43,6 @@ public class SetElevatorHeight extends CommandBase {
   @Override
   public boolean isFinished() {
     double[] arr = m_climber.getElevatorHeight();
-    return Math.abs(arr[0] - m_height) < Constants.ELEVATOR_HEIGHT_TOLERANCE
-    || Math.abs(arr[1] - m_height) < Constants.ELEVATOR_HEIGHT_TOLERANCE;
+    return Math.abs(arr[m_index] - m_height) < Constants.ELEVATOR_HEIGHT_TOLERANCE;
   }
 }

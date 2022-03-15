@@ -23,6 +23,7 @@ import frc.robot.commands.SetArmCoast;
 import frc.robot.commands.SetClimber;
 import frc.robot.commands.SetElevatorHeight;
 import frc.robot.commands.SetElevatorHeightTest;
+import frc.robot.commands.SetOneElevatorHeightTest;
 import frc.robot.commands.TuneShooterCommand;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.DriveTrain;
@@ -94,6 +95,9 @@ public class RobotContainer {
         JoystickButton farm2 = new JoystickButton(m_farm, 2);
         farm2.whenPressed(new SetArmAngleTest(m_climber, "Constants/SetArmAngleTest"));
 
+        JoystickButton farm3 = new JoystickButton(m_farm, 3);
+        farm3.whenPressed(new SetOneElevatorHeightTest(m_climber, "SetOneElevatorHeightTest"));
+
         JoystickButton farm6 = new JoystickButton(m_farm, 6);
         farm6.whenPressed(new SetClimber(m_climber));
 
@@ -110,7 +114,7 @@ public class RobotContainer {
         farm13.whenPressed(new SetArmCoast(m_climber));
 
         JoystickButton farm15 = new JoystickButton(m_farm, 15);
-        farm15.whenPressed(new SetArmBrake(m_climber));
+        farm15.whenPressed(new SetArmBrake(m_climber));        
     }
 
     private class Throttle implements DoubleSupplier {

@@ -27,7 +27,6 @@ public class SetArmAngleTest extends CommandBase {
   public void initialize() {
     m_angle = Units.degreesToRadians(SmartDashboard.getNumber(m_key, 0.0));
     m_climber.setArmAngle(m_angle);
-    SmartDashboard.putString("Message", "SetArmAngleTest executed!");
   }
 
   // Called every time the scheduler runs while the command is scheduled.

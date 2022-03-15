@@ -92,7 +92,7 @@ public final class Constants {
 
     // define constants for high, low, and mid rung
     public static final double HIGH_RUNG = 1.92;//192 cm
-    public static double MID_RUNG = Units.inchesToMeters(23.0);//153 cm
+    public static final double MID_RUNG = Units.inchesToMeters(23.0);//153 cm
     public static final double LOW_RUNG = 1.24;//Top of rung is 124cm
     public static final double CLIMBER_ANGLE = Units.degreesToRadians(22.0);//angle for setClimber()
     
@@ -131,18 +131,18 @@ public final class Constants {
     public static final double ARM_MIN_ANGLE = Units.degreesToRadians(20.0);
 
     // the angle for the arm to rotate to turn the elevator towards the next bar
-    public static double ARM_ANGLE_TO_NEXT_BAR = Units.degreesToRadians(130.0);
+    public static final double ARM_ANGLE_TO_NEXT_BAR = Units.degreesToRadians(130.0);
 
     // the angle for the arm to rotate to the left side of the next bar
-    public static double ARM_TO_THE_LEFT_ANGLE = Units.degreesToRadians(70.0);
-    public static double ARM_GRAB_THE_BAR = Units.degreesToRadians(90.0);
-    public static double ARM_ROTATION_ELEVATOR_TOUCH_BAR = Units.degreesToRadians(110.0);
+    public static final double ARM_TO_THE_LEFT_ANGLE = Units.degreesToRadians(70.0);
+    public static final double ARM_GRAB_THE_BAR = Units.degreesToRadians(90.0);
+    public static final double ARM_ROTATION_ELEVATOR_TOUCH_BAR = Units.degreesToRadians(110.0);
 
     // the height of the elevator to retract down to certain point where the arm can get to the other side of the bar
-    public static double ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE = Units.inchesToMeters(4.0);
-    public static double ARM_ANGLE_FOR_ELEVATOR_CLEARANCE = Units.degreesToRadians(70.0);
+    public static final double ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE = Units.inchesToMeters(4.0);
+    public static final double ARM_ANGLE_FOR_ELEVATOR_CLEARANCE = Units.degreesToRadians(70.0);
 
-    public static double ELEVATOR_HEIGHT_SECURE_ON_BAR = Units.inchesToMeters(18.0);
+    public static final double ELEVATOR_HEIGHT_SECURE_ON_BAR = Units.inchesToMeters(18.0);
 
     // Feedforward constants for the each Climber Arm
     public static final double ELEVATOR_KS = 0.182; // TODO: This may need to be tuned

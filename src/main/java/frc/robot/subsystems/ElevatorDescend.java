@@ -58,7 +58,7 @@ public class ElevatorDescend extends TrapezoidProfileSubsystem {
     m_motor.restoreFactoryDefaults();
     m_motor.setInverted(inverted);
 
-    m_limitSwitch = m_motor.getForwardLimitSwitch(Type.kNormallyOpen);
+    m_limitSwitch = m_motor.getForwardLimitSwitch(Type.kNormallyClosed);
     m_limitSwitch.enableLimitSwitch(true);
 
     m_PIDController = m_motor.getPIDController();
@@ -104,8 +104,7 @@ public class ElevatorDescend extends TrapezoidProfileSubsystem {
 
     SmartDashboard.putBoolean("elevator" + m_index + "/limitSwitchPressed", m_limitSwitch.isPressed());
     if (m_limitSwitch.isPressed()) {
-      m_resetElevatorPos = true;
-      m_encoder.setPosition(0.0);
+      m_encoder.setPosition(-0.5);
       super.setGoal(0.0);
     }
     
@@ -166,5 +165,9 @@ public class ElevatorDescend extends TrapezoidProfileSubsystem {
 
   public void elevatorStop(){
     m_elevatorDescending = false;
+  }
+  
+  public boolean isLimitSwitchPressed(){
+    return m_limitSwitch.isPressed();
   }
 }
