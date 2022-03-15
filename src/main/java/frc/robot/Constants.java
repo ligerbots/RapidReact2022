@@ -16,8 +16,8 @@ import edu.wpi.first.math.util.Units;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-    // Temporary Encoder's Distance Per Pulse for simulation
-    public static final double ENCODER_DISTANCE_PER_PULSE = Units.inchesToMeters(Math.PI * 6.0 / 1024);
+    // Grayhill is 256 ticks per revolution. Wheel diameter is 6".
+    public static final double ENCODER_DISTANCE_PER_PULSE = Units.inchesToMeters(Math.PI * 6.0 / 256);
 
     public static final double FALCON_UNITS_PER_RPM = 2048.0 / 600.0;
 
@@ -89,8 +89,6 @@ public final class Constants {
 
     // chute subsystem
     public static final int CHUTE_CAN_ID = 6; 
-
-    public static final int GRAYHILL_ENCODER_DISTANCE_PER_PULSE = 1; //TODO: Replace this value with a correct one 
 
     // define constants for high, low, and mid rung
     public static final int HIGH_RUNG = 192;//192 cm
