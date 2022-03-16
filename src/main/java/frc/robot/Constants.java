@@ -115,8 +115,8 @@ public final class Constants {
     public static final double ARM_KA = 0.08;
 
     // Constants to limit the arm rotation speed
-    public static final double ARM_MAX_VEL_RAD_PER_SEC = Math.toRadians(80.0);
-    public static final double ARM_MAX_ACC_RAD_PER_SEC_SQ = Math.toRadians(40);
+    public static final double ARM_MAX_VEL_RAD_PER_SEC = Math.toRadians(120.0);
+    public static final double ARM_MAX_ACC_RAD_PER_SEC_SQ = Math.toRadians(90);
     public static final double ARM_OFFSET_RAD = Math.toRadians(85.0);
 
     // PID Constants for the Arm PID controller
@@ -154,11 +154,11 @@ public final class Constants {
 
     // Constants to limit the elevator veocity and accel
 
-    public static final double ELEVATOR_MAX_VEL_METER_PER_SEC_ASCEND = Units.inchesToMeters(15.0);
-    public static final double ELEVATOR_MAX_ACC_METER_PER_SEC_SQ_ASCEND = Units.inchesToMeters(7.5);
+    public static final double ELEVATOR_MAX_VEL_METER_PER_SEC_ASCEND = Units.inchesToMeters(50.0);
+    public static final double ELEVATOR_MAX_ACC_METER_PER_SEC_SQ_ASCEND = Units.inchesToMeters(25.0);
 
-    public static final double ELEVATOR_MAX_VEL_METER_PER_SEC_DESCEND = Units.inchesToMeters(50.0);
-    public static final double ELEVATOR_MAX_ACC_METER_PER_SEC_SQ_DESCEND = Units.inchesToMeters(25.0);
+    public static final double ELEVATOR_MAX_VEL_METER_PER_SEC_DESCEND = Units.inchesToMeters(60.0);
+    public static final double ELEVATOR_MAX_ACC_METER_PER_SEC_SQ_DESCEND = Units.inchesToMeters(40.0);
     public static final double ELEVATOR_OFFSET_METER = 0.0;
 
     public static final double ELEVATOR_LIMIT_SWITCH_HEIGHT = Units.inchesToMeters(-0.15);
@@ -166,8 +166,8 @@ public final class Constants {
 
     // PID Constants for the Arm PID controller
     // Since we're using Trapeziodal control, all values will be 0 except for P
-    public static final double ELEVATOR_K_P0 = 30;
-    public static final double ELEVATOR_K_P1 = 30;
+    public static final double ELEVATOR_K_P0 = 50;
+    public static final double ELEVATOR_K_P1 = 50;
     public static final double ELEVATOR_K_I = 0.0;
     public static final double ELEVATOR_K_D = 0.0;
     public static final double ELEVATOR_K_FF = 0.0;

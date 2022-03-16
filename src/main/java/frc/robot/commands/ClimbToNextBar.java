@@ -31,7 +31,7 @@ public class ClimbToNextBar extends SequentialCommandGroup {
       new SetArmAngle(m_climber, Constants.ARM_ROTATION_ELEVATOR_TOUCH_BAR),
 
       // retract elevator to secure it on the bar
-      new SetElevatorHeight(m_climber, Constants.ELEVATOR_HEIGHT_SECURE_ON_BAR, COnstants.ELEVATOR_HEIGHT_LOOSE_TOLERANCE),
+      new SetElevatorHeight(m_climber, Constants.ELEVATOR_HEIGHT_SECURE_ON_BAR, Constants.ELEVATOR_HEIGHT_LOOSE_TOLERANCE),
 
       // set the arm to coast mode
       new SetArmCoast(m_climber),
