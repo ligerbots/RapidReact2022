@@ -1,8 +1,20 @@
 {
   "SysId": {
     "Analysis Type": "Drivetrain",
+    "Analyzer": {
+      "window": {
+        "visible": false
+      }
+    },
     "NetworkTables Settings": {
       "serverTeam": "2877"
-    }
+    },
+    "Program Log": {
+      "window": {
+        "visible": false
+      }
+    },
+    "mode": "Client",
+    "serverTeam": "2877"
   }
 }

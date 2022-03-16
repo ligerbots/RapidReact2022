@@ -56,7 +56,8 @@ public class DriveTrain extends SubsystemBase {
 
         m_leftEncoder.setDistancePerPulse(Constants.ENCODER_DISTANCE_PER_PULSE);
         m_rightEncoder.setDistancePerPulse(Constants.ENCODER_DISTANCE_PER_PULSE);
-
+        m_rightEncoder.setReverseDirection(true);
+        
         m_odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(0));
         m_navX = new AHRS(Port.kMXP, (byte) 200);
 
