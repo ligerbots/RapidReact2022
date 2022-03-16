@@ -35,7 +35,7 @@ import frc.robot.subsystems.Vision;
 public class RobotContainer {
 
     XboxController m_xbox = new XboxController(0);
-    Joystick m_farm = new Joystick(1);
+    // Joystick m_farm = new Joystick(1);
 
     // The robot's subsystems and commands are defined here...
     private final DriveTrain m_driveTrain = new DriveTrain();
@@ -89,8 +89,8 @@ public class RobotContainer {
         JoystickButton bumperLeft = new JoystickButton(m_xbox, Constants.XBOX_LB);
         bumperLeft.whileHeld(new IntakeCommand(m_intake, -Constants.INTAKE_SPEED));
 
-        JoystickButton farm4 = new JoystickButton(m_farm, 4);
-        farm4.whenPressed(new DeployIntake(m_driveTrain));
+        // JoystickButton farm4 = new JoystickButton(m_farm, 4);
+        // farm4.whenPressed(new DeployIntake(m_driveTrain));
     }
 
     private class Throttle implements DoubleSupplier {
