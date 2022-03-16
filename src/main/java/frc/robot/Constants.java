@@ -142,7 +142,7 @@ public final class Constants {
     public static final double ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE = Units.inchesToMeters(4.0);
     public static final double ARM_ANGLE_FOR_ELEVATOR_CLEARANCE = Units.degreesToRadians(70.0);
 
-    public static final double ELEVATOR_HEIGHT_SECURE_ON_BAR = Units.inchesToMeters(18.0);
+    public static final double ELEVATOR_HEIGHT_SECURE_ON_BAR = Units.inchesToMeters(22.0);
 
     // Feedforward constants for the each Climber Arm
     public static final double ELEVATOR_KS = 0.182; // TODO: This may need to be tuned
@@ -160,13 +160,13 @@ public final class Constants {
     public static final double ELEVATOR_MAX_ACC_METER_PER_SEC_SQ_DESCEND = Units.inchesToMeters(25.0);
     public static final double ELEVATOR_OFFSET_METER = 0.0;
 
-    public static final double ELEVATOR_LIMIT_SWITCH_HEIGHT = Units.inchesToMeters(-0.5);
+    public static final double ELEVATOR_LIMIT_SWITCH_HEIGHT = Units.inchesToMeters(-0.15);
 
 
     // PID Constants for the Arm PID controller
     // Since we're using Trapeziodal control, all values will be 0 except for P
-    public static final double ELEVATOR_K_P0 = 15;
-    public static final double ELEVATOR_K_P1 = 15;
+    public static final double ELEVATOR_K_P0 = 30;
+    public static final double ELEVATOR_K_P1 = 30;
     public static final double ELEVATOR_K_I = 0.0;
     public static final double ELEVATOR_K_D = 0.0;
     public static final double ELEVATOR_K_FF = 0.0;
