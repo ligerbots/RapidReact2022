@@ -5,7 +5,9 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.SparkMaxLimitSwitch;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.revrobotics.SparkMaxLimitSwitch.Type;
 
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -43,6 +45,9 @@ public class Climber extends SubsystemBase {
   double[] m_armEncoderValue = new double[2];
 
   CANSparkMax[] m_elevatorMotor;
+  
+  public SparkMaxLimitSwitch[] m_limitSwitch;
+
 
   public Climber() {
     // Construct the arm trapezoid subsystems
@@ -60,6 +65,13 @@ public class Climber extends SubsystemBase {
 
     SmartDashboard.putNumber("ElevatorIndex", 0);
     SmartDashboard.putNumber("SetOneElevatorHeightTest", 0.0);
+
+    m_limitSwitch = new SparkMaxLimitSwitch[2];
+
+    m_limitSwitch[0] = m_elevatorMotor[0].getReverseLimitSwitch(Type.kNormallyClosed);
+    m_limitSwitch[0].enableLimitSwitch(true);
+    m_limitSwitch[1] = m_elevatorMotor[1].getReverseLimitSwitch(Type.kNormallyClosed);
+    m_limitSwitch[1].enableLimitSwitch(true);
   }
 
   public void periodic() {
@@ -79,6 +91,27 @@ public class Climber extends SubsystemBase {
     //   //m_elevator[0].setGoal(goalUnits);
     //   m_elevator[1].setGoal(goalUnits); //* (20.1/18.45) factor for lowest point
     //   m_elevatorGoal = goal;
+    // }
+
+    SmartDashboard.putBoolean("elevatorAscending" + 0, m_elevatorAscend[0].m_elevatorAscending);
+    SmartDashboard.putBoolean("elevatorAscending" + 1, m_elevatorAscend[1].m_elevatorAscending);
+
+    SmartDashboard.putBoolean("elevatorDescending" + 0, m_elevatorDescend[0].m_elevatorDescending);
+    SmartDashboard.putBoolean("elevatorDescending" + 1, m_elevatorDescend[1].m_elevatorDescending);    
+
+    SmartDashboard.putBoolean("if0", m_limitSwitch[0].isPressed() && m_elevatorDescend[0].m_elevatorDescending);
+    SmartDashboard.putBoolean("if1", m_limitSwitch[1].isPressed() && m_elevatorDescend[1].m_elevatorDescending);
+
+    SmartDashboard.putBoolean("elevator" + 0 + "/limitSwitchPressed", m_limitSwitch[0].isPressed());
+    // if (m_limitSwitch[0].isPressed() && m_elevatorDescend[0].m_elevatorDescending) {
+    //   m_elevatorMotor[0].getEncoder().setPosition(Constants.ELEVATOR_LIMIT_SWITCH_HEIGHT);
+    //   setElevatorHeight(0, 0.0);
+    // }
+
+    SmartDashboard.putBoolean("elevator" + 1 + "/limitSwitchPressed", m_limitSwitch[1].isPressed());
+    // if (m_limitSwitch[1].isPressed() && m_elevatorDescend[1].m_elevatorDescending) {
+    //   m_elevatorMotor[1].getEncoder().setPosition(Constants.ELEVATOR_LIMIT_SWITCH_HEIGHT);
+    //   setElevatorHeight(1, 0.0);
     // }
   }
 
@@ -104,7 +137,7 @@ public class Climber extends SubsystemBase {
 
   // sets one of the elevator to a certain height
   public void setElevatorHeight(int index, double height) {
-    double curHeight = getElevatorHeight()[index];//both motors are similar, getting current height  
+    double curHeight = getElevatorHeight()[index];  
     if(height > curHeight){
         m_elevatorAscend[index].resetElevatorPos();
         m_elevatorAscend[index].elevatorAscending();

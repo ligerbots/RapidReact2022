@@ -30,8 +30,8 @@ public class ElevatorDescendsToLimitSwitch extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(m_climber.m_elevatorDescend[0].isLimitSwitchPressed()) m_elevator0Pressed = true;
-    if(m_climber.m_elevatorDescend[1].isLimitSwitchPressed()) m_elevator1Pressed = true;
+    if(m_climber.m_limitSwitch[0].isPressed()) m_elevator0Pressed = true;
+    if(m_climber.m_limitSwitch[1].isPressed()) m_elevator1Pressed = true;
   }
 
   // Called once the command ends or is interrupted.

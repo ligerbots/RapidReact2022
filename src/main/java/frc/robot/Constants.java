@@ -97,7 +97,7 @@ public final class Constants {
     public static final double CLIMBER_ANGLE = Units.degreesToRadians(22.0);//angle for setClimber()
     
     
-    public static final double ELEVATOR_HEIGHT_TOLERANCE = Units.inchesToMeters(0.5);//tolerance for elevator
+    public static final double ELEVATOR_HEIGHT_TOLERANCE = Units.inchesToMeters(0.1);//tolerance for elevator
     public static final double ARM_ANGLE_TOLERANCE = Units.degreesToRadians(1.0);
 
     public static final double RUNG_ANGLE = Units.degreesToRadians(-22.0);//angle to clamp back on rung for raiseToBar command
@@ -116,7 +116,7 @@ public final class Constants {
     // Constants to limit the arm rotation speed
     public static final double ARM_MAX_VEL_RAD_PER_SEC = Math.toRadians(80.0);
     public static final double ARM_MAX_ACC_RAD_PER_SEC_SQ = Math.toRadians(40);
-    public static final double ARM_OFFSET_RAD = Math.toRadians(80.0);
+    public static final double ARM_OFFSET_RAD = Math.toRadians(85.0);
 
     // PID Constants for the Arm PID controller
     // Since we're using Trapeziodal control, all values will be 0 except for P
@@ -160,6 +160,7 @@ public final class Constants {
     public static final double ELEVATOR_MAX_ACC_METER_PER_SEC_SQ_DESCEND = Units.inchesToMeters(25.0);
     public static final double ELEVATOR_OFFSET_METER = 0.0;
 
+    public static final double ELEVATOR_LIMIT_SWITCH_HEIGHT = Units.inchesToMeters(-0.5);
 
 
     // PID Constants for the Arm PID controller

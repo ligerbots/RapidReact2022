@@ -27,7 +27,6 @@ public class ElevatorDescend extends TrapezoidProfileSubsystem {
   private final RelativeEncoder m_encoder;
   private final SparkMaxPIDController m_PIDController;
 
-  private SparkMaxLimitSwitch m_limitSwitch;
 
   private final ElevatorFeedforward m_Feedforward = 
     new ElevatorFeedforward(Constants.ELEVATOR_KS, Constants.ELEVATOR_KG, Constants.ELEVATOR_KV, Constants.ELEVATOR_KA);
@@ -58,8 +57,6 @@ public class ElevatorDescend extends TrapezoidProfileSubsystem {
     m_motor.restoreFactoryDefaults();
     m_motor.setInverted(inverted);
 
-    m_limitSwitch = m_motor.getForwardLimitSwitch(Type.kNormallyClosed);
-    m_limitSwitch.enableLimitSwitch(true);
 
     m_PIDController = m_motor.getPIDController();
     m_PIDController.setP(m_kPElevator);
@@ -102,11 +99,6 @@ public class ElevatorDescend extends TrapezoidProfileSubsystem {
     //   }
     // }
 
-    SmartDashboard.putBoolean("elevator" + m_index + "/limitSwitchPressed", m_limitSwitch.isPressed());
-    if (m_limitSwitch.isPressed()) {
-      m_encoder.setPosition(-0.5);
-      super.setGoal(0.0);
-    }
     
     // Execute the super class periodic method
     super.periodic();
@@ -165,9 +157,5 @@ public class ElevatorDescend extends TrapezoidProfileSubsystem {
 
   public void elevatorStop(){
     m_elevatorDescending = false;
-  }
-  
-  public boolean isLimitSwitchPressed(){
-    return m_limitSwitch.isPressed();
   }
 }
