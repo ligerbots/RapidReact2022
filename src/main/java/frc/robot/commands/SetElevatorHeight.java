@@ -12,10 +12,18 @@ public class SetElevatorHeight extends CommandBase {
   /** Creates a new SetElevatorHeight. */
   Climber m_climber;
   double m_height;
-  public SetElevatorHeight(Climber climber, double height) {
+  double m_tolerance;
+
+  public SetElevatorHeight(Climber climber, double height, double tolerance) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_climber = climber;
     m_height = height;
+    m_tolerance = tolerance;
+  }
+
+  // Constructor with default tolerance
+  public SetElevatorHeight(Climber climber, double height) {
+    SetElevatorHeight(climber, height, Constants.ELEVATOR_HEIGHT_TOLERANCE);
   }
 
   // Called when the command is initially scheduled.
@@ -36,7 +44,7 @@ public class SetElevatorHeight extends CommandBase {
   @Override
   public boolean isFinished() {
     double[] arr = m_climber.getElevatorHeight();
-    return Math.abs(arr[0] - m_height) < Constants.ELEVATOR_HEIGHT_TOLERANCE
-    || Math.abs(arr[1] - m_height) < Constants.ELEVATOR_HEIGHT_TOLERANCE;
+    return Math.abs(arr[0] - m_height) < m_tolerance
+    || Math.abs(arr[1] - m_height) < m_tolerance;
   }
 }

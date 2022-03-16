@@ -98,6 +98,7 @@ public final class Constants {
     
     
     public static final double ELEVATOR_HEIGHT_TOLERANCE = Units.inchesToMeters(0.1);//tolerance for elevator
+    public static final double ELEVATOR_HEIGHT_LOOSE_TOLERANCE = Units.inchesToMeters(0.5);//tolerance for elevator
     public static final double ARM_ANGLE_TOLERANCE = Units.degreesToRadians(1.0);
 
     public static final double RUNG_ANGLE = Units.degreesToRadians(-22.0);//angle to clamp back on rung for raiseToBar command
