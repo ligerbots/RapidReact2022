@@ -12,6 +12,7 @@ public class SetElevatorHeight extends CommandBase {
   /** Creates a new SetElevatorHeight. */
   Climber m_climber;
   double [] m_height;
+  double m_tolerance;
 
   // flag to identify if we're going to Zero
   boolean m_goingToZero;
@@ -19,13 +20,19 @@ public class SetElevatorHeight extends CommandBase {
   // Did we hit the limit switch?
   boolean [] m_hitLimitSwitch = {false, false};
 
-  public SetElevatorHeight(Climber climber, double height) {
+  public SetElevatorHeight(Climber climber, double height, double tolerance) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_climber = climber;
     m_height[0] = height;
     m_height[1] = height;
+    m_tolerance = tolerance;
 
     m_goingToZero = (height == Constants.ELEVATOR_MIN_HEIGHT);
+  }
+
+  // Constructor with default tolerance
+  public SetElevatorHeight(Climber climber, double height) {
+    SetElevatorHeight(climber, height, Constants.ELEVATOR_HEIGHT_TOLERANCE);
   }
 
   // Called when the command is initially scheduled.
@@ -33,18 +40,23 @@ public class SetElevatorHeight extends CommandBase {
   public void initialize() {
     // Initialize each height
     m_climber.setElevatorHeight(0, m_height[0]);
-    m_climber.setElevatorHeight(0, m_height[0]);
+    m_climber.setElevatorHeight(1, m_height[1]);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
 
-    // if we're going to zero, we need to make sure both elevators hit the limit switch
+    // If we're going to Zero, we have to check things here and potentially change the 
+    // requested elevator height.
     if (m_goingToZero) {
-      // loop over both elevators
+      // We're going to need to check each elevator independently, so we need a loop
       for (int i = 0; i < 1; i++) {
-        // first check to see if the limit switch was pressed
+        // if we're going to zero, we need to make sure the elevator hit the limit switch
+        // Note that there is a race condition here. In Climber.periodic, it checks for the switch and
+        // ifPressed, it sets the encoder value and also calls setElevatorHeight to 0 which will raise the
+        // elevator slightly and release the switch.
+        // I think Commands run before Subsystems, so we should be OK.
         if (m_climber.m_limitSwitch[i].isPressed()) {
           m_hitLimitSwitch[i] = true;
         } else {
@@ -52,13 +64,13 @@ public class SetElevatorHeight extends CommandBase {
           // did we reach zero?
           if (Math.abs(m_climber.getElevatorHeight()[i] - m_height[i]) < Constants.ELEVATOR_HEIGHT_TOLERANCE) {
             // We reached zero, but since the limit switch was not hit, we need to keep going.
-            m_height[i]
-            m_climber.setElevatorHeight(i, m_height);
-            m_loweredGoal
+            // Lower the elevator height. We'll check next time through to see if the switch isPressed.
+            m_height[i] -= 0.5;
+            m_climber.setElevatorHeight(i, m_height[i]);
           }
         }
       }
-  }
+    }
   }
 
   // Called once the command ends or is interrupted.
@@ -70,10 +82,12 @@ public class SetElevatorHeight extends CommandBase {
   public boolean isFinished() {
     boolean finished = false;
     if (m_goingToZero) {
-      finished = m_climber.m_limitSwitch[0].isPressed()
+      finished = m_hitLimitSwitch[0] && m_hitLimitSwitch[1];
+    } else {
+      double[] arr = m_climber.getElevatorHeight();
+      finished =  Math.abs(arr[0] - m_height) < m_tolerance
+        || Math.abs(arr[1] - m_height) < m_tolerance;
     }
-    double[] arr = m_climber.getElevatorHeight();
-    return Math.abs(arr[0] - m_height) < Constants.ELEVATOR_HEIGHT_TOLERANCE
-    || Math.abs(arr[1] - m_height) < Constants.ELEVATOR_HEIGHT_TOLERANCE;
+    return finished;
   }
 }
