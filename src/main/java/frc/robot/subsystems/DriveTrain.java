@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.hal.SimDouble;
 import edu.wpi.first.math.geometry.Pose2d;
@@ -49,6 +50,11 @@ public class DriveTrain extends SubsystemBase {
     private AHRS m_navX;
 
     public DriveTrain() {
+        // m_rightLeader.configFactoryDefault();
+        m_leftLeader.setNeutralMode(NeutralMode.Coast);
+        m_rightLeader.setNeutralMode(NeutralMode.Coast);
+        m_leftFollower.setNeutralMode(NeutralMode.Coast);
+        m_rightFollower.setNeutralMode(NeutralMode.Coast);
 
         m_rightMotors.setInverted(true);
         m_differentialDrive = new DifferentialDrive(m_leftMotors, m_rightMotors);
@@ -97,7 +103,7 @@ public class DriveTrain extends SubsystemBase {
 
     public double getRightEncoderDistance() {
         // return m_rightEncoder.getDistance();
-        return m_rightLeader.getSelectedSensorPosition() * Constants.DRIVE_FALCON_DISTANCE_PER_UNIT;
+        return -m_rightLeader.getSelectedSensorPosition() * Constants.DRIVE_FALCON_DISTANCE_PER_UNIT;
     }
 
     public double getDistance() {
@@ -111,7 +117,7 @@ public class DriveTrain extends SubsystemBase {
 
     public double getRightEncoderVelocity() {
         // sensor velocity is per 100ms, so an extra scale of 10
-        return m_rightLeader.getSelectedSensorVelocity() * Constants.DRIVE_FALCON_DISTANCE_PER_UNIT * 10.0;
+        return -m_rightLeader.getSelectedSensorVelocity() * Constants.DRIVE_FALCON_DISTANCE_PER_UNIT * 10.0;
     }
 
     public int getLeftEncoderTicks() {
