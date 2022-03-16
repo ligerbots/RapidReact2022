@@ -34,9 +34,6 @@ public class ElevatorDescend extends TrapezoidProfileSubsystem {
   private double m_kPElevator;
   private int m_index;
 
-  private boolean m_tooHigh = false;
-  private boolean m_tooLow = false;
-
   private boolean m_resetElevatorPos = false;
   
   /** Creates a new Elevator. */

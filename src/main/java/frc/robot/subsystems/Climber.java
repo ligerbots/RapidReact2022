@@ -117,6 +117,7 @@ public class Climber extends SubsystemBase {
 
   // sets the elevator to a certain height
   public void setElevatorHeight(double height) {
+    // TODO: This can just call setElevatorHeight(int index, double height) for each index.
     double curHeight = getElevatorHeight()[0];//both motors are similar, getting current height  
     if(height > curHeight){
         m_elevatorAscend[0].resetElevatorPos();
