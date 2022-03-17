@@ -21,6 +21,7 @@ public final class Constants {
     public static final double kvVoltSecondsPerMeter = 2.116;
     public static final double kaVoltSecondsSquaredPerMeter = 0.29224;
     public static final double kPDriveVel = 2.8939; 
+    public static final double kTrackwidth = 0.636;    // 25.02 inches, in meters; physical is 23.5 inches
 
     // Guesses
     public static final double kvVoltSecondsPerRadian = 3.0;
@@ -33,7 +34,6 @@ public final class Constants {
     public static final DCMotor kDriveGearbox = DCMotor.getFalcon500(2);
     public static final double kDriveGearing = 10.125;
     public static final double kWheelDiameterMeters = Units.inchesToMeters(6.0);   // 6 inch wheels
-    public static final double kTrackwidth = Units.inchesToMeters(23.5);    // physical value. should be tuned
     
     // more fake values for ramsete
     public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(kTrackwidth);
