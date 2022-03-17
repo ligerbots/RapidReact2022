@@ -107,8 +107,8 @@ public class RobotContainer {
         JoystickButton farm8 = new JoystickButton(m_farm, 8);
         farm8.whenPressed(new ClimbToNextBar(m_climber));
 
-        JoystickButton farm11 = new JoystickButton(m_farm, 11);
-        farm11.whenPressed(new ResetElevatorEncoder(m_climber));
+        // JoystickButton farm11 = new JoystickButton(m_farm, 11);
+        // farm11.whenPressed(new ResetElevatorEncoder(m_climber));
 
         JoystickButton farm13 = new JoystickButton(m_farm, 13);
         farm13.whenPressed(new SetArmCoast(m_climber));
