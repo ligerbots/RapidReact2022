@@ -1,3 +1,8 @@
 SysId
 
 Navx I2c
+
+Needed to use the internal Falcon encoders.
+
+For track width, the tool did not work, but you can get the numbers if you export the JSON to CSV.
+Note that it appears that the "Gyro" is really in radians, not the indicated degrees.
