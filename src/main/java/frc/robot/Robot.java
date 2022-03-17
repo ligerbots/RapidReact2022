@@ -4,7 +4,6 @@
 
 package frc.robot;
 
-import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -12,10 +11,6 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.AutoCommandInterface;
 import frc.robot.commands.OneBallAuto;
-import frc.robot.commands.RaiseToBar;
-import frc.robot.commands.SetArmAngle;
-import frc.robot.commands.SetClimber;
-import frc.robot.commands.SetElevatorHeight;
 import frc.robot.commands.TrajectoryPlotter;
 import frc.robot.commands.TwoBallAutoCurved;
 import frc.robot.commands.TwoBallAutoStraight;
@@ -30,7 +25,7 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
   private RobotContainer m_robotContainer;
   private TrajectoryPlotter m_plotter;
-  private SendableChooser<Command> m_chosenAuto = new SendableChooser<>();
+  private SendableChooser<AutoCommandInterface> m_chosenAuto = new SendableChooser<>();
   private AutoCommandInterface m_prevAutoCommand = null;
 
   /**
@@ -88,16 +83,16 @@ public class Robot extends TimedRobot {
 
   @Override
   public void disabledPeriodic() {
-    // AutoCommandInterface autoCommandInterface = m_chosenAuto.getSelected();
-    // if (autoCommandInterface != null && autoCommandInterface != m_prevAutoCommand) {
-    //   m_robotContainer.getDriveTrain().setPose(autoCommandInterface.getInitialPose());
-    //   m_prevAutoCommand = autoCommandInterface;
+    AutoCommandInterface autoCommandInterface = m_chosenAuto.getSelected();
+    if (autoCommandInterface != null && autoCommandInterface != m_prevAutoCommand) {
+      m_robotContainer.getDriveTrain().setPose(autoCommandInterface.getInitialPose());
+      m_prevAutoCommand = autoCommandInterface;
 
-    //   if (Robot.isSimulation()) {
-    //     m_plotter.clear();
-    //     autoCommandInterface.plotTrajectory(m_plotter);
-    //   }
-    // }    
+      if (Robot.isSimulation()) {
+        m_plotter.clear();
+        autoCommandInterface.plotTrajectory(m_plotter);
+      }
+    }    
   }
 
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
@@ -133,12 +128,12 @@ public class Robot extends TimedRobot {
     m_robotContainer.getClimber().setBrakeMode(true);
     
     double elevatorCurPos = m_robotContainer.getClimber().getElevatorHeight()[0];
-    if(m_robotContainer.getClimber().m_elevatorAscend[0].m_elevatorAscending){
+    if (m_robotContainer.getClimber().m_elevatorAscend[0].m_elevatorAscending) {
       m_robotContainer.getClimber().m_elevatorAscend[0].resetElevatorPos();
       m_robotContainer.getClimber().m_elevatorAscend[1].resetElevatorPos(); 
       m_robotContainer.getClimber().m_elevatorAscend[0].setGoal(elevatorCurPos);
       m_robotContainer.getClimber().m_elevatorAscend[1].setGoal(elevatorCurPos);
-    }else{
+    } else {
       m_robotContainer.getClimber().m_elevatorDescend[0].resetElevatorPos();
       m_robotContainer.getClimber().m_elevatorDescend[1].resetElevatorPos(); 
       m_robotContainer.getClimber().m_elevatorDescend[0].setGoal(elevatorCurPos);
