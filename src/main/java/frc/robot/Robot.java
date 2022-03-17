@@ -44,12 +44,20 @@ public class Robot extends TimedRobot {
     m_chosenAuto.addOption("TwoBallAutoCurved", 
       new TwoBallAutoCurved(m_robotContainer.getShooter(), m_robotContainer.getIntake(), m_robotContainer.getDriveTrain(), m_robotContainer.getVision())
     );
+  
     m_chosenAuto.addOption("OneBallAuto", 
       new OneBallAuto(m_robotContainer.getShooter(), m_robotContainer.getIntake(), m_robotContainer.getDriveTrain(), m_robotContainer.getVision())
     );
     SmartDashboard.putData("Chosen Auto", m_chosenAuto);
 
     m_plotter = new TrajectoryPlotter(m_robotContainer.getDriveTrain().getField2d());
+
+    // Set climber motors to coast so we can move them if we need to.
+    m_robotContainer.getClimber().setBrakeMode(true);
+
+  SmartDashboard.putNumber("Constants/SetElevatorHeightTest", 0.0);
+  SmartDashboard.putNumber("Constants/SetArmAngleTest", 80.0);
+
   }
 
   /**
@@ -115,7 +123,27 @@ public class Robot extends TimedRobot {
       m_autonomousCommand.cancel();
     }
     m_robotContainer.getDriveCommand().schedule();
+
+    // Set Climber motors to Brake mode
+    m_robotContainer.getClimber().setBrakeMode(true);
+    
+    double elevatorCurPos = m_robotContainer.getClimber().getElevatorHeight()[0];
+    if (m_robotContainer.getClimber().m_elevatorAscend[0].m_elevatorAscending) {
+      m_robotContainer.getClimber().m_elevatorAscend[0].resetElevatorPos();
+      m_robotContainer.getClimber().m_elevatorAscend[1].resetElevatorPos(); 
+      m_robotContainer.getClimber().m_elevatorAscend[0].setGoal(elevatorCurPos);
+      m_robotContainer.getClimber().m_elevatorAscend[1].setGoal(elevatorCurPos);
+    } else {
+      m_robotContainer.getClimber().m_elevatorDescend[0].resetElevatorPos();
+      m_robotContainer.getClimber().m_elevatorDescend[1].resetElevatorPos(); 
+      m_robotContainer.getClimber().m_elevatorDescend[0].setGoal(elevatorCurPos);
+      m_robotContainer.getClimber().m_elevatorDescend[1].setGoal(elevatorCurPos);
+    }
+     
+    m_robotContainer.getClimber().m_arm[0].resetArmPos();
+    m_robotContainer.getClimber().m_arm[1].resetArmPos();  
   }
+
 
   /** This function is called periodically during operator control. */
   @Override

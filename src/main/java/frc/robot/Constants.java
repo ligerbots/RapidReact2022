@@ -54,11 +54,9 @@ public final class Constants {
     public static final int FOLLOWER_RIGHT_CAN_ID = 11;
 
     // Following four CAN IDs are for the climber subsystem
-    public static final int ELEVATOR_LEADER_CAN_ID = 1;
-    public static final int ELEVATOR_FOLLOWER_CAN_ID = 2;
-    public static final int ARM_LEADER_CAN_ID = 7;
-    public static final int ARM_FOLLOWER_CAN_ID = 10;
-
+    public static final int[] ELEVATOR_CAN_IDS = new int[] {7,2}; //{1,2};
+    public static final int[] ARM_CAN_IDS = new int[] {1,10}; //{7,10};
+    
     // intake subsystem
     public static final int INTAKE_MOTOR_CAN_ID = 5; 
     public static final double INTAKE_SHOOTING_SPEED = 0.4;
@@ -94,33 +92,82 @@ public final class Constants {
     public static final int CHUTE_CAN_ID = 6; 
 
     // define constants for high, low, and mid rung
-    public static final int HIGH_RUNG = 192;//192 cm
-    public static final int MID_RUNG = 153;//153 cm
-    public static final int LOW_RUNG = 124;//Top of rung is 124cm
-    public static final double CLIMBER_ANGLE = 22.0;//angle for setClimber()
+    public static final double HIGH_RUNG = 1.92;//192 cm
+    public static final double MID_RUNG = Units.inchesToMeters(23.0);//153 cm
+    public static final double LOW_RUNG = 1.24;//Top of rung is 124cm    
     
+    public static final double ELEVATOR_HEIGHT_TOLERANCE = Units.inchesToMeters(0.1);//tolerance for elevator
+    public static final double ELEVATOR_HEIGHT_LOOSE_TOLERANCE = Units.inchesToMeters(0.5);//tolerance for elevator
+    public static final double ARM_ANGLE_TOLERANCE = Units.degreesToRadians(1.0);
     
-    public static final double ELEVATOR_HEIGHT_TOLERANCE = 0.5;//tolerance for elevator
-    public static final double ARM_ANGLE_TOLERANCE = 0.5;
+    public static final double ELEVATOR_MAX_HEIGHT = Units.inchesToMeters(24.0);// 23.5in = length of elevator when fully extended
+    public static final double ELEVATOR_MIN_HEIGHT = Units.inchesToMeters(0.0);// 0in = length of elevator when fully retracted
+    // right elevator 0 to -21.5
+    
+    // Feedforward constants for the each Climber Arm
+    public static final double ARM_KS = 0.182; // TODO: This may need to be tuned
+    // The following constants are computed from https://www.reca.lc/arm
+    public static final double ARM_KG = 2.07;
+    public static final double ARM_KV = 1.83;
+    public static final double ARM_KA = 0.08;
 
-    public static final double RUNG_ANGLE = -22.0;//angle to clamp back on rung for raiseToBar command
-    
-    public static final double ELEVATOR_MAX_HEIGHT = 200.0;//length of elevator when fully extended
-    public static final double ELEVATOR_MIN_HEIGHT = 100.0;//length of elevator when fully retracted
+    // Constants to limit the arm rotation speed
+    public static final double ARM_MAX_VEL_RAD_PER_SEC = Math.toRadians(120.0);
+    public static final double ARM_MAX_ACC_RAD_PER_SEC_SQ = Math.toRadians(90);
+    public static final double ARM_OFFSET_RAD = Math.toRadians(85.0);
+
+    // PID Constants for the Arm PID controller
+    // Since we're using Trapeziodal control, all values will be 0 except for P
+    public static final double ARM_K_P = 10.0;
+    public static final double ARM_K_I = 0.0;
+    public static final double ARM_K_D = 0.0;
+    public static final double ARM_K_FF = 0.0;
+
+    // Limit the arm rotation
+    // TODO: This is relative to 0 starting position. Need to use absolute encoder and get better values
+    public static final double ARM_MAX_ANGLE = Units.degreesToRadians(160.0);
+    public static final double ARM_MIN_ANGLE = Units.degreesToRadians(20.0);
 
     // the angle for the arm to rotate to turn the elevator towards the next bar
-    public static final double ARM_ANGLE_TO_NEXT_BAR = 130.0;
-    public static final double ARM_ADJUST_ANGLE = 160.0; // the angle the arm needs to rotate to follow the motion of the elevator when retracting
+    public static final double ARM_ANGLE_TO_NEXT_BAR = Units.degreesToRadians(130.0);
 
     // the angle for the arm to rotate to the left side of the next bar
-    public static final double ARM_TO_THE_LEFT_ANGLE = 45.0;
-    public static final double ARM_GRAB_THE_BAR = 90.0;
-
-
+    public static final double ARM_TO_THE_LEFT_ANGLE = Units.degreesToRadians(70.0);
+    public static final double ARM_GRAB_THE_BAR = Units.degreesToRadians(90.0);
+    public static final double ARM_ROTATION_ELEVATOR_TOUCH_BAR = Units.degreesToRadians(110.0);
 
     // the height of the elevator to retract down to certain point where the arm can get to the other side of the bar
-    public static final double ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE = ELEVATOR_MIN_HEIGHT + 20.0;
-    public static final double ARM_ANGLE_FOR_ELEVATOR_CLEARANCE = ARM_GRAB_THE_BAR - 10.0;
+    public static final double ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE = Units.inchesToMeters(4.0);
+    public static final double ARM_ANGLE_FOR_ELEVATOR_CLEARANCE = Units.degreesToRadians(70.0);
+
+    public static final double ELEVATOR_HEIGHT_SECURE_ON_BAR = Units.inchesToMeters(22.0);
+
+    // Feedforward constants for the each Climber Arm
+    public static final double ELEVATOR_KS = 0.182; // TODO: This may need to be tuned
+    // The following constants are computed from https://www.reca.lc/arm
+    public static final double ELEVATOR_KG = 1.19;
+    public static final double ELEVATOR_KV = 7.67;
+    public static final double ELEVATOR_KA = 0.19;
+
+    // Constants to limit the elevator veocity and accel
+
+    public static final double ELEVATOR_MAX_VEL_METER_PER_SEC_ASCEND = Units.inchesToMeters(50.0);
+    public static final double ELEVATOR_MAX_ACC_METER_PER_SEC_SQ_ASCEND = Units.inchesToMeters(25.0);
+
+    public static final double ELEVATOR_MAX_VEL_METER_PER_SEC_DESCEND = Units.inchesToMeters(60.0);
+    public static final double ELEVATOR_MAX_ACC_METER_PER_SEC_SQ_DESCEND = Units.inchesToMeters(40.0);
+    public static final double ELEVATOR_OFFSET_METER = 0.0;
+
+    public static final double ELEVATOR_LIMIT_SWITCH_HEIGHT = Units.inchesToMeters(-0.15);
+
+
+    // PID Constants for the Arm PID controller
+    // Since we're using Trapeziodal control, all values will be 0 except for P
+    public static final double ELEVATOR_K_P0 = 50;
+    public static final double ELEVATOR_K_P1 = 50;
+    public static final double ELEVATOR_K_I = 0.0;
+    public static final double ELEVATOR_K_D = 0.0;
+    public static final double ELEVATOR_K_FF = 0.0;
 
     // drivetrain turning constants
     public static final double TURN_TOLERANCE_DEG = 5.;
