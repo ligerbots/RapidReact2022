@@ -50,10 +50,7 @@ public class DriveTrain extends SubsystemBase {
     private AHRS m_navX;
 
     public DriveTrain() {
-        m_leftLeader.setNeutralMode(NeutralMode.Coast);
-        m_leftFollower.setNeutralMode(NeutralMode.Coast);
-        m_rightLeader.setNeutralMode(NeutralMode.Coast);
-        m_rightFollower.setNeutralMode(NeutralMode.Coast);
+        setMotorMode(NeutralMode.Coast);
     
         m_rightMotors.setInverted(true);
         m_differentialDrive = new DifferentialDrive(m_leftMotors, m_rightMotors);
@@ -83,6 +80,13 @@ public class DriveTrain extends SubsystemBase {
             m_fieldSim = new Field2d();
             SmartDashboard.putData("Field", m_fieldSim);
         }
+    }
+
+    public void setMotorMode(NeutralMode m) {
+        m_leftLeader.setNeutralMode(m);
+        m_leftFollower.setNeutralMode(m);
+        m_rightLeader.setNeutralMode(m);
+        m_rightFollower.setNeutralMode(m); 
     }
 
     // Get the current set speed of the speed controllers
