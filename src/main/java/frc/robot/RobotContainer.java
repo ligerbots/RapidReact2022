@@ -24,6 +24,7 @@ import frc.robot.commands.SetClimber;
 // import frc.robot.commands.SetElevatorHeight;
 import frc.robot.commands.SetElevatorHeightTest;
 import frc.robot.commands.SetOneElevatorHeightTest;
+import frc.robot.commands.SetVisionMode;
 // import frc.robot.commands.TuneShooterCommand;
 import frc.robot.commands.VacuumMode;
 import frc.robot.subsystems.Climber;
@@ -31,6 +32,7 @@ import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Vision;
+import frc.robot.subsystems.Vision.VisionMode;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -130,8 +132,13 @@ public class RobotContainer {
         JoystickButton farm15 = new JoystickButton(m_farm, 15);
         farm15.whenPressed(new SetArmBrake(m_climber));        
         
-        JoystickButton farm4 = new JoystickButton(m_farm, 4);
-        farm4.whenPressed(new DeployIntake(m_driveTrain));
+        //Bind buttons for vision modes.
+        JoystickButton farm12 = new JoystickButton(m_farm, 12);
+        farm12.whenPressed(new SetVisionMode(m_vision, VisionMode.INTAKE)); 
+
+        JoystickButton farm14 = new JoystickButton(m_farm, 14);
+        farm14.whenPressed(new SetVisionMode(m_vision, VisionMode.SHOOTER)); 
+
     }
 
     private class Throttle implements DoubleSupplier {
