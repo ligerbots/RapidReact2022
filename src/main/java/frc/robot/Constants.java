@@ -16,11 +16,6 @@ import edu.wpi.first.math.util.Units;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-    // Temporary Encoder's Distance Per Pulse for simulation
-    public static final double ENCODER_DISTANCE_PER_PULSE = Units.inchesToMeters(Math.PI * 6.0 / 1024);
-
-    public static final double FALCON_UNITS_PER_RPM = 2048.0 / 600.0;
-
     // Temporary variable values for simulation
     public static final double kvVoltSecondsPerMeter = 2.64; 
     public static final double kaVoltSecondsSquaredPerMeter = 0.324; 
@@ -31,10 +26,11 @@ public final class Constants {
     LinearSystemId.identifyDrivetrainSystem(kvVoltSecondsPerMeter, kaVoltSecondsSquaredPerMeter,
         kvVoltSecondsPerRadian, kaVoltSecondsSquaredPerRadian);
 
-    public static final DCMotor kDriveGearbox = DCMotor.getNEO(2);
-    public static final double kDriveGearing = 8;
-    public static final double kWheelDiameterMeters = 0.1016;
-    public static final double kTrackwidth = 0.6604;
+    public static final DCMotor kDriveGearbox = DCMotor.getFalcon500(2);
+    public static final double kDriveGearing = 10.125;
+    public static final double kWheelDiameterMeters = Units.inchesToMeters(6.0);   // 6 inch wheels
+    public static final double kTrackwidth = Units.inchesToMeters(23.5);
+    
     // more fake values for ramsete
     public static final double ksVolts = 0.182; 
     public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(kTrackwidth);
@@ -45,11 +41,17 @@ public final class Constants {
     public static final double kRamseteB = 2; // generic ramsete values
     public static final double kRamseteZeta = 0.7; // generic ramsete values
 
+    // Grayhill is 256 ticks per revolution. Wheel diameter is 6".
+    public static final double ENCODER_DISTANCE_PER_PULSE = Units.inchesToMeters(Math.PI * 6.0 / 256);
+
+    public static final double FALCON_UNITS_PER_RPM = 2048.0 / 600.0;
+    public static final double DRIVE_FALCON_DISTANCE_PER_UNIT = Units.inchesToMeters(Math.PI * 6.0) / kDriveGearing / 2048.0;
+
     // Following four CAN IDs are for the drivetrain subsystem
-    public static final int LEADER_LEFT_CAN_ID = 9; 
-    public static final int LEADER_RIGHT_CAN_ID = 11;
-    public static final int FOLLOWER_LEFT_CAN_ID = 12;
-    public static final int FOLLOWER_RIGHT_CAN_ID = 8;
+    public static final int LEADER_LEFT_CAN_ID = 12;
+    public static final int LEADER_RIGHT_CAN_ID = 8;
+    public static final int FOLLOWER_LEFT_CAN_ID = 9; 
+    public static final int FOLLOWER_RIGHT_CAN_ID = 11;
 
     // Following four CAN IDs are for the climber subsystem
     public static final int[] ELEVATOR_CAN_IDS = new int[] {7,2}; //{1,2};
@@ -88,8 +90,6 @@ public final class Constants {
 
     // chute subsystem
     public static final int CHUTE_CAN_ID = 6; 
-
-    public static final int GRAYHILL_ENCODER_DISTANCE_PER_PULSE = 1; //TODO: Replace this value with a correct one 
 
     // define constants for high, low, and mid rung
     public static final double HIGH_RUNG = 1.92;//192 cm

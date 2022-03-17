@@ -7,7 +7,7 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
-import edu.wpi.first.wpilibj.Encoder;
+// import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.SPI.Port;
@@ -36,15 +36,15 @@ public class DriveTrain extends SubsystemBase {
 
     private DifferentialDrive m_differentialDrive;
 
-    private Encoder m_leftEncoder = new Encoder(Constants.LEFT_ENCODER_PORTS[0], Constants.LEFT_ENCODER_PORTS[1]);
-    private Encoder m_rightEncoder = new Encoder(Constants.RIGHT_ENCODER_PORTS[0], Constants.RIGHT_ENCODER_PORTS[1]);
+    // private Encoder m_leftEncoder = new Encoder(Constants.LEFT_ENCODER_PORTS[0], Constants.LEFT_ENCODER_PORTS[1]);
+    // private Encoder m_rightEncoder = new Encoder(Constants.RIGHT_ENCODER_PORTS[0], Constants.RIGHT_ENCODER_PORTS[1]);
 
     private DifferentialDrivetrainSim m_differentialDriveSim;
     private EncoderSim m_leftEncoderSim;
     private EncoderSim m_rightEncoderSim;
     private Field2d m_fieldSim;
     private SimDouble m_gyroAngleSim;
-
+    
     private DifferentialDriveOdometry m_odometry;
 
     private AHRS m_navX;
@@ -59,9 +59,10 @@ public class DriveTrain extends SubsystemBase {
         m_differentialDrive = new DifferentialDrive(m_leftMotors, m_rightMotors);
         m_differentialDrive.setSafetyEnabled(false);
 
-        m_leftEncoder.setDistancePerPulse(Constants.ENCODER_DISTANCE_PER_PULSE);
-        m_rightEncoder.setDistancePerPulse(Constants.ENCODER_DISTANCE_PER_PULSE);
-
+        // m_leftEncoder.setDistancePerPulse(Constants.ENCODER_DISTANCE_PER_PULSE);
+        // m_rightEncoder.setDistancePerPulse(Constants.ENCODER_DISTANCE_PER_PULSE);
+        // m_rightEncoder.setReverseDirection(true);
+        
         m_odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(0));
         m_navX = new AHRS(Port.kMXP, (byte) 200);
 
@@ -75,8 +76,8 @@ public class DriveTrain extends SubsystemBase {
                     Constants.kWheelDiameterMeters / 2.0,
                     null);
 
-            m_leftEncoderSim = new EncoderSim(m_leftEncoder);
-            m_rightEncoderSim = new EncoderSim(m_rightEncoder);
+            // m_leftEncoderSim = new EncoderSim(m_leftEncoder);
+            // m_rightEncoderSim = new EncoderSim(m_rightEncoder);
             m_gyroAngleSim = new SimDeviceSim("navX-Sensor[0]").getDouble("Yaw");
 
             m_fieldSim = new Field2d();
@@ -95,19 +96,37 @@ public class DriveTrain extends SubsystemBase {
 
     // Get stats about the encoders
     public double getLeftEncoderDistance() {
-        return m_leftEncoder.getDistance();
+        // return m_leftEncoder.getDistance();
+        return m_leftLeader.getSelectedSensorPosition() * Constants.DRIVE_FALCON_DISTANCE_PER_UNIT;
     }
 
     public double getRightEncoderDistance() {
-        return m_rightEncoder.getDistance();
+        // return m_rightEncoder.getDistance();
+        return -m_rightLeader.getSelectedSensorPosition() * Constants.DRIVE_FALCON_DISTANCE_PER_UNIT;
+    }
+
+    public double getDistance() {
+        return 0.5 * (getLeftEncoderDistance() + getRightEncoderDistance());
+    }
+
+    public double getLeftEncoderVelocity() {
+        // sensor velocity is per 100ms, so an extra scale of 10
+        return m_leftLeader.getSelectedSensorVelocity() * Constants.DRIVE_FALCON_DISTANCE_PER_UNIT * 10.0;
+    }
+
+    public double getRightEncoderVelocity() {
+        // sensor velocity is per 100ms, so an extra scale of 10
+        return -m_rightLeader.getSelectedSensorVelocity() * Constants.DRIVE_FALCON_DISTANCE_PER_UNIT * 10.0;
     }
 
     public int getLeftEncoderTicks() {
-        return m_leftEncoder.get();
+        // return m_leftEncoder.get();
+        return (int)m_leftLeader.getSelectedSensorPosition();
     }
 
     public int getRightEncoderTicks() {
-        return m_rightEncoder.get();
+        // return m_rightEncoder.get();
+        return (int)m_rightLeader.getSelectedSensorPosition();
     }
 
     // Get and Set odometry values
@@ -116,9 +135,12 @@ public class DriveTrain extends SubsystemBase {
     }
 
     public void setPose(Pose2d pose) {
-        m_leftEncoder.reset();
-        m_rightEncoder.reset();
-        if(Robot.isSimulation()) m_differentialDriveSim.setPose(new Pose2d()); // drive sim doesn't seem to get reset anymore?
+        // m_leftEncoder.reset();
+        // m_rightEncoder.reset();
+        m_leftLeader.setSelectedSensorPosition(0.0);
+        m_rightLeader.setSelectedSensorPosition(0.0);
+
+        if (Robot.isSimulation()) m_differentialDriveSim.setPose(new Pose2d()); // drive sim doesn't seem to get reset anymore?
         m_odometry.resetPosition(pose, Rotation2d.fromDegrees(getGyroAngle()));
     }
 
@@ -133,8 +155,8 @@ public class DriveTrain extends SubsystemBase {
 
     @Override
     public void periodic() {
-        m_odometry.update(Rotation2d.fromDegrees(getGyroAngle()), m_leftEncoder.getDistance(),
-                m_rightEncoder.getDistance());
+        m_odometry.update(Rotation2d.fromDegrees(getGyroAngle()), getLeftEncoderDistance(),
+                getRightEncoderDistance());
 
         SmartDashboard.putNumber("driveTrain/heading", getHeading());
         SmartDashboard.putNumber("driveTrain/NavX gyro", getGyroAngle());
@@ -151,7 +173,7 @@ public class DriveTrain extends SubsystemBase {
     }
 
     public void drive(double throttle, double rotate, boolean squaredInput) {
-        SmartDashboard.putNumber("driveTrain/throttle", throttle);
+        // SmartDashboard.putNumber("driveTrain/throttle", throttle);
 
         m_differentialDrive.arcadeDrive(throttle, -rotate, squaredInput);
     }
@@ -161,9 +183,12 @@ public class DriveTrain extends SubsystemBase {
         m_rightMotors.setVoltage(rightVolts);
         m_differentialDrive.feed();
     }
+
     public DifferentialDriveWheelSpeeds getWheelSpeeds () {
-        return new DifferentialDriveWheelSpeeds(m_leftEncoder.getRate(), m_rightEncoder.getRate());
+        // return new DifferentialDriveWheelSpeeds(m_leftEncoder.getRate(), m_rightEncoder.getRate());
+        return new DifferentialDriveWheelSpeeds(getLeftEncoderVelocity(), getRightEncoderVelocity());
     }
+
     @Override
     public void simulationPeriodic() {
         // Set the inputs to the system. Note that we need to convert

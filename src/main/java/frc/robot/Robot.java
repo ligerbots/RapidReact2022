@@ -43,25 +43,26 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
 
-    m_chosenAuto.addOption("OneBallAuto", 
-      new OneBallAuto(m_robotContainer.getShooter(), m_robotContainer.getIntake(), m_robotContainer.getDriveTrain(), m_robotContainer.getVision())
-    );
-    m_chosenAuto.addOption("TwoBallAutoStraight", 
+    m_chosenAuto.setDefaultOption("TwoBallAutoStraight", 
       new TwoBallAutoStraight(m_robotContainer.getShooter(), m_robotContainer.getIntake(), m_robotContainer.getDriveTrain(), m_robotContainer.getVision())
     );
-    m_chosenAuto.setDefaultOption("TwoBallAutoCurved", 
+    m_chosenAuto.addOption("TwoBallAutoCurved", 
       new TwoBallAutoCurved(m_robotContainer.getShooter(), m_robotContainer.getIntake(), m_robotContainer.getDriveTrain(), m_robotContainer.getVision())
     );
   
-  SmartDashboard.putNumber("Constants/SetElevatorHeightTest", 0.0);
-  SmartDashboard.putNumber("Constants/SetArmAngleTest", 80.0);
-
+    m_chosenAuto.addOption("OneBallAuto", 
+      new OneBallAuto(m_robotContainer.getShooter(), m_robotContainer.getIntake(), m_robotContainer.getDriveTrain(), m_robotContainer.getVision())
+    );
     SmartDashboard.putData("Chosen Auto", m_chosenAuto);
 
     m_plotter = new TrajectoryPlotter(m_robotContainer.getDriveTrain().getField2d());
 
     // Set climber motors to coast so we can move them if we need to.
     m_robotContainer.getClimber().setBrakeMode(true);
+
+  SmartDashboard.putNumber("Constants/SetElevatorHeightTest", 0.0);
+  SmartDashboard.putNumber("Constants/SetArmAngleTest", 80.0);
+
   }
 
   /**

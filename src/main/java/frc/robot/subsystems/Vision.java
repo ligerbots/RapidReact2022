@@ -21,7 +21,7 @@ public class Vision extends SubsystemBase {
     public static final VisionMode DEFAULT_MODE = VisionMode.INTAKE;
     private static final double[] EMPTY_TARGET_INFO = new double[] {0.0,0.0,0.0,0.0,0.0,0.0,0.0};
 
-    private Relay m_spike;
+    private Relay m_relay;
     private DriveTrain m_driveTrain;
     private double[] m_targetInfoSim = EMPTY_TARGET_INFO.clone();
     private double[] m_lastResult = EMPTY_TARGET_INFO;
@@ -32,7 +32,7 @@ public class Vision extends SubsystemBase {
     // Note: driveTrain is needed for simulation mode only
 
     public Vision(DriveTrain driveTrain) {
-        m_spike = new Relay(0);
+        m_relay = new Relay(0);
         m_driveTrain = driveTrain;
 
         // start the camera in hubfinder for auto, but don't turn on the LED
@@ -107,6 +107,6 @@ public class Vision extends SubsystemBase {
     }
 
     public void setLedRing (boolean on) {
-        m_spike.set(on ? Value.kReverse : Value.kOff);
+        m_relay.set(on ? Value.kReverse : Value.kOff);
     }
 }
