@@ -29,7 +29,8 @@ public final class Constants {
     public static final DCMotor kDriveGearbox = DCMotor.getFalcon500(2);
     public static final double kDriveGearing = 10.125;
     public static final double kWheelDiameterMeters = Units.inchesToMeters(6.0);   // 6 inch wheels
-    public static final double kTrackwidth = 0.6604;
+    public static final double kTrackwidth = Units.inchesToMeters(23.5);
+    
     // more fake values for ramsete
     public static final double ksVolts = 0.182; 
     public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(kTrackwidth);
