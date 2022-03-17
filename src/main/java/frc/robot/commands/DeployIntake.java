@@ -20,7 +20,7 @@ public class DeployIntake extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_driveTrain.tankDriveVolts(2.0, 2.0);
+    m_driveTrain.tankDriveVolts(-3.0, -3.0);
     m_timer.start();
   }
 

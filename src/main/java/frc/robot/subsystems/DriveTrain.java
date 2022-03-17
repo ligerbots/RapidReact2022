@@ -51,10 +51,10 @@ public class DriveTrain extends SubsystemBase {
 
     public DriveTrain() {
         m_leftLeader.setNeutralMode(NeutralMode.Coast);
-        m_rightLeader.setNeutralMode(NeutralMode.Coast);
         m_leftFollower.setNeutralMode(NeutralMode.Coast);
+        m_rightLeader.setNeutralMode(NeutralMode.Coast);
         m_rightFollower.setNeutralMode(NeutralMode.Coast);
-
+    
         m_rightMotors.setInverted(true);
         m_differentialDrive = new DifferentialDrive(m_leftMotors, m_rightMotors);
         m_differentialDrive.setSafetyEnabled(false);
@@ -165,8 +165,11 @@ public class DriveTrain extends SubsystemBase {
 
         SmartDashboard.putNumber("driveTrain/left encoder", getLeftEncoderTicks());
         SmartDashboard.putNumber("driveTrain/right encoder", getRightEncoderTicks());
-        SmartDashboard.putNumber("driveTrain/left distance", getLeftEncoderDistance());
-        SmartDashboard.putNumber("driveTrain/right distance", getRightEncoderDistance());
+
+        SmartDashboard.putNumber("driveTrain/LeftFollower", m_leftFollower.getSelectedSensorPosition());
+        SmartDashboard.putNumber("driveTrain/LeftLeader", m_leftLeader.getSelectedSensorPosition());
+        SmartDashboard.putNumber("driveTrain/RightFollower", m_rightFollower.getSelectedSensorPosition());
+        SmartDashboard.putNumber("driveTrain/RightLeader", m_rightLeader.getSelectedSensorPosition());
     }
 
     public void drive(double throttle, double rotate, boolean squaredInput) {
