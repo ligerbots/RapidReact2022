@@ -84,6 +84,9 @@ public class ShooterCommand extends CommandBase {
 
             case SPEED_UP_SHOOTER:
                 m_shooterSpeeds = Shooter.calculateShooterSpeeds(m_distance, m_upperHub);
+                System.out.println("distance " + m_distance + " chute speed " + m_shooterSpeeds.chute + " bottom " + m_shooterSpeeds.bottom 
+                        + " top " + m_shooterSpeeds.top);
+
                 // turn on the two motors on the shooter, let the chute and intake wait for the
                 // shots
                 m_shooter.setShooterRpms(m_shooterSpeeds.top, m_shooterSpeeds.bottom);
