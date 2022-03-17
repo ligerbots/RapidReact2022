@@ -14,7 +14,7 @@ import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-import edu.wpi.first.wpilibj.DigitalInput;
+// import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -26,17 +26,24 @@ public class Shooter extends SubsystemBase {
     CANSparkMax m_chuteMotor;
     // WPI_TalonFX for the shooter
     WPI_TalonFX m_topShooterMotor, m_bottomShooterMotor;
+
     // Limit Switch for Intake
     // TODO: change to color sensor
-    DigitalInput m_limitSwitch1, m_limitSwitch2;
+    // DigitalInput m_limitSwitch1, m_limitSwitch2;
 
-    static TreeMap<Double, ShooterSpeeds> shooterSpeeds = new TreeMap<>(Map.ofEntries(//table for upper hub
-            Map.entry(1., new ShooterSpeeds(0.5, 0.5, 0.5)),
-            Map.entry(2., new ShooterSpeeds(0.5, 0.5, 0.5)),
-            Map.entry(3., new ShooterSpeeds(0.5, 0.5, 0.5))
-            ));
-   
-    
+    // lookup table for upper hub speeds
+    static final TreeMap<Double, ShooterSpeeds> shooterSpeeds = new TreeMap<>(Map.ofEntries(
+            Map.entry(0.0, new ShooterSpeeds(900.0, 900.0, 0.3)),    // actually lower hub, but safer to include
+            Map.entry(62.0, new ShooterSpeeds(900.0, 900.0, 0.3)),   // actually lower hub, but safer to include
+            Map.entry(71.0, new ShooterSpeeds(1450.0, 1700.0, 0.3)),
+            Map.entry(84.0, new ShooterSpeeds(1600.0, 1600.0, 0.3)),
+            Map.entry(92.0, new ShooterSpeeds(1600.0, 1600.0, 0.3)),
+            Map.entry(102.0, new ShooterSpeeds(1700.0, 1700.0, 0.3)),
+            Map.entry(163.0, new ShooterSpeeds(1800.0, 2100.0, 0.3))));
+
+    // values for lowerHub
+    static final ShooterSpeeds lowHubSpeeds = new ShooterSpeeds(900.0, 900.0, 0.3);
+
 
     // Shooter class constructor, initialize arrays for motors controllers,
     // encoders, and SmartDashboard data
@@ -46,8 +53,8 @@ public class Shooter extends SubsystemBase {
         m_topShooterMotor = new WPI_TalonFX(Constants.TOP_SHOOTER_CAN_ID);
         m_bottomShooterMotor = new WPI_TalonFX(Constants.BOTTOM_SHOOTER_CAN_ID);
 
-        m_limitSwitch1 = new DigitalInput(Constants.LIMIT_SWITCH_ONE);
-        m_limitSwitch2 = new DigitalInput(Constants.LIMIT_SWITCH_TWO);
+        // m_limitSwitch1 = new DigitalInput(Constants.LIMIT_SWITCH_ONE);
+        // m_limitSwitch2 = new DigitalInput(Constants.LIMIT_SWITCH_TWO);
 
         // Config the Velocity closed loop gains in slot0
         m_topShooterMotor.config_kP(0, Constants.SHOOTER_KP);
@@ -68,8 +75,6 @@ public class Shooter extends SubsystemBase {
             this.top = top;
             this.bottom = bottom;
             this.chute = chute;
-            
-
         }
 
         public ShooterSpeeds interpolate(ShooterSpeeds other, double ratio) {
@@ -80,19 +85,21 @@ public class Shooter extends SubsystemBase {
         }
     }
 
-
     public static ShooterSpeeds calculateShooterSpeeds(double distance, boolean upperHub) {
-        if(upperHub == false){//if shooting to lowerHub, then return shooterSpeed with values for lowerHub
-            return new ShooterSpeeds(0, 0, 0);//values for lowerHub, change later
+        if (upperHub == false) {
+            // if shooting to lowerHub, then return shooterSpeed with values for lowerHub
+            return lowHubSpeeds;
         }
+
         Map.Entry<Double, ShooterSpeeds> before = shooterSpeeds.floorEntry(distance);
         Map.Entry<Double, ShooterSpeeds> after = shooterSpeeds.ceilingEntry(distance);
         if (before == null && after == null)
-            return new ShooterSpeeds(0, 0, 0); // this should never happen b/c shooterSpeeds should have at least 1 element
+            return lowHubSpeeds; // this should never happen b/c shooterSpeeds should have at least 1 element
         if (before == null)
             return after.getValue();
         if (after == null)
             return before.getValue();
+            
         double ratio = (distance - before.getKey()) / (after.getKey() - before.getKey());
         return before.getValue().interpolate(after.getValue(), ratio);
     }
@@ -123,6 +130,6 @@ public class Shooter extends SubsystemBase {
     }
 
     public void setChuteSpeed(double chute) {
-        m_chuteMotor.set(chute);
+        m_chuteMotor.set(-chute);
     }
 }
