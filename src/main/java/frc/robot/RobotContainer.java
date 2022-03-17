@@ -103,7 +103,7 @@ public class RobotContainer {
     private class Turn implements DoubleSupplier {
         @Override
         public double getAsDouble() {
-            return -0.5 * m_xbox.getRightX();
+            return -0.75 * m_xbox.getRightX();
         }
     }
 
