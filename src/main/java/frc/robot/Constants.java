@@ -94,15 +94,11 @@ public final class Constants {
     // define constants for high, low, and mid rung
     public static final double HIGH_RUNG = 1.92;//192 cm
     public static final double MID_RUNG = Units.inchesToMeters(23.0);//153 cm
-    public static final double LOW_RUNG = 1.24;//Top of rung is 124cm
-    public static final double CLIMBER_ANGLE = Units.degreesToRadians(22.0);//angle for setClimber()
-    
+    public static final double LOW_RUNG = 1.24;//Top of rung is 124cm    
     
     public static final double ELEVATOR_HEIGHT_TOLERANCE = Units.inchesToMeters(0.1);//tolerance for elevator
     public static final double ELEVATOR_HEIGHT_LOOSE_TOLERANCE = Units.inchesToMeters(0.5);//tolerance for elevator
     public static final double ARM_ANGLE_TOLERANCE = Units.degreesToRadians(1.0);
-
-    public static final double RUNG_ANGLE = Units.degreesToRadians(-22.0);//angle to clamp back on rung for raiseToBar command
     
     public static final double ELEVATOR_MAX_HEIGHT = Units.inchesToMeters(24.0);// 23.5in = length of elevator when fully extended
     public static final double ELEVATOR_MIN_HEIGHT = Units.inchesToMeters(0.0);// 0in = length of elevator when fully retracted
