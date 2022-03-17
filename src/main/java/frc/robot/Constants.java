@@ -16,7 +16,7 @@ import edu.wpi.first.math.util.Units;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-    // From SysId March 17
+    // From SysId runs on March 16
     public static final double ksVolts = 0.68402;
     public static final double kvVoltSecondsPerMeter = 2.116;
     public static final double kaVoltSecondsSquaredPerMeter = 0.29224;
