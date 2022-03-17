@@ -16,9 +16,13 @@ import edu.wpi.first.math.util.Units;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-    // Temporary variable values for simulation
-    public static final double kvVoltSecondsPerMeter = 2.64; 
-    public static final double kaVoltSecondsSquaredPerMeter = 0.324; 
+    // From SysId March 17
+    public static final double ksVolts = 0.68402;
+    public static final double kvVoltSecondsPerMeter = 2.116;
+    public static final double kaVoltSecondsSquaredPerMeter = 0.29224;
+    public static final double kPDriveVel = 2.8939; 
+
+    // Guesses
     public static final double kvVoltSecondsPerRadian = 3.0;
     public static final double kaVoltSecondsSquaredPerRadian = 0.3;
 
@@ -29,14 +33,12 @@ public final class Constants {
     public static final DCMotor kDriveGearbox = DCMotor.getFalcon500(2);
     public static final double kDriveGearing = 10.125;
     public static final double kWheelDiameterMeters = Units.inchesToMeters(6.0);   // 6 inch wheels
-    public static final double kTrackwidth = Units.inchesToMeters(23.5);
+    public static final double kTrackwidth = Units.inchesToMeters(23.5);    // physical value. should be tuned
     
     // more fake values for ramsete
-    public static final double ksVolts = 0.182; 
     public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(kTrackwidth);
     public static final double kMaxSpeed = 1.75;
     public static final double kMaxAcceleration = 1.5;
-    public static final double kPDriveVel = 6; 
 
     public static final double kRamseteB = 2; // generic ramsete values
     public static final double kRamseteZeta = 0.7; // generic ramsete values
