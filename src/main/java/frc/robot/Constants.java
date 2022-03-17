@@ -48,10 +48,10 @@ public final class Constants {
     public static final double DRIVE_FALCON_DISTANCE_PER_UNIT = Units.inchesToMeters(Math.PI * 6.0) / kDriveGearing / 2048.0;
 
     // Following four CAN IDs are for the drivetrain subsystem
-    public static final int LEADER_LEFT_CAN_ID = 9; 
-    public static final int LEADER_RIGHT_CAN_ID = 11;
-    public static final int FOLLOWER_LEFT_CAN_ID = 12;
-    public static final int FOLLOWER_RIGHT_CAN_ID = 8;
+    public static final int LEADER_LEFT_CAN_ID = 12;
+    public static final int LEADER_RIGHT_CAN_ID = 8;
+    public static final int FOLLOWER_LEFT_CAN_ID = 9; 
+    public static final int FOLLOWER_RIGHT_CAN_ID = 11;
 
     // Following four CAN IDs are for the climber subsystem
     public static final int ELEVATOR_LEADER_CAN_ID = 1;

@@ -7,7 +7,7 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
-import edu.wpi.first.wpilibj.Encoder;
+// import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.SPI.Port;
@@ -50,7 +50,6 @@ public class DriveTrain extends SubsystemBase {
     private AHRS m_navX;
 
     public DriveTrain() {
-        // m_rightLeader.configFactoryDefault();
         m_leftLeader.setNeutralMode(NeutralMode.Coast);
         m_rightLeader.setNeutralMode(NeutralMode.Coast);
         m_leftFollower.setNeutralMode(NeutralMode.Coast);
@@ -98,12 +97,12 @@ public class DriveTrain extends SubsystemBase {
     // Get stats about the encoders
     public double getLeftEncoderDistance() {
         // return m_leftEncoder.getDistance();
-        return m_leftFollower.getSelectedSensorPosition() * Constants.DRIVE_FALCON_DISTANCE_PER_UNIT;
+        return m_leftLeader.getSelectedSensorPosition() * Constants.DRIVE_FALCON_DISTANCE_PER_UNIT;
     }
 
     public double getRightEncoderDistance() {
         // return m_rightEncoder.getDistance();
-        return -m_rightFollower.getSelectedSensorPosition() * Constants.DRIVE_FALCON_DISTANCE_PER_UNIT;
+        return -m_rightLeader.getSelectedSensorPosition() * Constants.DRIVE_FALCON_DISTANCE_PER_UNIT;
     }
 
     public double getDistance() {
@@ -112,22 +111,22 @@ public class DriveTrain extends SubsystemBase {
 
     public double getLeftEncoderVelocity() {
         // sensor velocity is per 100ms, so an extra scale of 10
-        return m_leftFollower.getSelectedSensorVelocity() * Constants.DRIVE_FALCON_DISTANCE_PER_UNIT * 10.0;
+        return m_leftLeader.getSelectedSensorVelocity() * Constants.DRIVE_FALCON_DISTANCE_PER_UNIT * 10.0;
     }
 
     public double getRightEncoderVelocity() {
         // sensor velocity is per 100ms, so an extra scale of 10
-        return -m_rightFollower.getSelectedSensorVelocity() * Constants.DRIVE_FALCON_DISTANCE_PER_UNIT * 10.0;
+        return -m_rightLeader.getSelectedSensorVelocity() * Constants.DRIVE_FALCON_DISTANCE_PER_UNIT * 10.0;
     }
 
     public int getLeftEncoderTicks() {
         // return m_leftEncoder.get();
-        return (int)m_leftFollower.getSelectedSensorPosition();
+        return (int)m_leftLeader.getSelectedSensorPosition();
     }
 
     public int getRightEncoderTicks() {
         // return m_rightEncoder.get();
-        return (int)m_rightFollower.getSelectedSensorPosition();
+        return (int)m_rightLeader.getSelectedSensorPosition();
     }
 
     // Get and Set odometry values
@@ -138,10 +137,10 @@ public class DriveTrain extends SubsystemBase {
     public void setPose(Pose2d pose) {
         // m_leftEncoder.reset();
         // m_rightEncoder.reset();
-        m_leftFollower.setSelectedSensorPosition(0.0);
-        m_rightFollower.setSelectedSensorPosition(0.0);
+        m_leftLeader.setSelectedSensorPosition(0.0);
+        m_rightLeader.setSelectedSensorPosition(0.0);
 
-        if(Robot.isSimulation()) m_differentialDriveSim.setPose(new Pose2d()); // drive sim doesn't seem to get reset anymore?
+        if (Robot.isSimulation()) m_differentialDriveSim.setPose(new Pose2d()); // drive sim doesn't seem to get reset anymore?
         m_odometry.resetPosition(pose, Rotation2d.fromDegrees(getGyroAngle()));
     }
 
