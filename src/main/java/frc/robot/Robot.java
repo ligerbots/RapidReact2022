@@ -38,7 +38,7 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
 
-    m_chosenAuto.setDefaultOption("TwoBallAutoStraight", 
+    m_chosenAuto.addOption("TwoBallAutoStraight", 
       new TwoBallAutoStraight(m_robotContainer.getShooter(), m_robotContainer.getIntake(), m_robotContainer.getDriveTrain(), m_robotContainer.getVision())
     );
     m_chosenAuto.addOption("TwoBallAutoCurved", 
