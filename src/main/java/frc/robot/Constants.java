@@ -158,7 +158,7 @@ public final class Constants {
 
     public static final double ELEVATOR_MAX_VEL_METER_PER_SEC_DESCEND = Units.inchesToMeters(60.0);
     public static final double ELEVATOR_MAX_ACC_METER_PER_SEC_SQ_DESCEND = Units.inchesToMeters(40.0);
-    public static final double ELEVATOR_OFFSET_METER = Units.inchesToMeters(0.0);
+    public static final double ELEVATOR_OFFSET_METER = Units.inchesToMeters(2.0);
 
     public static final double ELEVATOR_LIMIT_SWITCH_HEIGHT = Units.inchesToMeters(-0.15);
 
