@@ -139,11 +139,6 @@ public class RobotContainer {
 
         JoystickButton farm14 = new JoystickButton(m_farm, 14);
         farm14.whenPressed(new SetVisionMode(m_vision, VisionMode.SHOOTER)); 
-
-        JoystickButton farm16 = new JoystickButton(m_farm, 16);
-        farm16.whenPressed(new TurnAndShoot(m_shooter, m_intake, m_driveTrain, m_vision)); 
-
-
     }
 
     private class Throttle implements DoubleSupplier {
