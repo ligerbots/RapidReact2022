@@ -87,7 +87,7 @@ public class RobotContainer {
 
         // shooting for upperHub
         JoystickButton xboxXButton = new JoystickButton(m_xbox, Constants.XBOX_X);
-        xboxXButton.whenPressed(new ShooterCommand(m_shooter, m_intake, m_vision, true));
+        xboxXButton.whenPressed(new TurnAndShoot(m_shooter, m_intake, m_driveTrain, m_vision));
 
         // shooting for upperHub from tarmac
         JoystickButton xboxAButton = new JoystickButton(m_xbox, Constants.XBOX_A);
