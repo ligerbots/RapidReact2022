@@ -79,22 +79,22 @@ public class ClimberArm extends TrapezoidProfileSubsystem {
     // if in coast mode, stop the periodic() here to prevent the PID from setReference()
     if (m_coastMode)  return;
       
-    // First check if we've gone too far. If we have, reset the setPoint to the limit.
-    m_tooFarForward = encoderValue > Constants.ARM_MAX_ANGLE;
-    SmartDashboard.putBoolean("arm" + m_index + "/too Forward", m_tooFarForward);
-    if (m_tooFarForward) {
-      // TODO: convert MAX to encoder position
-      m_PIDController.setReference(Constants.ARM_MAX_ANGLE, ControlType.kPosition, 0, 0.0);
-      return; // Do we really not want to run super.periodic()?
-    }
+    // // First check if we've gone too far. If we have, reset the setPoint to the limit.
+    // m_tooFarForward = encoderValue > Constants.ARM_MAX_ANGLE;
+    // SmartDashboard.putBoolean("arm" + m_index + "/too Forward", m_tooFarForward);
+    // if (m_tooFarForward) {
+    //   // TODO: convert MAX to encoder position
+    //   m_PIDController.setReference(Constants.ARM_MAX_ANGLE, ControlType.kPosition, 0, 0.0);
+    //   return; // Do we really not want to run super.periodic()?
+    // }
 
-    m_tooFarBack = encoderValue < Constants.ARM_MIN_ANGLE;
-    SmartDashboard.putBoolean("arm" + m_index + "/too Backward", m_tooFarBack);
-    if (m_tooFarBack) {
-      // TODO: convert MIN to encoder position
-      m_PIDController.setReference(Constants.ARM_MIN_ANGLE, ControlType.kPosition, 0, 0.0);
-      return;
-    }
+    // m_tooFarBack = encoderValue < Constants.ARM_MIN_ANGLE;
+    // SmartDashboard.putBoolean("arm" + m_index + "/too Backward", m_tooFarBack);
+    // if (m_tooFarBack) {
+    //   // TODO: convert MIN to encoder position
+    //   m_PIDController.setReference(Constants.ARM_MIN_ANGLE, ControlType.kPosition, 0, 0.0);
+    //   return;
+    // }
     
     // Execute the super class periodic method
     super.periodic();

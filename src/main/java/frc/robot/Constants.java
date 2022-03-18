@@ -56,8 +56,8 @@ public final class Constants {
     public static final int FOLLOWER_RIGHT_CAN_ID = 11;
 
     // Following four CAN IDs are for the climber subsystem
-    public static final int[] ELEVATOR_CAN_IDS = new int[] {7,2}; //{1,2};
-    public static final int[] ARM_CAN_IDS = new int[] {1,10}; //{7,10};
+    public static final int[] ELEVATOR_CAN_IDS = new int[] {1,2}; //{1,2};
+    public static final int[] ARM_CAN_IDS = new int[] {7,10}; //{7,10};
     
     // intake subsystem
     public static final int INTAKE_MOTOR_CAN_ID = 5; 
@@ -116,7 +116,7 @@ public final class Constants {
     // Constants to limit the arm rotation speed
     public static final double ARM_MAX_VEL_RAD_PER_SEC = Math.toRadians(120.0);
     public static final double ARM_MAX_ACC_RAD_PER_SEC_SQ = Math.toRadians(90);
-    public static final double ARM_OFFSET_RAD = Math.toRadians(85.0);
+    public static final double ARM_OFFSET_RAD = Math.toRadians(110.0);
 
     // PID Constants for the Arm PID controller
     // Since we're using Trapeziodal control, all values will be 0 except for P
@@ -131,7 +131,7 @@ public final class Constants {
     public static final double ARM_MIN_ANGLE = Units.degreesToRadians(20.0);
 
     // the angle for the arm to rotate to turn the elevator towards the next bar
-    public static final double ARM_ANGLE_TO_NEXT_BAR = Units.degreesToRadians(130.0);
+    public static final double ARM_ANGLE_TO_NEXT_BAR = Units.degreesToRadians(120.0);
 
     // the angle for the arm to rotate to the left side of the next bar
     public static final double ARM_TO_THE_LEFT_ANGLE = Units.degreesToRadians(70.0);
@@ -158,10 +158,11 @@ public final class Constants {
 
     public static final double ELEVATOR_MAX_VEL_METER_PER_SEC_DESCEND = Units.inchesToMeters(60.0);
     public static final double ELEVATOR_MAX_ACC_METER_PER_SEC_SQ_DESCEND = Units.inchesToMeters(40.0);
-    public static final double ELEVATOR_OFFSET_METER = 0.0;
+    public static final double ELEVATOR_OFFSET_METER = Units.inchesToMeters(0.0);
 
     public static final double ELEVATOR_LIMIT_SWITCH_HEIGHT = Units.inchesToMeters(-0.15);
 
+    public static final double ELEVATOR_START_LATCH_HEIGHT = Units.inchesToMeters(0.5);
 
     // PID Constants for the Arm PID controller
     // Since we're using Trapeziodal control, all values will be 0 except for P

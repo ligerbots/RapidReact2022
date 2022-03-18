@@ -60,7 +60,10 @@ public class ElevatorAscend extends TrapezoidProfileSubsystem {
     m_PIDController.setFF(Constants.ELEVATOR_K_FF);
 
     m_encoder = m_motor.getEncoder();
-    m_encoder.setPosition(0.0);
+    m_encoder.setPosition(Constants.ELEVATOR_OFFSET_METER);
+
+    SmartDashboard.putNumber("AscendingInitialPos", Units.metersToInches(m_encoder.getPosition()));
+
     // Set the position conversion factor.
     m_encoder.setPositionConversionFactor((12.0 / 72.0) * Units.inchesToMeters((5.0/8.0) * Math.PI));
 

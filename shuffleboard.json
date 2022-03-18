@@ -1821,6 +1821,50 @@
               "Colors/Color when true": "#7CFC00FF",
               "Colors/Color when false": "#8B0000FF"
             }
+          },
+          "4,17": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/driveTrain/left distance",
+              "_title": "driveTrain/left distance"
+            }
+          },
+          "6,17": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/driveTrain/right distance",
+              "_title": "driveTrain/right distance"
+            }
+          },
+          "8,17": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/AscendingInitialPos",
+              "_title": "AscendingInitialPos"
+            }
+          },
+          "10,17": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/DescendingInitialPos",
+              "_title": "DescendingInitialPos"
+            }
           }
         }
       }
@@ -1880,32 +1924,6 @@
               "_title": "/SmartDashboard/arm0/P Gain"
             }
           },
-          "4,3": {
-            "size": [
-              2,
-              2
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/arm0/too Backward",
-              "_title": "/SmartDashboard/arm0/too Backward",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "4,5": {
-            "size": [
-              2,
-              2
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/arm0/too Forward",
-              "_title": "/SmartDashboard/arm0/too Forward",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
           "6,4": {
             "size": [
               2,
@@ -1959,32 +1977,6 @@
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/arm1/velocity1",
               "_title": "/SmartDashboard/arm1/velocity1"
-            }
-          },
-          "13,3": {
-            "size": [
-              2,
-              2
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/arm1/too Backward",
-              "_title": "/SmartDashboard/arm1/too Backward",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "13,5": {
-            "size": [
-              2,
-              2
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/arm1/too Forward",
-              "_title": "/SmartDashboard/arm1/too Forward",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
             }
           },
           "6,5": {
@@ -2345,6 +2337,28 @@
               "_title": "/SmartDashboard/elevatorDescending1",
               "Colors/Color when true": "#7CFC00FF",
               "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "3,3": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/AscendingInitialPos",
+              "_title": "/SmartDashboard/AscendingInitialPos"
+            }
+          },
+          "4,3": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/DescendingInitialPos",
+              "_title": "/SmartDashboard/DescendingInitialPos"
             }
           }
         }
