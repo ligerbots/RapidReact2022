@@ -103,12 +103,17 @@ public class DriveTrain extends SubsystemBase {
         // return m_leftEncoder.getDistance();
         return m_leftLeader.getSelectedSensorPosition() * Constants.DRIVE_FALCON_DISTANCE_PER_UNIT;
     }
+    public void setLeftEncoderDistance(double distance) {
+        m_leftLeader.setSelectedSensorPosition((int) (distance / Constants.DRIVE_FALCON_DISTANCE_PER_UNIT));
+    }
 
     public double getRightEncoderDistance() {
         // return m_rightEncoder.getDistance();
         return -m_rightLeader.getSelectedSensorPosition() * Constants.DRIVE_FALCON_DISTANCE_PER_UNIT;
     }
-
+    public void setRightEncoderDistance(double distance) {
+        m_rightLeader.setSelectedSensorPosition((int) (-distance / Constants.DRIVE_FALCON_DISTANCE_PER_UNIT));
+    }
     public double getDistance() {
         return 0.5 * (getLeftEncoderDistance() + getRightEncoderDistance());
     }
@@ -117,7 +122,6 @@ public class DriveTrain extends SubsystemBase {
         // sensor velocity is per 100ms, so an extra scale of 10
         return m_leftLeader.getSelectedSensorVelocity() * Constants.DRIVE_FALCON_DISTANCE_PER_UNIT * 10.0;
     }
-
     public double getRightEncoderVelocity() {
         // sensor velocity is per 100ms, so an extra scale of 10
         return -m_rightLeader.getSelectedSensorVelocity() * Constants.DRIVE_FALCON_DISTANCE_PER_UNIT * 10.0;
@@ -127,12 +131,16 @@ public class DriveTrain extends SubsystemBase {
         // return m_leftEncoder.get();
         return (int)m_leftLeader.getSelectedSensorPosition();
     }
-
+    public void setLeftEncoderTicks(int ticks){
+        m_leftLeader.setSelectedSensorPosition(ticks);
+    }
     public int getRightEncoderTicks() {
         // return m_rightEncoder.get();
         return (int)m_rightLeader.getSelectedSensorPosition();
     }
-
+    public void setRightEncoderTicks(int ticks){
+        m_rightLeader.setSelectedSensorPosition(ticks);
+    }
     // Get and Set odometry values
     public Pose2d getPose() {
         return m_odometry.getPoseMeters();
@@ -209,10 +217,12 @@ public class DriveTrain extends SubsystemBase {
         m_differentialDriveSim.update(0.02);
 
         // Update all of our sensors.
+        /*
         m_leftEncoderSim.setDistance(m_differentialDriveSim.getLeftPositionMeters());
         m_leftEncoderSim.setRate(m_differentialDriveSim.getLeftVelocityMetersPerSecond());
         m_rightEncoderSim.setDistance(m_differentialDriveSim.getRightPositionMeters());
         m_rightEncoderSim.setRate(m_differentialDriveSim.getRightVelocityMetersPerSecond());
+        */
         m_gyroAngleSim.set(-m_differentialDriveSim.getHeading().getDegrees());
         m_fieldSim.setRobotPose(m_odometry.getPoseMeters());
     }
