@@ -1865,6 +1865,175 @@
               "_source0": "network_table:///SmartDashboard/DescendingInitialPos",
               "_title": "DescendingInitialPos"
             }
+          },
+          "12,17": {
+            "size": [
+              2,
+              2
+            ],
+            "content": {
+              "_type": "ComboBox Chooser",
+              "_source0": "network_table:///SmartDashboard/vision/active_mode",
+              "_title": "vision/active_mode"
+            }
+          },
+          "14,17": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/vision/fps",
+              "_title": "vision/fps"
+            }
+          },
+          "16,17": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/vision/output_fps_limit",
+              "_title": "vision/output_fps_limit"
+            }
+          },
+          "18,17": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/vision/output_port",
+              "_title": "vision/output_port"
+            }
+          },
+          "20,17": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/vision/hub/saturation_high_limit",
+              "_title": "vision/hub/saturation_high_limit"
+            }
+          },
+          "4,18": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/vision/width",
+              "_title": "vision/width"
+            }
+          },
+          "6,18": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/vision/hub/value_high_limit",
+              "_title": "vision/hub/value_high_limit"
+            }
+          },
+          "8,18": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/vision/hub/value_low_limit",
+              "_title": "vision/hub/value_low_limit"
+            }
+          },
+          "10,18": {
+            "size": [
+              2,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/vision/write_images",
+              "_title": "vision/write_images",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "14,18": {
+            "size": [
+              2,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/vision/tuning",
+              "_title": "vision/tuning",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "16,18": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/vision/hub/hue_low_limit",
+              "_title": "vision/hub/hue_low_limit"
+            }
+          },
+          "18,18": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/vision/hub/hue_high_limit",
+              "_title": "vision/hub/hue_high_limit"
+            }
+          },
+          "20,18": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/vision/default_compression",
+              "_title": "vision/default_compression"
+            }
+          },
+          "0,19": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/vision/height",
+              "_title": "vision/height"
+            }
+          },
+          "2,19": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/vision/hub/saturation_low_limit",
+              "_title": "vision/hub/saturation_low_limit"
+            }
           }
         }
       }

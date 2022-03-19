@@ -102,7 +102,7 @@ public final class Constants {
     public static final double ELEVATOR_HEIGHT_LOOSE_TOLERANCE = Units.inchesToMeters(0.5);//tolerance for elevator
     public static final double ARM_ANGLE_TOLERANCE = Units.degreesToRadians(1.0);
     
-    public static final double ELEVATOR_MAX_HEIGHT = Units.inchesToMeters(24.0);// 23.5in = length of elevator when fully extended
+    public static final double ELEVATOR_MAX_HEIGHT = Units.inchesToMeters(25.0);// 23.5in = length of elevator when fully extended
     public static final double ELEVATOR_MIN_HEIGHT = Units.inchesToMeters(0.0);// 0in = length of elevator when fully retracted
     // right elevator 0 to -21.5
     
