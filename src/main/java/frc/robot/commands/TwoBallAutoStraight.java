@@ -33,8 +33,7 @@ public class TwoBallAutoStraight extends SequentialCommandGroup implements AutoC
             10);
 
         TrajectoryConfig config =
-            new TrajectoryConfig(Constants.kMaxSpeed,
-                                Constants.kMaxAcceleration)
+            new TrajectoryConfig(Constants.kMaxSpeed, Constants.kMaxAcceleration)
                 .setKinematics(Constants.kDriveKinematics)
                 .addConstraint(autoVoltageConstraint)
                 .setReversed(true);
@@ -67,6 +66,8 @@ public class TwoBallAutoStraight extends SequentialCommandGroup implements AutoC
         );
 
         addCommands(
+            new DeployIntake(driveTrain),
+            new ShooterCommand(shooter, intake, Constants.STARTING_DISTANCE, true),
             new ParallelDeadlineGroup(
                 ramseteCommand.andThen(() -> driveTrain.tankDriveVolts(0, 0)),
                 new IntakeCommand(intake, Constants.INTAKE_SPEED)
@@ -80,6 +81,7 @@ public class TwoBallAutoStraight extends SequentialCommandGroup implements AutoC
     public Pose2d getInitialPose() {
         return FieldInformation.lowerBlueStart;
     }
+    
     @Override
     public void plotTrajectory(TrajectoryPlotter plotter) {
         plotter.plotTrajectory(m_trajectory);
