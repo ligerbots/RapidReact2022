@@ -37,6 +37,7 @@ public class SetElevatorHeight extends CommandBase {
     m_tolerance = tolerance;
 
     m_goingToZero = (height == Constants.ELEVATOR_MIN_HEIGHT);
+    m_hitLimitSwitch = new boolean[2];
   }
 
 
@@ -46,7 +47,8 @@ public class SetElevatorHeight extends CommandBase {
     // Initialize each height
     m_climber.setElevatorHeight(0, m_height[0]);
     m_climber.setElevatorHeight(1, m_height[1]);
-    m_hitLimitSwitch = new boolean[2];
+    m_hitLimitSwitch[0] = false;
+    m_hitLimitSwitch[1] = false;
   }
 
   // Called every time the scheduler runs while the command is scheduled.

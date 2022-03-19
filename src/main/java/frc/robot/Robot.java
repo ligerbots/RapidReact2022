@@ -108,6 +108,8 @@ public class Robot extends TimedRobot {
     // group
     m_robotContainer.getDriveCommand().cancel();
 
+    m_robotContainer.getDriveTrain().setMotorMode(NeutralMode.Brake);
+
     // schedule the autonomous command
     m_autonomousCommand = m_chosenAuto.getSelected();
     if (m_autonomousCommand != null) {
