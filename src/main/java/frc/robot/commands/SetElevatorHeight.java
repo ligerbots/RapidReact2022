@@ -63,6 +63,10 @@ public class SetElevatorHeight extends CommandBase {
         // ifPressed, it sets the encoder value and also calls setElevatorHeight to 0 which will raise the
         // elevator slightly and release the switch.
         // I think Commands run before Subsystems, so we should be OK.
+
+        // only check the limit switches when the elevator reads below certain height
+        if(m_climber.getElevatorHeight()[i] > Constants.ELEVATOR_CHECKING_LIMIT_SWITCH_HEIGHT) continue;
+
         if (m_climber.m_limitSwitch[i].isPressed()) {
           m_hitLimitSwitch[i] = true;
         } else {

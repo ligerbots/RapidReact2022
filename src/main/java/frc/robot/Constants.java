@@ -164,6 +164,8 @@ public final class Constants {
 
     public static final double ELEVATOR_START_LATCH_HEIGHT = Units.inchesToMeters(0.5);
 
+    public static final double ELEVATOR_CHECKING_LIMIT_SWITCH_HEIGHT = Units.inchesToMeters(2.0);
+
     // PID Constants for the Arm PID controller
     // Since we're using Trapeziodal control, all values will be 0 except for P
     public static final double ELEVATOR_K_P0 = 50;

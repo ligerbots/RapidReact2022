@@ -60,6 +60,8 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Constants/SetElevatorHeightTest", 0.0);
     SmartDashboard.putNumber("Constants/SetArmAngleTest", 80.0);
 
+    SmartDashboard.putBoolean("ClimbingCommandFinished", false);
+
     // m_robotContainer.getClimber().setElevatorHeight(Constants.ELEVATOR_START_LATCH_HEIGHT);
   }
 
