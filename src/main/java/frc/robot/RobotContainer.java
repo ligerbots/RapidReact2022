@@ -14,8 +14,10 @@ import frc.robot.commands.ClimbToNextBar;
 import frc.robot.commands.DeployIntake;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.ShooterCommand;
+import frc.robot.commands.TimeOut;
 import frc.robot.commands.TurnAndShoot;
 import frc.robot.commands.IntakeCommand;
+import frc.robot.commands.LigerTimer;
 import frc.robot.commands.RaiseToBar;
 // import frc.robot.commands.ResetElevatorEncoder;
 import frc.robot.commands.SetArmAngleTest;
@@ -119,10 +121,10 @@ public class RobotContainer {
         farm6.whenPressed(new SetClimber(m_climber));
 
         JoystickButton farm7 = new JoystickButton(m_farm, 7);
-        farm7.whenPressed(new RaiseToBar(m_climber));
+        farm7.whenPressed(new RaiseToBar(m_climber).raceWith(new TimeOut(Constants.RAISE_TO_BAR_TIMEOUT)));
 
         JoystickButton farm8 = new JoystickButton(m_farm, 8);
-        farm8.whenPressed(new ClimbToNextBar(m_climber));
+        farm8.whenPressed(new ClimbToNextBar(m_climber).raceWith(new TimeOut(Constants.CLIMB_TO_NEXT_BAR_TIMEOUT)));
 
         // JoystickButton farm11 = new JoystickButton(m_farm, 11);
         // farm11.whenPressed(new ResetElevatorEncoder(m_climber));

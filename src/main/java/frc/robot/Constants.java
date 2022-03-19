@@ -178,7 +178,10 @@ public final class Constants {
     public static final double TURN_TOLERANCE_DEG = 5.;
     public static final double TURN_STABILIZE_SECS = .5;
     public static final double TURN_TIMEOUT_SECS = 3;
-    
+
+    public static final double RAISE_TO_BAR_TIMEOUT = 7.0;
+    public static final double CLIMB_TO_NEXT_BAR_TIMEOUT = 12.0;
+
     // robot starting distance
     public static final double STARTING_DISTANCE = TARMAC_DEFAULT_DISTANCE - 10.0;
 
