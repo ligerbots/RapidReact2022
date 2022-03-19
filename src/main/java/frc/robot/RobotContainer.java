@@ -121,10 +121,10 @@ public class RobotContainer {
         farm6.whenPressed(new SetClimber(m_climber));
 
         JoystickButton farm7 = new JoystickButton(m_farm, 7);
-        farm7.whenPressed(new RaiseToBar(m_climber).raceWith(new TimeOut(Constants.RAISE_TO_BAR_TIMEOUT)));
+        farm7.whenPressed(new RaiseToBar(m_climber).withTimeout(Constants.RAISE_TO_BAR_TIMEOUT));
 
         JoystickButton farm8 = new JoystickButton(m_farm, 8);
-        farm8.whenPressed(new ClimbToNextBar(m_climber).raceWith(new TimeOut(Constants.CLIMB_TO_NEXT_BAR_TIMEOUT)));
+        farm8.whenPressed(new ClimbToNextBar(m_climber).withTimeout(Constants.CLIMB_TO_NEXT_BAR_TIMEOUT));
 
         // JoystickButton farm11 = new JoystickButton(m_farm, 11);
         // farm11.whenPressed(new ResetElevatorEncoder(m_climber));
