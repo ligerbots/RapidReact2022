@@ -176,6 +176,9 @@ public final class Constants {
     public static final double TURN_TOLERANCE_DEG = 5.;
     public static final double TURN_STABILIZE_SECS = .5;
     public static final double TURN_TIMEOUT_SECS = 3;
+    
+    // robot starting distance
+    public static final double STARTING_DISTANCE = TARMAC_DEFAULT_DISTANCE - 10.0;
 
     // Xbox button mapping
     public static final int XBOX_A = 1;
