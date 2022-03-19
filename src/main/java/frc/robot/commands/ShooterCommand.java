@@ -130,7 +130,7 @@ public class ShooterCommand extends CommandBase {
         m_shooter.setShooterRpms(0.0, 0.0);
         m_shooter.setChuteSpeed(0.0);
         m_intake.run(0.0);
-        m_vision.setMode(Vision.DEFAULT_MODE);
+        if (m_vision != null) m_vision.setMode(Vision.DEFAULT_MODE);
     }
 
     // Returns true when the command should end.
