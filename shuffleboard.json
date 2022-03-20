@@ -2034,6 +2034,19 @@
               "_source0": "network_table:///SmartDashboard/vision/hub/saturation_low_limit",
               "_title": "vision/hub/saturation_low_limit"
             }
+          },
+          "4,19": {
+            "size": [
+              2,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/ClimbingCommandFinished",
+              "_title": "ClimbingCommandFinished",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
           }
         }
       }
@@ -2529,15 +2542,26 @@
               "_source0": "network_table:///SmartDashboard/DescendingInitialPos",
               "_title": "/SmartDashboard/DescendingInitialPos"
             }
+          },
+          "0,0": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "ComboBox Chooser",
+              "_source0": "network_table:///SmartDashboard/Chosen Auto",
+              "_title": "SmartDashboard/Chosen Auto"
+            }
           }
         }
       }
     }
   ],
   "windowGeometry": {
-    "x": -6.222222328186035,
-    "y": -6.222222328186035,
-    "width": 1719.111083984375,
-    "height": 932.4444580078125
+    "x": -5.333333492279053,
+    "y": 0.8888888955116272,
+    "width": 1716.4444580078125,
+    "height": 924.4444580078125
   }
 }

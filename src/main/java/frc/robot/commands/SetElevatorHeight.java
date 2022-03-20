@@ -45,10 +45,10 @@ public class SetElevatorHeight extends CommandBase {
   @Override
   public void initialize() {
     // Initialize each height
-    m_climber.setElevatorHeight(0, m_height[0]);
-    m_climber.setElevatorHeight(1, m_height[1]);
     m_hitLimitSwitch[0] = false;
     m_hitLimitSwitch[1] = false;
+    m_climber.setElevatorHeight(0, m_height[0]);
+    m_climber.setElevatorHeight(1, m_height[1]);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
