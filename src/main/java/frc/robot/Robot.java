@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -38,7 +40,7 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
 
-    m_chosenAuto.setDefaultOption("TwoBallAutoStraight", 
+    m_chosenAuto.addOption("TwoBallAutoStraight", 
       new TwoBallAutoStraight(m_robotContainer.getShooter(), m_robotContainer.getIntake(), m_robotContainer.getDriveTrain(), m_robotContainer.getVision())
     );
     m_chosenAuto.addOption("TwoBallAutoCurved", 
@@ -55,9 +57,12 @@ public class Robot extends TimedRobot {
     // Set climber motors to coast so we can move them if we need to.
     m_robotContainer.getClimber().setBrakeMode(true);
 
-  SmartDashboard.putNumber("Constants/SetElevatorHeightTest", 0.0);
-  SmartDashboard.putNumber("Constants/SetArmAngleTest", 80.0);
+    SmartDashboard.putNumber("Constants/SetElevatorHeightTest", 0.0);
+    SmartDashboard.putNumber("Constants/SetArmAngleTest", 80.0);
 
+    SmartDashboard.putBoolean("ClimbingCommandFinished", false);
+
+    // m_robotContainer.getClimber().setElevatorHeight(Constants.ELEVATOR_START_LATCH_HEIGHT);
   }
 
   /**
@@ -73,12 +78,15 @@ public class Robot extends TimedRobot {
     // commands, running already-scheduled commands, removing finished or interrupted commands,
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
+
+    
     CommandScheduler.getInstance().run();
   }
 
   /** This function is called once each time the robot enters Disabled mode. */
   @Override
   public void disabledInit() {
+    m_robotContainer.getDriveTrain().setMotorMode(NeutralMode.Coast);
   }
 
   @Override
@@ -102,6 +110,8 @@ public class Robot extends TimedRobot {
     // group
     m_robotContainer.getDriveCommand().cancel();
 
+    m_robotContainer.getDriveTrain().setMotorMode(NeutralMode.Brake);
+
     // schedule the autonomous command
     m_autonomousCommand = m_chosenAuto.getSelected();
     if (m_autonomousCommand != null) {
@@ -123,6 +133,7 @@ public class Robot extends TimedRobot {
       m_autonomousCommand.cancel();
     }
     m_robotContainer.getDriveCommand().schedule();
+    m_robotContainer.getDriveTrain().setMotorMode(NeutralMode.Brake);
 
     // Set Climber motors to Brake mode
     m_robotContainer.getClimber().setBrakeMode(true);

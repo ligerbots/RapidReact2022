@@ -37,6 +37,7 @@ public class SetElevatorHeight extends CommandBase {
     m_tolerance = tolerance;
 
     m_goingToZero = (height == Constants.ELEVATOR_MIN_HEIGHT);
+    m_hitLimitSwitch = new boolean[2];
   }
 
 
@@ -44,9 +45,10 @@ public class SetElevatorHeight extends CommandBase {
   @Override
   public void initialize() {
     // Initialize each height
+    m_hitLimitSwitch[0] = false;
+    m_hitLimitSwitch[1] = false;
     m_climber.setElevatorHeight(0, m_height[0]);
     m_climber.setElevatorHeight(1, m_height[1]);
-    m_hitLimitSwitch = new boolean[2];
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -63,6 +65,10 @@ public class SetElevatorHeight extends CommandBase {
         // ifPressed, it sets the encoder value and also calls setElevatorHeight to 0 which will raise the
         // elevator slightly and release the switch.
         // I think Commands run before Subsystems, so we should be OK.
+
+        // only check the limit switches when the elevator reads below certain height
+        if(m_climber.getElevatorHeight()[i] > Constants.ELEVATOR_CHECKING_LIMIT_SWITCH_HEIGHT) continue;
+
         if (m_climber.m_limitSwitch[i].isPressed()) {
           m_hitLimitSwitch[i] = true;
         } else {

@@ -26,6 +26,7 @@ public class SetElevatorHeightTest extends CommandBase {
     m_climber = climber;
     m_key = key;
     m_height = new double[2];
+    m_hitLimitSwitch = new boolean[2];
   }
 
   // Called when the command is initially scheduled.
@@ -34,10 +35,12 @@ public class SetElevatorHeightTest extends CommandBase {
     double height = Units.inchesToMeters(SmartDashboard.getNumber(m_key, 0.0));
     m_height[0] = height;
     m_height[1] = height;
-    m_climber.setElevatorHeight(height);
     m_goingToZero = (height == Constants.ELEVATOR_MIN_HEIGHT);
+    m_hitLimitSwitch[0] = false;
+    m_hitLimitSwitch[1] = false;
+    m_climber.setElevatorHeight(0, m_height[0]);
+    m_climber.setElevatorHeight(1, m_height[1]);
     SmartDashboard.putBoolean("finished", false);
-    m_hitLimitSwitch = new boolean[2];
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -53,6 +56,9 @@ public class SetElevatorHeightTest extends CommandBase {
         // ifPressed, it sets the encoder value and also calls setElevatorHeight to 0 which will raise the
         // elevator slightly and release the switch.
         // I think Commands run before Subsystems, so we should be OK.
+
+        if(m_climber.getElevatorHeight()[i] > Constants.ELEVATOR_CHECKING_LIMIT_SWITCH_HEIGHT) continue;
+
         if (m_climber.m_limitSwitch[i].isPressed()) {
           m_hitLimitSwitch[i] = true;
         } else {

@@ -1821,6 +1821,232 @@
               "Colors/Color when true": "#7CFC00FF",
               "Colors/Color when false": "#8B0000FF"
             }
+          },
+          "4,17": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/driveTrain/left distance",
+              "_title": "driveTrain/left distance"
+            }
+          },
+          "6,17": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/driveTrain/right distance",
+              "_title": "driveTrain/right distance"
+            }
+          },
+          "8,17": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/AscendingInitialPos",
+              "_title": "AscendingInitialPos"
+            }
+          },
+          "10,17": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/DescendingInitialPos",
+              "_title": "DescendingInitialPos"
+            }
+          },
+          "12,17": {
+            "size": [
+              2,
+              2
+            ],
+            "content": {
+              "_type": "ComboBox Chooser",
+              "_source0": "network_table:///SmartDashboard/vision/active_mode",
+              "_title": "vision/active_mode"
+            }
+          },
+          "14,17": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/vision/fps",
+              "_title": "vision/fps"
+            }
+          },
+          "16,17": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/vision/output_fps_limit",
+              "_title": "vision/output_fps_limit"
+            }
+          },
+          "18,17": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/vision/output_port",
+              "_title": "vision/output_port"
+            }
+          },
+          "20,17": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/vision/hub/saturation_high_limit",
+              "_title": "vision/hub/saturation_high_limit"
+            }
+          },
+          "4,18": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/vision/width",
+              "_title": "vision/width"
+            }
+          },
+          "6,18": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/vision/hub/value_high_limit",
+              "_title": "vision/hub/value_high_limit"
+            }
+          },
+          "8,18": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/vision/hub/value_low_limit",
+              "_title": "vision/hub/value_low_limit"
+            }
+          },
+          "10,18": {
+            "size": [
+              2,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/vision/write_images",
+              "_title": "vision/write_images",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "14,18": {
+            "size": [
+              2,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/vision/tuning",
+              "_title": "vision/tuning",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "16,18": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/vision/hub/hue_low_limit",
+              "_title": "vision/hub/hue_low_limit"
+            }
+          },
+          "18,18": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/vision/hub/hue_high_limit",
+              "_title": "vision/hub/hue_high_limit"
+            }
+          },
+          "20,18": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/vision/default_compression",
+              "_title": "vision/default_compression"
+            }
+          },
+          "0,19": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/vision/height",
+              "_title": "vision/height"
+            }
+          },
+          "2,19": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/vision/hub/saturation_low_limit",
+              "_title": "vision/hub/saturation_low_limit"
+            }
+          },
+          "4,19": {
+            "size": [
+              2,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/ClimbingCommandFinished",
+              "_title": "ClimbingCommandFinished",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
           }
         }
       }
@@ -1880,32 +2106,6 @@
               "_title": "/SmartDashboard/arm0/P Gain"
             }
           },
-          "4,3": {
-            "size": [
-              2,
-              2
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/arm0/too Backward",
-              "_title": "/SmartDashboard/arm0/too Backward",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "4,5": {
-            "size": [
-              2,
-              2
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/arm0/too Forward",
-              "_title": "/SmartDashboard/arm0/too Forward",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
           "6,4": {
             "size": [
               2,
@@ -1959,32 +2159,6 @@
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/arm1/velocity1",
               "_title": "/SmartDashboard/arm1/velocity1"
-            }
-          },
-          "13,3": {
-            "size": [
-              2,
-              2
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/arm1/too Backward",
-              "_title": "/SmartDashboard/arm1/too Backward",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "13,5": {
-            "size": [
-              2,
-              2
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/arm1/too Forward",
-              "_title": "/SmartDashboard/arm1/too Forward",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
             }
           },
           "6,5": {
@@ -2225,7 +2399,7 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "9,1": {
+          "8,1": {
             "size": [
               2,
               1
@@ -2236,7 +2410,7 @@
               "_title": "SmartDashboard/Constants/SetArmAngleTest"
             }
           },
-          "7,1": {
+          "6,1": {
             "size": [
               2,
               1
@@ -2247,7 +2421,7 @@
               "_title": "SmartDashboard/Constants/SetElevatorHeightTest"
             }
           },
-          "7,2": {
+          "6,2": {
             "size": [
               2,
               1
@@ -2258,7 +2432,7 @@
               "_title": "SmartDashboard/ElevatorIndex"
             }
           },
-          "9,2": {
+          "8,2": {
             "size": [
               2,
               1
@@ -2295,7 +2469,7 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "3,2": {
+          "3,1": {
             "size": [
               1,
               1
@@ -2308,7 +2482,7 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "4,2": {
+          "4,1": {
             "size": [
               1,
               1
@@ -2321,7 +2495,7 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "3,3": {
+          "3,2": {
             "size": [
               1,
               1
@@ -2334,7 +2508,7 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "4,3": {
+          "4,2": {
             "size": [
               1,
               1
@@ -2347,104 +2521,37 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "3,4": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/if0",
-              "_title": "/SmartDashboard/if0",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "4,4": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/if1",
-              "_title": "/SmartDashboard/if1",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "3,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/goingToZero",
-              "_title": "/SmartDashboard/goingToZero",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "4,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/finished",
-              "_title": "/SmartDashboard/finished",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "3,1": {
+          "3,3": {
             "size": [
               1,
               1
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/m_height0",
-              "_title": "/SmartDashboard/m_height0"
+              "_source0": "network_table:///SmartDashboard/AscendingInitialPos",
+              "_title": "/SmartDashboard/AscendingInitialPos"
             }
           },
-          "4,1": {
+          "4,3": {
             "size": [
               1,
               1
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/m_height1",
-              "_title": "/SmartDashboard/m_height1"
+              "_source0": "network_table:///SmartDashboard/DescendingInitialPos",
+              "_title": "/SmartDashboard/DescendingInitialPos"
             }
           },
-          "5,0": {
+          "0,0": {
             "size": [
-              1,
+              2,
               1
             ],
             "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/if check0",
-              "_title": "/SmartDashboard/if check0",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "6,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/if check1",
-              "_title": "/SmartDashboard/if check1",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
+              "_type": "ComboBox Chooser",
+              "_source0": "network_table:///SmartDashboard/Chosen Auto",
+              "_title": "SmartDashboard/Chosen Auto"
             }
           }
         }
@@ -2452,9 +2559,9 @@
     }
   ],
   "windowGeometry": {
-    "x": -6.222222328186035,
-    "y": -6.222222328186035,
-    "width": 1719.111083984375,
-    "height": 932.4444580078125
+    "x": -5.333333492279053,
+    "y": 0.8888888955116272,
+    "width": 1716.4444580078125,
+    "height": 924.4444580078125
   }
 }

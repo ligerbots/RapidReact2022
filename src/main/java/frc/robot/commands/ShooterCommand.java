@@ -7,6 +7,7 @@ import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Vision;
 import frc.robot.subsystems.Shooter.ShooterSpeeds;
+import frc.robot.subsystems.Vision.VisionMode;
 
 public class ShooterCommand extends CommandBase {
     /**
@@ -53,28 +54,27 @@ public class ShooterCommand extends CommandBase {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-        m_visionTime.start();
-
-        if(m_upperHub == false || m_distance>0.0){//if lowerhub or if distance pre-defined, skip vision
+        if (m_upperHub == false || m_distance > 0.0) { // if lowerhub or if distance pre-defined, skip vision
             m_state = State.SPEED_UP_SHOOTER;
-        }else{
+        } else {
+            // turn on vision finding, just in case, and it does not hurt if already done
+            m_vision.setMode(VisionMode.HUBFINDER);
+            m_visionTime.start();
             m_state = State.FINDING_VISION_TARGET;
         }
-        // TODO: do we want to turn on shooter to some moderate speed? Need to see if it affects the camera
     }
 
     // Called every time the scheduler runs while the command is scheduled.
     @Override
-    
     public void execute() {
         switch (m_state) {
             case FINDING_VISION_TARGET:
                 
                 m_distance = m_vision.getDistance();
                 // go to the next state once the target is found
-                if(m_distance != 0.0)
+                if (m_distance != 0.0)
                     m_state = State.SPEED_UP_SHOOTER;
-                else if(m_visionTime.hasElapsed()){
+                else if (m_visionTime.hasElapsed()) {
                     m_state = State.SPEED_UP_SHOOTER;
                     // if still can't find the target, just use 9ft as the distance
                     m_distance = DEFAULT_DISTANCE_TO_THE_HUB;
@@ -108,7 +108,7 @@ public class ShooterCommand extends CommandBase {
                 // same logics, able to go to the next state directly
                 
             case WAIT_FOR_SHOOT_BALL1:
-                if(m_shootBall1Time.hasElapsed())
+                if (m_shootBall1Time.hasElapsed())
                     m_state = State.TURN_ON_INTAKE;
                 break;
             
@@ -130,12 +130,12 @@ public class ShooterCommand extends CommandBase {
         m_shooter.setShooterRpms(0.0, 0.0);
         m_shooter.setChuteSpeed(0.0);
         m_intake.run(0.0);
+        if (m_vision != null) m_vision.setMode(Vision.DEFAULT_MODE);
     }
 
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
         return m_state == State.WAIT_FOR_SHOOT_BALL2 && m_shootBall2Time.hasElapsed();
-        
     }
 }

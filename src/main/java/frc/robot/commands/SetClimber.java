@@ -19,10 +19,19 @@ public class SetClimber extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
+    // set the finished boolean to false
+    new CommandFinished(false),
+
+    // lower the elevators to get unlatched
+    new SetElevatorHeight(m_climber, Constants.ELEVATOR_MIN_HEIGHT),
+    
     // rotates arm to leave spaces for the elevator to raise up
     new SetArmAngle(m_climber, Constants.ARM_ANGLE_FOR_ELEVATOR_CLEARANCE),
 
     // extends elevator to reach for Mid Rung
-    new SetElevatorHeight(m_climber, Constants.MID_RUNG));
+    new SetElevatorHeight(m_climber, Constants.MID_RUNG),
+
+    // set the finished boolean to true
+    new CommandFinished(true));
   }
 }

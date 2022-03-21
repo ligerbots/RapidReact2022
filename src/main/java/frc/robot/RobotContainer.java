@@ -14,7 +14,10 @@ import frc.robot.commands.ClimbToNextBar;
 import frc.robot.commands.DeployIntake;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.ShooterCommand;
+import frc.robot.commands.TimeOut;
+import frc.robot.commands.TurnAndShoot;
 import frc.robot.commands.IntakeCommand;
+import frc.robot.commands.LigerTimer;
 import frc.robot.commands.RaiseToBar;
 // import frc.robot.commands.ResetElevatorEncoder;
 import frc.robot.commands.SetArmAngleTest;
@@ -24,6 +27,7 @@ import frc.robot.commands.SetClimber;
 // import frc.robot.commands.SetElevatorHeight;
 import frc.robot.commands.SetElevatorHeightTest;
 import frc.robot.commands.SetOneElevatorHeightTest;
+import frc.robot.commands.SetVisionMode;
 // import frc.robot.commands.TuneShooterCommand;
 import frc.robot.commands.VacuumMode;
 import frc.robot.subsystems.Climber;
@@ -31,6 +35,7 @@ import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Vision;
+import frc.robot.subsystems.Vision.VisionMode;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -84,7 +89,7 @@ public class RobotContainer {
 
         // shooting for upperHub
         JoystickButton xboxXButton = new JoystickButton(m_xbox, Constants.XBOX_X);
-        xboxXButton.whenPressed(new ShooterCommand(m_shooter, m_intake, m_vision, true));
+        xboxXButton.whenPressed(new TurnAndShoot(m_shooter, m_intake, m_driveTrain, m_vision));
 
         // shooting for upperHub from tarmac
         JoystickButton xboxAButton = new JoystickButton(m_xbox, Constants.XBOX_A);
@@ -116,10 +121,10 @@ public class RobotContainer {
         farm6.whenPressed(new SetClimber(m_climber));
 
         JoystickButton farm7 = new JoystickButton(m_farm, 7);
-        farm7.whenPressed(new RaiseToBar(m_climber));
+        farm7.whenPressed(new RaiseToBar(m_climber).withTimeout(Constants.RAISE_TO_BAR_TIMEOUT));
 
         JoystickButton farm8 = new JoystickButton(m_farm, 8);
-        farm8.whenPressed(new ClimbToNextBar(m_climber));
+        farm8.whenPressed(new ClimbToNextBar(m_climber).withTimeout(Constants.CLIMB_TO_NEXT_BAR_TIMEOUT));
 
         // JoystickButton farm11 = new JoystickButton(m_farm, 11);
         // farm11.whenPressed(new ResetElevatorEncoder(m_climber));
@@ -130,8 +135,12 @@ public class RobotContainer {
         JoystickButton farm15 = new JoystickButton(m_farm, 15);
         farm15.whenPressed(new SetArmBrake(m_climber));        
         
-        JoystickButton farm4 = new JoystickButton(m_farm, 4);
-        farm4.whenPressed(new DeployIntake(m_driveTrain));
+        //Bind buttons for vision modes.
+        JoystickButton farm12 = new JoystickButton(m_farm, 12);
+        farm12.whenPressed(new SetVisionMode(m_vision, VisionMode.INTAKE)); 
+
+        JoystickButton farm14 = new JoystickButton(m_farm, 14);
+        farm14.whenPressed(new SetVisionMode(m_vision, VisionMode.SHOOTER)); 
     }
 
     private class Throttle implements DoubleSupplier {
