@@ -230,4 +230,26 @@ public class DriveTrain extends SubsystemBase {
     public Field2d getField2d() {
         return m_fieldSim;
     }
+
+    public double turnSpeedCalc(double angleError) {
+        double absErr = Math.abs(angleError);
+        double turnSpeed;
+        if (absErr > 60.0) {
+            turnSpeed = 0.8;
+        }
+        else if (absErr > 30.0) {
+            turnSpeed = 0.2; //0.4;
+        }
+        else if (absErr > 10.0) {
+            turnSpeed = 0.15;
+        }
+        else if (absErr > 5.0) {
+            turnSpeed = 0.1; //0.07;
+        }
+        else {
+            turnSpeed = 0.065; //0.065;
+        }
+
+        return turnSpeed * Math.signum(angleError);
+    }
 }

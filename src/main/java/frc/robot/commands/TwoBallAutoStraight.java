@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
 import frc.robot.FieldInformation;
+import frc.robot.RobotContainer;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
@@ -23,7 +24,7 @@ import frc.robot.subsystems.Vision;
 public class TwoBallAutoStraight extends SequentialCommandGroup implements AutoCommandInterface {
     static final double DISTANCE_BACK = 1.4;
     Trajectory m_trajectory;
-    public TwoBallAutoStraight(Shooter shooter, Intake intake, DriveTrain driveTrain, Vision vision) {
+    public TwoBallAutoStraight(Shooter shooter, Intake intake, DriveTrain driveTrain, Vision vision, DriveCommand driveCommand) {
         var autoVoltageConstraint =
         new DifferentialDriveVoltageConstraint(
             new SimpleMotorFeedforward(Constants.ksVolts,
@@ -72,7 +73,7 @@ public class TwoBallAutoStraight extends SequentialCommandGroup implements AutoC
                 ramseteCommand.andThen(() -> driveTrain.tankDriveVolts(0, 0)),
                 new IntakeCommand(intake, Constants.INTAKE_SPEED)
             ),
-            new TurnTowardsHub(driveTrain, vision).withTimeout(Constants.TURN_TIMEOUT_SECS),
+            new FaceShootingTarget(driveTrain, Constants.TURN_TOLERANCE_DEG, driveCommand, vision),
             new ShooterCommand(shooter, intake, vision, true)
         );
     }

@@ -22,7 +22,7 @@ import frc.robot.subsystems.Vision;
 
 public class TwoBallAutoCurved extends SequentialCommandGroup implements AutoCommandInterface {
     Trajectory m_trajectory;
-    public TwoBallAutoCurved(Shooter shooter, Intake intake, DriveTrain driveTrain, Vision vision) {
+    public TwoBallAutoCurved(Shooter shooter, Intake intake, DriveTrain driveTrain, Vision vision, DriveCommand driveCommand) {
         var autoVoltageConstraint =
         new DifferentialDriveVoltageConstraint(
             new SimpleMotorFeedforward(Constants.ksVolts,
@@ -66,7 +66,7 @@ public class TwoBallAutoCurved extends SequentialCommandGroup implements AutoCom
                 ramseteCommand.andThen(() -> driveTrain.tankDriveVolts(0, 0)),
                 new IntakeCommand(intake, Constants.INTAKE_SPEED)
             ),
-            new TurnTowardsHub(driveTrain, vision).withTimeout(Constants.TURN_TIMEOUT_SECS),
+            new FaceShootingTarget(driveTrain, Constants.TURN_TOLERANCE_DEG, driveCommand, vision),
             new ShooterCommand(shooter, intake, vision, true)
         );
     }

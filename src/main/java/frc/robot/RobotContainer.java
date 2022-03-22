@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ClimbToNextBar;
 import frc.robot.commands.DeployIntake;
 import frc.robot.commands.DriveCommand;
+import frc.robot.commands.FaceShootingTarget;
 import frc.robot.commands.ShooterCommand;
 import frc.robot.commands.TimeOut;
 import frc.robot.commands.TurnAndShoot;
@@ -141,6 +142,10 @@ public class RobotContainer {
 
         JoystickButton farm14 = new JoystickButton(m_farm, 14);
         farm14.whenPressed(new SetVisionMode(m_vision, VisionMode.SHOOTER)); 
+
+
+        JoystickButton farm16 = new JoystickButton(m_farm, 16);
+        farm16.whenPressed(new FaceShootingTarget(m_driveTrain, Constants.TURN_TOLERANCE_DEG, m_driveCommand, m_vision)); 
     }
 
     private class Throttle implements DoubleSupplier {

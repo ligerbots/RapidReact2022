@@ -41,10 +41,10 @@ public class Robot extends TimedRobot {
     m_robotContainer = new RobotContainer();
 
     m_chosenAuto.addOption("TwoBallAutoStraight", 
-      new TwoBallAutoStraight(m_robotContainer.getShooter(), m_robotContainer.getIntake(), m_robotContainer.getDriveTrain(), m_robotContainer.getVision())
+      new TwoBallAutoStraight(m_robotContainer.getShooter(), m_robotContainer.getIntake(), m_robotContainer.getDriveTrain(), m_robotContainer.getVision(), m_robotContainer.getDriveCommand())
     );
-    m_chosenAuto.addOption("TwoBallAutoCurved", 
-      new TwoBallAutoCurved(m_robotContainer.getShooter(), m_robotContainer.getIntake(), m_robotContainer.getDriveTrain(), m_robotContainer.getVision())
+    m_chosenAuto.setDefaultOption("TwoBallAutoCurved", 
+      new TwoBallAutoCurved(m_robotContainer.getShooter(), m_robotContainer.getIntake(), m_robotContainer.getDriveTrain(), m_robotContainer.getVision(), m_robotContainer.getDriveCommand())
     );
   
     m_chosenAuto.addOption("OneBallAuto", 
