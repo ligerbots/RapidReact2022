@@ -7,13 +7,10 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-import frc.robot.Robot;
 import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Vision;
 
 public class FaceShootingTarget extends CommandBase {
@@ -21,72 +18,68 @@ public class FaceShootingTarget extends CommandBase {
    * Creates a new FaceShootingTarget.
    */
   // double startingAngle;
-  DriveTrain robotDrive;
-  DriveCommand driveCommand;
-  Vision vision;
-  double acceptableError;
+  DriveTrain m_robotDrive;
+  DriveCommand m_driveCommand;
+  Vision m_vision;
+  double m_acceptableError;
 
-  boolean oldOldCheck;
-  boolean oldCheck;
-  boolean check;
+  boolean m_oldOldCheck;
+  boolean m_oldCheck;
+  boolean m_check;
 
-  boolean targetAcquired;
-  double headingError;
-  double headingTarget;
+  boolean m_targetAcquired;
+  double m_headingError;
+  double m_headingTarget;
 
-  double startTime;
+  double m_startTime;
 
-  public FaceShootingTarget(DriveTrain robotDrive, double acceptableError, DriveCommand driveCommand, Vision vision) {
-    this.robotDrive = robotDrive;
-    this.acceptableError = acceptableError;
-    this.driveCommand = driveCommand;
-    this.vision = vision;
-    // Use addRequirements() here to declare subsystem dependencies.
+  public FaceShootingTarget(DriveTrain robotDrive, Vision vision, double acceptableError, DriveCommand driveCommand) {
+    m_robotDrive = robotDrive;
+    m_acceptableError = acceptableError;
+    m_driveCommand = driveCommand;
+    m_vision = vision;
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    if (driveCommand != null) driveCommand.cancel();
+    if (m_driveCommand != null) m_driveCommand.cancel();
 
-    vision.setMode(Vision.VisionMode.HUBFINDER);
+    m_vision.setMode(Vision.VisionMode.HUBFINDER);
 
-    //shooter.setTurretAdjusted(Constants.TURRET_ANGLE_ZERO_SETTING);
-    targetAcquired = false;
-    oldOldCheck = false;
-    check = false;
-    oldCheck = false;
-    startTime = Timer.getFPGATimestamp();
-    //headingError = 100000;
+    m_targetAcquired = false;
+    m_oldOldCheck = false;
+    m_check = false;
+    m_oldCheck = false;
+    m_startTime = LigerTimer.time();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    if (m_targetAcquired) {
+      m_headingError = m_robotDrive.getHeading() - m_headingTarget;
+      while ( m_headingError > 180.0) m_headingError -= 360.0;
+      while ( m_headingError < -180.0) m_headingError += 360.0;
+      SmartDashboard.putNumber("shooter/HeadingError", m_headingError);
+      System.out.println("FaceShooter headingError = " + m_headingError);
 
-    if (targetAcquired) {
-      headingError = robotDrive.getHeading() - headingTarget;
-      while ( headingError > 180.0) headingError -= 360.0;
-      while ( headingError < -180.0) headingError += 360.0;
-      SmartDashboard.putNumber("shooter/HeadingError", headingError);
-      System.out.println("FaceShooter headingError = " + headingError);
-
-      check = Math.abs(headingError) < acceptableError && oldCheck;
+      m_check = Math.abs(m_headingError) < m_acceptableError && m_oldCheck;
       // System.out.format("FaceShootingTarget: %3.2f%n", initialAngleOffset);
-      robotDrive.drive(0, robotDrive.turnSpeedCalc(headingError), false);
+      m_robotDrive.drive(0, m_robotDrive.turnSpeedCalc(m_headingError), false);
 
-      oldCheck = Math.abs(headingError) < acceptableError && oldOldCheck;
+      m_oldCheck = Math.abs(m_headingError) < m_acceptableError && m_oldOldCheck;
 
-      oldOldCheck = Math.abs(headingError) < acceptableError;
+      m_oldOldCheck = Math.abs(m_headingError) < m_acceptableError;
     }
-    else if (vision.getStatus() && vision.getDistance() > 1.0)
+    else if (m_vision.getStatus() && m_vision.getDistance() > 1.0)
     {
-      double startAngle = robotDrive.getHeading();
-      double visionAngle = vision.getRobotAngle();
-      headingTarget = startAngle - visionAngle;
+      double startAngle = m_robotDrive.getHeading();
+      double visionAngle = m_vision.getRobotAngle();
+      m_headingTarget = startAngle - visionAngle;
       System.out.format("FaceShooter acquired: heading = %3.1f visionAngle = %3.1f targetHeading = %3.2f%n",
-                        startAngle, visionAngle, headingTarget);
-      targetAcquired = true;
+                        startAngle, visionAngle, m_headingTarget);
+      m_targetAcquired = true;
     }
   }
 
@@ -94,17 +87,17 @@ public class FaceShootingTarget extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     System.out.format("FaceShooter finished: currentHeading = %3.1f targetHeading = %3.2f%n",
-        robotDrive.getHeading(), headingTarget);
+        m_robotDrive.getHeading(), m_headingTarget);
 
-    robotDrive.tankDriveVolts(0, 0);
-    if (driveCommand != null) driveCommand.schedule();
+    m_robotDrive.tankDriveVolts(0, 0);
+    if (m_driveCommand != null) m_driveCommand.schedule();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-      return (Math.abs(headingError) < acceptableError && check) 
-        || (!targetAcquired && (Timer.getFPGATimestamp() - startTime) > 0.5) 
-        || Timer.getFPGATimestamp() - startTime > 3.0;
+      return (Math.abs(m_headingError) < m_acceptableError && m_check) 
+        || (!m_targetAcquired && (LigerTimer.time() - m_startTime) > 0.5) 
+        || LigerTimer.time() - m_startTime > 3.0;
   }
 }

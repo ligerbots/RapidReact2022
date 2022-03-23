@@ -9,9 +9,10 @@ import frc.robot.subsystems.Vision;
 
 public class TurnAndShoot extends SequentialCommandGroup {
 
-    public TurnAndShoot(Shooter shooter, Intake intake, DriveTrain driveTrain, Vision vision) {
+    public TurnAndShoot(Shooter shooter, Intake intake, DriveTrain driveTrain, Vision vision, DriveCommand driveCommand) {
         addCommands(
-            new TurnTowardsHub(driveTrain, vision).withTimeout(Constants.TURN_TIMEOUT_SECS),
+            // new TurnTowardsHub(driveTrain, vision).withTimeout(Constants.TURN_TIMEOUT_SECS),
+            new FaceShootingTarget(driveTrain, vision, Constants.TURN_TOLERANCE_DEG, driveCommand),
             new ShooterCommand(shooter, intake, vision, true)
         );
     }

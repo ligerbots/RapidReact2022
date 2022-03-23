@@ -15,7 +15,6 @@ import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
 import frc.robot.FieldInformation;
-import frc.robot.RobotContainer;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
@@ -73,7 +72,7 @@ public class TwoBallAutoStraight extends SequentialCommandGroup implements AutoC
                 ramseteCommand.andThen(() -> driveTrain.tankDriveVolts(0, 0)),
                 new IntakeCommand(intake, Constants.INTAKE_SPEED)
             ),
-            new FaceShootingTarget(driveTrain, Constants.TURN_TOLERANCE_DEG, driveCommand, vision),
+            new FaceShootingTarget(driveTrain, vision, Constants.TURN_TOLERANCE_DEG, driveCommand),
             new ShooterCommand(shooter, intake, vision, true)
         );
     }

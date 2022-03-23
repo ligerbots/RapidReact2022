@@ -66,7 +66,7 @@ public class TwoBallAutoCurved extends SequentialCommandGroup implements AutoCom
                 ramseteCommand.andThen(() -> driveTrain.tankDriveVolts(0, 0)),
                 new IntakeCommand(intake, Constants.INTAKE_SPEED)
             ),
-            new FaceShootingTarget(driveTrain, Constants.TURN_TOLERANCE_DEG, driveCommand, vision),
+            new FaceShootingTarget(driveTrain, vision, Constants.TURN_TOLERANCE_DEG, driveCommand),
             new ShooterCommand(shooter, intake, vision, true)
         );
     }

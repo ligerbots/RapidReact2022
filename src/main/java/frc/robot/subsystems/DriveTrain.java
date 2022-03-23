@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.SPI.Port;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.simulation.DifferentialDrivetrainSim;
-import edu.wpi.first.wpilibj.simulation.EncoderSim;
+// import edu.wpi.first.wpilibj.simulation.EncoderSim;
 import edu.wpi.first.wpilibj.simulation.SimDeviceSim;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -40,8 +40,8 @@ public class DriveTrain extends SubsystemBase {
     // private Encoder m_rightEncoder = new Encoder(Constants.RIGHT_ENCODER_PORTS[0], Constants.RIGHT_ENCODER_PORTS[1]);
 
     private DifferentialDrivetrainSim m_differentialDriveSim;
-    private EncoderSim m_leftEncoderSim;
-    private EncoderSim m_rightEncoderSim;
+    // private EncoderSim m_leftEncoderSim;
+    // private EncoderSim m_rightEncoderSim;
     private Field2d m_fieldSim;
     private SimDouble m_gyroAngleSim;
     
