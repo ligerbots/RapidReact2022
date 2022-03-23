@@ -69,17 +69,23 @@ public class FaceShootingTarget extends CommandBase {
       m_robotDrive.drive(0, m_robotDrive.turnSpeedCalc(m_headingError), false);
 
       m_oldCheck = Math.abs(m_headingError) < m_acceptableError && m_oldOldCheck;
-
       m_oldOldCheck = Math.abs(m_headingError) < m_acceptableError;
     }
     else if (m_vision.getStatus() && m_vision.getDistance() > 1.0)
     {
-      double startAngle = m_robotDrive.getHeading();
-      double visionAngle = m_vision.getRobotAngle();
-      m_headingTarget = startAngle - visionAngle;
-      System.out.format("FaceShooter acquired: heading = %3.1f visionAngle = %3.1f targetHeading = %3.2f%n",
-                        startAngle, visionAngle, m_headingTarget);
       m_targetAcquired = true;
+
+      m_headingError = m_vision.getRobotAngle();
+      double startAngle = m_robotDrive.getHeading();
+      m_headingTarget = startAngle - m_headingError;
+      System.out.format("FaceShooter acquired: heading = %3.1f visionAngle = %3.1f targetHeading = %3.2f%n",
+                        startAngle, m_headingError, m_headingTarget);
+
+      if (Math.abs(m_headingError) < m_acceptableError) {
+        // we are already within the acceptable error, so short circuit the command
+        m_check = true;
+        return;
+      }
     }
   }
 
