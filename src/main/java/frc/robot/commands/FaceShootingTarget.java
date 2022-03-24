@@ -66,7 +66,7 @@ public class FaceShootingTarget extends CommandBase {
 
       m_check = Math.abs(m_headingError) < m_acceptableError && m_oldCheck;
       // System.out.format("FaceShootingTarget: %3.2f%n", initialAngleOffset);
-      m_robotDrive.drive(0, m_robotDrive.turnSpeedCalc(m_headingError), false);
+      m_robotDrive.drive(0, -m_robotDrive.turnSpeedCalc(m_headingError), false);
 
       m_oldCheck = Math.abs(m_headingError) < m_acceptableError && m_oldOldCheck;
       m_oldOldCheck = Math.abs(m_headingError) < m_acceptableError;
