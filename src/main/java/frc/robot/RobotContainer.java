@@ -6,13 +6,13 @@ package frc.robot;
 
 import java.util.function.DoubleSupplier;
 
+// import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ClimbToNextBar;
 import frc.robot.commands.DriveCommand;
-import frc.robot.commands.FaceShootingTarget;
 import frc.robot.commands.ShooterCommand;
 import frc.robot.commands.TurnAndShoot;
 import frc.robot.commands.IntakeCommand;
@@ -79,6 +79,9 @@ public class RobotContainer {
         // JoystickButton xboxAButton = new JoystickButton(m_xbox, Constants.XBOX_A);
         // xboxAButton.whileHeld(new TuneShooterCommand(m_shooter, m_intake));
 
+        // FOR TESTING!!
+        // DriverStation.silenceJoystickConnectionWarning(true);
+        
         // vacuum mode
         JoystickButton xboxYButton = new JoystickButton(m_xbox, Constants.XBOX_Y);
         xboxYButton.whileHeld(new VacuumMode(m_shooter, m_intake));
@@ -144,8 +147,8 @@ public class RobotContainer {
         farm16.whenPressed(new SetVisionMode(m_vision, VisionMode.HUBFINDER)); 
 
         // For Testing
-        JoystickButton farm10 = new JoystickButton(m_farm, 10);
-        farm10.whenPressed(new FaceShootingTarget(m_driveTrain, m_vision, Constants.TURN_TOLERANCE_DEG, m_driveCommand)); 
+        // JoystickButton farm10 = new JoystickButton(m_farm, 10);
+        // xboxYButton.whenPressed(new FaceShootingTarget(m_driveTrain, m_vision, Constants.TURN_TOLERANCE_DEG, m_driveCommand)); 
     }
 
     private class Throttle implements DoubleSupplier {

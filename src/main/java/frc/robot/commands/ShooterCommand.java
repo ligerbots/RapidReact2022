@@ -18,7 +18,7 @@ public class ShooterCommand extends CommandBase {
     Vision m_vision;
     boolean m_upperHub;
     double m_distance;
-
+    boolean m_useVision;
 
     LigerTimer m_shootDelay = new LigerTimer(Constants.SHOOTER_MOTOR_WAIT_TIME);
     LigerTimer m_intakeDelay = new LigerTimer(Constants.SHOOTER_INTAKE_WAIT_TIME);
@@ -42,6 +42,7 @@ public class ShooterCommand extends CommandBase {
         m_intake = intake;
         m_vision = vision;
         m_upperHub = upperHub;
+        m_useVision = true;
     }
 
     public ShooterCommand(Shooter shooter, Intake intake, double distance, boolean upperHub) {
@@ -49,12 +50,13 @@ public class ShooterCommand extends CommandBase {
         m_intake = intake;
         m_distance = distance;
         m_upperHub = upperHub;
+        m_useVision = false;
     }
 
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-        if (m_upperHub == false || m_distance > 0.0) { // if lowerhub or if distance pre-defined, skip vision
+        if (m_upperHub == false || ! m_useVision) { // if lowerhub or if distance pre-defined, skip vision
             m_state = State.SPEED_UP_SHOOTER;
         } else {
             // turn on vision finding, just in case, and it does not hurt if already done
@@ -69,8 +71,7 @@ public class ShooterCommand extends CommandBase {
     public void execute() {
         switch (m_state) {
             case FINDING_VISION_TARGET:
-                
-                m_distance = m_vision.getDistance();
+            m_distance = m_vision.getDistance();
                 // go to the next state once the target is found
                 if (m_distance != 0.0)
                     m_state = State.SPEED_UP_SHOOTER;
