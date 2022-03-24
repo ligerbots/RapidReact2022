@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.SPI.Port;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.simulation.DifferentialDrivetrainSim;
-import edu.wpi.first.wpilibj.simulation.EncoderSim;
+// import edu.wpi.first.wpilibj.simulation.EncoderSim;
 import edu.wpi.first.wpilibj.simulation.SimDeviceSim;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -40,8 +40,8 @@ public class DriveTrain extends SubsystemBase {
     // private Encoder m_rightEncoder = new Encoder(Constants.RIGHT_ENCODER_PORTS[0], Constants.RIGHT_ENCODER_PORTS[1]);
 
     private DifferentialDrivetrainSim m_differentialDriveSim;
-    private EncoderSim m_leftEncoderSim;
-    private EncoderSim m_rightEncoderSim;
+    // private EncoderSim m_leftEncoderSim;
+    // private EncoderSim m_rightEncoderSim;
     private Field2d m_fieldSim;
     private SimDouble m_gyroAngleSim;
     
@@ -229,5 +229,27 @@ public class DriveTrain extends SubsystemBase {
 
     public Field2d getField2d() {
         return m_fieldSim;
+    }
+
+    public double turnSpeedCalc(double angleError) {
+        double absErr = Math.abs(angleError);
+        double turnSpeed;
+        if (absErr > 60.0) {
+            turnSpeed = 0.8;
+        }
+        else if (absErr > 30.0) {
+            turnSpeed = 0.2; //0.4;
+        }
+        else if (absErr > 10.0) {
+            turnSpeed = 0.15;
+        }
+        // else if (absErr > 5.0) {
+        //     turnSpeed = 0.1; //0.07;
+        // }
+        else {
+            turnSpeed = 0.125; // 0.065;
+        }
+
+        return turnSpeed * Math.signum(angleError);
     }
 }

@@ -59,5 +59,4 @@ public class TurnTowardsHub extends SequentialCommandGroup{
     public TurnTowardsHub(DriveTrain driveTrain, Vision vision){
         this(Constants.TURN_TOLERANCE_DEG, Constants.TURN_STABILIZE_SECS, driveTrain, vision);
     }
-
 }

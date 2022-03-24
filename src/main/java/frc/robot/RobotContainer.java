@@ -6,18 +6,16 @@ package frc.robot;
 
 import java.util.function.DoubleSupplier;
 
+// import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ClimbToNextBar;
-import frc.robot.commands.DeployIntake;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.ShooterCommand;
-import frc.robot.commands.TimeOut;
 import frc.robot.commands.TurnAndShoot;
 import frc.robot.commands.IntakeCommand;
-import frc.robot.commands.LigerTimer;
 import frc.robot.commands.RaiseToBar;
 // import frc.robot.commands.ResetElevatorEncoder;
 import frc.robot.commands.SetArmAngleTest;
@@ -81,6 +79,9 @@ public class RobotContainer {
         // JoystickButton xboxAButton = new JoystickButton(m_xbox, Constants.XBOX_A);
         // xboxAButton.whileHeld(new TuneShooterCommand(m_shooter, m_intake));
 
+        // FOR TESTING!!
+        // DriverStation.silenceJoystickConnectionWarning(true);
+        
         // vacuum mode
         JoystickButton xboxYButton = new JoystickButton(m_xbox, Constants.XBOX_Y);
         xboxYButton.whileHeld(new VacuumMode(m_shooter, m_intake));
@@ -89,7 +90,7 @@ public class RobotContainer {
 
         // shooting for upperHub
         JoystickButton xboxXButton = new JoystickButton(m_xbox, Constants.XBOX_X);
-        xboxXButton.whenPressed(new TurnAndShoot(m_shooter, m_intake, m_driveTrain, m_vision));
+        xboxXButton.whenPressed(new TurnAndShoot(m_shooter, m_intake, m_driveTrain, m_vision, m_driveCommand));
 
         // shooting for upperHub from tarmac
         JoystickButton xboxAButton = new JoystickButton(m_xbox, Constants.XBOX_A);
@@ -141,6 +142,13 @@ public class RobotContainer {
 
         JoystickButton farm14 = new JoystickButton(m_farm, 14);
         farm14.whenPressed(new SetVisionMode(m_vision, VisionMode.SHOOTER)); 
+
+        JoystickButton farm16 = new JoystickButton(m_farm, 16);
+        farm16.whenPressed(new SetVisionMode(m_vision, VisionMode.HUBFINDER)); 
+
+        // For Testing
+        // JoystickButton farm10 = new JoystickButton(m_farm, 10);
+        // xboxYButton.whenPressed(new FaceShootingTarget(m_driveTrain, m_vision, Constants.TURN_TOLERANCE_DEG, m_driveCommand)); 
     }
 
     private class Throttle implements DoubleSupplier {
