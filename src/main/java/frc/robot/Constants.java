@@ -114,8 +114,8 @@ public final class Constants {
     public static final double ARM_KA = 0.08;
 
     // Constants to limit the arm rotation speed
-    public static final double ARM_MAX_VEL_RAD_PER_SEC = Math.toRadians(120.0);
-    public static final double ARM_MAX_ACC_RAD_PER_SEC_SQ = Math.toRadians(90);
+    public static final double ARM_MAX_VEL_RAD_PER_SEC = Math.toRadians(200.0);
+    public static final double ARM_MAX_ACC_RAD_PER_SEC_SQ = Math.toRadians(200.0);
     public static final double ARM_OFFSET_RAD = Math.toRadians(110.0);
 
     // PID Constants for the Arm PID controller
@@ -138,6 +138,8 @@ public final class Constants {
     public static final double ARM_GRAB_THE_BAR = Units.degreesToRadians(90.0);
     public static final double ARM_ROTATION_ELEVATOR_TOUCH_BAR = Units.degreesToRadians(110.0);
 
+    public static final double ARM_CLIMB_BAR_OFFSET = Units.degreesToRadians(130.0);
+
     // the height of the elevator to retract down to certain point where the arm can get to the other side of the bar
     public static final double ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE = Units.inchesToMeters(5.0);
     public static final double ARM_ANGLE_FOR_ELEVATOR_CLEARANCE = Units.degreesToRadians(70.0);
@@ -153,11 +155,11 @@ public final class Constants {
 
     // Constants to limit the elevator veocity and accel
 
-    public static final double ELEVATOR_MAX_VEL_METER_PER_SEC_ASCEND = Units.inchesToMeters(50.0);
-    public static final double ELEVATOR_MAX_ACC_METER_PER_SEC_SQ_ASCEND = Units.inchesToMeters(25.0);
+    public static final double ELEVATOR_MAX_VEL_METER_PER_SEC_ASCEND = Units.inchesToMeters(1000.0);
+    public static final double ELEVATOR_MAX_ACC_METER_PER_SEC_SQ_ASCEND = Units.inchesToMeters(250.0);
 
-    public static final double ELEVATOR_MAX_VEL_METER_PER_SEC_DESCEND = Units.inchesToMeters(60.0);
-    public static final double ELEVATOR_MAX_ACC_METER_PER_SEC_SQ_DESCEND = Units.inchesToMeters(40.0);
+    public static final double ELEVATOR_MAX_VEL_METER_PER_SEC_DESCEND = Units.inchesToMeters(100.0);
+    public static final double ELEVATOR_MAX_ACC_METER_PER_SEC_SQ_DESCEND = Units.inchesToMeters(30.0);
     public static final double ELEVATOR_OFFSET_METER = Units.inchesToMeters(2.0);
 
     public static final double ELEVATOR_LIMIT_SWITCH_HEIGHT = Units.inchesToMeters(-0.15);

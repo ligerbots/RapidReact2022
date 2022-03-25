@@ -24,7 +24,9 @@ public class ClimbToNextBar extends SequentialCommandGroup {
       new CommandFinished(false),
 
       // rotate the arm to point elevator towards the next bar and extend the elevator
-      new SetArmAngle(m_climber, Constants.ARM_ANGLE_TO_NEXT_BAR).alongWith(new SetElevatorHeight(m_climber, Constants.ELEVATOR_MAX_HEIGHT)),
+      // new SetArmAngle(m_climber, Constants.ARM_ANGLE_TO_NEXT_BAR).alongWith(new SetElevatorHeight(m_climber, Constants.ELEVATOR_MAX_HEIGHT)),
+      new SetArmAngle(m_climber, Constants.ARM_ANGLE_TO_NEXT_BAR),
+      new SetElevatorHeight(m_climber, Constants.ELEVATOR_MAX_HEIGHT),
 
       // clear the command
       // CommandGroupBase.clearGroupedCommand(Command),
@@ -43,6 +45,9 @@ public class ClimbToNextBar extends SequentialCommandGroup {
 
       // set the arm to brake mode
       new SetArmBrake(m_climber),
+
+      // clear from the bar
+      new SetArmAngle(m_climber, Constants.ARM_CLIMB_BAR_OFFSET),
 
       // rotate the arm to leave the previous bar and get to the side of the next bar
       new SetArmAngle(m_climber, Constants.ARM_TO_THE_LEFT_ANGLE).
