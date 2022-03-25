@@ -72,7 +72,7 @@ public class TwoBallAutoStraight extends SequentialCommandGroup implements AutoC
                 ramseteCommand.andThen(() -> driveTrain.tankDriveVolts(0, 0)),
                 new IntakeCommand(intake, Constants.INTAKE_SPEED)
             ),
-            new FaceShootingTarget(driveTrain, vision, Constants.TURN_TOLERANCE_DEG, driveCommand),
+            new FaceShootingTarget(driveTrain, vision, Constants.TURN_TOLERANCE_DEG, null),
             new ShooterCommand(shooter, intake, vision, true)
         );
     }
