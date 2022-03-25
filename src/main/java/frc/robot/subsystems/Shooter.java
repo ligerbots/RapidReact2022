@@ -14,7 +14,6 @@ import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-// import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -34,7 +33,8 @@ public class Shooter extends SubsystemBase {
     // lookup table for upper hub speeds
     static final TreeMap<Double, ShooterSpeeds> shooterSpeeds = new TreeMap<>(Map.ofEntries(
             Map.entry(0.0, new ShooterSpeeds(900.0, 900.0, 0.3)),    // actually lower hub, but safer to include
-            Map.entry(62.0, new ShooterSpeeds(900.0, 900.0, 0.3)),   // actually lower hub, but safer to include
+            Map.entry(54.99, new ShooterSpeeds(900.0, 900.0, 0.3)),   // actually lower hub, but safer to include
+            Map.entry(55.0, new ShooterSpeeds(1450.0, 1700.0, 0.3)),
             Map.entry(71.0, new ShooterSpeeds(1450.0, 1700.0, 0.3)),
             Map.entry(84.0, new ShooterSpeeds(1600.0, 1600.0, 0.3)),
             Map.entry(92.0, new ShooterSpeeds(1600.0, 1600.0, 0.3)),
@@ -43,7 +43,6 @@ public class Shooter extends SubsystemBase {
 
     // values for lowerHub
     static final ShooterSpeeds lowHubSpeeds = new ShooterSpeeds(900.0, 900.0, 0.3);
-
 
     // Shooter class constructor, initialize arrays for motors controllers,
     // encoders, and SmartDashboard data
