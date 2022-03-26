@@ -67,9 +67,9 @@ public class SetElevatorHeight extends CommandBase {
         // I think Commands run before Subsystems, so we should be OK.
 
         // only check the limit switches when the elevator reads below certain height
-        if(m_climber.getElevatorHeight()[i] > Constants.ELEVATOR_CHECKING_LIMIT_SWITCH_HEIGHT) continue;
+        // if(m_climber.getElevatorHeight()[i] > Constants.ELEVATOR_CHECKING_LIMIT_SWITCH_HEIGHT) continue;
 
-        if (m_climber.m_limitSwitch[i].isPressed()) {
+        if (m_climber.m_limitSwitch[i].isPressed() && m_climber.getElevatorHeight()[i] < Constants.ELEVATOR_CHECKING_LIMIT_SWITCH_HEIGHT) {
           m_hitLimitSwitch[i] = true;
         } else {
           // limit switch is not pressed yet.

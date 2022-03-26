@@ -71,16 +71,17 @@ public class ShooterCommand extends CommandBase {
     public void execute() {
         switch (m_state) {
             case FINDING_VISION_TARGET:
-            m_distance = m_vision.getDistance();
+                m_distance = m_vision.getDistance();
                 // go to the next state once the target is found
-                if (m_distance != 0.0)
+                if (m_distance > 1.0)
                     m_state = State.SPEED_UP_SHOOTER;
                 else if (m_visionTime.hasElapsed()) {
                     m_state = State.SPEED_UP_SHOOTER;
                     // if still can't find the target, just use 9ft as the distance
                     m_distance = DEFAULT_DISTANCE_TO_THE_HUB;
                 }
-                else break;
+                else 
+                    break;
                 // allows fall through to the next state if found the target
 
             case SPEED_UP_SHOOTER:
@@ -93,25 +94,30 @@ public class ShooterCommand extends CommandBase {
                 m_shooter.setShooterRpms(m_shooterSpeeds.top, m_shooterSpeeds.bottom);
                 m_state = State.WAIT_FOR_SHOOTER;
                 m_shootDelay.start();
-                // able to go straight to the next state since this only needs to be called once
-                // and can start checking directly
+                break;
 
             case WAIT_FOR_SHOOTER:
                 if (m_shootDelay.hasElapsed())
                     m_state = State.TURN_ON_CHUTE;
-                break;
+                else {
+                    // fall through if timer elapsed
+                    break;
+                }
 
             case TURN_ON_CHUTE:
                 // turn on the chute once the shooter is ready
                 m_shooter.setChuteSpeed(m_shooterSpeeds.chute);
                 m_state = State.WAIT_FOR_SHOOT_BALL1;
                 m_shootBall1Time.start();
-                // same logics, able to go to the next state directly
+                break;
                 
             case WAIT_FOR_SHOOT_BALL1:
                 if (m_shootBall1Time.hasElapsed())
                     m_state = State.TURN_ON_INTAKE;
-                break;
+                else {
+                    // allow fall through if elapse
+                    break;
+                }
             
             case TURN_ON_INTAKE:
                 m_intake.run(Constants.INTAKE_SHOOTING_SPEED);

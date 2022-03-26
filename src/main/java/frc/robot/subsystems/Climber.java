@@ -102,13 +102,15 @@ public class Climber extends SubsystemBase {
     SmartDashboard.putBoolean("if0", m_limitSwitch[0].isPressed() && m_elevatorDescend[0].m_elevatorDescending);
     SmartDashboard.putBoolean("if1", m_limitSwitch[1].isPressed() && m_elevatorDescend[1].m_elevatorDescending);
 
-    SmartDashboard.putBoolean("elevator" + 0 + "/limitSwitchPressed", m_limitSwitch[0].isPressed());
+    SmartDashboard.putBoolean("elevator0/limitSwitchPressed", m_limitSwitch[0].isPressed());
+    SmartDashboard.putBoolean("elevator0/limitActive", m_limitSwitch[0].isPressed() && getElevatorHeight()[0] < Constants.ELEVATOR_CHECKING_LIMIT_SWITCH_HEIGHT);
     if (m_limitSwitch[0].isPressed() && m_elevatorDescend[0].m_elevatorDescending) {
       m_elevatorMotor[0].getEncoder().setPosition(Constants.ELEVATOR_LIMIT_SWITCH_HEIGHT);
       setElevatorHeight(0, 0.0);
     }
 
-    SmartDashboard.putBoolean("elevator" + 1 + "/limitSwitchPressed", m_limitSwitch[1].isPressed());
+    SmartDashboard.putBoolean("elevator1/limitSwitchPressed", m_limitSwitch[1].isPressed());
+    SmartDashboard.putBoolean("elevator1/limitActive", m_limitSwitch[1].isPressed() && getElevatorHeight()[1] < Constants.ELEVATOR_CHECKING_LIMIT_SWITCH_HEIGHT);
     if (m_limitSwitch[1].isPressed() && m_elevatorDescend[1].m_elevatorDescending) {
       m_elevatorMotor[1].getEncoder().setPosition(Constants.ELEVATOR_LIMIT_SWITCH_HEIGHT);
       setElevatorHeight(1, 0.0);
