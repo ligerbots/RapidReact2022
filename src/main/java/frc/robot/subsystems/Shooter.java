@@ -43,7 +43,7 @@ public class Shooter extends SubsystemBase {
             Map.entry(123.0, new ShooterSpeeds(1650.0, 1750.0, 0.3)),// 123 1650 1750
             Map.entry(154.0, new ShooterSpeeds(1750.0, 2000.0, 0.3)),// 154 1750 2000
             Map.entry(163.0, new ShooterSpeeds(1850.0, 2150.0, 0.3)),   // 1800, 2100
-            Map.entry(190.0, new ShooterSpeeds(1950.0, 2250.0, 0.3)),
+            // Map.entry(190.0, new ShooterSpeeds(1950.0, 2250.0, 0.3)),
             Map.entry(195.0, new ShooterSpeeds(1900.0, 2100.0, 0.3)),
             Map.entry(235.0, new ShooterSpeeds(2100.0, 2250.0, 0.3))));   // made up
             // 195 1900 2100
