@@ -53,8 +53,14 @@ public class ClimbToNextBar extends SequentialCommandGroup {
       new SetArmAngle(m_climber, Constants.ARM_TO_THE_LEFT_ANGLE).
         alongWith(new SetElevatorHeight(m_climber, Constants.ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE, Constants.ELEVATOR_HEIGHT_LOOSE_TOLERANCE)),
 
-      // execute RaiseToBar to prepare for the next round of climbing
-      new RaiseToBar(m_climber),
+      // retract the elevator
+      new SetElevatorHeight(m_climber, Constants.ELEVATOR_MIN_HEIGHT),
+
+      // rotates arm to grab on to the bar
+      new SetArmAngle(m_climber, Constants.ARM_GRAB_THE_BAR),
+
+      // extend the elevator a bit to come off the bar and let arm grab it
+      new SetElevatorHeight(m_climber, Constants.ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE),
       
       new CommandFinished(true));
   }
