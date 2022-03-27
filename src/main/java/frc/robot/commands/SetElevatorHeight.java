@@ -34,6 +34,7 @@ public class SetElevatorHeight extends CommandBase {
     // Use addRequirements() here to declare subsystem dependencies.
     m_climber = climber;
     m_height = new double[2];
+    m_ressetEncoder = new boolean[2];
     m_height[0] = height;
     m_height[1] = height;
     m_tolerance = tolerance;

@@ -31,6 +31,7 @@ public class SetElevatorHeightTest extends CommandBase {
     m_height = new double[2];
     m_hitLimitSwitch = new boolean[2];
     m_limitSwitchAlreadyPressed = new boolean[2];
+    m_ressetEncoder = new boolean[2];
   }
 
   // Called when the command is initially scheduled.
@@ -42,6 +43,8 @@ public class SetElevatorHeightTest extends CommandBase {
     m_goingToZero = (height == Constants.ELEVATOR_MIN_HEIGHT);
     m_hitLimitSwitch[0] = false;
     m_hitLimitSwitch[1] = false;
+    m_ressetEncoder[0] = false;
+    m_ressetEncoder[1] = false;
     m_climber.setElevatorHeight(0, m_height[0]);
     m_climber.setElevatorHeight(1, m_height[1]);
     SmartDashboard.putBoolean("finished", false);
