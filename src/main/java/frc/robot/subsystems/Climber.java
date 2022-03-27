@@ -44,7 +44,7 @@ public class Climber extends SubsystemBase {
   double[] m_elevatorEncoderValue = new double[2];
   double[] m_armEncoderValue = new double[2];
 
-  CANSparkMax[] m_elevatorMotor;
+  public CANSparkMax[] m_elevatorMotor;
   
   public SparkMaxLimitSwitch[] m_limitSwitch;
 
@@ -104,17 +104,18 @@ public class Climber extends SubsystemBase {
 
     SmartDashboard.putBoolean("elevator0/limitSwitchPressed", m_limitSwitch[0].isPressed());
     SmartDashboard.putBoolean("elevator0/limitActive", m_limitSwitch[0].isPressed() && getElevatorHeight()[0] < Constants.ELEVATOR_CHECKING_LIMIT_SWITCH_HEIGHT);
-    if (m_limitSwitch[0].isPressed() && m_elevatorDescend[0].m_elevatorDescending) {
-      m_elevatorMotor[0].getEncoder().setPosition(Constants.ELEVATOR_LIMIT_SWITCH_HEIGHT);
-      setElevatorHeight(0, 0.0);
-    }
+    // Should be OK because the limit switch is being checked in SetElevatorHeight() and SetElevatorHeightTest()
+    // if (m_limitSwitch[0].isPressed() && m_elevatorDescend[0].m_elevatorDescending) {
+    //   m_elevatorMotor[0].getEncoder().setPosition(Constants.ELEVATOR_LIMIT_SWITCH_HEIGHT);
+    //   setElevatorHeight(0, 0.0);
+    // }
 
-    SmartDashboard.putBoolean("elevator1/limitSwitchPressed", m_limitSwitch[1].isPressed());
-    SmartDashboard.putBoolean("elevator1/limitActive", m_limitSwitch[1].isPressed() && getElevatorHeight()[1] < Constants.ELEVATOR_CHECKING_LIMIT_SWITCH_HEIGHT);
-    if (m_limitSwitch[1].isPressed() && m_elevatorDescend[1].m_elevatorDescending) {
-      m_elevatorMotor[1].getEncoder().setPosition(Constants.ELEVATOR_LIMIT_SWITCH_HEIGHT);
-      setElevatorHeight(1, 0.0);
-    }
+    // SmartDashboard.putBoolean("elevator1/limitSwitchPressed", m_limitSwitch[1].isPressed());
+    // SmartDashboard.putBoolean("elevator1/limitActive", m_limitSwitch[1].isPressed() && getElevatorHeight()[1] < Constants.ELEVATOR_CHECKING_LIMIT_SWITCH_HEIGHT);
+    // if (m_limitSwitch[1].isPressed() && m_elevatorDescend[1].m_elevatorDescending) {
+    //   m_elevatorMotor[1].getEncoder().setPosition(Constants.ELEVATOR_LIMIT_SWITCH_HEIGHT);
+    //   setElevatorHeight(1, 0.0);
+    // }
   }
 
   // sets the elevator to a certain height

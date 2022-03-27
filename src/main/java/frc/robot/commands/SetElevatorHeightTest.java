@@ -20,6 +20,9 @@ public class SetElevatorHeightTest extends CommandBase {
   double[] m_height;
 
   boolean[] m_hitLimitSwitch;
+  boolean[] m_limitSwitchAlreadyPressed;
+
+  boolean[] m_ressetEncoder;
 
   public SetElevatorHeightTest(Climber climber, String key) {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -27,6 +30,7 @@ public class SetElevatorHeightTest extends CommandBase {
     m_key = key;
     m_height = new double[2];
     m_hitLimitSwitch = new boolean[2];
+    m_limitSwitchAlreadyPressed = new boolean[2];
   }
 
   // Called when the command is initially scheduled.
@@ -46,32 +50,52 @@ public class SetElevatorHeightTest extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    SmartDashboard.putBoolean("goingToZero", m_goingToZero);
 
+    // If we're going to Zero, we have to check things here and potentially change
+    // the
+    // requested elevator height.
     if (m_goingToZero) {
       // We're going to need to check each elevator independently, so we need a loop
       for (int i = 0; i <= 1; i++) {
-        // if we're going to zero, we need to make sure the elevator hit the limit switch
-        // Note that there is a race condition here. In Climber.periodic, it checks for the switch and
-        // ifPressed, it sets the encoder value and also calls setElevatorHeight to 0 which will raise the
+        // if we're going to zero, we need to make sure the elevator hit the limit
+        // switch
+        // Note that there is a race condition here. In Climber.periodic, it checks for
+        // the switch and
+        // ifPressed, it sets the encoder value and also calls setElevatorHeight to 0
+        // which will raise the
         // elevator slightly and release the switch.
         // I think Commands run before Subsystems, so we should be OK.
 
-        if(m_climber.getElevatorHeight()[i] > Constants.ELEVATOR_CHECKING_LIMIT_SWITCH_HEIGHT) continue;
+        // only check the limit switches when the elevator reads below certain height
+        // if(m_climber.getElevatorHeight()[i] >
+        // Constants.ELEVATOR_CHECKING_LIMIT_SWITCH_HEIGHT) continue;
 
-        if (m_climber.m_limitSwitch[i].isPressed()) {
-          m_hitLimitSwitch[i] = true;
-        } else {
+        // Make sure that the switch is pressed twice in a row.
+        boolean tempPressedCheck = m_climber.m_limitSwitch[i].isPressed() &&
+            m_climber.getElevatorHeight()[i] < Constants.ELEVATOR_CHECKING_LIMIT_SWITCH_HEIGHT;
+        m_hitLimitSwitch[i] = tempPressedCheck && m_limitSwitchAlreadyPressed[i];
+        m_limitSwitchAlreadyPressed[i] = tempPressedCheck;
+
+        // if the limit swsitch is not triggered, we need to reduce the set height to
+        // keep it going down
+        if (!m_hitLimitSwitch[i]) {
           // limit switch is not pressed yet.
           // did we reach zero?
-          SmartDashboard.putBoolean("if check" + i, Math.abs(m_climber.getElevatorHeight()[i] - m_height[i]) < Constants.ELEVATOR_HEIGHT_TOLERANCE);
-
           if (Math.abs(m_climber.getElevatorHeight()[i] - m_height[i]) < Constants.ELEVATOR_HEIGHT_TOLERANCE) {
-            // We reached zero, but since the limit switch was not hit, we need to keep going.
-            // Lower the elevator height. We'll check next time through to see if the switch isPressed.
+            // We reached zero, but since the limit switch was not hit, we need to keep
+            // going.
+            // Lower the elevator height. We'll check next time through to see if the switch
+            // isPressed.
             m_height[i] -= Units.inchesToMeters(0.5);
             m_climber.setElevatorHeight(i, m_height[i]);
           }
+        }
+        // If we've hit the limit switch twice, we need to set the encoder value to limit switch height
+        // and then raise elevator to ELEVATOR_MIN_HEIGHT.
+        if (m_hitLimitSwitch[i] && m_limitSwitchAlreadyPressed[i] && !m_ressetEncoder[i]) {
+          m_climber.m_elevatorMotor[i].getEncoder().setPosition(Constants.ELEVATOR_LIMIT_SWITCH_HEIGHT);
+          m_climber.setElevatorHeight(i, 0.0);
+          m_ressetEncoder[i] = true;
         }
       }
     }
