@@ -170,8 +170,8 @@ public final class Constants {
 
     // PID Constants for the Arm PID controller
     // Since we're using Trapeziodal control, all values will be 0 except for P
-    public static final double ELEVATOR_K_P0 = 50;
-    public static final double ELEVATOR_K_P1 = 50;
+    public static final double ELEVATOR_K_P0 = 100;
+    public static final double ELEVATOR_K_P1 = 100;
     public static final double ELEVATOR_K_I = 0.0;
     public static final double ELEVATOR_K_D = 0.0;
     public static final double ELEVATOR_K_FF = 0.0;
