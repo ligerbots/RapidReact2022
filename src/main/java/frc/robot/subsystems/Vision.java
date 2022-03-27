@@ -64,6 +64,9 @@ public class Vision extends SubsystemBase {
             if (distanceIsStable()) {
                 m_lastSuccessfulResult = m_lastResult;
             }
+            else {
+                System.out.format("Unstable vision reading: d = %3.1f angle = %3.1f%n", m_lastResult[3], Math.toDegrees(m_lastResult[4]));
+            }
         }
     }
 
