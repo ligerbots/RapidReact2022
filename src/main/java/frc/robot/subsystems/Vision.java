@@ -24,6 +24,18 @@ public class Vision extends SubsystemBase {
     private Relay m_relay;
     private DriveTrain m_driveTrain;
     private double[] m_targetInfoSim = EMPTY_TARGET_INFO.clone();
+
+    // Variables to monitor the stability of the found distance, to declare if it is stable
+    // monitor 3 readings
+    private static final int N_READINGS_AVERAGE = 3;
+    // max range between all readings
+    private static final double DISTANCE_STABILITY_LIMIT = 5.0;
+
+    // maintain a ring buffer of readings so we can check their spread
+    private double[] m_distanceRingBuf = new double[N_READINGS_AVERAGE];
+    // current index into the ring buffer
+    private int m_ringIndex = 0;
+
     private double[] m_lastResult = EMPTY_TARGET_INFO;
     private double[] m_lastSuccessfulResult = EMPTY_TARGET_INFO;
 
@@ -42,9 +54,29 @@ public class Vision extends SubsystemBase {
     @Override
     public void periodic() {
         m_lastResult = SmartDashboard.getNumberArray("vision/target_info", EMPTY_TARGET_INFO);
+
         if (m_lastResult[1] > 0.5) {
-            m_lastSuccessfulResult = m_lastResult;
+            // if the vision says the reading is good, store the distance in the ring buffer
+            m_distanceRingBuf[m_ringIndex] = m_lastResult[3];
+            m_ringIndex = (m_ringIndex + 1) % N_READINGS_AVERAGE;
+
+            // if values in the ring buffer are stable, declare it good.
+            if (distanceIsStable()) {
+                m_lastSuccessfulResult = m_lastResult;
+            }
         }
+    }
+
+    // Check the stability of the vision results by checking the spread (min/max) of the distance results
+    private boolean distanceIsStable() {
+        // keep it general
+        double maxD = -100.0;
+        double minD = 10000000.0;
+        for (double x: m_distanceRingBuf) {
+            if (x > maxD) maxD = x;
+            if (x < minD) minD = x;
+        }
+        return (maxD - minD) < DISTANCE_STABILITY_LIMIT;
     }
 
     @Override
