@@ -84,7 +84,7 @@ public class SetElevatorHeightTest extends CommandBase {
         if (!m_hitLimitSwitch[i]) {
           // limit switch is not pressed yet.
           // did we reach zero?
-          if (Math.abs(m_climber.getElevatorHeight()[i] - m_height[i]) < Constants.ELEVATOR_HEIGHT_TOLERANCE) {
+          if (Math.abs(m_climber.getElevatorHeight()[i] - m_height[i]) < Constants.ELEVATOR_HEIGHT_LOOSE_TOLERANCE) {
             // We reached zero, but since the limit switch was not hit, we need to keep
             // going.
             // Lower the elevator height. We'll check next time through to see if the switch

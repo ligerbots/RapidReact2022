@@ -2073,6 +2073,17 @@
               "Colors/Color when true": "#7CFC00FF",
               "Colors/Color when false": "#8B0000FF"
             }
+          },
+          "12,19": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/shooter/HeadingError",
+              "_title": "shooter/HeadingError"
+            }
           }
         }
       }
@@ -2579,6 +2590,19 @@
               "_source0": "network_table:///SmartDashboard/Chosen Auto",
               "_title": "SmartDashboard/Chosen Auto"
             }
+          },
+          "4,3": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/finished",
+              "_title": "/SmartDashboard/finished",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
           }
         }
       }
@@ -2618,7 +2642,7 @@
     }
   ],
   "windowGeometry": {
-    "x": -2.222222328186035,
+    "x": -5.333333492279053,
     "y": 0.8888888955116272,
     "width": 1716.4444580078125,
     "height": 725.3333129882812

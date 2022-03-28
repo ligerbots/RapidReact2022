@@ -235,13 +235,13 @@ public class DriveTrain extends SubsystemBase {
         double absErr = Math.abs(angleError);
         double turnSpeed;
         if (absErr > 60.0) {
-            turnSpeed = 0.8;
+            turnSpeed = 0.6;//0.8;
         }
         else if (absErr > 30.0) {
-            turnSpeed = 0.2; //0.4;
+            turnSpeed = 0.15;//0.2; //0.4;
         }
         else if (absErr > 10.0) {
-            turnSpeed = 0.15;
+            turnSpeed = 0.1;//0.15;
         }
         // else if (absErr > 5.0) {
         //     turnSpeed = 0.1; //0.07;
