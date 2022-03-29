@@ -88,11 +88,12 @@ public final class Constants {
     // amount of time to shoot the second ball
     public static final double SHOOT_BALL2_WAIT_TIME = 0.75;
     
+    public static final double SHOOTER_POS = 24;//shooter position on the robot from the bumper
     public static final double TARMAC_DEFAULT_DISTANCE = 12.0 * 7.0;  // 9ft minus hub radius
-    public static final double FAR_LAUNCHPAD_SHOOTER_DISTANCE = 220.77;//distance from the far side of the launchpad to the center hub
-    public static final double CLOSE_LAUNCHPAD_SHOOTER_DISTANCE = 178.95;//distance from the close side of the launchpad to the center hub
-    public static final double HUMAN_PLAYER_SHOOTER_DISTANCE = 281.66;//distance from human shooter to center hub
-    public static final double FAR_SIDE_SHOOTER_DISTANCE = 300.0;//the side between launch pad and human shooter to center hub (least precise location)
+    public static final double FAR_LAUNCHPAD_SHOOTER_DISTANCE = 244.77 - SHOOTER_POS;//distance from the far side of the launchpad to the center hub
+    public static final double CLOSE_LAUNCHPAD_SHOOTER_DISTANCE = 202.95 - SHOOTER_POS;//distance from the close side of the launchpad to the center hub
+    public static final double HUMAN_PLAYER_SHOOTER_DISTANCE = 305.66 - SHOOTER_POS;//distance from human shooter to center hub
+    public static final double FAR_SIDE_SHOOTER_DISTANCE = 324.0 - SHOOTER_POS;//the side between launch pad and human shooter to center hub (least precise location)
 
     // chute subsystem
     public static final int CHUTE_CAN_ID = 6; 
