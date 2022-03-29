@@ -89,6 +89,10 @@ public final class Constants {
     public static final double SHOOT_BALL2_WAIT_TIME = 0.75;
     
     public static final double TARMAC_DEFAULT_DISTANCE = 12.0 * 7.0;  // 9ft minus hub radius
+    public static final double FAR_LAUNCHPAD_SHOOTER_DISTANCE = 220.77;//distance from the far side of the launchpad to the center hub
+    public static final double CLOSE_LAUNCHPAD_SHOOTER_DISTANCE = 178.95;//distance from the close side of the launchpad to the center hub
+    public static final double HUMAN_PLAYER_SHOOTER_DISTANCE = 281.66;//distance from human shooter to center hub
+    public static final double FAR_SIDE_SHOOTER_DISTANCE = 300.0;//the side between launch pad and human shooter to center hub (least precise location)
 
     // chute subsystem
     public static final int CHUTE_CAN_ID = 6; 
@@ -186,6 +190,7 @@ public final class Constants {
 
     // robot starting distance
     public static final double STARTING_DISTANCE = TARMAC_DEFAULT_DISTANCE - 10.0;
+   
 
     // Xbox button mapping
     public static final int XBOX_A = 1;
