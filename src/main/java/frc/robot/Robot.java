@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.AutoCommandInterface;
 import frc.robot.commands.OneBallAuto;
+import frc.robot.commands.ThreeBallLowerMid;
 import frc.robot.commands.TrajectoryPlotter;
 import frc.robot.commands.TwoBallAutoCurved;
 import frc.robot.commands.TwoBallAutoStraight;
@@ -48,6 +49,9 @@ public class Robot extends TimedRobot {
     );
     m_chosenAuto.addOption("OneBallAuto", 
       new OneBallAuto(m_robotContainer.getShooter(), m_robotContainer.getIntake(), m_robotContainer.getDriveTrain(), m_robotContainer.getVision())
+    );
+    m_chosenAuto.addOption("ThreeBallAuto", 
+    new ThreeBallLowerMid(m_robotContainer.getShooter(), m_robotContainer.getIntake(), m_robotContainer.getDriveTrain(), m_robotContainer.getVision(), m_robotContainer.getDriveCommand())
     );
     SmartDashboard.putData("Chosen Auto", m_chosenAuto);
 
