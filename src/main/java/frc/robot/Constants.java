@@ -88,14 +88,31 @@ public final class Constants {
     // amount of time to shoot the second ball
     public static final double SHOOT_BALL2_WAIT_TIME = 0.75;
     
-    public static final double SHOOTER_POS = 24;//shooter position on the robot from the bumper
-    public static final double TARMAC_DEFAULT_DISTANCE = 12.0 * 7.0;  // 9ft minus hub radius
-    public static final double FAR_LAUNCHPAD_SHOOTER_DISTANCE = 244.77 - SHOOTER_POS;//distance from the far side of the launchpad to the center hub
-    public static final double CLOSE_LAUNCHPAD_SHOOTER_DISTANCE = 202.95 - SHOOTER_POS;//distance from the close side of the launchpad to the center hub
-    public static final double HUMAN_PLAYER_SHOOTER_DISTANCE = 305.66 - SHOOTER_POS;//distance from human shooter to center hub
-    public static final double FAR_SIDE_SHOOTER_DISTANCE = 324.0 - SHOOTER_POS;//the side between launch pad and human shooter to center hub (least precise location)
+    
+    //
+    // Various constants used for shooting
+    //
 
-    // chute subsystem
+    // The shooting mechanism is about 24" from the edge of the robot, including bumper
+    // We therefore subtract SHOOTER_POS from all shooting distance constants
+    public static final double SHOOTER_POS = 24;
+    
+    // Our usual "Tarmac" shot is 9ft
+    public static final double TARMAC_DEFAULT_DISTANCE = (12.0 * 9.0) - SHOOTER_POS;
+    
+    // distance from the edge of the field by the human shooting position
+    public static final double JUST_OUTSIDE_TARMAC = (12.0 * 11.5) - SHOOTER_POS;
+    
+    // distance from the near side launchpad to the center hub
+    public static final double CLOSE_LAUNCHPAD_SHOOTER_DISTANCE = 202.95 - SHOOTER_POS;
+    
+    // distance from the far side launchpad to the center hub
+    public static final double FAR_LAUNCHPAD_SHOOTER_DISTANCE = 244.77 - SHOOTER_POS;
+
+    //
+    //
+
+    // Chute subsystem
     public static final int CHUTE_CAN_ID = 6; 
 
     // define constants for high, low, and mid rung
