@@ -10,6 +10,7 @@ import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.math.trajectory.constraint.DifferentialDriveVoltageConstraint;
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
@@ -72,8 +73,9 @@ public class TwoBallAutoStraight extends SequentialCommandGroup implements AutoC
                 ramseteCommand.andThen(() -> driveTrain.tankDriveVolts(0, 0)),
                 new IntakeCommand(intake, Constants.INTAKE_SPEED)
             ),
-            new FaceShootingTarget(driveTrain, vision, Constants.TURN_TOLERANCE_DEG, null),
-            new ShooterCommand(shooter, intake, vision, true)
+            //new FaceShootingTarget(driveTrain, vision, Constants.TURN_TOLERANCE_DEG, null),
+            // new ShooterCommand(shooter, intake, vision, true)
+            new ShooterCommand(shooter, intake, Constants.STARTING_DISTANCE + Units.metersToInches(DISTANCE_BACK), true)
         );
     }
 

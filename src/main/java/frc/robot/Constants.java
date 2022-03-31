@@ -88,7 +88,7 @@ public final class Constants {
     // amount of time to shoot the second ball
     public static final double SHOOT_BALL2_WAIT_TIME = 0.75;
     
-    public static final double TARMAC_DEFAULT_DISTANCE = 12.0 * 7.0;  // 9ft minus hub radius
+    public static final double TARMAC_DEFAULT_DISTANCE = 94.0;//12.0 * 7.0;  // 9ft minus hub radius
 
     // chute subsystem
     public static final int CHUTE_CAN_ID = 6; 
@@ -170,8 +170,8 @@ public final class Constants {
 
     // PID Constants for the Arm PID controller
     // Since we're using Trapeziodal control, all values will be 0 except for P
-    public static final double ELEVATOR_K_P0 = 50;
-    public static final double ELEVATOR_K_P1 = 50;
+    public static final double ELEVATOR_K_P0 = 100;
+    public static final double ELEVATOR_K_P1 = 100;
     public static final double ELEVATOR_K_I = 0.0;
     public static final double ELEVATOR_K_D = 0.0;
     public static final double ELEVATOR_K_FF = 0.0;
@@ -185,7 +185,7 @@ public final class Constants {
     public static final double CLIMB_TO_NEXT_BAR_TIMEOUT = 12.0;
 
     // robot starting distance
-    public static final double STARTING_DISTANCE = TARMAC_DEFAULT_DISTANCE - 10.0;
+    public static final double STARTING_DISTANCE = 74.0;//TARMAC_DEFAULT_DISTANCE - 10.0;
 
     // Xbox button mapping
     public static final int XBOX_A = 1;

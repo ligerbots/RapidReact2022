@@ -33,17 +33,22 @@ public class FaceShootingTarget extends CommandBase {
 
   double m_startTime;
 
+  LigerTimer m_waitLED;
+
   public FaceShootingTarget(DriveTrain robotDrive, Vision vision, double acceptableError, DriveCommand driveCommand) {
     m_robotDrive = robotDrive;
     m_acceptableError = acceptableError;
     m_driveCommand = driveCommand;
     m_vision = vision;
+    m_waitLED = new LigerTimer(0.25);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+  
     if (m_driveCommand != null) m_driveCommand.cancel();
+    m_waitLED.start();
 
     m_vision.setMode(Vision.VisionMode.HUBFINDER);
 
@@ -57,34 +62,36 @@ public class FaceShootingTarget extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (m_targetAcquired) {
-      m_headingError = m_robotDrive.getHeading() - m_headingTarget;
-      while ( m_headingError > 180.0) m_headingError -= 360.0;
-      while ( m_headingError < -180.0) m_headingError += 360.0;
-      SmartDashboard.putNumber("shooter/HeadingError", m_headingError);
-      System.out.println("FaceShooter headingError = " + m_headingError);
+    if (m_waitLED.hasElapsed()) {
+      if (m_targetAcquired) {
+        m_headingError = m_robotDrive.getHeading() - m_headingTarget;
+        while (m_headingError > 180.0)
+          m_headingError -= 360.0;
+        while (m_headingError < -180.0)
+          m_headingError += 360.0;
+        SmartDashboard.putNumber("shooter/HeadingError", m_headingError);
+        System.out.println("FaceShooter headingError = " + m_headingError);
 
-      m_check = Math.abs(m_headingError) < m_acceptableError && m_oldCheck;
-      // System.out.format("FaceShootingTarget: %3.2f%n", initialAngleOffset);
-      m_robotDrive.drive(0, -m_robotDrive.turnSpeedCalc(m_headingError), false);
+        m_check = Math.abs(m_headingError) < m_acceptableError && m_oldCheck;
+        // System.out.format("FaceShootingTarget: %3.2f%n", initialAngleOffset);
+        m_robotDrive.drive(0, -m_robotDrive.turnSpeedCalc(m_headingError), false);
 
-      m_oldCheck = Math.abs(m_headingError) < m_acceptableError && m_oldOldCheck;
-      m_oldOldCheck = Math.abs(m_headingError) < m_acceptableError;
-    }
-    else if (m_vision.getStatus() && m_vision.getDistance() > 1.0)
-    {
-      m_targetAcquired = true;
+        m_oldCheck = Math.abs(m_headingError) < m_acceptableError && m_oldOldCheck;
+        m_oldOldCheck = Math.abs(m_headingError) < m_acceptableError;
+      } else if (m_vision.getStatus() && m_vision.getDistance() > 1.0) {
+        m_targetAcquired = true;
 
-      m_headingError = m_vision.getRobotAngle();
-      double startAngle = m_robotDrive.getHeading();
-      m_headingTarget = startAngle - m_headingError;
-      System.out.format("FaceShooter acquired: heading = %3.1f visionAngle = %3.1f targetHeading = %3.2f%n",
-                        startAngle, m_headingError, m_headingTarget);
+        m_headingError = m_vision.getRobotAngle();
+        double startAngle = m_robotDrive.getHeading();
+        m_headingTarget = startAngle - m_headingError;
+        System.out.format("FaceShooter acquired: heading = %3.1f visionAngle = %3.1f targetHeading = %3.2f%n",
+            startAngle, m_headingError, m_headingTarget);
 
-      if (Math.abs(m_headingError) < m_acceptableError) {
-        // we are already within the acceptable error, so short circuit the command
-        m_check = true;
-        return;
+        if (Math.abs(m_headingError) < m_acceptableError) {
+          // we are already within the acceptable error, so short circuit the command
+          m_check = true;
+          return;
+        }
       }
     }
   }

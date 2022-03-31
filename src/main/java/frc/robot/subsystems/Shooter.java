@@ -34,13 +34,21 @@ public class Shooter extends SubsystemBase {
     static final TreeMap<Double, ShooterSpeeds> shooterSpeeds = new TreeMap<>(Map.ofEntries(
             Map.entry(0.0, new ShooterSpeeds(900.0, 900.0, 0.3)),    // actually lower hub, but safer to include
             Map.entry(54.99, new ShooterSpeeds(900.0, 900.0, 0.3)),   // actually lower hub, but safer to include
-            Map.entry(55.0, new ShooterSpeeds(1450.0, 1700.0, 0.3)),
+            Map.entry(55.0, new ShooterSpeeds(1400.0, 1650.0, 0.3)),   // 1450, 1700
             Map.entry(71.0, new ShooterSpeeds(1450.0, 1700.0, 0.3)),
-            Map.entry(84.0, new ShooterSpeeds(1600.0, 1600.0, 0.3)),
+            Map.entry(84.0, new ShooterSpeeds(1550.0, 1550.0, 0.3)),   // 1600
+            // 86  1550 1550
             Map.entry(92.0, new ShooterSpeeds(1600.0, 1600.0, 0.3)),
-            Map.entry(102.0, new ShooterSpeeds(1700.0, 1700.0, 0.3)),
-            Map.entry(163.0, new ShooterSpeeds(1800.0, 2100.0, 0.3))));
-
+            // Map.entry(102.0, new ShooterSpeeds(1750.0, 1750.0, 0.3)),  // 1700
+            Map.entry(123.0, new ShooterSpeeds(1650.0, 1750.0, 0.3)),// 123 1650 1750
+            Map.entry(154.0, new ShooterSpeeds(1750.0, 2000.0, 0.3)),// 154 1750 2000
+            Map.entry(163.0, new ShooterSpeeds(1850.0, 2150.0, 0.3)),   // 1800, 2100
+            // Map.entry(190.0, new ShooterSpeeds(1950.0, 2250.0, 0.3)),
+            Map.entry(195.0, new ShooterSpeeds(1900.0, 2100.0, 0.3)),
+            Map.entry(235.0, new ShooterSpeeds(2120.0, 2300.0, 0.3))));   // made up
+            // 195 1900 2100
+            // 235 2100 2250
+            
     // values for lowerHub
     static final ShooterSpeeds lowHubSpeeds = new ShooterSpeeds(900.0, 900.0, 0.3);
 
