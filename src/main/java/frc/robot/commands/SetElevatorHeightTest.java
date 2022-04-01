@@ -6,6 +6,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.math.util.Units;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.TrapezoidProfileCommand;
 import frc.robot.Constants;
 import frc.robot.subsystems.Climber;
@@ -13,7 +14,7 @@ import frc.robot.subsystems.Climber;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class SetElevatorHeight extends TrapezoidProfileCommand {
+public class SetElevatorHeightTest extends TrapezoidProfileCommand {
   boolean m_goingDown;
   Climber m_climber;
   double m_height;
@@ -24,12 +25,12 @@ public class SetElevatorHeight extends TrapezoidProfileCommand {
 
   boolean[] m_ressetEncoder;
 
-  public SetElevatorHeight(Climber climber, double height) {
-    this(climber, height, Constants.ELEVATOR_MAX_VEL_METER_PER_SEC_NORMAL, Constants.ELEVATOR_MAX_ACC_METER_PER_SEC_SQ_NORMAL);
+  public SetElevatorHeightTest(Climber climber, String key) {
+    this(climber, key, Constants.ELEVATOR_MAX_VEL_METER_PER_SEC_NORMAL, Constants.ELEVATOR_MAX_ACC_METER_PER_SEC_SQ_NORMAL);
   }
 
-
-  public SetElevatorHeight(Climber climber, double height, final double MAX_VEL_METER_PER_SEC, final double MAX_ACC_METER_PER_SEC) {
+  public SetElevatorHeightTest(Climber climber, String key, final double MAX_VEL_METER_PER_SEC, final double MAX_ACC_METER_PER_SEC) {
+    // TODO: this may not work if smartDashboard value is assigned in the very beginning when constructed
     super(
         new TrapezoidProfile(
             // Limit the max acceleration and velocity
@@ -37,7 +38,7 @@ public class SetElevatorHeight extends TrapezoidProfileCommand {
                 MAX_VEL_METER_PER_SEC,
                 MAX_ACC_METER_PER_SEC),
             // End at desired position in meters; implicitly starts at 0
-            new TrapezoidProfile.State(height, 0),
+            new TrapezoidProfile.State(SmartDashboard.getNumber(key, 0.0), 0),
             // initial position state
             // TODO: it may not work when two elevators are executed separately at different hight
             new TrapezoidProfile.State(climber.getElevatorHeight()[0], 0)),
@@ -45,7 +46,7 @@ public class SetElevatorHeight extends TrapezoidProfileCommand {
         setpointState -> climber.setElevatorHeight(setpointState));
       
         m_climber = climber;
-        m_height = height;
+        m_height = SmartDashboard.getNumber(key, 0.0);
   }
 
     // Called when the command is initially scheduled.

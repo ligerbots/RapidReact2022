@@ -98,8 +98,6 @@ public final class Constants {
     public static final double MID_RUNG = Units.inchesToMeters(23.0);//153 cm
     public static final double LOW_RUNG = 1.24;//Top of rung is 124cm    
     
-    public static final double ELEVATOR_HEIGHT_TOLERANCE = Units.inchesToMeters(0.1);//tolerance for elevator
-    public static final double ELEVATOR_HEIGHT_LOOSE_TOLERANCE = Units.inchesToMeters(0.5);//tolerance for elevator
     public static final double ARM_ANGLE_TOLERANCE = Units.degreesToRadians(1.0);
     
     public static final double ELEVATOR_MAX_HEIGHT = Units.inchesToMeters(25.0);// 23.5in = length of elevator when fully extended
@@ -160,13 +158,13 @@ public final class Constants {
 
     public static final double ELEVATOR_MAX_VEL_METER_PER_SEC_DESCEND = Units.inchesToMeters(100.0);
     public static final double ELEVATOR_MAX_ACC_METER_PER_SEC_SQ_DESCEND = Units.inchesToMeters(30.0);
+
+    public static final double ELEVATOR_MAX_VEL_METER_PER_SEC_NORMAL = Units.inchesToMeters(100.0);
+    public static final double ELEVATOR_MAX_ACC_METER_PER_SEC_SQ_NORMAL = Units.inchesToMeters(30.0);
+
     public static final double ELEVATOR_OFFSET_METER = Units.inchesToMeters(2.0);
 
-    public static final double ELEVATOR_LIMIT_SWITCH_HEIGHT = Units.inchesToMeters(-0.15);
-
-    public static final double ELEVATOR_START_LATCH_HEIGHT = Units.inchesToMeters(0.5);
-
-    public static final double ELEVATOR_CHECKING_LIMIT_SWITCH_HEIGHT = Units.inchesToMeters(2.0);
+    public static final double ELEVATOR_LIMIT_SWITCH_HEIGHT = Units.inchesToMeters(0.0);
 
     // PID Constants for the Arm PID controller
     // Since we're using Trapeziodal control, all values will be 0 except for P

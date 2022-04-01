@@ -62,6 +62,10 @@ public class Climber extends SubsystemBase {
     m_elevator[1].setSetPoint(height);
   }
 
+  public void setOneElevatorHeight(int index, TrapezoidProfile.State height){
+    m_elevator[index].setSetPoint(height);
+  }
+
   // rotates the arms to a certain angle
   public void setArmAngle(double degree) {
       m_arm[0].setGoal(degree);

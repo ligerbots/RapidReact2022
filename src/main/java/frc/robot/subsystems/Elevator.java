@@ -98,7 +98,7 @@ public class Elevator extends SubsystemBase {
   }
 
   public void resetElevatorPos(){
-    // TODO: reset the goal to current encoder position
+    setSetPoint(new TrapezoidProfile.State(m_encoder.getPosition(), 0.0));
     m_resetElevatorPos = true;
   }
 }
