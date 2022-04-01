@@ -109,7 +109,7 @@ public class RobotContainer {
 
         // farm controller
         JoystickButton farm1 = new JoystickButton(m_farm, 1);
-        farm1.whenPressed(new SetElevatorHeightTest(m_climber, "Constants/SetElevatorHeightTest"));
+        farm1.whenPressed(new SetElevatorHeightTest(m_climber));
 
         JoystickButton farm2 = new JoystickButton(m_farm, 2);
         farm2.whenPressed(new SetArmAngleTest(m_climber, "Constants/SetArmAngleTest"));
