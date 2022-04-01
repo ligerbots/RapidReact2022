@@ -86,7 +86,7 @@ public final class Constants {
     // amount of times to shoot the first ball
     public static final double SHOOT_BALL1_WAIT_TIME = 0.5;
     // amount of time to shoot the second ball
-    public static final double SHOOT_BALL2_WAIT_TIME = 0.75;
+    public static final double SHOOT_BALL2_WAIT_TIME = 1.25;
     
     public static final double TARMAC_DEFAULT_DISTANCE = 94.0;//12.0 * 7.0;  // 9ft minus hub radius
 
