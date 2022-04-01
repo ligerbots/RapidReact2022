@@ -13,12 +13,11 @@ import edu.wpi.first.math.controller.ElevatorFeedforward;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.TrapezoidProfileSubsystem;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-public class ElevatorAscend extends TrapezoidProfileSubsystem {
-  public boolean m_elevatorAscending = false;
-  Climber m_climber;
+public class Elevator extends SubsystemBase {
+  /** Creates a new Elevator. */
   // Define the motor and encoders
   private final CANSparkMax m_motor;
   private final RelativeEncoder m_encoder;
@@ -30,21 +29,10 @@ public class ElevatorAscend extends TrapezoidProfileSubsystem {
   private double m_kPElevator;
   private int m_index;
 
-  private boolean m_tooHigh = false;
-  private boolean m_tooLow = false;
-
   private boolean m_resetElevatorPos = false;
   
   /** Creates a new Elevator. */
-  public ElevatorAscend(int index, boolean inverted, Climber climber, CANSparkMax motor) {
-
-    super(
-      // The constraints for the generated profiles
-      new TrapezoidProfile.Constraints(Constants.ELEVATOR_MAX_VEL_METER_PER_SEC_ASCEND, Constants.ELEVATOR_MAX_ACC_METER_PER_SEC_SQ_ASCEND),
-      // The initial position of the mechanism
-      Constants.ELEVATOR_OFFSET_METER);
-
-    m_climber = climber;
+  public Elevator(int index, boolean inverted, CANSparkMax motor) {
     m_index = index;
     m_kPElevator = m_index == 0 ? Constants.ELEVATOR_K_P0 : Constants.ELEVATOR_K_P1;
 
@@ -66,54 +54,19 @@ public class ElevatorAscend extends TrapezoidProfileSubsystem {
 
     m_encoder.setPosition(Constants.ELEVATOR_OFFSET_METER);
 
-    SmartDashboard.putNumber("AscendingInitialPos", Units.metersToInches(m_encoder.getPosition()));
-
     SmartDashboard.putNumber("elevator" + m_index + "/P Gain", m_kPElevator);
   }
 
   @Override
   public void periodic() {
-    if(m_climber.m_elevatorDescend[m_index].m_elevatorDescending){
-      return;
-    }
     double encoderValue = m_encoder.getPosition();
-    
-    // Display current values on the SmartDashboard
-    SmartDashboard.putNumber("elevator" + m_index + "/Output" + m_index, m_motor.getAppliedOutput());
     SmartDashboard.putNumber("elevator" + m_index + "/Encoder" + m_index, Units.metersToInches(encoderValue));
-
-	// if (!m_climber.m_elevatorTesting) {
-	// 	// First check if we've gone too far. If we have, reset the setPoint to the
-	// 	// limit.
-	// 	m_tooHigh = encoderValue > Constants.ELEVATOR_MAX_HEIGHT;
-	// 	SmartDashboard.putBoolean("elevator" + m_index + "/too High", m_tooHigh);
-	// 	if (m_tooHigh) {
-	// 		m_PIDController.setReference(Constants.ELEVATOR_MAX_HEIGHT, ControlType.kPosition, 0, 0.0);
-	// 		return;
-	// 	}
-
-	// 	m_tooLow = encoderValue < Constants.ELEVATOR_MIN_HEIGHT;
-	// 	SmartDashboard.putBoolean("elevator" + m_index + "/too Low", m_tooLow);
-	// 	if (m_tooLow) {
-	// 		m_PIDController.setReference(Constants.ELEVATOR_MIN_HEIGHT, ControlType.kPosition, 0, 0.0);
-	// 		return;
-	// 	}
-	// }
-
-	// Execute the super class periodic method
-    super.periodic();
-
-    SmartDashboard.putNumber("elevator" + m_index + "/current", m_motor.getOutputCurrent());
-
-    // Here we can check the SmartDashboard for any updates to the PIC constants.
-    // Note that since this is Trapezoidal control, we only need to set P.
-    // Each increment will only change the set point position a little bit.
-
+    
+    // update the PID val
     checkPIDVal();
   }
 
-  @Override
-  protected void useState(TrapezoidProfile.State setPoint) {
+  protected void setSetPoint(TrapezoidProfile.State setPoint) {
     // Calculate the feedforward from the setPoint
     double feedforward = m_Feedforward.calculate(setPoint.position, setPoint.velocity);
 
@@ -125,9 +78,7 @@ public class ElevatorAscend extends TrapezoidProfileSubsystem {
       m_resetElevatorPos = false;
     }
     m_PIDController.setReference(setPoint.position, ControlType.kPosition, 0, feedforward / 12.0);
-    SmartDashboard.putNumber("elevator" + m_index + "/feedforward" + m_index, feedforward);
     SmartDashboard.putNumber("elevator" + m_index + "/setPoint" + m_index, Units.metersToInches(setPoint.position));
-    SmartDashboard.putNumber("elevator" + m_index + "/velocity" + m_index, Units.metersToInches(setPoint.velocity));
   }
 
   private void checkPIDVal() {
@@ -147,15 +98,7 @@ public class ElevatorAscend extends TrapezoidProfileSubsystem {
   }
 
   public void resetElevatorPos(){
+    // TODO: reset the goal to current encoder position
     m_resetElevatorPos = true;
-  }
-
-  public void elevatorAscending(){
-    m_elevatorAscending = true;
-    m_climber.m_elevatorDescend[m_index].elevatorStop();
-  }
-
-  public void elevatorStop(){
-    m_elevatorAscending = false;
   }
 }

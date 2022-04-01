@@ -58,10 +58,9 @@ public class Robot extends TimedRobot {
 
     SmartDashboard.putNumber("Constants/SetElevatorHeightTest", 0.0);
     SmartDashboard.putNumber("Constants/SetArmAngleTest", 80.0);
-
-    SmartDashboard.putBoolean("ClimbingCommandFinished", false);
-
-    // m_robotContainer.getClimber().setElevatorHeight(Constants.ELEVATOR_START_LATCH_HEIGHT);
+    
+    SmartDashboard.putNumber("Constants/OneElevatorIndex", 0.0);
+    SmartDashboard.putNumber("Constants/SetOneElevatorHeightTest", 0.0);
   }
 
   /**
@@ -137,19 +136,9 @@ public class Robot extends TimedRobot {
     // Set Climber motors to Brake mode
     m_robotContainer.getClimber().setBrakeMode(true);
     
-    double elevatorCurPos = m_robotContainer.getClimber().getElevatorHeight()[0];
-    if (m_robotContainer.getClimber().m_elevatorAscend[0].m_elevatorAscending) {
-      m_robotContainer.getClimber().m_elevatorAscend[0].resetElevatorPos();
-      m_robotContainer.getClimber().m_elevatorAscend[1].resetElevatorPos(); 
-      m_robotContainer.getClimber().m_elevatorAscend[0].setGoal(elevatorCurPos);
-      m_robotContainer.getClimber().m_elevatorAscend[1].setGoal(elevatorCurPos);
-    } else {
-      m_robotContainer.getClimber().m_elevatorDescend[0].resetElevatorPos();
-      m_robotContainer.getClimber().m_elevatorDescend[1].resetElevatorPos(); 
-      m_robotContainer.getClimber().m_elevatorDescend[0].setGoal(elevatorCurPos);
-      m_robotContainer.getClimber().m_elevatorDescend[1].setGoal(elevatorCurPos);
-    }
-     
+    m_robotContainer.getClimber().m_elevator[0].resetElevatorPos();
+    m_robotContainer.getClimber().m_elevator[1].resetElevatorPos(); 
+
     m_robotContainer.getClimber().m_arm[0].resetArmPos();
     m_robotContainer.getClimber().m_arm[1].resetArmPos();  
   }
