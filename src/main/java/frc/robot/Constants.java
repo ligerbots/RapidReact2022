@@ -124,7 +124,6 @@ public final class Constants {
     public static final double ARM_K_FF = 0.0;
 
     // Limit the arm rotation
-    // TODO: This is relative to 0 starting position. Need to use absolute encoder and get better values
     public static final double ARM_MAX_ANGLE = Units.degreesToRadians(160.0);
     public static final double ARM_MIN_ANGLE = Units.degreesToRadians(20.0);
 
@@ -162,7 +161,12 @@ public final class Constants {
     public static final double ELEVATOR_MAX_VEL_METER_PER_SEC_NORMAL = Units.inchesToMeters(100.0);
     public static final double ELEVATOR_MAX_ACC_METER_PER_SEC_SQ_NORMAL = Units.inchesToMeters(30.0);
 
-    public static final double ELEVATOR_OFFSET_METER = Units.inchesToMeters(2.0);
+    // TODO: check if it is correct and safe
+    public static final double ELEVATOR_MAX_VEL_METER_PER_SEC_DESCEND_SLOW = Units.inchesToMeters(-1000000.0);
+    public static final double ELEVATOR_MAX_ACC_METER_PER_SEC_SQ_DESCEND_SLOW = Units.inchesToMeters(-10.0);
+
+    // This is going to be the initial state of the elevators
+    public static final double ELEVATOR_OFFSET_METER = Units.inchesToMeters(2.5);
 
     public static final double ELEVATOR_LIMIT_SWITCH_HEIGHT = Units.inchesToMeters(0.0);
 

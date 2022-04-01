@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ClimbToNextBar;
+import frc.robot.commands.DescendElevatorToLimitSwitch;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.ShooterCommand;
 import frc.robot.commands.TurnAndShoot;
@@ -112,9 +113,12 @@ public class RobotContainer {
         JoystickButton farm2 = new JoystickButton(m_farm, 2);
         farm2.whenPressed(new SetArmAngleTest(m_climber, "Constants/SetArmAngleTest"));
 
-        // TODO: Will we be able to set only one elevator's height
+        // TODO: Will we be able to set only one elevator's height?
         // JoystickButton farm3 = new JoystickButton(m_farm, 3);
         // farm3.whenPressed(new SetOneElevatorHeightTest(m_climber, "SetOneElevatorHeightTest"));
+
+        JoystickButton farm3 = new JoystickButton(m_farm, 3);
+        farm3.whenPressed(new DescendElevatorToLimitSwitch(m_climber));
 
         JoystickButton farm6 = new JoystickButton(m_farm, 6);
         farm6.whenPressed(new SetClimber(m_climber));
