@@ -29,14 +29,14 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class ThreeBallMiddle extends SequentialCommandGroup implements AutoCommandInterface {
-  /** Creates a new ThreeBallLower. */
-
-    static final double DISTANCE_BACK = 1.4;
-    Trajectory m_initialTrajectory;
-    Trajectory m_finalTrajectory;
-    public ThreeBallMiddle(Shooter shooter, Intake intake, DriveTrain driveTrain, Vision vision, DriveCommand driveCommand) {
-        var autoVoltageConstraint =
+public class FourBallLower extends SequentialCommandGroup implements AutoCommandInterface {
+  /** Creates a new FourBallLower. */
+  static final double DISTANCE_BACK = 1.4;  
+  Trajectory m_firstTrajectory;
+  Trajectory m_secondTrajectory;
+  Trajectory m_thirdTrajectory;
+  public FourBallLower(Shooter shooter, Intake intake, DriveTrain driveTrain, Vision vision, DriveCommand driveCommand) {
+    var autoVoltageConstraint =
         new DifferentialDriveVoltageConstraint(
             new SimpleMotorFeedforward(Constants.ksVolts,
                                        Constants.kvVoltSecondsPerMeter,
@@ -45,10 +45,10 @@ public class ThreeBallMiddle extends SequentialCommandGroup implements AutoComma
             10);
 
         TrajectoryConfig reverseConfig =
-        new TrajectoryConfig(Constants.kMaxSpeed, Constants.kMaxAcceleration)
-            .setKinematics(Constants.kDriveKinematics)
-            .addConstraint(autoVoltageConstraint)
-            .setReversed(true);
+            new TrajectoryConfig(Constants.kMaxSpeed, Constants.kMaxAcceleration)
+                .setKinematics(Constants.kDriveKinematics)
+                .addConstraint(autoVoltageConstraint)
+                .setReversed(true);
         
         TrajectoryConfig forwardConfig =
         new TrajectoryConfig(Constants.kMaxSpeed, Constants.kMaxAcceleration)
@@ -57,32 +57,39 @@ public class ThreeBallMiddle extends SequentialCommandGroup implements AutoComma
             .setReversed(false);
 
         Pose2d initialPose = getInitialPose();
-        Pose2d cornerPose = FieldInformation.cornerBlueBall;
-        Pose2d finalPose = FieldInformation.middleBlueBall;
+        Pose2d firstShootingPose = FieldInformation.lowerBlueBall;
+
+        Pose2d finalShootingPose = FieldInformation.middleBlueBall;
         // Pose2d midPose = new Pose2d(
         //     initialPose.getX() - initialPose.getRotation().getCos() * DISTANCE_BACK, 
         //     initialPose.getY() - initialPose.getRotation().getSin() * DISTANCE_BACK, 
         //     initialPose.getRotation());
 
-        m_initialTrajectory = TrajectoryGenerator.generateTrajectory(
+        m_firstTrajectory = TrajectoryGenerator.generateTrajectory(
             initialPose, 
-            List.of(
-                FieldInformation.middleBlueBall.getTranslation(), 
-                FieldInformation.cornerBlueBall.getTranslation()
-            ),
-            cornerPose,
-            reverseConfig
-        );
-        
-        m_finalTrajectory = TrajectoryGenerator.generateTrajectory(
-            cornerPose, 
             List.of(),
-            finalPose,
+            firstShootingPose,
+            reverseConfig
+        ); 
+
+        m_secondTrajectory = TrajectoryGenerator.generateTrajectory(
+            firstShootingPose, 
+            List.of(
+                FieldInformation.middleBlueBall.getTranslation()
+            ),
+            FieldInformation.cornerBlueBall,
+            reverseConfig
+        ); 
+
+        m_thirdTrajectory = TrajectoryGenerator.generateTrajectory(
+            FieldInformation.cornerBlueBall, 
+            List.of(),
+            finalShootingPose,
             forwardConfig
-        );
+        ); 
 
         RamseteCommand ramsete1 = new RamseteCommand(
-            m_initialTrajectory,
+            m_firstTrajectory,
             driveTrain::getPose,
             new RamseteController(Constants.kRamseteB, Constants.kRamseteZeta),
             new SimpleMotorFeedforward(Constants.ksVolts,
@@ -97,7 +104,7 @@ public class ThreeBallMiddle extends SequentialCommandGroup implements AutoComma
         );
 
         RamseteCommand ramsete2 = new RamseteCommand(
-            m_finalTrajectory,
+            m_secondTrajectory,
             driveTrain::getPose,
             new RamseteController(Constants.kRamseteB, Constants.kRamseteZeta),
             new SimpleMotorFeedforward(Constants.ksVolts,
@@ -111,29 +118,46 @@ public class ThreeBallMiddle extends SequentialCommandGroup implements AutoComma
             driveTrain
         );
 
-        addCommands(
-            new DeployIntake(driveTrain), 
-            new ShooterCommand(shooter, intake, Constants.STARTING_DISTANCE, true),
-            new ParallelDeadlineGroup(
-                ramsete1.andThen(() -> driveTrain.tankDriveVolts(0, 0)),
-                new IntakeCommand(intake, Constants.INTAKE_SPEED)
-            ),
-            new ParallelDeadlineGroup(
-                ramsete2.andThen(() -> driveTrain.tankDriveVolts(0, 0)),
-                new IntakeCommand(intake, Constants.INTAKE_SPEED)
-            ),
-            new FaceShootingTarget(driveTrain, vision, Constants.TURN_TOLERANCE_DEG, driveCommand),
-            new ShooterCommand(shooter, intake, Constants.STARTING_DISTANCE + Units.metersToInches(DISTANCE_BACK), true)
+        RamseteCommand ramsete3 = new RamseteCommand(
+            m_thirdTrajectory,
+            driveTrain::getPose,
+            new RamseteController(Constants.kRamseteB, Constants.kRamseteZeta),
+            new SimpleMotorFeedforward(Constants.ksVolts,
+                                        Constants.kvVoltSecondsPerMeter,
+                                        Constants.kaVoltSecondsSquaredPerMeter),
+            Constants.kDriveKinematics,
+            driveTrain::getWheelSpeeds,
+            new PIDController(Constants.kPDriveVel, 0, 0),
+            new PIDController(Constants.kPDriveVel, 0, 0),
+            driveTrain::tankDriveVolts,
+            driveTrain
         );
-    }
-  
+    
+    addCommands(
+        new DeployIntake(driveTrain), 
+        new ParallelDeadlineGroup(
+            ramsete1.andThen(() -> driveTrain.tankDriveVolts(0, 0)),
+            new IntakeCommand(intake, Constants.INTAKE_SPEED)
+        ),
+        // new FaceShootingTarget(driveTrain, vision, Constants.TURN_TOLERANCE_DEG, driveCommand),
+        // new ShooterCommand(shooter, intake, vision, true),
+        new ParallelDeadlineGroup(
+            ramsete2.andThen(() -> driveTrain.tankDriveVolts(0, 0)),
+            new IntakeCommand(intake, Constants.INTAKE_SPEED)
+        ),
+        ramsete3.andThen(() -> driveTrain.tankDriveVolts(0, 0)),
+        new FaceShootingTarget(driveTrain, vision, Constants.TURN_TOLERANCE_DEG, driveCommand),
+        new ShooterCommand(shooter, intake, vision, true)
+    );
+  }
+
   @Override
   public Pose2d getInitialPose() {
-      return FieldInformation.middleBlueStart;
+      return FieldInformation.lowerBlueStart;
   }
   
   @Override
   public void plotTrajectory(TrajectoryPlotter plotter) {
-      plotter.plotTrajectory(m_initialTrajectory);
+      plotter.plotTrajectory(m_firstTrajectory);
   }
 }
