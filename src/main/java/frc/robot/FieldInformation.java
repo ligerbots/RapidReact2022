@@ -18,4 +18,5 @@ public class FieldInformation {
     public static final Pose2d lowerBlueStart = centerAnglePose(Units.inchesToMeters(90), Rotation2d.fromDegrees(261));
     public static final Pose2d middleBlueBall = centerAnglePose(Units.inchesToMeters(157), Rotation2d.fromDegrees(215));
     public static final Pose2d cornerBlueBall = centerAnglePose(Units.inchesToMeters(290.66), Rotation2d.fromDegrees(204));
+    public static final Pose2d bottomBlueBall = centerAnglePose(Units.inchesToMeters(157), Rotation2d.fromDegrees(260));
 }
