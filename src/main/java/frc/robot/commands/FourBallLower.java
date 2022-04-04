@@ -31,9 +31,10 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 public class FourBallLower extends SequentialCommandGroup implements AutoCommandInterface {
   /** Creates a new FourBallLower. */
   static final double DISTANCE_BACK = 1.4;  
-  Trajectory m_firstTrajectory;
-  Trajectory m_secondTrajectory;
-  Trajectory m_thirdTrajectory;
+  Trajectory m_trajectory1;
+  Trajectory m_trajectory2;
+  Trajectory m_trajectory3;
+  Trajectory m_trajectory4;
   public FourBallLower(Shooter shooter, Intake intake, DriveTrain driveTrain, Vision vision, DriveCommand driveCommand) {
     var autoVoltageConstraint =
         new DifferentialDriveVoltageConstraint(
@@ -56,40 +57,45 @@ public class FourBallLower extends SequentialCommandGroup implements AutoCommand
             .setReversed(false);
 
         Pose2d initialPose = getInitialPose();
-        Pose2d firstShootingPose = FieldInformation.lowerBlueBall;
-        Pose2d lastBall = FieldInformation.cornerBlueBall;
-
+        Pose2d firstShootingPose = getInitialPose();
         Pose2d finalShootingPose = FieldInformation.middleBlueBall;
         // Pose2d midPose = new Pose2d(
         //     initialPose.getX() - initialPose.getRotation().getCos() * DISTANCE_BACK, 
         //     initialPose.getY() - initialPose.getRotation().getSin() * DISTANCE_BACK, 
         //     initialPose.getRotation());
 
-        m_firstTrajectory = TrajectoryGenerator.generateTrajectory(
+        m_trajectory1 = TrajectoryGenerator.generateTrajectory(
             initialPose, 
             List.of(),
-            firstShootingPose,
+            FieldInformation.lowerBlueBall,
             reverseConfig
         ); 
 
-        m_secondTrajectory = TrajectoryGenerator.generateTrajectory(
+        m_trajectory2 = TrajectoryGenerator.generateTrajectory(
+            FieldInformation.lowerBlueBall, 
+            List.of(),
+            firstShootingPose,
+            forwardConfig
+        ); 
+
+        m_trajectory3 = TrajectoryGenerator.generateTrajectory(
             firstShootingPose, 
             List.of(
                 FieldInformation.middleBlueBall.getTranslation()
             ),
-            lastBall,
+            FieldInformation.cornerBlueBall,
             reverseConfig
         ); 
 
-        m_thirdTrajectory = TrajectoryGenerator.generateTrajectory(
-            lastBall, 
+        m_trajectory4 = TrajectoryGenerator.generateTrajectory(
+            FieldInformation.cornerBlueBall, 
             List.of(),
             finalShootingPose,
             forwardConfig
         ); 
 
         RamseteCommand ramsete1 = new RamseteCommand(
-            m_firstTrajectory,
+            m_trajectory1,
             driveTrain::getPose,
             new RamseteController(Constants.kRamseteB, Constants.kRamseteZeta),
             new SimpleMotorFeedforward(Constants.ksVolts,
@@ -104,7 +110,7 @@ public class FourBallLower extends SequentialCommandGroup implements AutoCommand
         );
 
         RamseteCommand ramsete2 = new RamseteCommand(
-            m_secondTrajectory,
+            m_trajectory2,
             driveTrain::getPose,
             new RamseteController(Constants.kRamseteB, Constants.kRamseteZeta),
             new SimpleMotorFeedforward(Constants.ksVolts,
@@ -119,7 +125,22 @@ public class FourBallLower extends SequentialCommandGroup implements AutoCommand
         );
 
         RamseteCommand ramsete3 = new RamseteCommand(
-            m_thirdTrajectory,
+            m_trajectory3,
+            driveTrain::getPose,
+            new RamseteController(Constants.kRamseteB, Constants.kRamseteZeta),
+            new SimpleMotorFeedforward(Constants.ksVolts,
+                                        Constants.kvVoltSecondsPerMeter,
+                                        Constants.kaVoltSecondsSquaredPerMeter),
+            Constants.kDriveKinematics,
+            driveTrain::getWheelSpeeds,
+            new PIDController(Constants.kPDriveVel, 0, 0),
+            new PIDController(Constants.kPDriveVel, 0, 0),
+            driveTrain::tankDriveVolts,
+            driveTrain
+        );
+
+        RamseteCommand ramsete4 = new RamseteCommand(
+            m_trajectory4,
             driveTrain::getPose,
             new RamseteController(Constants.kRamseteB, Constants.kRamseteZeta),
             new SimpleMotorFeedforward(Constants.ksVolts,
@@ -139,13 +160,20 @@ public class FourBallLower extends SequentialCommandGroup implements AutoCommand
             ramsete1.andThen(() -> driveTrain.tankDriveVolts(0, 0)),
             new IntakeCommand(intake, Constants.INTAKE_SPEED)
         ),
-        // new FaceShootingTarget(driveTrain, vision, Constants.TURN_TOLERANCE_DEG, driveCommand),
-        // new ShooterCommand(shooter, intake, vision, true),
         new ParallelDeadlineGroup(
             ramsete2.andThen(() -> driveTrain.tankDriveVolts(0, 0)),
             new IntakeCommand(intake, Constants.INTAKE_SPEED)
         ),
-        ramsete3.andThen(() -> driveTrain.tankDriveVolts(0, 0)),
+        // new FaceShootingTarget(driveTrain, vision, Constants.TURN_TOLERANCE_DEG, driveCommand),
+        // new ShooterCommand(shooter, intake, vision, true),
+        new ParallelDeadlineGroup(
+            ramsete3.andThen(() -> driveTrain.tankDriveVolts(0, 0)),
+            new IntakeCommand(intake, Constants.INTAKE_SPEED)
+        ),
+        new ParallelDeadlineGroup(
+            ramsete4.andThen(() -> driveTrain.tankDriveVolts(0, 0)),
+            new IntakeCommand(intake, Constants.INTAKE_SPEED)
+        ),
         new FaceShootingTarget(driveTrain, vision, Constants.TURN_TOLERANCE_DEG, driveCommand),
         new ShooterCommand(shooter, intake, vision, true)
     );
@@ -158,8 +186,9 @@ public class FourBallLower extends SequentialCommandGroup implements AutoCommand
   
   @Override
   public void plotTrajectory(TrajectoryPlotter plotter) {
-      plotter.plotTrajectory(m_firstTrajectory);
-      plotter.plotTrajectory(m_secondTrajectory);
-      plotter.plotTrajectory(m_thirdTrajectory);
+      plotter.plotTrajectory(m_trajectory1);
+      plotter.plotTrajectory(m_trajectory2);
+      plotter.plotTrajectory(m_trajectory3);
+      plotter.plotTrajectory(m_trajectory4);
   }
 }
