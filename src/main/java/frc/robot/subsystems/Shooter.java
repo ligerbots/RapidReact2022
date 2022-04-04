@@ -39,7 +39,11 @@ public class Shooter extends SubsystemBase {
             Map.entry(84.0, new ShooterSpeeds(1600.0, 1600.0, 0.3)),
             Map.entry(92.0, new ShooterSpeeds(1600.0, 1600.0, 0.3)),
             Map.entry(102.0, new ShooterSpeeds(1700.0, 1700.0, 0.3)),
-            Map.entry(163.0, new ShooterSpeeds(1800.0, 2100.0, 0.3))));
+            Map.entry(163.0, new ShooterSpeeds(1800.0, 2100.0, 0.3)),
+            // extrapolated entries for longer distances than we've tested
+            // see https://docs.google.com/spreadsheets/d/1n4-k0tSs-gYxqUTZAAVHsCi5a5Opg_p4OpYEWjNNB-U/edit?usp=sharing
+            Map.entry(180.0, new ShooterSpeeds(1885.0, 2156.8, 0.3)),
+            Map.entry(220.0, new ShooterSpeeds(2017.0, 2360.4, 0.3)) ));
 
     // values for lowerHub
     static final ShooterSpeeds lowHubSpeeds = new ShooterSpeeds(900.0, 900.0, 0.3);
