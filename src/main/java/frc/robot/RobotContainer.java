@@ -26,7 +26,7 @@ import frc.robot.commands.SetClimber;
 import frc.robot.commands.SetElevatorHeightTest;
 import frc.robot.commands.SetOneElevatorHeightTest;
 import frc.robot.commands.SetVisionMode;
-// import frc.robot.commands.TuneShooterCommand;
+import frc.robot.commands.TuneShooterCommand;
 import frc.robot.commands.VacuumMode;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.DriveTrain;
@@ -76,8 +76,8 @@ public class RobotContainer {
      */
     private void configureButtonBindings() {
         // only used for tuning
-        // JoystickButton xboxAButton = new JoystickButton(m_xbox, Constants.XBOX_A);
-        // xboxAButton.whileHeld(new TuneShooterCommand(m_shooter, m_intake));
+        // JoystickButton xboxYButton = new JoystickButton(m_xbox, Constants.XBOX_Y);
+        // xboxYButton.whileHeld(new TuneShooterCommand(m_shooter, m_intake));
 
         // FOR TESTING!!
         // DriverStation.silenceJoystickConnectionWarning(true);
