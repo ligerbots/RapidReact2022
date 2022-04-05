@@ -55,6 +55,9 @@ public class Vision extends SubsystemBase {
     public void periodic() {
         m_lastResult = SmartDashboard.getNumberArray("vision/target_info", EMPTY_TARGET_INFO);
 
+        SmartDashboard.putNumber("vision/distance", m_lastResult[3]);
+        SmartDashboard.putNumber("vision/angle", Math.toDegrees(m_lastResult[4]));
+
         if (m_lastResult[1] > 0.5) {
             // if the vision says the reading is good, store the distance in the ring buffer
             m_distanceRingBuf[m_ringIndex] = m_lastResult[3];
