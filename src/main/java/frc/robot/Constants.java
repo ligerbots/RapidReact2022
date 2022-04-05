@@ -92,21 +92,21 @@ public final class Constants {
     // Various constants used for shooting
     //
 
-    // The shooting mechanism is about 24" from the edge of the robot, including bumper
-    // We therefore subtract SHOOTER_POS from all shooting distance constants
-    public static final double SHOOTER_POS = 24;
+    // The Hub radius is 2ft. Shooting distance from Vision is to the edge of the Hub.
+    // We therefore subtract HUB_RADIUS from all shooting distances.
+    public static final double HUB_RADIUS = 24.0;
     
     // Our usual "Tarmac" shot 
     public static final double TARMAC_DEFAULT_DISTANCE = 94.0;
     
     // distance from the edge of the field by the human shooting position
-    public static final double JUST_OUTSIDE_TARMAC = (12.0 * 11.5) - SHOOTER_POS;
+    public static final double JUST_OUTSIDE_TARMAC = 12.0 * 11.5 - HUB_RADIUS;
     
     // distance from the near side launchpad to the center hub
-    public static final double CLOSE_LAUNCHPAD_SHOOTER_DISTANCE = 202.95 - SHOOTER_POS;
+    public static final double CLOSE_LAUNCHPAD_SHOOTER_DISTANCE = 202.95 - HUB_RADIUS;
     
     // distance from the far side launchpad to the center hub
-    public static final double FAR_LAUNCHPAD_SHOOTER_DISTANCE = 244.77 - SHOOTER_POS;
+    public static final double FAR_LAUNCHPAD_SHOOTER_DISTANCE = 244.77 - HUB_RADIUS;
 
     //
     //
