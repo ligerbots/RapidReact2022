@@ -10,6 +10,7 @@ import java.util.function.DoubleSupplier;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ClimbToNextBar;
 import frc.robot.commands.DescendElevatorToLimitSwitch;
@@ -23,7 +24,7 @@ import frc.robot.commands.SetArmAngleTest;
 import frc.robot.commands.SetArmBrake;
 import frc.robot.commands.SetArmCoast;
 import frc.robot.commands.SetClimber;
-import frc.robot.commands.SetElevatorHeightTest;
+import frc.robot.commands.SetElevatorHeight;
 import frc.robot.commands.SetVisionMode;
 import frc.robot.commands.TuneShooterCommand;
 import frc.robot.commands.VacuumMode;
@@ -109,7 +110,7 @@ public class RobotContainer {
 
         // farm controller
         JoystickButton farm1 = new JoystickButton(m_farm, 1);
-        farm1.whenPressed(new SetElevatorHeightTest(m_climber));
+        farm1.whenPressed(new SetElevatorHeight(m_climber, SmartDashboard.getNumber("Constants/SetElevatorTest", 0)));
 
         JoystickButton farm2 = new JoystickButton(m_farm, 2);
         farm2.whenPressed(new SetArmAngleTest(m_climber, "Constants/SetArmAngleTest"));

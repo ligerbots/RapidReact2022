@@ -56,11 +56,13 @@ public final class Constants {
     public static final int FOLLOWER_RIGHT_CAN_ID = 11;
 
     // Following four CAN IDs are for the climber subsystem
-    public static final int[] ELEVATOR_CAN_IDS = new int[] {1,2}; //{1,2};
-    public static final int[] ARM_CAN_IDS = new int[] {7,10}; //{7,10};
+    // public static final int[] ELEVATOR_CAN_IDS = new int[] {1,2}; //{1,2};
+    // public static final int[] ARM_CAN_IDS = new int[] {7,10}; //{7,10};
+    public static final int[] ELEVATOR_CAN_IDS = new int[] {7,10}; // PROTOTYPE
+    public static final int[] ARM_CAN_IDS = new int[] {2,1}; // PROTOTYPE
     
     // intake subsystem
-    public static final int INTAKE_MOTOR_CAN_ID = 5; 
+    public static final int INTAKE_MOTOR_CAN_ID = 50; //TODO: changed it back on actual robot!!!
     public static final double INTAKE_SHOOTING_SPEED = 0.5;
     public static final double INTAKE_SPEED = 0.5;
 
@@ -166,7 +168,7 @@ public final class Constants {
     public static final double ELEVATOR_MAX_ACC_METER_PER_SEC_SQ_DESCEND_SLOW = Units.inchesToMeters(-10.0);
 
     // This is going to be the initial state of the elevators
-    public static final double ELEVATOR_OFFSET_METER = Units.inchesToMeters(2.5);
+    public static final double ELEVATOR_OFFSET_METER = Units.inchesToMeters(23);// should be 2.5
 
     public static final double ELEVATOR_LIMIT_SWITCH_HEIGHT = Units.inchesToMeters(0.0);
 
