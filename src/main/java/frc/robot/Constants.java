@@ -99,7 +99,7 @@ public final class Constants {
     // Our usual "Tarmac" shot 
     public static final double TARMAC_DEFAULT_DISTANCE = 94.0;
     
-    // distance from the edge of the field by the human shooting position
+    // shoot from about 2.5ft outside the Tarmac
     public static final double JUST_OUTSIDE_TARMAC = 12.0 * 11.5 - HUB_RADIUS;
     
     // distance from the near side launchpad to the center hub
