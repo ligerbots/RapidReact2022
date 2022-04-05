@@ -130,6 +130,21 @@ public class RobotContainer {
         // JoystickButton farm11 = new JoystickButton(m_farm, 11);
         // farm11.whenPressed(new ResetElevatorEncoder(m_climber));
 
+        // Additional manual shooter position buttons(orange buttons)
+        JoystickButton farm4 = new JoystickButton(m_farm, 4);
+        farm4.whenPressed(new ShooterCommand(m_shooter, m_intake, Constants.TARMAC_DEFAULT_DISTANCE, true));
+    
+        JoystickButton farm5 = new JoystickButton(m_farm, 5);
+        farm5.whenPressed(new ShooterCommand(m_shooter, m_intake, Constants.JUST_OUTSIDE_TARMAC, true));
+
+        JoystickButton farm9 = new JoystickButton(m_farm, 9);
+        farm9.whenPressed(new ShooterCommand(m_shooter, m_intake, Constants.CLOSE_LAUNCHPAD_SHOOTER_DISTANCE, true));
+
+        JoystickButton farm10 = new JoystickButton(m_farm, 10);
+        farm10.whenPressed(new ShooterCommand(m_shooter, m_intake, Constants.FAR_LAUNCHPAD_SHOOTER_DISTANCE, true));
+        // end additional shooter buttons
+
+        // Arm Brake/Coast buttons
         JoystickButton farm13 = new JoystickButton(m_farm, 13);
         farm13.whenPressed(new SetArmCoast(m_climber));
 
