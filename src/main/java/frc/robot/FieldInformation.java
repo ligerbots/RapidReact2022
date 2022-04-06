@@ -10,13 +10,13 @@ public class FieldInformation {
     static Translation2d centerAngle(double distanceMeters, Rotation2d angle){
         return new Translation2d(distanceMeters, angle).plus(fieldCenter);
     }
-    static Pose2d centerAnglePose(double distanceMeters, Rotation2d angle){
+    public static Pose2d centerAnglePose(double distanceMeters, Rotation2d angle){
         return new Pose2d(centerAngle(distanceMeters, angle), angle.plus(Rotation2d.fromDegrees(180)));
     }
     public static final Pose2d upperBlueStart = centerAnglePose(Units.inchesToMeters(90), Rotation2d.fromDegrees(148));
     public static final Pose2d middleBlueStart = centerAnglePose(Units.inchesToMeters(90), Rotation2d.fromDegrees(225));
     public static final Pose2d lowerBlueStart = centerAnglePose(Units.inchesToMeters(90), Rotation2d.fromDegrees(261));
-    public static final Pose2d middleBlueBall = centerAnglePose(Units.inchesToMeters(157), Rotation2d.fromDegrees(215));
-    public static final Pose2d cornerBlueBall = centerAnglePose(Units.inchesToMeters(294), Rotation2d.fromDegrees(202.5));
+    public static final Pose2d middleBlueBall = centerAnglePose(Units.inchesToMeters(157), Rotation2d.fromDegrees(210));
+    public static final Pose2d cornerBlueBall = centerAnglePose(Units.inchesToMeters(290), Rotation2d.fromDegrees(202.5));
     public static final Pose2d lowerBlueBall = centerAnglePose(Units.inchesToMeters(138), Rotation2d.fromDegrees(260));
 }

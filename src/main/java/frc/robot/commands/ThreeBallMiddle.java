@@ -24,6 +24,7 @@ import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Vision;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -120,8 +121,7 @@ public class ThreeBallMiddle extends SequentialCommandGroup implements AutoComma
                 ramsete2.andThen(() -> driveTrain.tankDriveVolts(0, 0)),
                 new IntakeCommand(intake, Constants.INTAKE_SPEED)
             ),
-            new FaceShootingTarget(driveTrain, vision, Constants.TURN_TOLERANCE_DEG, driveCommand),
-            new ShooterCommand(shooter, intake, vision, true)
+            new TurnAndShoot(shooter, intake, driveTrain, vision, null)
         );
     }
   

@@ -10,10 +10,12 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.RamseteController;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.math.trajectory.constraint.DifferentialDriveVoltageConstraint;
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import frc.robot.Constants;
@@ -24,6 +26,7 @@ import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Vision;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -57,7 +60,7 @@ public class FourBallLower extends SequentialCommandGroup implements AutoCommand
             .setReversed(false);
 
         Pose2d initialPose = getInitialPose();
-        Pose2d firstShootingPose = getInitialPose();
+        Pose2d firstShootingPose = FieldInformation.centerAnglePose(Units.inchesToMeters(114.0), Rotation2d.fromDegrees(261));
         Pose2d finalShootingPose = FieldInformation.middleBlueBall;
         // Pose2d midPose = new Pose2d(
         //     initialPose.getX() - initialPose.getRotation().getCos() * DISTANCE_BACK, 
@@ -155,26 +158,21 @@ public class FourBallLower extends SequentialCommandGroup implements AutoCommand
         );
     
     addCommands(
-        new DeployIntake(driveTrain), 
+        new DeployIntake(driveTrain),
+        // wait for intake to drop
+        new WaitCommand(0.2), 
         new ParallelDeadlineGroup(
             ramsete1.andThen(() -> driveTrain.tankDriveVolts(0, 0)),
             new IntakeCommand(intake, Constants.INTAKE_SPEED)
         ),
-        new ParallelDeadlineGroup(
-            ramsete2.andThen(() -> driveTrain.tankDriveVolts(0, 0)),
-            new IntakeCommand(intake, Constants.INTAKE_SPEED)
-        ),
-        // new FaceShootingTarget(driveTrain, vision, Constants.TURN_TOLERANCE_DEG, driveCommand),
-        // new ShooterCommand(shooter, intake, vision, true),
+        ramsete2.andThen(() -> driveTrain.tankDriveVolts(0, 0)),
+        new ShooterCommand(shooter, intake, Constants.STARTING_DISTANCE, true),
         new ParallelDeadlineGroup(
             ramsete3.andThen(() -> driveTrain.tankDriveVolts(0, 0)),
             new IntakeCommand(intake, Constants.INTAKE_SPEED)
         ),
-        new ParallelDeadlineGroup(
-            ramsete4.andThen(() -> driveTrain.tankDriveVolts(0, 0)),
-            new IntakeCommand(intake, Constants.INTAKE_SPEED)
-        ),
-        new FaceShootingTarget(driveTrain, vision, Constants.TURN_TOLERANCE_DEG, driveCommand),
+        ramsete4.andThen(() -> driveTrain.tankDriveVolts(0, 0)),
+        new FaceShootingTarget(driveTrain, vision, Constants.TURN_TOLERANCE_DEG, null),
         new ShooterCommand(shooter, intake, vision, true)
     );
   }
