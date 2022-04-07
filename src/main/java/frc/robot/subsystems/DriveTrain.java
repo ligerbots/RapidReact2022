@@ -7,6 +7,8 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
+import edu.wpi.first.math.trajectory.TrapezoidProfile;
+import edu.wpi.first.math.util.Units;
 // import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.RobotController;
@@ -230,6 +232,17 @@ public class DriveTrain extends SubsystemBase {
     public Field2d getField2d() {
         return m_fieldSim;
     }
+
+    //TODO: check how this works with falcons, change gear ratios; add all the PIDs stuff if possible
+    // protected void setSetPoint(TrapezoidProfile.State setPoint) {
+    //     // Calculate the feedforward from the setPoint
+    //     double feedforward = m_Feedforward.calculate(setPoint.position, setPoint.velocity);
+    
+    //     // Add the feedforward to the PID output to get the motor output
+    //     // Remember that the encoder was already set to account for the gear ratios.
+    
+    //     m_PIDController.setReference(setPoint.position, ControlType.kPosition, 0, feedforward / 12.0);
+    //   }
 
     public double turnSpeedCalc(double angleError) {
         double absErr = Math.abs(angleError);

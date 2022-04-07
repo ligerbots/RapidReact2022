@@ -5,8 +5,6 @@
 package frc.robot.commands;
 
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
-import edu.wpi.first.math.util.Units;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.TrapezoidProfileCommand;
 import frc.robot.Constants;
 import frc.robot.subsystems.Climber;
@@ -33,7 +31,6 @@ public class SetOneElevatorHeight extends TrapezoidProfileCommand {
             // End at desired position in meters; implicitly starts at 0
             new TrapezoidProfile.State(height, 0),
             // initial position state
-            // TODO: it may not work when two elevators are executed separately at different hight
             new TrapezoidProfile.State(climber.getElevatorHeight()[index], 0)),
         // Pipe the profile state to the drive
         setpointState -> climber.setOneElevatorHeight(index, setpointState));
