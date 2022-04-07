@@ -56,8 +56,8 @@ public final class Constants {
     public static final int FOLLOWER_RIGHT_CAN_ID = 11;
 
     // Following four CAN IDs are for the climber subsystem
-    public static final int[] ELEVATOR_CAN_IDS = new int[] {1,2}; //{1,2};
-    public static final int[] ARM_CAN_IDS = new int[] {7,10}; //{7,10};
+    public static final int[] ELEVATOR_CAN_IDS = new int[] {7, 10}; //{1,2};
+    public static final int[] ARM_CAN_IDS = new int[] {2, 1}; //{7,10};
     
     // intake subsystem
     public static final int INTAKE_MOTOR_CAN_ID = 5; 

@@ -68,9 +68,9 @@ public class Climber extends SubsystemBase {
 
     m_limitSwitch = new SparkMaxLimitSwitch[2];
 
-    m_limitSwitch[0] = m_elevatorMotor[0].getReverseLimitSwitch(Type.kNormallyClosed);
+    m_limitSwitch[0] = m_elevatorMotor[0].getReverseLimitSwitch(Type.kNormallyOpen);
     m_limitSwitch[0].enableLimitSwitch(true);
-    m_limitSwitch[1] = m_elevatorMotor[1].getReverseLimitSwitch(Type.kNormallyClosed);
+    m_limitSwitch[1] = m_elevatorMotor[1].getReverseLimitSwitch(Type.kNormallyOpen);
     m_limitSwitch[1].enableLimitSwitch(true);
   }
 
