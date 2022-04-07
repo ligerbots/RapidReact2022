@@ -18,15 +18,15 @@ import edu.wpi.first.math.trajectory.constraint.DifferentialDriveVoltageConstrai
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
+
 import frc.robot.Constants;
 import frc.robot.FieldInformation;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Vision;
-
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -184,9 +184,10 @@ public class FourBallLower extends SequentialCommandGroup implements AutoCommand
   
   @Override
   public void plotTrajectory(TrajectoryPlotter plotter) {
-      plotter.plotTrajectory(m_trajectory1);
-      plotter.plotTrajectory(m_trajectory2);
-      plotter.plotTrajectory(m_trajectory3);
-      plotter.plotTrajectory(m_trajectory4);
+      // with multiple trajectories, you need to select an index for each
+      plotter.plotTrajectory(0, m_trajectory1);
+      plotter.plotTrajectory(1, m_trajectory2);
+      plotter.plotTrajectory(2, m_trajectory3);
+      plotter.plotTrajectory(3, m_trajectory4);
   }
 }

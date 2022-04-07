@@ -56,7 +56,22 @@
         "height": 8.229599952697754,
         "image": "2022-field.png",
         "trajectory": {
-          "image": "green_arrow.png",
+          "image": "/scratch/ligerbots/projects/RapidReact2022/green_arrow.png",
+          "length": 0.30000001192092896,
+          "width": 0.10000000149011612
+        },
+        "trajectory1": {
+          "image": "/scratch/ligerbots/projects/RapidReact2022/green_arrow.png",
+          "length": 0.30000001192092896,
+          "width": 0.10000000149011612
+        },
+        "trajectory2": {
+          "image": "/scratch/ligerbots/projects/RapidReact2022/green_arrow.png",
+          "length": 0.30000001192092896,
+          "width": 0.10000000149011612
+        },
+        "trajectory3": {
+          "image": "/scratch/ligerbots/projects/RapidReact2022/green_arrow.png",
           "length": 0.30000001192092896,
           "width": 0.10000000149011612
         },

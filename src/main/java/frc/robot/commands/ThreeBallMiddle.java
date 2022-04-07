@@ -16,15 +16,14 @@ import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.math.trajectory.constraint.DifferentialDriveVoltageConstraint;
 import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+
 import frc.robot.Constants;
 import frc.robot.FieldInformation;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Vision;
-
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -132,7 +131,8 @@ public class ThreeBallMiddle extends SequentialCommandGroup implements AutoComma
   
   @Override
   public void plotTrajectory(TrajectoryPlotter plotter) {
-      plotter.plotTrajectory(m_initialTrajectory);
-      plotter.plotTrajectory(m_finalTrajectory);
+      // with multiple trajectories, you need to select an index for each
+      plotter.plotTrajectory(0, m_initialTrajectory);
+      plotter.plotTrajectory(1, m_finalTrajectory);
   }
 }
