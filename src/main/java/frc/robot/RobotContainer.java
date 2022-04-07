@@ -25,6 +25,7 @@ import frc.robot.commands.SetArmBrake;
 import frc.robot.commands.SetArmCoast;
 import frc.robot.commands.SetClimber;
 import frc.robot.commands.SetElevatorHeight;
+import frc.robot.commands.SetElevatorHeightTest;
 import frc.robot.commands.SetVisionMode;
 import frc.robot.commands.TuneShooterCommand;
 import frc.robot.commands.VacuumMode;
@@ -110,12 +111,11 @@ public class RobotContainer {
 
         // farm controller
         JoystickButton farm1 = new JoystickButton(m_farm, 1);
-        farm1.whenPressed(new SetElevatorHeight(m_climber, SmartDashboard.getNumber("Constants/SetElevatorTest", 0)));
+        farm1.whenPressed(new SetElevatorHeightTest(m_climber));
 
         JoystickButton farm2 = new JoystickButton(m_farm, 2);
         farm2.whenPressed(new SetArmAngleTest(m_climber, "Constants/SetArmAngleTest"));
 
-        // TODO: Will we be able to set only one elevator's height?
         // JoystickButton farm3 = new JoystickButton(m_farm, 3);
         // farm3.whenPressed(new SetOneElevatorHeightTest(m_climber, "SetOneElevatorHeightTest"));
 

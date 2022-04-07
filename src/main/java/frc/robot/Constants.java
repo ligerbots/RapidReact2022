@@ -1,3 +1,4 @@
+
 package frc.robot;
 
 import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
@@ -102,7 +103,7 @@ public final class Constants {
     
     public static final double ARM_ANGLE_TOLERANCE = Units.degreesToRadians(1.0);
     
-    public static final double ELEVATOR_MAX_HEIGHT = Units.inchesToMeters(25.0);// 23.5in = length of elevator when fully extended
+    public static final double ELEVATOR_MAX_HEIGHT = Units.inchesToMeters(23.5);// 23.5in = length of elevator when fully extended PROTOTYPE
     public static final double ELEVATOR_MIN_HEIGHT = Units.inchesToMeters(0.0);// 0in = length of elevator when fully retracted
     // right elevator 0 to -21.5
     
@@ -168,7 +169,7 @@ public final class Constants {
     public static final double ELEVATOR_MAX_ACC_METER_PER_SEC_SQ_DESCEND_SLOW = Units.inchesToMeters(-10.0);
 
     // This is going to be the initial state of the elevators
-    public static final double ELEVATOR_OFFSET_METER = Units.inchesToMeters(23);// should be 2.5
+    public static final double ELEVATOR_OFFSET_METER = Units.inchesToMeters(23.5);// should be 2.5
 
     public static final double ELEVATOR_LIMIT_SWITCH_HEIGHT = Units.inchesToMeters(0.0);
 
