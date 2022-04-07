@@ -38,7 +38,7 @@ public class FourBallLower extends SequentialCommandGroup implements AutoCommand
   Trajectory m_trajectory2;
   Trajectory m_trajectory3;
   Trajectory m_trajectory4;
-  public FourBallLower(Shooter shooter, Intake intake, DriveTrain driveTrain, Vision vision, DriveCommand driveCommand) {
+  public FourBallLower(Shooter shooter, Intake intake, DriveTrain driveTrain, Vision vision) {
     var autoVoltageConstraint =
         new DifferentialDriveVoltageConstraint(
             new SimpleMotorFeedforward(Constants.ksVolts,

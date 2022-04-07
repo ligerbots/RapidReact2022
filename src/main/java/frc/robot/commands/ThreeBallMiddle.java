@@ -34,7 +34,7 @@ public class ThreeBallMiddle extends SequentialCommandGroup implements AutoComma
     static final double DISTANCE_BACK = 1.4;
     Trajectory m_initialTrajectory;
     Trajectory m_finalTrajectory;
-    public ThreeBallMiddle(Shooter shooter, Intake intake, DriveTrain driveTrain, Vision vision, DriveCommand driveCommand) {
+    public ThreeBallMiddle(Shooter shooter, Intake intake, DriveTrain driveTrain, Vision vision) {
         var autoVoltageConstraint =
         new DifferentialDriveVoltageConstraint(
             new SimpleMotorFeedforward(Constants.ksVolts,
