@@ -12,15 +12,16 @@ import frc.robot.subsystems.Climber;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class SetElevatorHeight extends TrapezoidProfileCommand {
+public class SetOneElevatorHeight extends TrapezoidProfileCommand {
   Climber m_climber;
   double m_height;
+  int m_index;
 
-  public SetElevatorHeight(Climber climber, double height) {
-    this(climber, height, Constants.ELEVATOR_MAX_VEL_METER_PER_SEC_NORMAL, Constants.ELEVATOR_MAX_ACC_METER_PER_SEC_SQ_NORMAL);
+  public SetOneElevatorHeight(Climber climber, double height, int index) {
+    this(climber, height, index, Constants.ELEVATOR_MAX_VEL_METER_PER_SEC_NORMAL, Constants.ELEVATOR_MAX_ACC_METER_PER_SEC_SQ_NORMAL);
   }
 
-  public SetElevatorHeight(Climber climber, double height, final double MAX_VEL_METER_PER_SEC, final double MAX_ACC_METER_PER_SEC) {
+  public SetOneElevatorHeight(Climber climber, double height, int index, final double MAX_VEL_METER_PER_SEC, final double MAX_ACC_METER_PER_SEC) {
     super(
         new TrapezoidProfile(
             // Limit the max acceleration and velocity
@@ -30,9 +31,9 @@ public class SetElevatorHeight extends TrapezoidProfileCommand {
             // End at desired position in meters; implicitly starts at 0
             new TrapezoidProfile.State(height, 0),
             // initial position state
-            new TrapezoidProfile.State(climber.getElevatorHeight()[0], 0)),
+            new TrapezoidProfile.State(climber.getElevatorHeight()[index], 0)),
         // Pipe the profile state to the drive
-        setpointState -> climber.setElevatorHeight(setpointState));
+        setpointState -> climber.setOneElevatorHeight(index, setpointState));
       
         m_climber = climber;
         m_height = height;

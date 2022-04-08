@@ -21,15 +21,6 @@ public class Climber extends SubsystemBase {
 
   public Elevator[] m_elevator = new Elevator[2];
 
-  boolean[] m_armTooFar = new boolean[] { false, false };
-
-  double m_elevatorAllowedErr = 0;
-
-  boolean[] m_elevatorTooFar = new boolean[] { false, false };
-
-  double[] m_elevatorEncoderValue = new double[2];
-  double[] m_armEncoderValue = new double[2];
-
   public CANSparkMax[] m_elevatorMotor;
   
   public SparkMaxLimitSwitch[] m_limitSwitch;
