@@ -57,13 +57,13 @@ public final class Constants {
     public static final int FOLLOWER_RIGHT_CAN_ID = 11;
 
     // Following four CAN IDs are for the climber subsystem
-    // public static final int[] ELEVATOR_CAN_IDS = new int[] {1,2}; //{1,2};
-    // public static final int[] ARM_CAN_IDS = new int[] {7,10}; //{7,10};
-    public static final int[] ELEVATOR_CAN_IDS = new int[] {7,10}; // PROTOTYPE
-    public static final int[] ARM_CAN_IDS = new int[] {2,1}; // PROTOTYPE
+    public static final int[] ELEVATOR_CAN_IDS = new int[] {1,2}; //{1,2};
+    public static final int[] ARM_CAN_IDS = new int[] {7,10}; //{7,10};
+    // public static final int[] ELEVATOR_CAN_IDS = new int[] {7,10}; // PROTOTYPE
+    // public static final int[] ARM_CAN_IDS = new int[] {2,1}; // PROTOTYPE
     
     // intake subsystem
-    public static final int INTAKE_MOTOR_CAN_ID = 50; //TODO: changed it back on actual robot!!!
+    public static final int INTAKE_MOTOR_CAN_ID = 5; 
     public static final double INTAKE_SHOOTING_SPEED = 0.5;
     public static final double INTAKE_SPEED = 0.5;
 
@@ -98,12 +98,12 @@ public final class Constants {
 
     // define constants for high, low, and mid rung
     public static final double HIGH_RUNG = 1.92;//192 cm
-    public static final double MID_RUNG = Units.inchesToMeters(23.0);//153 cm
+    public static final double MID_RUNG = Units.inchesToMeters(24.0);//153 cm
     public static final double LOW_RUNG = 1.24;//Top of rung is 124cm    
     
     public static final double ARM_ANGLE_TOLERANCE = Units.degreesToRadians(1.0);
     
-    public static final double ELEVATOR_MAX_HEIGHT = Units.inchesToMeters(23.5);// 23.5in = length of elevator when fully extended PROTOTYPE
+    public static final double ELEVATOR_MAX_HEIGHT = Units.inchesToMeters(26.3);// 23.5in = length of elevator when fully extended PROTOTYPE
     public static final double ELEVATOR_MIN_HEIGHT = Units.inchesToMeters(0.0);// 0in = length of elevator when fully retracted
     // right elevator 0 to -21.5
     
@@ -161,15 +161,18 @@ public final class Constants {
     public static final double ELEVATOR_MAX_VEL_METER_PER_SEC_DESCEND = Units.inchesToMeters(100.0);
     public static final double ELEVATOR_MAX_ACC_METER_PER_SEC_SQ_DESCEND = Units.inchesToMeters(30.0);
 
-    public static final double ELEVATOR_MAX_VEL_METER_PER_SEC_NORMAL = Units.inchesToMeters(100.0);
-    public static final double ELEVATOR_MAX_ACC_METER_PER_SEC_SQ_NORMAL = Units.inchesToMeters(30.0);
+    public static final double ELEVATOR_MAX_VEL_METER_PER_SEC_NORMAL = Units.inchesToMeters(50.0);
+    public static final double ELEVATOR_MAX_ACC_METER_PER_SEC_SQ_NORMAL = Units.inchesToMeters(10.0);
+
+    public static final double ELEVATOR_MAX_VEL_METER_PER_SEC_ASCEND_SLOW = Units.inchesToMeters(1000.0);
+    public static final double ELEVATOR_MAX_ACC_METER_PER_SEC_SQ_ASCEND_SLOW = Units.inchesToMeters(62.5);
 
     // TODO: check if it is correct and safe
     public static final double ELEVATOR_MAX_VEL_METER_PER_SEC_DESCEND_SLOW = Units.inchesToMeters(-1000000.0);
     public static final double ELEVATOR_MAX_ACC_METER_PER_SEC_SQ_DESCEND_SLOW = Units.inchesToMeters(-10.0);
 
     // This is going to be the initial state of the elevators
-    public static final double ELEVATOR_OFFSET_METER = Units.inchesToMeters(23.5);// should be 2.5
+    public static final double ELEVATOR_OFFSET_METER = Units.inchesToMeters(2.0);
 
     public static final double ELEVATOR_LIMIT_SWITCH_HEIGHT = Units.inchesToMeters(0.0);
 

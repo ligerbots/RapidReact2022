@@ -2521,7 +2521,7 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "7,1": {
+          "7,0": {
             "size": [
               1,
               1
@@ -2543,7 +2543,7 @@
               "_title": "/SmartDashboard/Constants/SetOneElevatorHeightTest"
             }
           },
-          "7,0": {
+          "7,1": {
             "size": [
               1,
               1
