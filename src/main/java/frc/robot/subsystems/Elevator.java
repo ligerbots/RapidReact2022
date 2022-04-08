@@ -50,7 +50,7 @@ public class Elevator extends SubsystemBase {
     m_encoder = m_motor.getEncoder();
 
     // Set the position conversion factor.
-    m_encoder.setPositionConversionFactor((12.0 / 72.0) * Units.inchesToMeters((5.0/8.0) * Math.PI));
+    m_encoder.setPositionConversionFactor((12.0 / 72.0) * Units.inchesToMeters((7.0/8.0) * Math.PI)); // was 5/8
 
     m_encoder.setPosition(Constants.ELEVATOR_OFFSET_METER);
 
