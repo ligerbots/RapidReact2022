@@ -61,6 +61,8 @@ public class Robot extends TimedRobot {
     
     SmartDashboard.putNumber("Constants/OneElevatorIndex", 0.0);
     SmartDashboard.putNumber("Constants/SetOneElevatorHeightTest", 0.0);
+
+    SmartDashboard.putNumber("Constants/AdjustRobotAngleTest", 0.0);
   }
 
   /**

@@ -1,5 +1,7 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.hal.SimDouble;
@@ -52,9 +54,29 @@ public class DriveTrain extends SubsystemBase {
     private AHRS m_navX;
 
     public DriveTrain() {
+        // setup PID control for TalonFX
+        m_leftLeader.configFactoryDefault();
+        m_leftLeader.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 0);
+        m_leftLeader.set(ControlMode.Position,0);
+        m_leftLeader.config_kP(0, Constants.DRIVETRAIN_KP);
+        m_leftLeader.config_kI(0, Constants.DRIVETRAIN_KI);
+        m_leftLeader.config_kD(0, Constants.DRIVETRAIN_KD);
+        m_leftLeader.config_kF(0, Constants.DRIVETRAIN_KF);
+        m_leftLeader.setSensorPhase(false);
+
+        m_rightLeader.configFactoryDefault();
+        m_rightLeader.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 0);
+        m_rightLeader.set(ControlMode.Position,0);
+        m_rightLeader.config_kP(0, Constants.DRIVETRAIN_KP);
+        m_rightLeader.config_kI(0, Constants.DRIVETRAIN_KI);
+        m_rightLeader.config_kD(0, Constants.DRIVETRAIN_KD);
+        m_rightLeader.config_kF(0, Constants.DRIVETRAIN_KF);
+        m_rightLeader.setSensorPhase(true);
+        
+        m_rightMotors.setInverted(true);
         setMotorMode(NeutralMode.Coast);
     
-        m_rightMotors.setInverted(true);
+       
         m_differentialDrive = new DifferentialDrive(m_leftMotors, m_rightMotors);
         m_differentialDrive.setSafetyEnabled(false);
 
@@ -233,16 +255,16 @@ public class DriveTrain extends SubsystemBase {
         return m_fieldSim;
     }
 
-    //TODO: check how this works with falcons, change gear ratios; add all the PIDs stuff if possible
-    // protected void setSetPoint(TrapezoidProfile.State setPoint) {
-    //     // Calculate the feedforward from the setPoint
-    //     double feedforward = m_Feedforward.calculate(setPoint.position, setPoint.velocity);
-    
-    //     // Add the feedforward to the PID output to get the motor output
-    //     // Remember that the encoder was already set to account for the gear ratios.
-    
-    //     m_PIDController.setReference(setPoint.position, ControlType.kPosition, 0, feedforward / 12.0);
-    //   }
+    public void setSetPoint(boolean turnToLeft, TrapezoidProfile.State setPoint) {
+        // if turn to left, let the right motor drive, and vice versa
+        if(turnToLeft)
+            m_rightLeader.set(ControlMode.Position, setPoint.position);
+        else
+            m_leftLeader.set(ControlMode.Position, setPoint.position);
+        
+        SmartDashboard.putBoolean("DriveTrain/turnToLeft", turnToLeft);
+        SmartDashboard.putNumber("DriveTrain/setPoint", Units.metersToInches(setPoint.position));
+      }
 
     public double turnSpeedCalc(double angleError) {
         double absErr = Math.abs(angleError);

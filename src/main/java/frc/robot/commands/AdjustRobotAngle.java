@@ -5,7 +5,9 @@
 package frc.robot.commands;
 
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj2.command.TrapezoidProfileCommand;
+import frc.robot.Constants;
 import frc.robot.subsystems.DriveTrain;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
@@ -18,13 +20,12 @@ public class AdjustRobotAngle extends TrapezoidProfileCommand {
         // The motion profile to be executed
         new TrapezoidProfile(
             // The motion profile constraints
-            new TrapezoidProfile.Constraints(0, 0),
+            new TrapezoidProfile.Constraints(Constants.DRIVETRAIN_MAX_VEL_METER_PER_SEC, Constants.DRIVETRAIN_MAX_ACC_METER_PER_SEC_SQ),
             // Goal state
-
-            //TODO: do we want to use radians?
-            new TrapezoidProfile.State(),
+            // use radians
+            new TrapezoidProfile.State(goalAngle, 0),
             // Initial state
-            new TrapezoidProfile.State()),
-        state -> {});
+            new TrapezoidProfile.State(Units.degreesToRadians(driveTrain.getHeading()), 0)),
+        state -> driveTrain.setSetPoint(goalAngle > Units.degreesToRadians(driveTrain.getHeading()), state));
   }
 }
