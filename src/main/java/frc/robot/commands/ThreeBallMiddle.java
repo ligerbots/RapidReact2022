@@ -56,7 +56,7 @@ public class ThreeBallMiddle extends SequentialCommandGroup implements AutoComma
             .setReversed(false);
 
         Pose2d initialPose = getInitialPose();
-        Pose2d cornerPose = FieldInformation.cornerBlueBall;
+        Pose2d cornerPose = FieldInformation.ballPosePolar(FieldInformation.cornerBlueBall, 11, 20);
         Pose2d finalPose = FieldInformation.middleBlueBall;
         // Pose2d midPose = new Pose2d(
         //     initialPose.getX() - initialPose.getRotation().getCos() * DISTANCE_BACK, 

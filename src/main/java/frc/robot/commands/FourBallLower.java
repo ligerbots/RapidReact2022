@@ -61,7 +61,9 @@ public class FourBallLower extends SequentialCommandGroup implements AutoCommand
 
         Pose2d initialPose = getInitialPose();
         Pose2d firstShootingPose = FieldInformation.centerAnglePose(Units.inchesToMeters(114.0), Rotation2d.fromDegrees(261));
-        Pose2d finalShootingPose = FieldInformation.middleBlueBall;
+        Pose2d invertPose1 = FieldInformation.ballPose(FieldInformation.lowerBlueBall, 2, 10);
+        Pose2d invertPose2 = FieldInformation.ballPosePolar(FieldInformation.cornerBlueBall, 11, 20);
+        Pose2d finalShootingPose = FieldInformation.ballPose(FieldInformation.middleBlueBall, -5.0, -5.0);
         // Pose2d midPose = new Pose2d(
         //     initialPose.getX() - initialPose.getRotation().getCos() * DISTANCE_BACK, 
         //     initialPose.getY() - initialPose.getRotation().getSin() * DISTANCE_BACK, 
@@ -70,12 +72,12 @@ public class FourBallLower extends SequentialCommandGroup implements AutoCommand
         m_trajectory1 = TrajectoryGenerator.generateTrajectory(
             initialPose, 
             List.of(),
-            FieldInformation.lowerBlueBall,
+            invertPose1,
             reverseConfig
         ); 
 
         m_trajectory2 = TrajectoryGenerator.generateTrajectory(
-            FieldInformation.lowerBlueBall, 
+            invertPose1, 
             List.of(),
             firstShootingPose,
             forwardConfig
@@ -86,12 +88,12 @@ public class FourBallLower extends SequentialCommandGroup implements AutoCommand
             List.of(
                 FieldInformation.middleBlueBall.getTranslation()
             ),
-            FieldInformation.cornerBlueBall,
+            invertPose2,
             reverseConfig
         ); 
 
         m_trajectory4 = TrajectoryGenerator.generateTrajectory(
-            FieldInformation.cornerBlueBall, 
+            invertPose2, 
             List.of(),
             finalShootingPose,
             forwardConfig
@@ -166,7 +168,7 @@ public class FourBallLower extends SequentialCommandGroup implements AutoCommand
             new IntakeCommand(intake, Constants.INTAKE_SPEED)
         ),
         ramsete2.andThen(() -> driveTrain.tankDriveVolts(0, 0)),
-        new ShooterCommand(shooter, intake, Constants.STARTING_DISTANCE, true),
+        new ShooterCommand(shooter, intake, vision, true),
         new ParallelDeadlineGroup(
             ramsete3.andThen(() -> driveTrain.tankDriveVolts(0, 0)),
             new IntakeCommand(intake, Constants.INTAKE_SPEED)
