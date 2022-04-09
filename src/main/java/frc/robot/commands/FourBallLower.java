@@ -164,20 +164,23 @@ public class FourBallLower extends SequentialCommandGroup implements AutoCommand
         // wait for intake to drop
         new WaitCommand(0.3), 
         new ParallelDeadlineGroup(
-            ramsete1.andThen(() -> driveTrain.tankDriveVolts(0, 0)),
+            ramsete1.andThen(() -> driveTrain.tankDriveVolts(0, 0)).alongWith(new IntakeCommand(intake, Constants.INTAKE_SPEED).withTimeout(1.0)),,
             new IntakeCommand(intake, Constants.INTAKE_SPEED)
         ),
         // run intake while driving forward to make sure the ball is pulled in
         new ParallelDeadlineGroup(
-            ramsete2.andThen(() -> driveTrain.tankDriveVolts(0, 0)),
+            ramsete2.andThen(() -> driveTrain.tankDriveVolts(0, 0)).alongWith(new IntakeCommand(intake, Constants.INTAKE_SPEED).withTimeout(1.0)),,
             new IntakeCommand(intake, Constants.INTAKE_SPEED)
         ),
         new ShooterCommand(shooter, intake, vision, true),
         new ParallelDeadlineGroup(
-            ramsete3.andThen(() -> driveTrain.tankDriveVolts(0, 0)),
+            ramsete3.andThen(() -> driveTrain.tankDriveVolts(0, 0)).alongWith(new IntakeCommand(intake, Constants.INTAKE_SPEED).withTimeout(1.0)),,
             new IntakeCommand(intake, Constants.INTAKE_SPEED)
         ),
         // run intake for 1 more second to make sure the ball is pulled in
+        //ramsete1.andThen(() -> driveTrain.tankDriveVolts(0, 0)).alongWith(new IntakeCommand(intake, Constants.INTAKE_SPEED).withTimeout(1.0)),
+        //ramsete2.andThen(() -> driveTrain.tankDriveVolts(0, 0)).alongWith(new IntakeCommand(intake, Constants.INTAKE_SPEED).withTimeout(1.0)),
+        //ramsete3.andThen(() -> driveTrain.tankDriveVolts(0, 0)).alongWith(new IntakeCommand(intake, Constants.INTAKE_SPEED).withTimeout(1.0)),
         ramsete4.andThen(() -> driveTrain.tankDriveVolts(0, 0)).alongWith(new IntakeCommand(intake, Constants.INTAKE_SPEED).withTimeout(1.0)),
         new FaceShootingTarget(driveTrain, vision, Constants.TURN_TOLERANCE_DEG, null),
         new ShooterCommand(shooter, intake, vision, true)
