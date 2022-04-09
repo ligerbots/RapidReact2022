@@ -2636,6 +2636,17 @@
               "imageWidth": -1,
               "imageHeight": -1
             }
+          },
+          "0,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Toggle Button",
+              "_source0": "network_table:///SmartDashboard/vision/write_images",
+              "_title": "/SmartDashboard/vision/write_images"
+            }
           }
         }
       }

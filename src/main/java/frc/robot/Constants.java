@@ -109,6 +109,8 @@ public final class Constants {
     public static final double FAR_LAUNCHPAD_SHOOTER_DISTANCE = 244.77 - SHOOTER_POS;
 
     //
+
+    public static final double CHUTE_SPEED = 0.4;
     //
 
     // Chute subsystem
