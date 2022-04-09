@@ -26,7 +26,8 @@ public class SetClimber extends SequentialCommandGroup {
     new SetElevatorHeight(m_climber, Constants.ELEVATOR_MIN_HEIGHT),
     
     // rotates arm to leave spaces for the elevator to raise up
-    new SetArmAngle(m_climber, Constants.ARM_ANGLE_FOR_ELEVATOR_CLEARANCE).alongWith(new SetElevatorHeight(m_climber, Constants.MID_RUNG, Constants.ELEVATOR_MAX_VEL_METER_PER_SEC_ASCEND, Constants.ELEVATOR_MAX_ACC_METER_PER_SEC_SQ_ASCEND)),
+    new SetArmAngle(m_climber, Constants.ARM_ANGLE_FOR_ELEVATOR_CLEARANCE).alongWith(new SetElevatorHeight(m_climber, Constants.MID_RUNG, 
+            Constants.ELEVATOR_MAX_VEL_METER_PER_SEC_ASCEND, Constants.ELEVATOR_MAX_ACC_METER_PER_SEC_SQ_ASCEND)),
 
     // set the finished boolean to true
     new CommandFinished(true));

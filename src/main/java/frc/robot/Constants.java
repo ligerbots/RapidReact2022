@@ -107,7 +107,7 @@ public final class Constants {
 
     // define constants for high, low, and mid rung
     public static final double HIGH_RUNG = 1.92;//192 cm
-    public static final double MID_RUNG = Units.inchesToMeters(24.0);//153 cm
+    public static final double MID_RUNG = Units.inchesToMeters(25.0);//153 cm
     public static final double LOW_RUNG = 1.24;//Top of rung is 124cm    
     
     public static final double ARM_ANGLE_TOLERANCE = Units.degreesToRadians(1.0);
@@ -147,13 +147,13 @@ public final class Constants {
     public static final double ARM_GRAB_THE_BAR = Units.degreesToRadians(90.0);
     public static final double ARM_ROTATION_ELEVATOR_TOUCH_BAR = Units.degreesToRadians(110.0);
 
-    public static final double ARM_CLIMB_BAR_OFFSET = Units.degreesToRadians(130.0);
+    public static final double ARM_CLIMB_BAR_OFFSET = Units.degreesToRadians(120.0);
 
     // the height of the elevator to retract down to certain point where the arm can get to the other side of the bar
-    public static final double ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE = Units.inchesToMeters(5.0);
+    public static final double ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE = Units.inchesToMeters(7.0);
     public static final double ARM_ANGLE_FOR_ELEVATOR_CLEARANCE = Units.degreesToRadians(70.0);
 
-    public static final double ELEVATOR_HEIGHT_SECURE_ON_BAR = Units.inchesToMeters(22.0);
+    public static final double ELEVATOR_HEIGHT_SECURE_ON_BAR = Units.inchesToMeters(20.0);
 
     // Feedforward constants for the each Climber Arm
     public static final double ELEVATOR_KS = 0.182; // TODO: This may need to be tuned
@@ -181,7 +181,7 @@ public final class Constants {
     public static final double ELEVATOR_MAX_ACC_METER_PER_SEC_SQ_DESCEND_SLOW = Units.inchesToMeters(-10.0);
 
     // This is going to be the initial state of the elevators
-    public static final double ELEVATOR_OFFSET_METER = Units.inchesToMeters(2.0);
+    public static final double ELEVATOR_OFFSET_METER = Units.inchesToMeters(1.5);
 
     public static final double ELEVATOR_LIMIT_SWITCH_HEIGHT = Units.inchesToMeters(0.0);
 
@@ -199,7 +199,7 @@ public final class Constants {
     public static final double TURN_TIMEOUT_SECS = 3.0;
 
     public static final double RAISE_TO_BAR_TIMEOUT = 7.0;
-    public static final double CLIMB_TO_NEXT_BAR_TIMEOUT = 12.0;
+    public static final double CLIMB_TO_NEXT_BAR_TIMEOUT = 20.0;
 
     // robot starting distance
     public static final double STARTING_DISTANCE = 74.0;//TARMAC_DEFAULT_DISTANCE - 10.0;

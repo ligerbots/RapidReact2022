@@ -2119,6 +2119,17 @@
               "Colors/Color when true": "#7CFC00FF",
               "Colors/Color when false": "#8B0000FF"
             }
+          },
+          "0,20": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Constants/AdjustRobotAngleTest",
+              "_title": "Constants/AdjustRobotAngleTest"
+            }
           }
         }
       }
@@ -2521,9 +2532,9 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "7,0": {
+          "6,0": {
             "size": [
-              1,
+              2,
               1
             ],
             "content": {
@@ -2534,7 +2545,7 @@
           },
           "8,1": {
             "size": [
-              1,
+              2,
               1
             ],
             "content": {
@@ -2543,9 +2554,9 @@
               "_title": "/SmartDashboard/Constants/SetOneElevatorHeightTest"
             }
           },
-          "7,1": {
+          "6,1": {
             "size": [
-              1,
+              2,
               1
             ],
             "content": {
@@ -2556,7 +2567,7 @@
           },
           "8,0": {
             "size": [
-              1,
+              2,
               1
             ],
             "content": {
