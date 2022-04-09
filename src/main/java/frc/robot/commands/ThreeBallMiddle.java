@@ -31,7 +31,6 @@ import frc.robot.subsystems.Vision;
 public class ThreeBallMiddle extends SequentialCommandGroup implements AutoCommandInterface {
   /** Creates a new ThreeBallLower. */
 
-    static final double DISTANCE_BACK = 1.4;
     Trajectory m_initialTrajectory;
     Trajectory m_finalTrajectory;
     public ThreeBallMiddle(Shooter shooter, Intake intake, DriveTrain driveTrain, Vision vision) {

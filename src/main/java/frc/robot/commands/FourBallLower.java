@@ -33,7 +33,7 @@ import frc.robot.subsystems.Vision;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class FourBallLower extends SequentialCommandGroup implements AutoCommandInterface {
   /** Creates a new FourBallLower. */
-  static final double DISTANCE_BACK = 1.4;  
+
   Trajectory m_trajectory1;
   Trajectory m_trajectory2;
   Trajectory m_trajectory3;
@@ -167,6 +167,7 @@ public class FourBallLower extends SequentialCommandGroup implements AutoCommand
             ramsete1.andThen(() -> driveTrain.tankDriveVolts(0, 0)),
             new IntakeCommand(intake, Constants.INTAKE_SPEED)
         ),
+        // run intake while driving forward to make sure the ball is pulled in
         new ParallelDeadlineGroup(
             ramsete2.andThen(() -> driveTrain.tankDriveVolts(0, 0)),
             new IntakeCommand(intake, Constants.INTAKE_SPEED)
@@ -176,6 +177,7 @@ public class FourBallLower extends SequentialCommandGroup implements AutoCommand
             ramsete3.andThen(() -> driveTrain.tankDriveVolts(0, 0)),
             new IntakeCommand(intake, Constants.INTAKE_SPEED)
         ),
+        // run intake for 1 more second to make sure the ball is pulled in
         ramsete4.andThen(() -> driveTrain.tankDriveVolts(0, 0)).alongWith(new IntakeCommand(intake, Constants.INTAKE_SPEED).withTimeout(1.0)),
         new FaceShootingTarget(driveTrain, vision, Constants.TURN_TOLERANCE_DEG, null),
         new ShooterCommand(shooter, intake, vision, true)
