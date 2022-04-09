@@ -34,8 +34,8 @@ public class Shooter extends SubsystemBase {
     static final TreeMap<Double, ShooterSpeeds> shooterSpeeds = new TreeMap<>(Map.ofEntries(
             Map.entry(0.0, new ShooterSpeeds(900.0, 900.0, Constants.CHUTE_SPEED)),    // actually lower hub, but safer to include
             Map.entry(54.99, new ShooterSpeeds(900.0, 900.0, Constants.CHUTE_SPEED)),   // actually lower hub, but safer to include
-            Map.entry(55.0, new ShooterSpeeds(1400.0, 1650.0, Constants.CHUTE_SPEED)),   // 1450, 1700
-            Map.entry(71.0, new ShooterSpeeds(1450.0, 1700.0, Constants.CHUTE_SPEED)),
+            Map.entry(55.0, new ShooterSpeeds(900.0, 2200.0, 0.3)),   // 1400, 1650
+            Map.entry(71.0, new ShooterSpeeds(1450.0, 1700.0, 0.3)),
             Map.entry(84.0, new ShooterSpeeds(1550.0, 1550.0, Constants.CHUTE_SPEED)),   // 1600
             // 86  1550 1550
             Map.entry(92.0, new ShooterSpeeds(1600.0, 1600.0, Constants.CHUTE_SPEED)),

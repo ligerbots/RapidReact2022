@@ -61,8 +61,8 @@ public class FourBallLower extends SequentialCommandGroup implements AutoCommand
 
         Pose2d initialPose = getInitialPose();
         Pose2d firstShootingPose = FieldInformation.centerAnglePose(Units.inchesToMeters(114.0), Rotation2d.fromDegrees(261));
-        Pose2d invertPose1 = FieldInformation.ballPose(FieldInformation.lowerBlueBall, 2, 10);
-        Pose2d invertPose2 = FieldInformation.ballPosePolar(FieldInformation.cornerBlueBall, 11, 20);
+        Pose2d invertPose1 = FieldInformation.ballPose(FieldInformation.lowerBlueBall, 2, 15);
+        Pose2d invertPose2 = FieldInformation.ballPosePolar(FieldInformation.cornerBlueBall, 8, 20);
         Pose2d finalShootingPose = FieldInformation.ballPose(FieldInformation.middleBlueBall, -5.0, -5.0);
         // Pose2d midPose = new Pose2d(
         //     initialPose.getX() - initialPose.getRotation().getCos() * DISTANCE_BACK, 
@@ -162,18 +162,21 @@ public class FourBallLower extends SequentialCommandGroup implements AutoCommand
     addCommands(
         new DeployIntake(driveTrain),
         // wait for intake to drop
-        new WaitCommand(0.2), 
+        new WaitCommand(0.3), 
         new ParallelDeadlineGroup(
             ramsete1.andThen(() -> driveTrain.tankDriveVolts(0, 0)),
             new IntakeCommand(intake, Constants.INTAKE_SPEED)
         ),
-        ramsete2.andThen(() -> driveTrain.tankDriveVolts(0, 0)),
+        new ParallelDeadlineGroup(
+            ramsete2.andThen(() -> driveTrain.tankDriveVolts(0, 0)),
+            new IntakeCommand(intake, Constants.INTAKE_SPEED)
+        ),
         new ShooterCommand(shooter, intake, vision, true),
         new ParallelDeadlineGroup(
             ramsete3.andThen(() -> driveTrain.tankDriveVolts(0, 0)),
             new IntakeCommand(intake, Constants.INTAKE_SPEED)
         ),
-        ramsete4.andThen(() -> driveTrain.tankDriveVolts(0, 0)),
+        ramsete4.andThen(() -> driveTrain.tankDriveVolts(0, 0)).alongWith(new IntakeCommand(intake, Constants.INTAKE_SPEED).withTimeout(1.0)),
         new FaceShootingTarget(driveTrain, vision, Constants.TURN_TOLERANCE_DEG, null),
         new ShooterCommand(shooter, intake, vision, true)
     );

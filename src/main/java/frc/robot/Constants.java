@@ -37,8 +37,8 @@ public final class Constants {
     
     // more fake values for ramsete
     public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(kTrackwidth);
-    public static final double kMaxSpeed = 2.75;  // billerica change from 1.75
-    public static final double kMaxAcceleration = 1.5;
+    public static final double kMaxSpeed = 3.0;  // billerica change from 1.75
+    public static final double kMaxAcceleration = 2.0;
 
     public static final double kRamseteB = 2; // generic ramsete values
     public static final double kRamseteZeta = 0.7; // generic ramsete values
