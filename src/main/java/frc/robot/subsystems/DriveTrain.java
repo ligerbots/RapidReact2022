@@ -255,15 +255,29 @@ public class DriveTrain extends SubsystemBase {
         return m_fieldSim;
     }
 
-    public void setSetPoint(boolean turnToLeft, TrapezoidProfile.State setPoint) {
+    public double disToTurn(double angle){
+        // calculate the distance one side of the wheels need to turn to get to the desired angle
+        return Constants.kTrackwidth*Math.PI*(angle / (2*Math.PI));
+    }
+
+    public void setSetPoint(boolean turnToLeft, TrapezoidProfile.State setPoint, double startDisLeft, double startDisRight) {
         // if turn to left, let the right motor drive, and vice versa
-        if(turnToLeft)
-            m_rightLeader.set(ControlMode.Position, setPoint.position);
-        else
-            m_leftLeader.set(ControlMode.Position, setPoint.position);
-        
-        SmartDashboard.putBoolean("DriveTrain/turnToLeft", turnToLeft);
-        SmartDashboard.putNumber("DriveTrain/setPoint", Units.metersToInches(setPoint.position));
+        if(turnToLeft){
+            // have the right side go forward and left side backward to turn the robot to the left
+            m_leftLeader.set(ControlMode.Position, startDisLeft - setPoint.position);
+            m_rightLeader.set(ControlMode.Position, startDisRight + setPoint.position);
+
+            SmartDashboard.putNumber("DriveTrain/setPointLeft", Units.metersToInches(startDisLeft - setPoint.position));
+            SmartDashboard.putNumber("DriveTrain/setPointRight", Units.metersToInches(startDisRight + setPoint.position));
+        }else{
+            // have the left side go forward and right side backward to turn the robot to the right
+            m_leftLeader.set(ControlMode.Position, startDisLeft + setPoint.position);
+            m_rightLeader.set(ControlMode.Position, startDisRight - setPoint.position);
+
+            SmartDashboard.putNumber("DriveTrain/setPointLeft", Units.metersToInches(startDisLeft + setPoint.position));
+            SmartDashboard.putNumber("DriveTrain/setPointRight", Units.metersToInches(startDisRight - setPoint.position));
+        }
+        SmartDashboard.putBoolean("DriveTrain/turnToLeft", turnToLeft);        
       }
 
     public double turnSpeedCalc(double angleError) {

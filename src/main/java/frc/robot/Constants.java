@@ -73,7 +73,7 @@ public final class Constants {
     public static final int LIMIT_SWITCH_ONE = 4; // Limit Switch 1
     public static final int LIMIT_SWITCH_TWO = 5; // Limit Switch 2
 
-    // TODO: tune this
+    // TODO: waited to be tuned
     public static final double DRIVETRAIN_MAX_VEL_METER_PER_SEC = Units.inchesToMeters(50.0);
     public static final double DRIVETRAIN_MAX_ACC_METER_PER_SEC_SQ = Units.inchesToMeters(10.0);
 
