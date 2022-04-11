@@ -55,8 +55,8 @@ public class ThreeBallMiddle extends SequentialCommandGroup implements AutoComma
             .setReversed(false);
 
         Pose2d initialPose = getInitialPose();
-        Pose2d cornerPose = FieldInformation.ballPosePolar(FieldInformation.cornerBlueBall, 11, 20);
-        Pose2d finalPose = FieldInformation.middleBlueBall;
+        Pose2d cornerPose = FieldInformation.ballPosePolar(FieldInformation.cornerBlueBall, 8, 20);
+        Pose2d finalPose = FieldInformation.ballPose(FieldInformation.middleBlueBall, -5.0, -5.0);
         // Pose2d midPose = new Pose2d(
         //     initialPose.getX() - initialPose.getRotation().getCos() * DISTANCE_BACK, 
         //     initialPose.getY() - initialPose.getRotation().getSin() * DISTANCE_BACK, 
@@ -115,10 +115,7 @@ public class ThreeBallMiddle extends SequentialCommandGroup implements AutoComma
                 ramsete1.andThen(() -> driveTrain.tankDriveVolts(0, 0)),
                 new IntakeCommand(intake, Constants.INTAKE_SPEED)
             ),
-            new ParallelDeadlineGroup(
-                ramsete2.andThen(() -> driveTrain.tankDriveVolts(0, 0)),
-                new IntakeCommand(intake, Constants.INTAKE_SPEED)
-            ),
+            ramsete2.andThen(() -> driveTrain.tankDriveVolts(0, 0)).alongWith(new IntakeCommand(intake, Constants.INTAKE_SPEED).withTimeout(1.0)),
             new TurnAndShoot(shooter, intake, driveTrain, vision, null)
         );
     }
