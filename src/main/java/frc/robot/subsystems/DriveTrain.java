@@ -263,22 +263,22 @@ public class DriveTrain extends SubsystemBase {
     public void setSetPoint(boolean turnToLeft, TrapezoidProfile.State setPoint, double startDisLeft, double startDisRight) {
         // if turn to left, let the right motor drive, and vice versa
         if(turnToLeft){
-            // have the right side go forward and left side backward to turn the robot to the left
-            m_leftLeader.set(ControlMode.Position, startDisLeft - setPoint.position);
-            m_rightLeader.set(ControlMode.Position, startDisRight + setPoint.position);
-
-            SmartDashboard.putNumber("DriveTrain/setPointLeft", Units.metersToInches(startDisLeft - setPoint.position));
-            SmartDashboard.putNumber("DriveTrain/setPointRight", Units.metersToInches(startDisRight + setPoint.position));
-        }else{
             // have the left side go forward and right side backward to turn the robot to the right
             m_leftLeader.set(ControlMode.Position, startDisLeft + setPoint.position);
             m_rightLeader.set(ControlMode.Position, startDisRight - setPoint.position);
 
             SmartDashboard.putNumber("DriveTrain/setPointLeft", Units.metersToInches(startDisLeft + setPoint.position));
             SmartDashboard.putNumber("DriveTrain/setPointRight", Units.metersToInches(startDisRight - setPoint.position));
+        }else{
+            // have the right side go forward and left side backward to turn the robot to the left
+            m_leftLeader.set(ControlMode.Position, startDisLeft - setPoint.position);
+            m_rightLeader.set(ControlMode.Position, startDisRight + setPoint.position);
+
+            SmartDashboard.putNumber("DriveTrain/setPointLeft", Units.metersToInches(startDisLeft - setPoint.position));
+            SmartDashboard.putNumber("DriveTrain/setPointRight", Units.metersToInches(startDisRight + setPoint.position));
         }
         SmartDashboard.putBoolean("DriveTrain/turnToLeft", turnToLeft);        
-      }
+    }
 
     public double turnSpeedCalc(double angleError) {
         double absErr = Math.abs(angleError);

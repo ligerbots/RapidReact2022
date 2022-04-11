@@ -23,6 +23,7 @@ public class AdjustRobotAngleTest extends InstantCommand {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    CommandScheduler.getInstance().schedule(new AdjustRobotAngle(m_driveTrain, Units.degreesToRadians(SmartDashboard.getNumber("Constants/AdjustRobotAngleTest", 0.0))));
+    double angleToTurn = Units.degreesToRadians(m_driveTrain.getHeading() - SmartDashboard.getNumber("Constants/AdjustRobotAngleTest", 0.0));
+    CommandScheduler.getInstance().schedule(new AdjustRobotAngle(m_driveTrain, angleToTurn));
   }
 }
