@@ -38,8 +38,8 @@ public final class Constants {
     
     // more fake values for ramsete
     public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(kTrackwidth);
-    public static final double kMaxSpeed = 1.75;
-    public static final double kMaxAcceleration = 1.5;
+    public static final double kMaxSpeed = 3.0;  // billerica change from 1.75
+    public static final double kMaxAcceleration = 2.0;
 
     public static final double kRamseteB = 2; // generic ramsete values
     public static final double kRamseteZeta = 0.7; // generic ramsete values
@@ -99,10 +99,33 @@ public final class Constants {
     public static final double SHOOT_BALL1_WAIT_TIME = 0.5;
     // amount of time to shoot the second ball
     public static final double SHOOT_BALL2_WAIT_TIME = 0.75;
-    
-    public static final double TARMAC_DEFAULT_DISTANCE = 94.0;//12.0 * 7.0;  // 9ft minus hub radius
 
-    // chute subsystem
+    //
+    // Various constants used for shooting
+    //
+
+    // The shooting mechanism is about 24" from the edge of the robot, including bumper
+    // We therefore subtract SHOOTER_POS from all shooting distance constants
+    public static final double SHOOTER_POS = 24;
+    
+    // Our usual "Tarmac" shot 
+    public static final double TARMAC_DEFAULT_DISTANCE = 94.0;
+    
+    // distance from the edge of the field by the human shooting position
+    public static final double JUST_OUTSIDE_TARMAC = (12.0 * 11.5) - SHOOTER_POS;
+    
+    // distance from the near side launchpad to the center hub
+    public static final double CLOSE_LAUNCHPAD_SHOOTER_DISTANCE = 202.95 - SHOOTER_POS;
+    
+    // distance from the far side launchpad to the center hub
+    public static final double FAR_LAUNCHPAD_SHOOTER_DISTANCE = 244.77 - SHOOTER_POS;
+
+    //
+
+    public static final double CHUTE_SPEED = 0.4;
+    //
+
+    // Chute subsystem
     public static final int CHUTE_CAN_ID = 6; 
 
     // define constants for high, low, and mid rung
@@ -202,8 +225,9 @@ public final class Constants {
     public static final double CLIMB_TO_NEXT_BAR_TIMEOUT = 20.0;
 
     // robot starting distance
-    public static final double STARTING_DISTANCE = 74.0;//TARMAC_DEFAULT_DISTANCE - 10.0;
-
+    // this used to be TARMAC_DEFAULT_DISTANCE - 10.0, but adjusted to be closer at Revere
+    public static final double STARTING_DISTANCE = 74.0;
+   
     // Xbox button mapping
     public static final int XBOX_A = 1;
     public static final int XBOX_B = 2;

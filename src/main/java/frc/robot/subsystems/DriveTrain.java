@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.TalonFXSimCollection;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.hal.SimDouble;
 import edu.wpi.first.math.geometry.Pose2d;
@@ -35,6 +36,8 @@ public class DriveTrain extends SubsystemBase {
     private WPI_TalonFX m_rightLeader = new WPI_TalonFX(Constants.LEADER_RIGHT_CAN_ID);
     private WPI_TalonFX m_rightFollower = new WPI_TalonFX(Constants.FOLLOWER_RIGHT_CAN_ID);
 
+    private TalonFXSimCollection m_leftLeader_sim;
+    private TalonFXSimCollection m_rightLeader_sim;
     private final MotorControllerGroup m_leftMotors = new MotorControllerGroup(m_leftLeader, m_leftFollower);
     private final MotorControllerGroup m_rightMotors = new MotorControllerGroup(m_rightLeader, m_rightFollower);
 
@@ -97,7 +100,9 @@ public class DriveTrain extends SubsystemBase {
                     Constants.kWheelDiameterMeters / 2.0,
                     null);
 
-            // m_leftEncoderSim = new EncoderSim(m_leftEncoder);
+            m_leftLeader_sim = m_leftLeader.getSimCollection();
+            m_rightLeader_sim = m_rightLeader.getSimCollection();
+                    // m_leftEncoderSim = new EncoderSim(m_leftEncoder);
             // m_rightEncoderSim = new EncoderSim(m_rightEncoder);
             m_gyroAngleSim = new SimDeviceSim("navX-Sensor[0]").getDouble("Yaw");
 
@@ -247,6 +252,13 @@ public class DriveTrain extends SubsystemBase {
         m_rightEncoderSim.setDistance(m_differentialDriveSim.getRightPositionMeters());
         m_rightEncoderSim.setRate(m_differentialDriveSim.getRightVelocityMetersPerSecond());
         */
+
+        m_leftLeader_sim.setIntegratedSensorRawPosition((int) (m_differentialDriveSim.getLeftPositionMeters() / Constants.DRIVE_FALCON_DISTANCE_PER_UNIT));
+        m_leftLeader_sim.setIntegratedSensorVelocity((int) (m_differentialDriveSim.getLeftVelocityMetersPerSecond() / Constants.DRIVE_FALCON_DISTANCE_PER_UNIT / 10.0));
+
+        m_rightLeader_sim.setIntegratedSensorRawPosition( - (int) (m_differentialDriveSim.getRightPositionMeters() / Constants.DRIVE_FALCON_DISTANCE_PER_UNIT));
+        m_rightLeader_sim.setIntegratedSensorVelocity( - (int) (m_differentialDriveSim.getRightVelocityMetersPerSecond() / Constants.DRIVE_FALCON_DISTANCE_PER_UNIT / 10.0));
+
         m_gyroAngleSim.set(-m_differentialDriveSim.getHeading().getDegrees());
         m_fieldSim.setRobotPose(m_odometry.getPoseMeters());
     }
