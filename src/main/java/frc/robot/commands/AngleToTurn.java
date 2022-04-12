@@ -46,6 +46,8 @@ public class AngleToTurn extends CommandBase {
 
     m_vision.setMode(Vision.VisionMode.HUBFINDER);
 
+    m_turnCommand = null;
+
     m_targetAcquired = false;
     m_onTarget = false;
     m_startTime = LigerTimer.time();
@@ -83,7 +85,7 @@ public class AngleToTurn extends CommandBase {
   @Override
   public boolean isFinished() {
       return m_onTarget 
-        || m_turnCommand.isFinished() 
+        || (m_turnCommand != null && m_turnCommand.isFinished())
         || LigerTimer.time() - m_startTime > 3.0;
   }
 }
