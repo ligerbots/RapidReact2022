@@ -24,7 +24,7 @@ import frc.robot.subsystems.Vision;
 public class TwoBallAutoStraight extends SequentialCommandGroup implements AutoCommandInterface {
     static final double DISTANCE_BACK = 1.4;
     Trajectory m_trajectory;
-    public TwoBallAutoStraight(Shooter shooter, Intake intake, DriveTrain driveTrain, Vision vision, DriveCommand driveCommand) {
+    public TwoBallAutoStraight(Shooter shooter, Intake intake, DriveTrain driveTrain, Vision vision) {
         var autoVoltageConstraint =
         new DifferentialDriveVoltageConstraint(
             new SimpleMotorFeedforward(Constants.ksVolts,

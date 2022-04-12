@@ -22,7 +22,7 @@ import frc.robot.subsystems.Vision;
 
 public class TwoBallAutoCurved extends SequentialCommandGroup implements AutoCommandInterface {
     Trajectory m_trajectory;
-    public TwoBallAutoCurved(Shooter shooter, Intake intake, DriveTrain driveTrain, Vision vision, DriveCommand driveCommand) {
+    public TwoBallAutoCurved(Shooter shooter, Intake intake, DriveTrain driveTrain, Vision vision) {
         var autoVoltageConstraint =
         new DifferentialDriveVoltageConstraint(
             new SimpleMotorFeedforward(Constants.ksVolts,
