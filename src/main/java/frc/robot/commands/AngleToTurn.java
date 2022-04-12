@@ -58,6 +58,7 @@ public class AngleToTurn extends CommandBase {
   public void execute() {
       if (m_targetAcquired) {
         // flip the sign TODO: test it
+        if(m_turnCommand.isScheduled()) return ;
         m_turnCommand = new AdjustRobotAngle(m_robotDrive, -m_headingError);
         CommandScheduler.getInstance().schedule(m_turnCommand);
       } else if (m_vision.getStatus() && m_vision.getDistance() > 1.0 && m_waitLED.hasElapsed()) {
