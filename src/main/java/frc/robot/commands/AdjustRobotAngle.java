@@ -46,11 +46,13 @@ public class AdjustRobotAngle extends CommandBase {
           new TrapezoidProfile.State(0.0, 0)),
       state -> m_driveTrain.setSetPoint(m_angleToTurn < 0, state, startDisLeft, startDisRight));
 
+      System.out.println("=================AdjustRobotAngle Executed=========================");
+
       CommandScheduler.getInstance().schedule(m_command);
   }
 
   @Override
   public boolean isFinished() {
-    return m_command.isFinished();
+    return m_command != null && m_command.isFinished();
   }
 }

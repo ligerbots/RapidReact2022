@@ -14,9 +14,9 @@ public class TurnAndShoot extends SequentialCommandGroup {
             // new TurnTowardsHub(driveTrain, vision).withTimeout(Constants.TURN_TIMEOUT_SECS),
             
             // TODO: test this
-            new AngleToTurn(driveTrain, vision, Constants.TURN_TOLERANCE_DEG, driveCommand),
+            // new AngleToTurn(driveTrain, vision, Constants.TURN_TOLERANCE_DEG, driveCommand),
 
-            // new FaceShootingTarget(driveTrain, vision, Constants.TURN_TOLERANCE_DEG, driveCommand),
+            new FaceShootingTarget(driveTrain, vision, Constants.TURN_TOLERANCE_DEG, driveCommand),
 
             new ShooterCommand(shooter, intake, vision, true)
         );

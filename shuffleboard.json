@@ -2130,6 +2130,30 @@
               "_source0": "network_table:///SmartDashboard/Constants/AdjustRobotAngleTest",
               "_title": "Constants/AdjustRobotAngleTest"
             }
+          },
+          "2,20": {
+            "size": [
+              2,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/m_targetAcquired",
+              "_title": "m_targetAcquired",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "10,20": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/m_headingError",
+              "_title": "m_headingError"
+            }
           }
         }
       }
@@ -2601,6 +2625,30 @@
               "Colors/Color when true": "#7CFC00FF",
               "Colors/Color when false": "#8B0000FF"
             }
+          },
+          "3,4": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/m_headingError",
+              "_title": "/SmartDashboard/m_headingError"
+            }
+          },
+          "4,4": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/m_targetAcquired",
+              "_title": "/SmartDashboard/m_targetAcquired",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
           }
         }
       }
@@ -2644,6 +2692,30 @@
               "_type": "Toggle Button",
               "_source0": "network_table:///SmartDashboard/vision/write_images",
               "_title": "/SmartDashboard/vision/write_images"
+            }
+          },
+          "3,2": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/m_targetAcquired",
+              "_title": "/SmartDashboard/m_targetAcquired",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "3,3": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/m_headingError",
+              "_title": "/SmartDashboard/m_headingError"
             }
           }
         }

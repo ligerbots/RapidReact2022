@@ -7,6 +7,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -56,6 +57,8 @@ public class AngleToTurn extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    SmartDashboard.putBoolean("m_targetAcquired", m_targetAcquired);
+    SmartDashboard.putNumber("m_headingError", m_headingError);
       if (m_targetAcquired) {
         // flip the sign TODO: test it
         if(m_turnCommand != null && m_turnCommand.isScheduled()) return ;

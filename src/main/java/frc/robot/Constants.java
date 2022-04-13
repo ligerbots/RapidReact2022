@@ -173,7 +173,7 @@ public final class Constants {
     public static final double ARM_CLIMB_BAR_OFFSET = Units.degreesToRadians(120.0);
 
     // the height of the elevator to retract down to certain point where the arm can get to the other side of the bar
-    public static final double ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE = Units.inchesToMeters(7.0);
+    public static final double ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE = Units.inchesToMeters(5.5);
     public static final double ARM_ANGLE_FOR_ELEVATOR_CLEARANCE = Units.degreesToRadians(70.0);
 
     public static final double ELEVATOR_HEIGHT_SECURE_ON_BAR = Units.inchesToMeters(20.0);
