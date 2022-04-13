@@ -56,6 +56,6 @@ public class SetElevatorHeight extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    return m_command.isFinished();
+    return m_command != null && m_command.isFinished();
   }
 }
