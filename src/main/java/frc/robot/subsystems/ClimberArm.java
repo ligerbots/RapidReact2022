@@ -30,9 +30,6 @@ public class ClimberArm extends TrapezoidProfileSubsystem {
   private double m_kPArm = Constants.ARM_K_P;
   private int m_index;
 
-  private boolean m_tooFarForward = false;
-  private boolean m_tooFarBack = false;
-
   private boolean m_coastMode = false;
 
   private boolean m_resetArmPos = false;

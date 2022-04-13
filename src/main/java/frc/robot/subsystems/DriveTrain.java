@@ -1,5 +1,7 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.TalonFXSimCollection;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
@@ -8,6 +10,8 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
+import edu.wpi.first.math.trajectory.TrapezoidProfile;
+import edu.wpi.first.math.util.Units;
 // import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.RobotController;
@@ -53,9 +57,29 @@ public class DriveTrain extends SubsystemBase {
     private AHRS m_navX;
 
     public DriveTrain() {
+        // setup PID control for TalonFX
+        m_leftLeader.configFactoryDefault();
+        m_leftLeader.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 0);
+        m_leftLeader.set(ControlMode.Position,0);
+        m_leftLeader.config_kP(0, Constants.DRIVETRAIN_KP);
+        m_leftLeader.config_kI(0, Constants.DRIVETRAIN_KI);
+        m_leftLeader.config_kD(0, Constants.DRIVETRAIN_KD);
+        m_leftLeader.config_kF(0, Constants.DRIVETRAIN_KF);
+        m_leftLeader.setSensorPhase(false);
+
+        m_rightLeader.configFactoryDefault();
+        m_rightLeader.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 0);
+        m_rightLeader.set(ControlMode.Position,0);
+        m_rightLeader.config_kP(0, Constants.DRIVETRAIN_KP);
+        m_rightLeader.config_kI(0, Constants.DRIVETRAIN_KI);
+        m_rightLeader.config_kD(0, Constants.DRIVETRAIN_KD);
+        m_rightLeader.config_kF(0, Constants.DRIVETRAIN_KF);
+        m_rightLeader.setSensorPhase(true);
+        
+        m_rightMotors.setInverted(true);
         setMotorMode(NeutralMode.Coast);
     
-        m_rightMotors.setInverted(true);
+       
         m_differentialDrive = new DifferentialDrive(m_leftMotors, m_rightMotors);
         m_differentialDrive.setSafetyEnabled(false);
 
@@ -241,6 +265,31 @@ public class DriveTrain extends SubsystemBase {
 
     public Field2d getField2d() {
         return m_fieldSim;
+    }
+
+    public double disToTurn(double angle){
+        // calculate the distance one side of the wheels need to turn to get to the desired angle
+        return Constants.kTrackwidth*Math.PI*(angle / (2*Math.PI));
+    }
+
+    public void setSetPoint(boolean turnToLeft, TrapezoidProfile.State setPoint, double startDisLeft, double startDisRight) {
+        // if turn to left, let the right motor drive, and vice versa
+        if(turnToLeft){
+            // have the left side go forward and right side backward to turn the robot to the right
+            m_leftLeader.set(ControlMode.Position, startDisLeft + setPoint.position);
+            m_rightLeader.set(ControlMode.Position, startDisRight - setPoint.position);
+
+            SmartDashboard.putNumber("DriveTrain/setPointLeft", Units.metersToInches(startDisLeft + setPoint.position));
+            SmartDashboard.putNumber("DriveTrain/setPointRight", Units.metersToInches(startDisRight - setPoint.position));
+        }else{
+            // have the right side go forward and left side backward to turn the robot to the left
+            m_leftLeader.set(ControlMode.Position, startDisLeft - setPoint.position);
+            m_rightLeader.set(ControlMode.Position, startDisRight + setPoint.position);
+
+            SmartDashboard.putNumber("DriveTrain/setPointLeft", Units.metersToInches(startDisLeft - setPoint.position));
+            SmartDashboard.putNumber("DriveTrain/setPointRight", Units.metersToInches(startDisRight + setPoint.position));
+        }
+        SmartDashboard.putBoolean("DriveTrain/turnToLeft", turnToLeft);        
     }
 
     public double turnSpeedCalc(double angleError) {

@@ -8,23 +8,22 @@ import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import frc.robot.subsystems.Climber;
+import frc.robot.subsystems.DriveTrain;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class SetOneElevatorHeightTest extends InstantCommand {
-  Climber m_climber;
-  public SetOneElevatorHeightTest(Climber climber) {
+public class AdjustRobotAngleTest extends InstantCommand {
+  DriveTrain m_driveTrain;
+  public AdjustRobotAngleTest(DriveTrain driveTrain) {
     // Use addRequirements() here to declare subsystem dependencies.
-    m_climber = climber;
+    m_driveTrain = driveTrain;
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    CommandScheduler.getInstance().schedule(new SetOneElevatorHeight(m_climber,
-     Units.inchesToMeters(SmartDashboard.getNumber("Constants/SetOneElevatorHeightTest", 0.0)), 
-     (int) SmartDashboard.getNumber("Constants/OneElevatorIndex", 0.0)));
+    double angleToTurn = Units.degreesToRadians(m_driveTrain.getHeading() - SmartDashboard.getNumber("Constants/AdjustRobotAngleTest", 0.0));
+    CommandScheduler.getInstance().schedule(new AdjustRobotAngle(m_driveTrain, angleToTurn));
   }
 }

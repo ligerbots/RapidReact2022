@@ -11,10 +11,10 @@ import frc.robot.subsystems.Climber;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class SetClimber extends SequentialCommandGroup {
+public class ResetClimber extends SequentialCommandGroup {
   Climber m_climber;
   /** Creates a new SetClimber. */
-  public SetClimber(Climber climber) {
+  public ResetClimber(Climber climber) {
     m_climber = climber;
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
@@ -22,12 +22,11 @@ public class SetClimber extends SequentialCommandGroup {
     // set the finished boolean to false
     new CommandFinished(false),
 
-    // lower the elevators to get unlatched
-    new SetElevatorHeight(m_climber, Constants.ELEVATOR_MIN_HEIGHT),
+    // let the elevator goes all the way down to get resetted
+    new DescendElevatorToLimitSwitch(m_climber),
     
-    // rotates arm to leave spaces for the elevator to raise up
-    new SetArmAngle(m_climber, Constants.ARM_ANGLE_FOR_ELEVATOR_CLEARANCE).alongWith(new SetElevatorHeight(m_climber, Constants.MID_RUNG, 
-            Constants.ELEVATOR_MAX_VEL_METER_PER_SEC_ASCEND, Constants.ELEVATOR_MAX_ACC_METER_PER_SEC_SQ_ASCEND)),
+    // ready the arm and elevators to be latched
+    new SetArmAngle(m_climber, Constants.ARM_OFFSET_RAD).alongWith(new SetElevatorHeight(m_climber, Constants.ELEVATOR_OFFSET_METER)),
 
     // set the finished boolean to true
     new CommandFinished(true));

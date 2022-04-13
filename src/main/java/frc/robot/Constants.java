@@ -1,3 +1,4 @@
+
 package frc.robot;
 
 import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
@@ -58,6 +59,8 @@ public final class Constants {
     // Following four CAN IDs are for the climber subsystem
     public static final int[] ELEVATOR_CAN_IDS = new int[] {1,2}; //{1,2};
     public static final int[] ARM_CAN_IDS = new int[] {7,10}; //{7,10};
+    // public static final int[] ELEVATOR_CAN_IDS = new int[] {7,10}; // PROTOTYPE
+    // public static final int[] ARM_CAN_IDS = new int[] {2,1}; // PROTOTYPE
     
     // intake subsystem
     public static final int INTAKE_MOTOR_CAN_ID = 5; 
@@ -69,6 +72,15 @@ public final class Constants {
     public static final int[] RIGHT_ENCODER_PORTS = new int[]{2, 3};
     public static final int LIMIT_SWITCH_ONE = 4; // Limit Switch 1
     public static final int LIMIT_SWITCH_TWO = 5; // Limit Switch 2
+
+    // TODO: waited to be tuned
+    public static final double DRIVETRAIN_MAX_VEL_METER_PER_SEC = Units.inchesToMeters(50.0);
+    public static final double DRIVETRAIN_MAX_ACC_METER_PER_SEC_SQ = Units.inchesToMeters(10.0);
+
+    public static final double DRIVETRAIN_KP = 50.0; // waited to be tuned
+    public static final double DRIVETRAIN_KI = 0.0;
+    public static final double DRIVETRAIN_KD = 0.0; 
+    public static final double DRIVETRAIN_KF = 0.0;
 
     // Following two CAN IDs are for the shooter subsystem
     public static final int TOP_SHOOTER_CAN_ID = 3; 
@@ -92,21 +104,21 @@ public final class Constants {
     // Various constants used for shooting
     //
 
-    // The shooting mechanism is about 24" from the edge of the robot, including bumper
-    // We therefore subtract SHOOTER_POS from all shooting distance constants
-    public static final double SHOOTER_POS = 24;
+    // Distance are between the camera and the *edge* of the Hub
+    // We therefore subtract HUB_RADIUS from all shooting distance constants
+    public static final double HUB_RADIUS = 24;
     
     // Our usual "Tarmac" shot 
     public static final double TARMAC_DEFAULT_DISTANCE = 94.0;
     
     // distance from the edge of the field by the human shooting position
-    public static final double JUST_OUTSIDE_TARMAC = (12.0 * 11.5) - SHOOTER_POS;
+    public static final double JUST_OUTSIDE_TARMAC = (12.0 * 11.5) - HUB_RADIUS;
     
     // distance from the near side launchpad to the center hub
-    public static final double CLOSE_LAUNCHPAD_SHOOTER_DISTANCE = 202.95 - SHOOTER_POS;
+    public static final double CLOSE_LAUNCHPAD_SHOOTER_DISTANCE = 202.95 - HUB_RADIUS;
     
     // distance from the far side launchpad to the center hub
-    public static final double FAR_LAUNCHPAD_SHOOTER_DISTANCE = 244.77 - SHOOTER_POS;
+    public static final double FAR_LAUNCHPAD_SHOOTER_DISTANCE = 244.77 - HUB_RADIUS;
 
     //
 
@@ -118,14 +130,12 @@ public final class Constants {
 
     // define constants for high, low, and mid rung
     public static final double HIGH_RUNG = 1.92;//192 cm
-    public static final double MID_RUNG = Units.inchesToMeters(23.0);//153 cm
+    public static final double MID_RUNG = Units.inchesToMeters(25.0);//153 cm
     public static final double LOW_RUNG = 1.24;//Top of rung is 124cm    
     
-    public static final double ELEVATOR_HEIGHT_TOLERANCE = Units.inchesToMeters(0.1);//tolerance for elevator
-    public static final double ELEVATOR_HEIGHT_LOOSE_TOLERANCE = Units.inchesToMeters(0.5);//tolerance for elevator
     public static final double ARM_ANGLE_TOLERANCE = Units.degreesToRadians(1.0);
     
-    public static final double ELEVATOR_MAX_HEIGHT = Units.inchesToMeters(25.0);// 23.5in = length of elevator when fully extended
+    public static final double ELEVATOR_MAX_HEIGHT = Units.inchesToMeters(26.3);// 23.5in = length of elevator when fully extended PROTOTYPE
     public static final double ELEVATOR_MIN_HEIGHT = Units.inchesToMeters(0.0);// 0in = length of elevator when fully retracted
     // right elevator 0 to -21.5
     
@@ -149,7 +159,6 @@ public final class Constants {
     public static final double ARM_K_FF = 0.0;
 
     // Limit the arm rotation
-    // TODO: This is relative to 0 starting position. Need to use absolute encoder and get better values
     public static final double ARM_MAX_ANGLE = Units.degreesToRadians(160.0);
     public static final double ARM_MIN_ANGLE = Units.degreesToRadians(20.0);
 
@@ -161,13 +170,13 @@ public final class Constants {
     public static final double ARM_GRAB_THE_BAR = Units.degreesToRadians(90.0);
     public static final double ARM_ROTATION_ELEVATOR_TOUCH_BAR = Units.degreesToRadians(110.0);
 
-    public static final double ARM_CLIMB_BAR_OFFSET = Units.degreesToRadians(130.0);
+    public static final double ARM_CLIMB_BAR_OFFSET = Units.degreesToRadians(120.0);
 
     // the height of the elevator to retract down to certain point where the arm can get to the other side of the bar
-    public static final double ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE = Units.inchesToMeters(5.0);
+    public static final double ELEVATOR_HEIGHT_FOR_ARM_CLEARANCE = Units.inchesToMeters(5.5);
     public static final double ARM_ANGLE_FOR_ELEVATOR_CLEARANCE = Units.degreesToRadians(70.0);
 
-    public static final double ELEVATOR_HEIGHT_SECURE_ON_BAR = Units.inchesToMeters(22.0);
+    public static final double ELEVATOR_HEIGHT_SECURE_ON_BAR = Units.inchesToMeters(20.0);
 
     // Feedforward constants for the each Climber Arm
     public static final double ELEVATOR_KS = 0.182; // TODO: This may need to be tuned
@@ -183,13 +192,21 @@ public final class Constants {
 
     public static final double ELEVATOR_MAX_VEL_METER_PER_SEC_DESCEND = Units.inchesToMeters(100.0);
     public static final double ELEVATOR_MAX_ACC_METER_PER_SEC_SQ_DESCEND = Units.inchesToMeters(30.0);
-    public static final double ELEVATOR_OFFSET_METER = Units.inchesToMeters(2.0);
 
-    public static final double ELEVATOR_LIMIT_SWITCH_HEIGHT = Units.inchesToMeters(-0.15);
+    public static final double ELEVATOR_MAX_VEL_METER_PER_SEC_NORMAL = Units.inchesToMeters(50.0);
+    public static final double ELEVATOR_MAX_ACC_METER_PER_SEC_SQ_NORMAL = Units.inchesToMeters(10.0);
 
-    public static final double ELEVATOR_START_LATCH_HEIGHT = Units.inchesToMeters(0.5);
+    public static final double ELEVATOR_MAX_VEL_METER_PER_SEC_ASCEND_SLOW = Units.inchesToMeters(1000.0);
+    public static final double ELEVATOR_MAX_ACC_METER_PER_SEC_SQ_ASCEND_SLOW = Units.inchesToMeters(62.5);
 
-    public static final double ELEVATOR_CHECKING_LIMIT_SWITCH_HEIGHT = Units.inchesToMeters(2.0);
+    // TODO: check if it is correct and safe
+    public static final double ELEVATOR_MAX_VEL_METER_PER_SEC_DESCEND_SLOW = Units.inchesToMeters(-1000000.0);
+    public static final double ELEVATOR_MAX_ACC_METER_PER_SEC_SQ_DESCEND_SLOW = Units.inchesToMeters(-10.0);
+
+    // This is going to be the initial state of the elevators
+    public static final double ELEVATOR_OFFSET_METER = Units.inchesToMeters(1.5);
+
+    public static final double ELEVATOR_LIMIT_SWITCH_HEIGHT = Units.inchesToMeters(0.0);
 
     // PID Constants for the Arm PID controller
     // Since we're using Trapeziodal control, all values will be 0 except for P
@@ -205,7 +222,7 @@ public final class Constants {
     public static final double TURN_TIMEOUT_SECS = 3.0;
 
     public static final double RAISE_TO_BAR_TIMEOUT = 7.0;
-    public static final double CLIMB_TO_NEXT_BAR_TIMEOUT = 12.0;
+    public static final double CLIMB_TO_NEXT_BAR_TIMEOUT = 20.0;
 
     // robot starting distance
     // this used to be TARMAC_DEFAULT_DISTANCE - 10.0, but adjusted to be closer at Revere

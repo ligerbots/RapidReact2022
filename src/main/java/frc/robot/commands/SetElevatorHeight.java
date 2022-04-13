@@ -4,128 +4,58 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.math.util.Units;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.math.trajectory.TrapezoidProfile;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.TrapezoidProfileCommand;
 import frc.robot.Constants;
 import frc.robot.subsystems.Climber;
 
+// NOTE:  Consider using this command inline, rather than writing a subclass.  For more
+// information, see:
+// https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class SetElevatorHeight extends CommandBase {
-  /** Creates a new SetElevatorHeight. */
   Climber m_climber;
-  double[] m_height;
-  double m_tolerance;
+  double m_height;
 
-  // flag to identify if we're going to Zero
-  boolean m_goingToZero;
+  double m_maxVel;
+  double m_maxAcc;
 
-  // Did we hit the limit switch?
-  boolean[] m_hitLimitSwitch;
-  boolean[] m_limitSwitchAlreadyPressed;
+  Command m_command;
 
-  boolean[] m_ressetEncoder;
-
-  // Constructor with default tolerance
   public SetElevatorHeight(Climber climber, double height) {
-    this(climber, height, Constants.ELEVATOR_HEIGHT_TOLERANCE);
+    this(climber, height, Constants.ELEVATOR_MAX_VEL_METER_PER_SEC_DESCEND,
+        Constants.ELEVATOR_MAX_ACC_METER_PER_SEC_SQ_DESCEND);
   }
 
-  public SetElevatorHeight(Climber climber, double height, double tolerance) {
-    // Use addRequirements() here to declare subsystem dependencies.
+  public SetElevatorHeight(Climber climber, double height, final double MAX_VEL_METER_PER_SEC,
+      final double MAX_ACC_METER_PER_SEC) {
+    m_maxAcc = MAX_ACC_METER_PER_SEC;
+    m_maxVel = MAX_VEL_METER_PER_SEC;
     m_climber = climber;
-    m_height = new double[2];
-    m_ressetEncoder = new boolean[2];
-    m_height[0] = height;
-    m_height[1] = height;
-    m_tolerance = tolerance;
-
-    m_goingToZero = (height == Constants.ELEVATOR_MIN_HEIGHT);
-    m_hitLimitSwitch = new boolean[2];
-    m_limitSwitchAlreadyPressed = new boolean[2];
+    m_height = height;
   }
 
-  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    // Initialize each height
-    m_hitLimitSwitch[0] = false;
-    m_hitLimitSwitch[1] = false;
-    m_ressetEncoder[0] = false;
-    m_ressetEncoder[1] = false;
-    m_climber.setElevatorHeight(0, m_height[0]);
-    m_climber.setElevatorHeight(1, m_height[1]);
+    m_command = new TrapezoidProfileCommand(new TrapezoidProfile(
+        // Limit the max acceleration and velocity
+        new TrapezoidProfile.Constraints(
+            m_maxVel,
+            m_maxAcc),
+        // End at desired position in meters; implicitly starts at 0
+        new TrapezoidProfile.State(m_height, 0),
+        // initial position state
+        new TrapezoidProfile.State(m_climber.getElevatorHeight()[0], 0)),
+        // Pipe the profile state to the drive
+        setpointState -> m_climber.setElevatorHeight(setpointState));
+
+    CommandScheduler.getInstance().schedule(m_command);
   }
 
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {
-
-    // If we're going to Zero, we have to check things here and potentially change
-    // the
-    // requested elevator height.
-    if (m_goingToZero) {
-      // We're going to need to check each elevator independently, so we need a loop
-      for (int i = 0; i <= 1; i++) {
-        // if we're going to zero, we need to make sure the elevator hit the limit
-        // switch
-        // Note that there is a race condition here. In Climber.periodic, it checks for
-        // the switch and
-        // ifPressed, it sets the encoder value and also calls setElevatorHeight to 0
-        // which will raise the
-        // elevator slightly and release the switch.
-        // I think Commands run before Subsystems, so we should be OK.
-
-        // only check the limit switches when the elevator reads below certain height
-        // if(m_climber.getElevatorHeight()[i] >
-        // Constants.ELEVATOR_CHECKING_LIMIT_SWITCH_HEIGHT) continue;
-
-        // Make sure that the switch is pressed twice in a row.
-        boolean tempPressedCheck = m_climber.m_limitSwitch[i].isPressed() &&
-            m_climber.getElevatorHeight()[i] < Constants.ELEVATOR_CHECKING_LIMIT_SWITCH_HEIGHT;
-        m_hitLimitSwitch[i] = tempPressedCheck && m_limitSwitchAlreadyPressed[i];
-        m_limitSwitchAlreadyPressed[i] = tempPressedCheck;
-
-        // if the limit swsitch is not triggered, we need to reduce the set height to
-        // keep it going down
-        if (!m_hitLimitSwitch[i]) {
-          // limit switch is not pressed yet.
-          // did we reach zero?
-          if (Math.abs(m_climber.getElevatorHeight()[i] - m_height[i]) < Constants.ELEVATOR_HEIGHT_LOOSE_TOLERANCE) {
-            // We reached zero, but since the limit switch was not hit, we need to keep
-            // going.
-            // Lower the elevator height. We'll check next time through to see if the switch
-            // isPressed.
-            m_height[i] -= Units.inchesToMeters(0.5);
-            m_climber.setElevatorHeight(i, m_height[i]);
-          }
-        }
-        // If we've hit the limit switch twice, we need to set the encoder value to limit switch height
-        // and then raise elevator to ELEVATOR_MIN_HEIGHT.
-        if (m_hitLimitSwitch[i] && m_limitSwitchAlreadyPressed[i] && !m_ressetEncoder[i]) {
-          m_climber.m_elevatorMotor[i].getEncoder().setPosition(Constants.ELEVATOR_LIMIT_SWITCH_HEIGHT);
-          m_climber.setElevatorHeight(i, 0.0);
-          m_ressetEncoder[i] = true;
-        }
-      }
-    }
-  }
-
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {
-  }
-
-  // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    boolean finished = false;
-    if (m_goingToZero) {
-      finished = m_hitLimitSwitch[0] && m_hitLimitSwitch[1];
-    } else {
-      double[] arr = m_climber.getElevatorHeight();
-      finished = Math.abs(arr[0] - m_height[0]) < m_tolerance
-          || Math.abs(arr[1] - m_height[1]) < m_tolerance;
-    }
-    return finished;
+    return m_command != null && m_command.isFinished();
   }
 }
