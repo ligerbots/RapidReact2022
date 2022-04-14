@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.AdjustRobotAngleTest;
 import frc.robot.commands.ClimbToNextBar;
+import frc.robot.commands.DescendElevatorToLimitSwitch;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.ShooterCommand;
 import frc.robot.commands.TurnAndShoot;
@@ -119,6 +120,9 @@ public class RobotContainer {
 
         JoystickButton farm4 = new JoystickButton(m_farm, 4);
         farm4.whenPressed(new AdjustRobotAngleTest(m_driveTrain));
+
+        JoystickButton farm4 = new JoystickButton(m_farm, 4);
+        farm4.whenPressed(new DescendElevatorToLimitSwitch(m_climber));
 
         JoystickButton farm6 = new JoystickButton(m_farm, 6);
         farm6.whenPressed(new SetClimber(m_climber));
