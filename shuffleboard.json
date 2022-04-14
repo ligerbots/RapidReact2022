@@ -773,6 +773,300 @@
               "Colors/Color when true": "#7CFC00FF",
               "Colors/Color when false": "#8B0000FF"
             }
+          },
+          "13,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/arm1/feedforward1",
+              "_title": "arm1/feedforward1"
+            }
+          },
+          "14,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/vision/hub/saturation_high_limit",
+              "_title": "vision/hub/saturation_high_limit"
+            }
+          },
+          "15,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/elevator0/Encoder0",
+              "_title": "elevator0/Encoder0"
+            }
+          },
+          "16,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/arm1/Encoder1",
+              "_title": "arm1/Encoder1"
+            }
+          },
+          "13,1": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Constants/SetElevatorHeightTest",
+              "_title": "Constants/SetElevatorHeightTest"
+            }
+          },
+          "14,1": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/arm0/Output0",
+              "_title": "arm0/Output0"
+            }
+          },
+          "15,1": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/vision/width",
+              "_title": "vision/width"
+            }
+          },
+          "16,1": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/vision/hub/value_high_limit",
+              "_title": "vision/hub/value_high_limit"
+            }
+          },
+          "11,2": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/vision/hub/value_low_limit",
+              "_title": "vision/hub/value_low_limit"
+            }
+          },
+          "12,2": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/vision/write_images",
+              "_title": "vision/write_images",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "13,2": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/vision/tuning",
+              "_title": "vision/tuning",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "14,2": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/arm0/setPoint0",
+              "_title": "arm0/setPoint0"
+            }
+          },
+          "15,2": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/elevator1/Encoder1",
+              "_title": "elevator1/Encoder1"
+            }
+          },
+          "16,2": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/arm1/Output1",
+              "_title": "arm1/Output1"
+            }
+          },
+          "10,3": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/arm0/CoastMode0",
+              "_title": "arm0/CoastMode0",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "11,3": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/vision/hub/hue_low_limit",
+              "_title": "vision/hub/hue_low_limit"
+            }
+          },
+          "12,3": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/elevator1/limitSwitchPressed",
+              "_title": "elevator1/limitSwitchPressed",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "13,3": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Constants/SetArmAngleTest",
+              "_title": "Constants/SetArmAngleTest"
+            }
+          },
+          "14,3": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/arm0/velocity0",
+              "_title": "arm0/velocity0"
+            }
+          },
+          "15,3": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/vision/hub/hue_high_limit",
+              "_title": "vision/hub/hue_high_limit"
+            }
+          },
+          "16,3": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/vision/default_compression",
+              "_title": "vision/default_compression"
+            }
+          },
+          "10,4": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/vision/height",
+              "_title": "vision/height"
+            }
+          },
+          "11,4": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/arm1/setPoint1",
+              "_title": "arm1/setPoint1"
+            }
+          },
+          "12,4": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/arm0/feedforward0",
+              "_title": "arm0/feedforward0"
+            }
+          },
+          "13,4": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/elevator0/setPoint0",
+              "_title": "elevator0/setPoint0"
+            }
+          },
+          "14,4": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/vision/hub/saturation_low_limit",
+              "_title": "vision/hub/saturation_low_limit"
+            }
           }
         }
       }
@@ -1095,265 +1389,6 @@
       }
     },
     {
-      "title": "LiveWindow",
-      "autoPopulate": true,
-      "autoPopulatePrefix": "LiveWindow/",
-      "widgetPane": {
-        "gridSize": 128.0,
-        "showGrid": true,
-        "hgap": 16.0,
-        "vgap": 16.0,
-        "titleType": 0,
-        "tiles": {
-          "0,0": {
-            "size": [
-              2,
-              4
-            ],
-            "content": {
-              "_type": "Subsystem Layout",
-              "_source0": "network_table:///LiveWindow/Ungrouped",
-              "_title": "Ungrouped",
-              "Layout/Label position": "BOTTOM",
-              "_children": [
-                {
-                  "_type": "Encoder",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/Encoder[1]",
-                  "_title": "Encoder[1]"
-                },
-                {
-                  "_type": "PID Controller",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/PIDController[3]",
-                  "_title": "PIDController[3]"
-                },
-                {
-                  "_type": "Relay Widget",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/Relay[0]",
-                  "_title": "Relay[0]"
-                },
-                {
-                  "_type": "PID Controller",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/PIDController[1]",
-                  "_title": "PIDController[1]"
-                },
-                {
-                  "_type": "Differential Drivebase",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/DifferentialDrive[1]",
-                  "_title": "DifferentialDrive[1]",
-                  "Wheels/Number of wheels": 4,
-                  "Wheels/Wheel diameter": 80.0,
-                  "Visuals/Show velocity vectors": true
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/Talon FX [4]/Value",
-                  "_title": "Talon FX [4]/Value"
-                },
-                {
-                  "_type": "PID Controller",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/PIDController[2]",
-                  "_title": "PIDController[2]"
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/Talon FX [3]/Value",
-                  "_title": "Talon FX [3]/Value"
-                },
-                {
-                  "_type": "Encoder",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/Encoder[0]",
-                  "_title": "Encoder[0]"
-                },
-                {
-                  "_type": "PID Controller",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/PIDController[4]",
-                  "_title": "PIDController[4]"
-                },
-                {
-                  "_type": "Boolean Box",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/DigitalInput[5]/Value",
-                  "_title": "DigitalInput[5]/Value",
-                  "Colors/Color when true": "#7CFC00FF",
-                  "Colors/Color when false": "#8B0000FF"
-                },
-                {
-                  "_type": "Boolean Box",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/DigitalInput[4]/Value",
-                  "_title": "DigitalInput[4]/Value",
-                  "Colors/Color when true": "#7CFC00FF",
-                  "Colors/Color when false": "#8B0000FF"
-                },
-                {
-                  "_type": "Gyro",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/navX-Sensor[4]",
-                  "_title": "navX-Sensor[4]",
-                  "Visuals/Major tick spacing": 45.0,
-                  "Visuals/Starting angle": 180.0,
-                  "Visuals/Show tick mark ring": true,
-                  "Visuals/Counter clockwise": false
-                },
-                {
-                  "_type": "Motor Controller",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/Talon FX [4]",
-                  "_title": "Talon FX [4]",
-                  "Visuals/Orientation": "HORIZONTAL"
-                },
-                {
-                  "_type": "Motor Controller",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/Talon FX [3]",
-                  "_title": "Talon FX [3]",
-                  "Visuals/Orientation": "HORIZONTAL"
-                },
-                {
-                  "_type": "PID Controller",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/PIDController[5]",
-                  "_title": "PIDController[5]"
-                },
-                {
-                  "_type": "PID Controller",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/PIDController[6]",
-                  "_title": "PIDController[6]"
-                },
-                {
-                  "_type": "PID Controller",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/PIDController[16]",
-                  "_title": "PIDController[16]"
-                },
-                {
-                  "_type": "PID Controller",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/PIDController[13]",
-                  "_title": "PIDController[13]"
-                },
-                {
-                  "_type": "PID Controller",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/PIDController[17]",
-                  "_title": "PIDController[17]"
-                },
-                {
-                  "_type": "PID Controller",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/PIDController[14]",
-                  "_title": "PIDController[14]"
-                },
-                {
-                  "_type": "PID Controller",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/PIDController[7]",
-                  "_title": "PIDController[7]"
-                },
-                {
-                  "_type": "PID Controller",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/PIDController[18]",
-                  "_title": "PIDController[18]"
-                },
-                {
-                  "_type": "PID Controller",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/PIDController[8]",
-                  "_title": "PIDController[8]"
-                },
-                {
-                  "_type": "PID Controller",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/PIDController[11]",
-                  "_title": "PIDController[11]"
-                },
-                {
-                  "_type": "PID Controller",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/PIDController[10]",
-                  "_title": "PIDController[10]"
-                },
-                {
-                  "_type": "PID Controller",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/PIDController[15]",
-                  "_title": "PIDController[15]"
-                },
-                {
-                  "_type": "PID Controller",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/PIDController[9]",
-                  "_title": "PIDController[9]"
-                },
-                {
-                  "_type": "PID Controller",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/PIDController[12]",
-                  "_title": "PIDController[12]"
-                }
-              ]
-            }
-          },
-          "2,0": {
-            "size": [
-              2,
-              4
-            ],
-            "content": {
-              "_type": "Subsystem Layout",
-              "_source0": "network_table:///LiveWindow/Climber",
-              "_title": "Climber",
-              "Layout/Label position": "BOTTOM",
-              "_children": [
-                {
-                  "_type": "Subsystem Layout",
-                  "_source0": "network_table:///LiveWindow/ClimberArm",
-                  "_title": "LiveWindow/ClimberArm",
-                  "Layout/Label position": "BOTTOM",
-                  "_children": []
-                }
-              ]
-            }
-          },
-          "4,0": {
-            "size": [
-              2,
-              4
-            ],
-            "content": {
-              "_type": "Subsystem Layout",
-              "_source0": "network_table:///LiveWindow/Shooter",
-              "_title": "Shooter",
-              "Layout/Label position": "BOTTOM",
-              "_children": []
-            }
-          },
-          "6,0": {
-            "size": [
-              2,
-              4
-            ],
-            "content": {
-              "_type": "Subsystem Layout",
-              "_source0": "network_table:///LiveWindow/Vision",
-              "_title": "Vision",
-              "Layout/Label position": "BOTTOM",
-              "_children": []
-            }
-          },
-          "8,0": {
-            "size": [
-              2,
-              4
-            ],
-            "content": {
-              "_type": "Subsystem Layout",
-              "_source0": "network_table:///LiveWindow/DriveTrain",
-              "_title": "DriveTrain",
-              "Layout/Label position": "BOTTOM",
-              "_children": []
-            }
-          },
-          "10,0": {
-            "size": [
-              2,
-              4
-            ],
-            "content": {
-              "_type": "Subsystem Layout",
-              "_source0": "network_table:///LiveWindow/Intake",
-              "_title": "Intake",
-              "Layout/Label position": "BOTTOM",
-              "_children": []
-            }
-          }
-        }
-      }
-    },
-    {
       "title": "Tab 3",
       "autoPopulate": false,
       "autoPopulatePrefix": "",
@@ -1386,7 +1421,7 @@
               "_title": "/SmartDashboard/shooter/Shooter Top Speed"
             }
           },
-          "3,1": {
+          "4,2": {
             "size": [
               1,
               1
@@ -1395,6 +1430,124 @@
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/shooter/Chute Speed",
               "_title": "/SmartDashboard/shooter/Chute Speed"
+            }
+          },
+          "10,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Constants/SetArmAngleTest",
+              "_title": "SmartDashboard/Constants/SetArmAngleTest"
+            }
+          },
+          "7,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Constants/SetElevatorHeightTest",
+              "_title": "SmartDashboard/Constants/SetElevatorHeightTest"
+            }
+          },
+          "10,3": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/arm0/CoastMode0",
+              "_title": "SmartDashboard/arm0/CoastMode0",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "11,3": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/arm1/CoastMode1",
+              "_title": "SmartDashboard/arm1/CoastMode1",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "11,2": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/arm1/Encoder1",
+              "_title": "SmartDashboard/arm1/Encoder1"
+            }
+          },
+          "10,2": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/arm0/Encoder0",
+              "_title": "SmartDashboard/arm0/Encoder0"
+            }
+          },
+          "7,2": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/elevator0/Encoder0",
+              "_title": "SmartDashboard/elevator0/Encoder0"
+            }
+          },
+          "8,2": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/elevator1/Encoder1",
+              "_title": "SmartDashboard/elevator1/Encoder1"
+            }
+          },
+          "8,3": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/elevator1/limitSwitchPressed",
+              "_title": "SmartDashboard/elevator1/limitSwitchPressed",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "7,3": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/elevator0/limitSwitchPressed",
+              "_title": "SmartDashboard/elevator0/limitSwitchPressed",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
             }
           }
         }
@@ -1424,13 +1577,13 @@
               "Crosshair/Crosshair color": "#FFFFFFFF",
               "Controls/Show controls": true,
               "Controls/Rotation": "NONE",
-              "compression": 10.0,
+              "compression": -1.0,
               "fps": -1,
-              "imageWidth": -1,
-              "imageHeight": -1
+              "imageWidth": 0,
+              "imageHeight": 0
             }
           },
-          "0,1": {
+          "0,0": {
             "size": [
               2,
               1
@@ -1438,21 +1591,10 @@
             "content": {
               "_type": "ComboBox Chooser",
               "_source0": "network_table:///SmartDashboard/Chosen Auto",
-              "_title": "SmartDashboard/Chosen Auto"
+              "_title": "/SmartDashboard/Chosen Auto"
             }
           },
-          "1,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Constants/SetArmAngleTest",
-              "_title": "SmartDashboard/Constants/SetArmAngleTest"
-            }
-          },
-          "2,0": {
+          "11,0": {
             "size": [
               1,
               1
@@ -1463,62 +1605,7 @@
               "_title": "SmartDashboard/Constants/SetElevatorHeightTest"
             }
           },
-          "10,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/ElevatorIndex",
-              "_title": "SmartDashboard/ElevatorIndex"
-            }
-          },
-          "11,0": {
-            "size": [
-              6,
-              6
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/SetOneElevatorHeightTest",
-              "_title": "SmartDashboard/SetOneElevatorHeightTest"
-            }
-          },
-          "12,1": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/elevator0/Encoder0",
-              "_title": "SmartDashboard/elevator0/Encoder0"
-            }
-          },
-          "12,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/elevator1/Encoder1",
-              "_title": "/SmartDashboard/elevator1/Encoder1"
-            }
-          },
-          "10,1": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Toggle Button",
-              "_source0": "network_table:///SmartDashboard/vision/write_images",
-              "_title": "SmartDashboard/vision/write_images"
-            }
-          },
-          "11,2": {
+          "10,2": {
             "size": [
               1,
               1
@@ -1527,30 +1614,6 @@
               "_type": "ComboBox Chooser",
               "_source0": "network_table:///SmartDashboard/vision/active_mode",
               "_title": "SmartDashboard/vision/active_mode"
-            }
-          },
-          "0,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/ClimbingCommandFinished",
-              "_title": "SmartDashboard/ClimbingCommandFinished",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "1,0": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "ComboBox Chooser",
-              "_source0": "network_table:///SmartDashboard/Chosen Auto",
-              "_title": "/SmartDashboard/Chosen Auto"
             }
           },
           "1,3": {
@@ -1579,7 +1642,7 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "1,2": {
+          "1,1": {
             "size": [
               1,
               1
@@ -1592,7 +1655,7 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "0,2": {
+          "0,1": {
             "size": [
               1,
               1
