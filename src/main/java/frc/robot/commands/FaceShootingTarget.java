@@ -94,6 +94,7 @@ public class FaceShootingTarget extends CommandBase {
         }
       }
     }
+    SmartDashboard.putBoolean("TargetAcquired", m_targetAcquired);
   }
 
   // Called once the command ends or is interrupted.

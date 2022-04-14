@@ -172,13 +172,13 @@ public class FourBallLower extends SequentialCommandGroup implements AutoCommand
             ramsete2.andThen(() -> driveTrain.tankDriveVolts(0, 0)),
             new IntakeCommand(intake, Constants.INTAKE_SPEED)
         ),
-        new ShooterCommand(shooter, intake, Units.inchesToMeters(114.0), true),
+        new ShooterCommand(shooter, intake, 114.0, true),
         new ParallelDeadlineGroup(
             ramsete3.andThen(() -> driveTrain.tankDriveVolts(0, 0)),
             new IntakeCommand(intake, Constants.INTAKE_SPEED)
         ),
         // run intake for 1 more second to make sure the ball is pulled in
-        ramsete4.andThen(() -> driveTrain.tankDriveVolts(0, 0)).alongWith(new IntakeCommand(intake, Constants.INTAKE_SPEED).withTimeout(1.0)),
+        ramsete4.andThen(() -> driveTrain.tankDriveVolts(0, 0)).alongWith(new IntakeCommand(intake, Constants.INTAKE_SPEED).withTimeout(2.0)),
         new FaceShootingTarget(driveTrain, vision, Constants.TURN_TOLERANCE_DEG, null),
         new ShooterCommand(shooter, intake, vision, true)
     );

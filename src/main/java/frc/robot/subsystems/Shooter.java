@@ -46,6 +46,8 @@ public class Shooter extends SubsystemBase {
     // Shooter class constructor, initialize arrays for motors controllers,
     // encoders, and SmartDashboard data
     public Shooter() {
+
+        SmartDashboard.putBoolean("TargetAcquired", false);
         m_chuteMotor = new CANSparkMax(Constants.CHUTE_CAN_ID, MotorType.kBrushless);
 
         m_topShooterMotor = new WPI_TalonFX(Constants.TOP_SHOOTER_CAN_ID);

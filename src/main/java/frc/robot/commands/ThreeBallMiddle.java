@@ -115,7 +115,7 @@ public class ThreeBallMiddle extends SequentialCommandGroup implements AutoComma
                 ramsete1.andThen(() -> driveTrain.tankDriveVolts(0, 0)),
                 new IntakeCommand(intake, Constants.INTAKE_SPEED)
             ),
-            ramsete2.andThen(() -> driveTrain.tankDriveVolts(0, 0)).alongWith(new IntakeCommand(intake, Constants.INTAKE_SPEED).withTimeout(1.0)),
+            ramsete2.andThen(() -> driveTrain.tankDriveVolts(0, 0)).alongWith(new IntakeCommand(intake, Constants.INTAKE_SPEED).withTimeout(2.0)),
             new TurnAndShoot(shooter, intake, driveTrain, vision, null)
         );
     }

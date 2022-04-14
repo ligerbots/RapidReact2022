@@ -32,7 +32,7 @@ public class ShooterCommand extends CommandBase {
 
     enum State {
         FINDING_VISION_TARGET, SPEED_UP_SHOOTER, WAIT_FOR_SHOOTER, TURN_ON_CHUTE, TURN_ON_INTAKE, 
-        WAIT_FOR_SHOOT_BALL1, WAIT_FOR_SHOOT_BALL2;
+        WAIT_FOR_SHOOT_BALL1, WAIT_FOR_SHOOT_BALL2, ABORT;
     }
 
     State m_state;
@@ -76,9 +76,10 @@ public class ShooterCommand extends CommandBase {
                 if (m_distance > 1.0)
                     m_state = State.SPEED_UP_SHOOTER;
                 else if (m_visionTime.hasElapsed()) {
-                    m_state = State.SPEED_UP_SHOOTER;
+                    m_state = State.ABORT;
                     // if still can't find the target, just use 9ft as the distance
-                    m_distance = DEFAULT_DISTANCE_TO_THE_HUB;
+                    // m_distance = DEFAULT_DISTANCE_TO_THE_HUB;
+                    break;
                 }
                 else 
                     break;
@@ -143,6 +144,6 @@ public class ShooterCommand extends CommandBase {
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        return m_state == State.WAIT_FOR_SHOOT_BALL2 && m_shootBall2Time.hasElapsed();
+        return m_state == State.ABORT || (m_state == State.WAIT_FOR_SHOOT_BALL2 && m_shootBall2Time.hasElapsed());
     }
 }

@@ -64,6 +64,8 @@ public class Robot extends TimedRobot {
     // Set climber motors to coast so we can move them if we need to.
     m_robotContainer.getClimber().setBrakeMode(true);
 
+    SmartDashboard.putBoolean("ClimbingCommandFinished", false);
+
     SmartDashboard.putNumber("Constants/SetElevatorHeightTest", 0.0);
     SmartDashboard.putNumber("Constants/SetArmAngleTest", 80.0);
     
