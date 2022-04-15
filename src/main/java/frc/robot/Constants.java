@@ -137,7 +137,7 @@ public final class Constants {
 
     public static final double HEIGHT_RESET_LIMIT_SWITCH = Units.inchesToMeters(-30.0);
 
-    public static final double ELEVATOR_MAX_HEIGHT = Units.inchesToMeters(26.3);// 23.5in = length of elevator when fully extended PROTOTYPE
+    public static final double ELEVATOR_MAX_HEIGHT = Units.inchesToMeters(26.45);// 23.5in = length of elevator when fully extended PROTOTYPE
     public static final double ELEVATOR_MIN_HEIGHT = Units.inchesToMeters(0.0);// 0in = length of elevator when fully retracted
     // right elevator 0 to -21.5
     
@@ -208,7 +208,7 @@ public final class Constants {
     // This is going to be the initial state of the elevators
     public static final double ELEVATOR_OFFSET_METER = Units.inchesToMeters(1.5);
 
-    public static final double ELEVATOR_LIMIT_SWITCH_HEIGHT = Units.inchesToMeters(-0.25);
+    public static final double ELEVATOR_LIMIT_SWITCH_HEIGHT = Units.inchesToMeters(-0.1);
 
     // PID Constants for the Arm PID controller
     // Since we're using Trapeziodal control, all values will be 0 except for P
