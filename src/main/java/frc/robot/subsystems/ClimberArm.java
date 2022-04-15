@@ -69,9 +69,9 @@ public class ClimberArm extends TrapezoidProfileSubsystem {
     double encoderValue = m_encoder.getPosition();
     
     // Display current values on the SmartDashboard
-    SmartDashboard.putNumber("arm" + m_index + "/Output" + m_index, m_motor.getAppliedOutput());
-    SmartDashboard.putNumber("arm" + m_index + "/Encoder" + m_index, Units.radiansToDegrees(encoderValue));
-    SmartDashboard.putBoolean("arm" + m_index + "/CoastMode" + m_index, m_coastMode);
+    // SmartDashboard.putNumber("arm" + m_index + "/Output" + m_index, m_motor.getAppliedOutput());
+    // SmartDashboard.putNumber("arm" + m_index + "/Encoder" + m_index, Units.radiansToDegrees(encoderValue));
+    // SmartDashboard.putBoolean("arm" + m_index + "/CoastMode" + m_index, m_coastMode);
 
     // if in coast mode, stop the periodic() here to prevent the PID from setReference()
     if (m_coastMode)  return;
@@ -100,7 +100,7 @@ public class ClimberArm extends TrapezoidProfileSubsystem {
     // Note that since this is Trapezoidal control, we only need to set P.
     // Each increment will only change the set point position a little bit.
 
-    checkPIDVal();
+    // checkPIDVal();
   }
 
   @Override
@@ -118,9 +118,9 @@ public class ClimberArm extends TrapezoidProfileSubsystem {
       m_resetArmPos = false;
     }
     m_PIDController.setReference(setPoint.position, ControlType.kPosition, 0, feedforward / 12.0);
-    SmartDashboard.putNumber("arm" + m_index + "/feedforward" + m_index, feedforward);
-    SmartDashboard.putNumber("arm" + m_index + "/setPoint" + m_index, Units.metersToInches(setPoint.position));
-    SmartDashboard.putNumber("arm" + m_index + "/velocity" + m_index, Units.metersToInches(setPoint.velocity));
+    // SmartDashboard.putNumber("arm" + m_index + "/feedforward" + m_index, feedforward);
+    // SmartDashboard.putNumber("arm" + m_index + "/setPoint" + m_index, Units.metersToInches(setPoint.position));
+    // SmartDashboard.putNumber("arm" + m_index + "/velocity" + m_index, Units.metersToInches(setPoint.velocity));
    
 }
 

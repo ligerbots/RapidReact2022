@@ -60,10 +60,9 @@ public class Elevator extends SubsystemBase {
   @Override
   public void periodic() {
     double encoderValue = m_encoder.getPosition();
-    SmartDashboard.putNumber("elevator" + m_index + "/Encoder" + m_index, Units.metersToInches(encoderValue));
-    
-    // update the PID val
-    checkPIDVal();
+    // SmartDashboard.putNumber("elevator" + m_index + "/Encoder" + m_index, Units.metersToInches(encoderValue));
+        // update the PID val
+    // checkPIDVal();
   }
 
   protected void setSetPoint(TrapezoidProfile.State setPoint) {
@@ -78,7 +77,7 @@ public class Elevator extends SubsystemBase {
       m_resetElevatorPos = false;
     }
     m_PIDController.setReference(setPoint.position, ControlType.kPosition, 0, feedforward / 12.0);
-    SmartDashboard.putNumber("elevator" + m_index + "/setPoint" + m_index, Units.metersToInches(setPoint.position));
+    // SmartDashboard.putNumber("elevator" + m_index + "/setPoint" + m_index, Units.metersToInches(setPoint.position));
   }
 
   private void checkPIDVal() {

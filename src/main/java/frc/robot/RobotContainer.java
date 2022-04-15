@@ -13,8 +13,10 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.AdjustRobotAngleTest;
 import frc.robot.commands.ClimbToNextBar;
+import frc.robot.commands.CoastExtendElevator;
 import frc.robot.commands.DescendElevatorToLimitSwitch;
 import frc.robot.commands.DriveCommand;
+import frc.robot.commands.ExtendElevatorTest;
 import frc.robot.commands.ShooterCommand;
 import frc.robot.commands.TurnAndShoot;
 import frc.robot.commands.IntakeCommand;
@@ -124,6 +126,9 @@ public class RobotContainer {
         JoystickButton farm4 = new JoystickButton(m_farm, 4);
         farm4.whenPressed(new DescendElevatorToLimitSwitch(m_climber));
 
+        JoystickButton farm5 = new JoystickButton(m_farm, 5);
+        farm5.whenPressed(new ExtendElevatorTest(m_climber));
+
         JoystickButton farm6 = new JoystickButton(m_farm, 6);
         farm6.whenPressed(new SetClimber(m_climber));
 
@@ -140,8 +145,8 @@ public class RobotContainer {
         // JoystickButton farm4 = new JoystickButton(m_farm, 4);
         // farm4.whenPressed(new ShooterCommand(m_shooter, m_intake, Constants.TARMAC_DEFAULT_DISTANCE, true));
     
-        JoystickButton farm5 = new JoystickButton(m_farm, 5);
-        farm5.whenPressed(new ShooterCommand(m_shooter, m_intake, Constants.JUST_OUTSIDE_TARMAC, true));
+        // JoystickButton farm5 = new JoystickButton(m_farm, 5);
+        // farm5.whenPressed(new ShooterCommand(m_shooter, m_intake, Constants.JUST_OUTSIDE_TARMAC, true));
 
         JoystickButton farm9 = new JoystickButton(m_farm, 9);
         farm9.whenPressed(new ShooterCommand(m_shooter, m_intake, Constants.CLOSE_LAUNCHPAD_SHOOTER_DISTANCE, true));

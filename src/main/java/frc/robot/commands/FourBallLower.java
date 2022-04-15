@@ -63,7 +63,7 @@ public class FourBallLower extends SequentialCommandGroup implements AutoCommand
         Pose2d firstShootingPose = FieldInformation.centerAnglePose(Units.inchesToMeters(114.0), Rotation2d.fromDegrees(261));
         Pose2d invertPose1 = FieldInformation.ballPose(FieldInformation.lowerBlueBall, 2, 15);
         Pose2d invertPose2 = FieldInformation.ballPosePolar(FieldInformation.cornerBlueBall, 8, 20);
-        Pose2d finalShootingPose = FieldInformation.ballPose(FieldInformation.middleBlueBall, -5.0, -5.0);
+        Pose2d finalShootingPose = FieldInformation.middleBlueBall;
         // Pose2d midPose = new Pose2d(
         //     initialPose.getX() - initialPose.getRotation().getCos() * DISTANCE_BACK, 
         //     initialPose.getY() - initialPose.getRotation().getSin() * DISTANCE_BACK, 
@@ -179,8 +179,8 @@ public class FourBallLower extends SequentialCommandGroup implements AutoCommand
         ),
         // run intake for 1 more second to make sure the ball is pulled in
         ramsete4.andThen(() -> driveTrain.tankDriveVolts(0, 0)).alongWith(new IntakeCommand(intake, Constants.INTAKE_SPEED).withTimeout(2.0)),
-        new FaceShootingTarget(driveTrain, vision, Constants.TURN_TOLERANCE_DEG, null),
-        new ShooterCommand(shooter, intake, vision, true)
+        //new FaceShootingTarget(driveTrain, vision, Constants.TURN_TOLERANCE_DEG, null),
+        new ShooterCommand(shooter, intake, 126.0, true)
     );
   }
 

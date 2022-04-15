@@ -92,7 +92,7 @@ public class Climber extends SubsystemBase {
 
   public void setElevatorCoast(boolean coast){
     m_elevatorMotor[0].setIdleMode(coast ? CANSparkMax.IdleMode.kCoast : CANSparkMax.IdleMode.kBrake);
-    m_elevatorMotor[1].setIdleMode(coast ? CANSparkMax.IdleMode.kCoast : CANSparkMax.IdleMode.kBrake));
+    m_elevatorMotor[1].setIdleMode(coast ? CANSparkMax.IdleMode.kCoast : CANSparkMax.IdleMode.kBrake);
   }
 
   // Set elevator motor voltages

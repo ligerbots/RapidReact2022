@@ -199,15 +199,15 @@ public class DriveTrain extends SubsystemBase {
         m_odometry.update(Rotation2d.fromDegrees(getGyroAngle()), getLeftEncoderDistance(),
                 getRightEncoderDistance());
 
-        SmartDashboard.putNumber("driveTrain/heading", getHeading());
-        SmartDashboard.putNumber("driveTrain/NavX gyro", getGyroAngle());
-        SmartDashboard.putNumber("driveTrain/x position", getPose().getX());
-        SmartDashboard.putNumber("driveTrain/y position", getPose().getY());
+        // SmartDashboard.putNumber("driveTrain/heading", getHeading());
+        // SmartDashboard.putNumber("driveTrain/NavX gyro", getGyroAngle());
+        // SmartDashboard.putNumber("driveTrain/x position", getPose().getX());
+        // SmartDashboard.putNumber("driveTrain/y position", getPose().getY());
 
-        SmartDashboard.putNumber("driveTrain/left encoder", getLeftEncoderTicks());
-        SmartDashboard.putNumber("driveTrain/right encoder", getRightEncoderTicks());
-        SmartDashboard.putNumber("driveTrain/left distance", getLeftEncoderDistance());
-        SmartDashboard.putNumber("driveTrain/right distance", getRightEncoderDistance());
+        // SmartDashboard.putNumber("driveTrain/left encoder", getLeftEncoderTicks());
+        // SmartDashboard.putNumber("driveTrain/right encoder", getRightEncoderTicks());
+        // SmartDashboard.putNumber("driveTrain/left distance", getLeftEncoderDistance());
+        // SmartDashboard.putNumber("driveTrain/right distance", getRightEncoderDistance());
 
         // SmartDashboard.putNumber("driveTrain/LeftFollower", m_leftFollower.getSelectedSensorPosition());
         // SmartDashboard.putNumber("driveTrain/LeftLeader", m_leftLeader.getSelectedSensorPosition());
@@ -279,17 +279,17 @@ public class DriveTrain extends SubsystemBase {
             m_leftLeader.set(ControlMode.Position, startDisLeft + setPoint.position);
             m_rightLeader.set(ControlMode.Position, startDisRight - setPoint.position);
 
-            SmartDashboard.putNumber("DriveTrain/setPointLeft", Units.metersToInches(startDisLeft + setPoint.position));
-            SmartDashboard.putNumber("DriveTrain/setPointRight", Units.metersToInches(startDisRight - setPoint.position));
+            // SmartDashboard.putNumber("DriveTrain/setPointLeft", Units.metersToInches(startDisLeft + setPoint.position));
+            // SmartDashboard.putNumber("DriveTrain/setPointRight", Units.metersToInches(startDisRight - setPoint.position));
         }else{
             // have the right side go forward and left side backward to turn the robot to the left
             m_leftLeader.set(ControlMode.Position, startDisLeft - setPoint.position);
             m_rightLeader.set(ControlMode.Position, startDisRight + setPoint.position);
 
-            SmartDashboard.putNumber("DriveTrain/setPointLeft", Units.metersToInches(startDisLeft - setPoint.position));
-            SmartDashboard.putNumber("DriveTrain/setPointRight", Units.metersToInches(startDisRight + setPoint.position));
+            // SmartDashboard.putNumber("DriveTrain/setPointLeft", Units.metersToInches(startDisLeft - setPoint.position));
+            // SmartDashboard.putNumber("DriveTrain/setPointRight", Units.metersToInches(startDisRight + setPoint.position));
         }
-        SmartDashboard.putBoolean("DriveTrain/turnToLeft", turnToLeft);        
+        // SmartDashboard.putBoolean("DriveTrain/turnToLeft", turnToLeft);        
     }
 
     public double turnSpeedCalc(double angleError) {

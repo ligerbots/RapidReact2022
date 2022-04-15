@@ -29,7 +29,7 @@ public class ClimbToNextBar extends SequentialCommandGroup {
           Constants.ELEVATOR_MAX_VEL_METER_PER_SEC_ASCEND, Constants.ELEVATOR_MAX_ACC_METER_PER_SEC_SQ_ASCEND),
 
       // Now coast the elevators until they go all the way up
-      new CoastExtendElevator(m_climber),
+      // new CoastExtendElevator(m_climber),
 
       // clear the command
       // CommandGroupBase.clearGroupedCommand(Command),

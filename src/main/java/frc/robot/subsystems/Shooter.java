@@ -112,8 +112,8 @@ public class Shooter extends SubsystemBase {
     // periodically update the values of motors for shooter to SmartDashboard
     @Override
     public void periodic() {
-        SmartDashboard.putNumber("shooter/bottom_rpm", getBottomRpm());
-        SmartDashboard.putNumber("shooter/top_rpm", getTopRpm());
+        // SmartDashboard.putNumber("shooter/bottom_rpm", getBottomRpm());
+        // SmartDashboard.putNumber("shooter/top_rpm", getTopRpm());
     }
 
     public double getTopRpm() {
