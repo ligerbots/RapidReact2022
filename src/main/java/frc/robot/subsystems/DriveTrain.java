@@ -299,8 +299,6 @@ public class DriveTrain extends SubsystemBase {
         double left = (startDisLeft - setPoint.position) / Constants.DRIVE_FALCON_DISTANCE_PER_UNIT;
         double right = -(startDisRight + setPoint.position) / Constants.DRIVE_FALCON_DISTANCE_PER_UNIT;
 
-        System.out.println("leftMotors speed " + m_leftMotors.get() + "  leftLeader speed " + getLeftEncoderVelocity());
-
         m_leftLeader.set(ControlMode.Position, left);
         m_leftFollower.set(ControlMode.Follower, Constants.LEADER_LEFT_CAN_ID);
         m_rightLeader.set(ControlMode.Position, right);

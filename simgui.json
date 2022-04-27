@@ -109,6 +109,9 @@
   },
   "NetworkTables": {
     "SmartDashboard": {
+      "AngleToTurn": {
+        "open": true
+      },
       "DriveTrain": {
         "open": true
       },
