@@ -1,4 +1,28 @@
 {
+  "HALProvider": {
+    "Other Devices": {
+      "Talon FX[11]": {
+        "header": {
+          "open": true
+        }
+      },
+      "Talon FX[12]": {
+        "header": {
+          "open": true
+        }
+      },
+      "Talon FX[8]": {
+        "header": {
+          "open": true
+        }
+      },
+      "Talon FX[9]": {
+        "header": {
+          "open": true
+        }
+      }
+    }
+  },
   "NTProvider": {
     "types": {
       "/FMSInfo": "FMSInfo",
@@ -85,7 +109,7 @@
   },
   "NetworkTables": {
     "SmartDashboard": {
-      "Chosen Auto": {
+      "DriveTrain": {
         "open": true
       },
       "driveTrain": {

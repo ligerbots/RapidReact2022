@@ -32,6 +32,7 @@ public class AdjustRobotAngle extends CommandBase {
     double startDisLeft = m_driveTrain.getLeftEncoderDistance();
     double startDisRight = m_driveTrain.getRightEncoderDistance();
 
+    // this is signed by the direction we need to turn
     double disToTurn = m_driveTrain.disToTurn(m_angleToTurn);
 
     Command m_command = new TrapezoidProfileCommand(
@@ -40,13 +41,12 @@ public class AdjustRobotAngle extends CommandBase {
           // The motion profile constraints
           new TrapezoidProfile.Constraints(Constants.DRIVETRAIN_MAX_VEL_METER_PER_SEC, Constants.DRIVETRAIN_MAX_ACC_METER_PER_SEC_SQ),
           // Goal state
-          // use radians
           new TrapezoidProfile.State(disToTurn, 0),
           // Initial state
           new TrapezoidProfile.State(0.0, 0)),
-      state -> m_driveTrain.setSetPoint(m_angleToTurn < 0, state, startDisLeft, startDisRight));
+      state -> m_driveTrain.setSetPoint2(state, startDisLeft, startDisRight));
 
-      System.out.println("=================AdjustRobotAngle Executed=========================");
+      System.out.println("==== AdjustRobotAngle Started, turn angle = " + m_angleToTurn + "distToTurn = " + disToTurn);
 
       CommandScheduler.getInstance().schedule(m_command);
   }

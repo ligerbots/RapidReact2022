@@ -6,7 +6,7 @@ package frc.robot;
 
 import java.util.function.DoubleSupplier;
 
-// import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
@@ -80,7 +80,7 @@ public class RobotContainer {
         // xboxYButton.whileHeld(new TuneShooterCommand(m_shooter, m_intake));
 
         // FOR TESTING!!
-        // DriverStation.silenceJoystickConnectionWarning(true);
+        DriverStation.silenceJoystickConnectionWarning(true);
         
         // vacuum mode
         JoystickButton xboxYButton = new JoystickButton(m_xbox, Constants.XBOX_Y);
@@ -183,7 +183,7 @@ public class RobotContainer {
     private class Turn implements DoubleSupplier {
         @Override
         public double getAsDouble() {
-            return -0.75 * m_xbox.getRightX();
+            return -0.75 * m_xbox.getLeftX();
         }
     }
 

@@ -77,7 +77,7 @@ public final class Constants {
     public static final double DRIVETRAIN_MAX_VEL_METER_PER_SEC = Units.inchesToMeters(50.0);
     public static final double DRIVETRAIN_MAX_ACC_METER_PER_SEC_SQ = Units.inchesToMeters(10.0);
 
-    public static final double DRIVETRAIN_KP = 50.0; // waited to be tuned
+    public static final double DRIVETRAIN_KP = 1.0; // waited to be tuned
     public static final double DRIVETRAIN_KI = 0.0;
     public static final double DRIVETRAIN_KD = 0.0; 
     public static final double DRIVETRAIN_KF = 0.0;

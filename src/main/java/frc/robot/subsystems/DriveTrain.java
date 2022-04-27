@@ -59,8 +59,9 @@ public class DriveTrain extends SubsystemBase {
     public DriveTrain() {
         // setup PID control for TalonFX
         m_leftLeader.configFactoryDefault();
-        m_leftLeader.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 0);
-        m_leftLeader.set(ControlMode.Position,0);
+        // m_leftLeader.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 0);
+        m_leftLeader.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
+        // m_leftLeader.set(ControlMode.Position, 0);
         m_leftLeader.config_kP(0, Constants.DRIVETRAIN_KP);
         m_leftLeader.config_kI(0, Constants.DRIVETRAIN_KI);
         m_leftLeader.config_kD(0, Constants.DRIVETRAIN_KD);
@@ -69,7 +70,7 @@ public class DriveTrain extends SubsystemBase {
 
         m_rightLeader.configFactoryDefault();
         m_rightLeader.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 0);
-        m_rightLeader.set(ControlMode.Position,0);
+        // m_rightLeader.set(ControlMode.Position, 0);
         m_rightLeader.config_kP(0, Constants.DRIVETRAIN_KP);
         m_rightLeader.config_kI(0, Constants.DRIVETRAIN_KI);
         m_rightLeader.config_kD(0, Constants.DRIVETRAIN_KD);
@@ -79,7 +80,6 @@ public class DriveTrain extends SubsystemBase {
         m_rightMotors.setInverted(true);
         setMotorMode(NeutralMode.Coast);
     
-       
         m_differentialDrive = new DifferentialDrive(m_leftMotors, m_rightMotors);
         m_differentialDrive.setSafetyEnabled(false);
 
@@ -269,27 +269,49 @@ public class DriveTrain extends SubsystemBase {
 
     public double disToTurn(double angle){
         // calculate the distance one side of the wheels need to turn to get to the desired angle
-        return Constants.kTrackwidth*Math.PI*(angle / (2*Math.PI));
+        // arc distance is angle (in radians) * radius
+        return Constants.kTrackwidth / 2.0 * Units.degreesToRadians(angle);
     }
 
     public void setSetPoint(boolean turnToLeft, TrapezoidProfile.State setPoint, double startDisLeft, double startDisRight) {
         // if turn to left, let the right motor drive, and vice versa
-        if(turnToLeft){
-            // have the left side go forward and right side backward to turn the robot to the right
+        if (turnToLeft) {
+            // have the left side go forward and right side backward to turn the robot to
+            // the right
             m_leftLeader.set(ControlMode.Position, startDisLeft + setPoint.position);
             m_rightLeader.set(ControlMode.Position, startDisRight - setPoint.position);
 
             SmartDashboard.putNumber("DriveTrain/setPointLeft", Units.metersToInches(startDisLeft + setPoint.position));
             SmartDashboard.putNumber("DriveTrain/setPointRight", Units.metersToInches(startDisRight - setPoint.position));
-        }else{
-            // have the right side go forward and left side backward to turn the robot to the left
+        } else {
+            // have the right side go forward and left side backward to turn the robot to
+            // the left
             m_leftLeader.set(ControlMode.Position, startDisLeft - setPoint.position);
             m_rightLeader.set(ControlMode.Position, startDisRight + setPoint.position);
 
             SmartDashboard.putNumber("DriveTrain/setPointLeft", Units.metersToInches(startDisLeft - setPoint.position));
             SmartDashboard.putNumber("DriveTrain/setPointRight", Units.metersToInches(startDisRight + setPoint.position));
         }
-        SmartDashboard.putBoolean("DriveTrain/turnToLeft", turnToLeft);        
+        SmartDashboard.putBoolean("DriveTrain/turnToLeft", turnToLeft);
+    }
+
+    public void setSetPoint2(TrapezoidProfile.State setPoint, double startDisLeft, double startDisRight) {
+        double left = (startDisLeft - setPoint.position) / Constants.DRIVE_FALCON_DISTANCE_PER_UNIT;
+        double right = -(startDisRight + setPoint.position) / Constants.DRIVE_FALCON_DISTANCE_PER_UNIT;
+
+        System.out.println("leftMotors speed " + m_leftMotors.get() + "  leftLeader speed " + getLeftEncoderVelocity());
+
+        m_leftLeader.set(ControlMode.Position, left);
+        m_leftFollower.set(ControlMode.Follower, Constants.LEADER_LEFT_CAN_ID);
+        m_rightLeader.set(ControlMode.Position, right);
+        m_rightFollower.set(ControlMode.Follower, Constants.LEADER_RIGHT_CAN_ID);
+        
+        SmartDashboard.putNumber("driveTrain/setPointLeft", left);
+        SmartDashboard.putNumber("driveTrain/setPointRight", right);
+        SmartDashboard.putNumber("driveTrain/targetLeft", m_leftLeader.getClosedLoopTarget());
+        SmartDashboard.putNumber("driveTrain/targetRight", m_rightLeader.getClosedLoopTarget());
+        SmartDashboard.putNumber("driveTrain/currPosLeft", m_leftLeader.getSelectedSensorPosition());
+        SmartDashboard.putNumber("driveTrain/currPosRight", m_rightLeader.getSelectedSensorPosition());
     }
 
     public double turnSpeedCalc(double angleError) {
