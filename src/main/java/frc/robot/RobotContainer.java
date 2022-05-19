@@ -14,9 +14,6 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.AdjustRobotAngleTest;
 import frc.robot.commands.ClimbToNextBar;
 import frc.robot.commands.DriveCommand;
-import frc.robot.commands.ShooterCommand;
-import frc.robot.commands.TurnAndShoot;
-import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.RaiseToBar;
 import frc.robot.commands.ResetClimber;
 import frc.robot.commands.SetArmAngleTest;
@@ -25,14 +22,8 @@ import frc.robot.commands.SetArmCoast;
 import frc.robot.commands.SetClimber;
 import frc.robot.commands.SetElevatorHeightTest;
 import frc.robot.commands.SetOneElevatorHeightTest;
-import frc.robot.commands.SetVisionMode;
-import frc.robot.commands.VacuumMode;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.Intake;
-import frc.robot.subsystems.Shooter;
-import frc.robot.subsystems.Vision;
-import frc.robot.subsystems.Vision.VisionMode;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -50,10 +41,7 @@ public class RobotContainer {
 
     // The robot's subsystems and commands are defined here...
     private final DriveTrain m_driveTrain = new DriveTrain();
-    private final Vision m_vision = new Vision(m_driveTrain);
     private final Climber m_climber = new Climber();
-    private final Shooter m_shooter = new Shooter();
-    private final Intake m_intake = new Intake();
     
     private final DriveCommand m_driveCommand = new DriveCommand(m_driveTrain, new Throttle(), new Turn());
 
@@ -80,32 +68,6 @@ public class RobotContainer {
 
         // FOR TESTING!!
         // DriverStation.silenceJoystickConnectionWarning(true);
-        
-        // vacuum mode
-        JoystickButton xboxYButton = new JoystickButton(m_xbox, Constants.XBOX_Y);
-        xboxYButton.whileHeld(new VacuumMode(m_shooter, m_intake));
-
-        // actual shooter command
-
-        // shooting for upperHub
-        JoystickButton xboxXButton = new JoystickButton(m_xbox, Constants.XBOX_X);
-        xboxXButton.whenPressed(new TurnAndShoot(m_shooter, m_intake, m_driveTrain, m_vision, m_driveCommand));
-
-        // shooting for upperHub from tarmac
-        JoystickButton xboxAButton = new JoystickButton(m_xbox, Constants.XBOX_A);
-        xboxAButton.whenPressed(new ShooterCommand(m_shooter, m_intake, Constants.TARMAC_DEFAULT_DISTANCE, true));
-
-        // shooting for lowerHub
-        JoystickButton xboxBButton = new JoystickButton(m_xbox, Constants.XBOX_B);
-        xboxBButton.whenPressed(new ShooterCommand(m_shooter, m_intake, m_vision, false));
-
-        // Intake commands
-        
-        JoystickButton bumperRight = new JoystickButton(m_xbox, Constants.XBOX_RB);
-        bumperRight.whileHeld(new IntakeCommand(m_intake, Constants.INTAKE_SPEED));
-    
-        JoystickButton bumperLeft = new JoystickButton(m_xbox, Constants.XBOX_LB);
-        bumperLeft.whileHeld(new IntakeCommand(m_intake, -Constants.INTAKE_SPEED));
 
         // farm controller
         JoystickButton farm1 = new JoystickButton(m_farm, 1);
@@ -132,40 +94,12 @@ public class RobotContainer {
         JoystickButton farm11 = new JoystickButton(m_farm, 11);
         farm11.whenPressed(new ResetClimber(m_climber));
 
-        // Additional manual shooter position buttons(orange buttons)
-        // JoystickButton farm4 = new JoystickButton(m_farm, 4);
-        // farm4.whenPressed(new ShooterCommand(m_shooter, m_intake, Constants.TARMAC_DEFAULT_DISTANCE, true));
-    
-        JoystickButton farm5 = new JoystickButton(m_farm, 5);
-        farm5.whenPressed(new ShooterCommand(m_shooter, m_intake, Constants.JUST_OUTSIDE_TARMAC, true));
-
-        JoystickButton farm9 = new JoystickButton(m_farm, 9);
-        farm9.whenPressed(new ShooterCommand(m_shooter, m_intake, Constants.CLOSE_LAUNCHPAD_SHOOTER_DISTANCE, true));
-
-        JoystickButton farm10 = new JoystickButton(m_farm, 10);
-        farm10.whenPressed(new ShooterCommand(m_shooter, m_intake, Constants.FAR_LAUNCHPAD_SHOOTER_DISTANCE, true));
-        // end additional shooter buttons
-
         // Arm Brake/Coast buttons
         JoystickButton farm13 = new JoystickButton(m_farm, 13);
         farm13.whenPressed(new SetArmCoast(m_climber));
 
         JoystickButton farm15 = new JoystickButton(m_farm, 15);
         farm15.whenPressed(new SetArmBrake(m_climber));        
-        
-        //Bind buttons for vision modes.
-        JoystickButton farm12 = new JoystickButton(m_farm, 12);
-        farm12.whenPressed(new SetVisionMode(m_vision, VisionMode.INTAKE)); 
-
-        JoystickButton farm14 = new JoystickButton(m_farm, 14);
-        farm14.whenPressed(new SetVisionMode(m_vision, VisionMode.SHOOTER)); 
-
-        JoystickButton farm16 = new JoystickButton(m_farm, 16);
-        farm16.whenPressed(new SetVisionMode(m_vision, VisionMode.HUBFINDER)); 
-
-        // For Testing
-        // JoystickButton farm10 = new JoystickButton(m_farm, 10);
-        // xboxYButton.whenPressed(new FaceShootingTarget(m_driveTrain, m_vision, Constants.TURN_TOLERANCE_DEG, m_driveCommand)); 
     }
 
     private class Throttle implements DoubleSupplier {
@@ -195,27 +129,7 @@ public class RobotContainer {
     public DriveTrain getDriveTrain(){
         return m_driveTrain;
     }
-    
-    public Vision getVision() {
-        return m_vision;
-    }
-    
     public Climber getClimber(){
         return m_climber;
     }
-
-    public Shooter getShooter(){
-        return m_shooter;
-    }
-
-    public Intake getIntake(){
-        return m_intake;
-    }
-
-    // LigerBots: we don't use this function.
-    // Autonomous is controlled by a Chooser defined in Robot.
-    //
-    // public Command getAutonomousCommand() {
-    // return null;
-    // }
 }

@@ -7,17 +7,9 @@ package frc.robot;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.commands.AutoCommandInterface;
-import frc.robot.commands.FourBallLower;
-import frc.robot.commands.OneBallAuto;
-import frc.robot.commands.ThreeBallMiddle;
-import frc.robot.commands.TrajectoryPlotter;
-import frc.robot.commands.TwoBallAutoCurved;
-import frc.robot.commands.TwoBallAutoStraight;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -28,9 +20,6 @@ import frc.robot.commands.TwoBallAutoStraight;
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
   private RobotContainer m_robotContainer;
-  private TrajectoryPlotter m_plotter;
-  private SendableChooser<AutoCommandInterface> m_chosenAuto = new SendableChooser<>();
-  private AutoCommandInterface m_prevAutoCommand = null;
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -41,25 +30,6 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
-
-    m_chosenAuto.setDefaultOption("TwoBallAutoStraight", 
-      new TwoBallAutoStraight(m_robotContainer.getShooter(), m_robotContainer.getIntake(), m_robotContainer.getDriveTrain(), m_robotContainer.getVision())
-    );
-    m_chosenAuto.addOption("TwoBallAutoCurved", 
-      new TwoBallAutoCurved(m_robotContainer.getShooter(), m_robotContainer.getIntake(), m_robotContainer.getDriveTrain(), m_robotContainer.getVision())
-    );
-    m_chosenAuto.addOption("OneBallAuto", 
-      new OneBallAuto(m_robotContainer.getShooter(), m_robotContainer.getIntake(), m_robotContainer.getDriveTrain(), m_robotContainer.getVision())
-    );
-    m_chosenAuto.addOption("ThreeBallMiddle", 
-      new ThreeBallMiddle(m_robotContainer.getShooter(), m_robotContainer.getIntake(), m_robotContainer.getDriveTrain(), m_robotContainer.getVision())
-    );
-    m_chosenAuto.addOption("FourBallLower", 
-      new FourBallLower(m_robotContainer.getShooter(), m_robotContainer.getIntake(), m_robotContainer.getDriveTrain(), m_robotContainer.getVision())
-    );
-    SmartDashboard.putData("Chosen Auto", m_chosenAuto);
-
-    m_plotter = new TrajectoryPlotter(m_robotContainer.getDriveTrain().getField2d());
 
     // Set climber motors to coast so we can move them if we need to.
     m_robotContainer.getClimber().setBrakeMode(true);
@@ -98,18 +68,7 @@ public class Robot extends TimedRobot {
   }
 
   @Override
-  public void disabledPeriodic() {
-    AutoCommandInterface autoCommandInterface = m_chosenAuto.getSelected();
-    if (autoCommandInterface != null && autoCommandInterface != m_prevAutoCommand) {
-      m_robotContainer.getDriveTrain().setPose(autoCommandInterface.getInitialPose());
-      m_prevAutoCommand = autoCommandInterface;
-
-      if (Robot.isSimulation()) {
-        m_plotter.clear();
-        autoCommandInterface.plotTrajectory(m_plotter);
-      }
-    }    
-  }
+  public void disabledPeriodic() {}
 
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
@@ -119,12 +78,6 @@ public class Robot extends TimedRobot {
     m_robotContainer.getDriveCommand().cancel();
 
     m_robotContainer.getDriveTrain().setMotorMode(NeutralMode.Brake);
-
-    // schedule the autonomous command
-    m_autonomousCommand = m_chosenAuto.getSelected();
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.schedule();
-    }
   }
 
   /** This function is called periodically during autonomous. */
