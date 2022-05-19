@@ -32,15 +32,6 @@ public class Robot extends TimedRobot {
     m_robotContainer = new RobotContainer();
 
     // Set climber motors to coast so we can move them if we need to.
-    m_robotContainer.getClimber().setBrakeMode(true);
-
-    SmartDashboard.putNumber("Constants/SetElevatorHeightTest", 0.0);
-    SmartDashboard.putNumber("Constants/SetArmAngleTest", 80.0);
-    
-    SmartDashboard.putNumber("Constants/OneElevatorIndex", 0.0);
-    SmartDashboard.putNumber("Constants/SetOneElevatorHeightTest", 0.0);
-
-    SmartDashboard.putNumber("Constants/AdjustRobotAngleTest", 0.0);
   }
 
   /**
@@ -64,7 +55,6 @@ public class Robot extends TimedRobot {
   /** This function is called once each time the robot enters Disabled mode. */
   @Override
   public void disabledInit() {
-    m_robotContainer.getDriveTrain().setMotorMode(NeutralMode.Coast);
   }
 
   @Override
@@ -75,9 +65,6 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
     // Cancel the DriveCommand so that the joystick can't override this command
     // group
-    m_robotContainer.getDriveCommand().cancel();
-
-    m_robotContainer.getDriveTrain().setMotorMode(NeutralMode.Brake);
   }
 
   /** This function is called periodically during autonomous. */
@@ -93,17 +80,6 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
-    m_robotContainer.getDriveCommand().schedule();
-    m_robotContainer.getDriveTrain().setMotorMode(NeutralMode.Brake);
-
-    // Set Climber motors to Brake mode
-    m_robotContainer.getClimber().setBrakeMode(true);
-    
-    m_robotContainer.getClimber().m_elevator[0].resetElevatorPos();
-    m_robotContainer.getClimber().m_elevator[1].resetElevatorPos(); 
-
-    m_robotContainer.getClimber().m_arm[0].resetArmPos();
-    m_robotContainer.getClimber().m_arm[1].resetArmPos();  
   }
 
 
