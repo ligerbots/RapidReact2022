@@ -6,6 +6,8 @@ package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 
+import edu.wpi.first.util.datalog.DataLog;
+import edu.wpi.first.wpilibj.DataLogManager;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -38,9 +40,15 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+    // start logging data
+    DataLogManager.start();
+    DataLog log = DataLogManager.getLog();
+
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
-    m_robotContainer = new RobotContainer();
+
+    // pass the data log into the robotContainer for subsystems to log in data
+    m_robotContainer = new RobotContainer(log);
 
     m_chosenAuto.setDefaultOption("TwoBallAutoStraight", 
       new TwoBallAutoStraight(m_robotContainer.getShooter(), m_robotContainer.getIntake(), m_robotContainer.getDriveTrain(), m_robotContainer.getVision())

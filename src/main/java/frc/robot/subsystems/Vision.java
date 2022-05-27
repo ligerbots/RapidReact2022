@@ -4,6 +4,9 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.util.Units;
+import edu.wpi.first.util.datalog.BooleanArrayLogEntry;
+import edu.wpi.first.util.datalog.DataLog;
+import edu.wpi.first.util.datalog.DoubleArrayLogEntry;
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.Relay.Value;
@@ -41,9 +44,19 @@ public class Vision extends SubsystemBase {
 
     private static final double HORIZONTAL_HALF_FOV = Math.toRadians(32.0);
 
+
+
+    // flag to check when we want to start loggin
+    private boolean m_logging;
+    private DoubleArrayLogEntry m_doubleArrayLogEntry;
+  
     // Note: driveTrain is needed for simulation mode only
 
-    public Vision(DriveTrain driveTrain) {
+    public Vision(DriveTrain driveTrain, DataLog log) {
+        // set up data logging in vision subsystem
+        m_logging = false;
+        m_doubleArrayLogEntry = new DoubleArrayLogEntry(log, "/vision_info");
+
         m_relay = new Relay(0);
         m_driveTrain = driveTrain;
 
@@ -54,6 +67,9 @@ public class Vision extends SubsystemBase {
     @Override
     public void periodic() {
         m_lastResult = SmartDashboard.getNumberArray("vision/target_info", EMPTY_TARGET_INFO);
+
+        // log the data when needed
+        if(m_logging) m_doubleArrayLogEntry.append(m_lastResult);
 
         if (m_lastResult[1] > 0.5) {
             // if the vision says the reading is good, store the distance in the ring buffer
@@ -68,6 +84,14 @@ public class Vision extends SubsystemBase {
                 System.out.format("Unstable vision reading: d = %3.1f angle = %3.1f%n", m_lastResult[3], Math.toDegrees(m_lastResult[4]));
             }
         }
+    }
+
+    public void startLogging(){
+        m_logging = true;
+    }
+
+    public void stopLogging(){
+        m_logging = false;
     }
 
     // Check the stability of the vision results by checking the spread (min/max) of the distance results

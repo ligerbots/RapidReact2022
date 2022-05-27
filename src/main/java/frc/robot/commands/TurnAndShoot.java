@@ -1,5 +1,6 @@
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
 import frc.robot.subsystems.DriveTrain;
@@ -16,9 +17,13 @@ public class TurnAndShoot extends SequentialCommandGroup {
             // TODO: test this
             // new AngleToTurn(driveTrain, vision, Constants.TURN_TOLERANCE_DEG, driveCommand),
 
+            new InstantCommand(vision::startLogging),
+
             new FaceShootingTarget(driveTrain, vision, Constants.TURN_TOLERANCE_DEG, driveCommand),
 
-            new ShooterCommand(shooter, intake, vision, true)
+            new ShooterCommand(shooter, intake, vision, true),
+
+            new InstantCommand(vision::stopLogging)
         );
     }
 }       

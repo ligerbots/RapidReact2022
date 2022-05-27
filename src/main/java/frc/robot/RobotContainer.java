@@ -6,6 +6,7 @@ package frc.robot;
 
 import java.util.function.DoubleSupplier;
 
+import edu.wpi.first.util.datalog.DataLog;
 // import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
@@ -48,9 +49,12 @@ public class RobotContainer {
     XboxController m_xbox = new XboxController(0);
     Joystick m_farm = new Joystick(1);
 
+    // dataLog for data logging in each subsystems
+    DataLog m_log;
+
     // The robot's subsystems and commands are defined here...
     private final DriveTrain m_driveTrain = new DriveTrain();
-    private final Vision m_vision = new Vision(m_driveTrain);
+    private final Vision m_vision = new Vision(m_driveTrain, m_log);
     private final Climber m_climber = new Climber();
     private final Shooter m_shooter = new Shooter();
     private final Intake m_intake = new Intake();
@@ -60,7 +64,8 @@ public class RobotContainer {
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
      */
-    public RobotContainer() {
+    public RobotContainer(DataLog log) {
+        m_log = log;
         // Configure the button bindings
         configureButtonBindings();
     }
