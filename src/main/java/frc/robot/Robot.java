@@ -41,9 +41,8 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     // start logging data
-    // TODO: figure out how this works
-    DataLogManager.start("RapidReact2022/dataLogging");
-    System.out.println(DataLogManager.getLogDir());
+
+    DataLogManager.start("dataLogging");
     DataLog log = DataLogManager.getLog();
 
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
