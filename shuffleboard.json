@@ -2154,6 +2154,30 @@
               "_source0": "network_table:///SmartDashboard/m_headingError",
               "_title": "m_headingError"
             }
+          },
+          "22,0": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/multiplier",
+              "_title": "multiplier"
+            }
+          },
+          "22,1": {
+            "size": [
+              2,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/isTuning",
+              "_title": "isTuning",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
           }
         }
       }
@@ -2720,12 +2744,52 @@
           }
         }
       }
+    },
+    {
+      "title": "Outreach",
+      "autoPopulate": false,
+      "autoPopulatePrefix": "",
+      "widgetPane": {
+        "gridSize": 100.0,
+        "showGrid": true,
+        "hgap": 16.0,
+        "vgap": 16.0,
+        "titleType": 0,
+        "tiles": {
+          "0,2": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Toggle Switch",
+              "_source0": "network_table:///SmartDashboard/isTuning",
+              "_title": "SmartDashboard/isTuning"
+            }
+          },
+          "0,3": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Number Slider",
+              "_source0": "network_table:///SmartDashboard/multiplier",
+              "_title": "SmartDashboard/multiplier",
+              "Slider Settings/Min": 0.0,
+              "Slider Settings/Max": 1.0,
+              "Slider Settings/Block increment": 0.0625,
+              "Visuals/Display value": true
+            }
+          }
+        }
+      }
     }
   ],
   "windowGeometry": {
-    "x": -6.222222328186035,
-    "y": -6.222222328186035,
-    "width": 1719.111083984375,
-    "height": 932.4444580078125
+    "x": -8.0,
+    "y": -8.0,
+    "width": 1936.0,
+    "height": 1168.0
   }
 }
