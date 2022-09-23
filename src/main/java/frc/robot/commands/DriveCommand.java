@@ -18,6 +18,7 @@ public class DriveCommand extends CommandBase {
 	DoubleSupplier m_turn;
 
 	double m_multiplier;
+	double m_rmutiplier;
 	boolean m_isTuning;
 
 	public DriveCommand(DriveTrain driveTrain, DoubleSupplier throttle, DoubleSupplier turn) {
@@ -30,9 +31,11 @@ public class DriveCommand extends CommandBase {
 	// Called when the command is initially scheduled.
 	@Override
 	public void initialize() {
-		m_multiplier = 1;
+		m_multiplier = Constants.FORWARD_BACKWARD;
+		m_rmutiplier = Constants.ROTATION;
 		m_isTuning = false;
 		SmartDashboard.putNumber("multiplier", m_multiplier);
+		SmartDashboard.putNumber("rotationMultiplier",m_rmutiplier);
 		SmartDashboard.putBoolean("isTuning", m_isTuning);
 	}
 
@@ -41,9 +44,10 @@ public class DriveCommand extends CommandBase {
   public void execute() {
     m_isTuning = SmartDashboard.getBoolean("isTuning", false);
     m_multiplier = SmartDashboard.getNumber("multiplier", 1);
+	m_rmutiplier = SmartDashboard.getNumber("rotationMultiplier",1);
     
     if(m_isTuning)
-        m_driveTrain.drive(m_throttle.getAsDouble()*m_multiplier, m_turn.getAsDouble()*m_multiplier, true);
+        m_driveTrain.drive(m_throttle.getAsDouble()*m_multiplier, m_turn.getAsDouble()*m_rmutiplier, true);
     else
 		m_driveTrain.drive(m_throttle.getAsDouble(), m_turn.getAsDouble(), true);
   }

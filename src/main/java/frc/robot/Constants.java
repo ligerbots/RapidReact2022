@@ -17,6 +17,10 @@ import edu.wpi.first.math.util.Units;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
+
+    public static final double FORWARD_BACKWARD = 0.44;
+    public static final double ROTATION = 0.56;
+
     // From SysId runs on March 16
     public static final double ksVolts = 0.68402;
     public static final double kvVoltSecondsPerMeter = 2.116;
