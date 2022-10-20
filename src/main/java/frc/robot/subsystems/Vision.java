@@ -48,7 +48,7 @@ public class Vision extends SubsystemBase {
         m_driveTrain = driveTrain;
 
         // start the camera in hubfinder for auto, but don't turn on the LED
-        this.setMode(VisionMode.HUBFINDER, false);
+        // this.setMode(VisionMode.HUBFINDER, false);
     }
 
     @Override
