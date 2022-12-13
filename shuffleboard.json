@@ -1067,6 +1067,252 @@
               "_source0": "network_table:///SmartDashboard/vision/hub/saturation_low_limit",
               "_title": "vision/hub/saturation_low_limit"
             }
+          },
+          "17,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/multiplier",
+              "_title": "multiplier"
+            }
+          },
+          "18,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/rotationMultiplier",
+              "_title": "rotationMultiplier"
+            }
+          },
+          "19,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/isTuning",
+              "_title": "isTuning",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "17,1": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Swerve",
+              "_title": "Swerve"
+            }
+          },
+          "18,1": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Swerve Speed",
+              "_title": "Swerve Speed"
+            }
+          },
+          "19,1": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Swerve Angle",
+              "_title": "Swerve Angle"
+            }
+          },
+          "17,2": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Gyro Angle",
+              "_title": "Gyro Angle"
+            }
+          },
+          "18,2": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/NEO 4 Volt",
+              "_title": "NEO 4 Volt"
+            }
+          },
+          "19,2": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/NEO 2 Volt",
+              "_title": "NEO 2 Volt"
+            }
+          },
+          "17,3": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/NEO 6 Volt",
+              "_title": "NEO 6 Volt"
+            }
+          },
+          "18,3": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/NEO 8 Volt",
+              "_title": "NEO 8 Volt"
+            }
+          },
+          "19,3": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/On?",
+              "_title": "On?",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "15,4": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Falcon 1 Volt",
+              "_title": "Falcon 1 Volt"
+            }
+          },
+          "16,4": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Falcon 3 Volt",
+              "_title": "Falcon 3 Volt"
+            }
+          },
+          "17,4": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Falcon 5 Volt",
+              "_title": "Falcon 5 Volt"
+            }
+          },
+          "18,4": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/NEO 1 Volt",
+              "_title": "NEO 1 Volt"
+            }
+          },
+          "19,4": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/NEO 3 Volt",
+              "_title": "NEO 3 Volt"
+            }
+          },
+          "0,5": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/NEO 5 Volt",
+              "_title": "NEO 5 Volt"
+            }
+          },
+          "1,5": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/NEO 7 Volt",
+              "_title": "NEO 7 Volt"
+            }
+          },
+          "2,5": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Falcon 2 Volt",
+              "_title": "Falcon 2 Volt"
+            }
+          },
+          "3,5": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Falcon 4 Volt",
+              "_title": "Falcon 4 Volt"
+            }
+          },
+          "4,5": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Falcon 6 Volt",
+              "_title": "Falcon 6 Volt"
+            }
           }
         }
       }
@@ -1577,7 +1823,7 @@
               "Crosshair/Crosshair color": "#FFFFFFFF",
               "Controls/Show controls": true,
               "Controls/Rotation": "NONE",
-              "compression": -1.0,
+              "compression": 87.1920289855073,
               "fps": -1,
               "imageWidth": 0,
               "imageHeight": 0
@@ -1667,14 +1913,174 @@
               "Colors/Color when true": "#7CFC00FF",
               "Colors/Color when false": "#8B0000FF"
             }
+          },
+          "3,3": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Toggle Button",
+              "_source0": "network_table:///SmartDashboard/vision/write_images",
+              "_title": "SmartDashboard/vision/write_images"
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Tab 6",
+      "autoPopulate": false,
+      "autoPopulatePrefix": "",
+      "widgetPane": {
+        "gridSize": 128.0,
+        "showGrid": true,
+        "hgap": 16.0,
+        "vgap": 16.0,
+        "titleType": 0,
+        "tiles": {
+          "0,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Swerve",
+              "_title": "/SmartDashboard/Swerve"
+            }
+          },
+          "1,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Swerve Angle",
+              "_title": "/SmartDashboard/Swerve Angle"
+            }
+          },
+          "2,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Swerve Speed",
+              "_title": "/SmartDashboard/Swerve Speed"
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Tab 7",
+      "autoPopulate": false,
+      "autoPopulatePrefix": "",
+      "widgetPane": {
+        "gridSize": 128.0,
+        "showGrid": true,
+        "hgap": 16.0,
+        "vgap": 16.0,
+        "titleType": 0,
+        "tiles": {
+          "0,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/NEO 1 Volt",
+              "_title": "/SmartDashboard/NEO 1 Volt"
+            }
+          },
+          "1,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/NEO 2 Volt",
+              "_title": "/SmartDashboard/NEO 2 Volt"
+            }
+          },
+          "2,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/NEO 3 Volt",
+              "_title": "/SmartDashboard/NEO 3 Volt"
+            }
+          },
+          "3,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/NEO 4 Volt",
+              "_title": "/SmartDashboard/NEO 4 Volt"
+            }
+          },
+          "4,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/NEO 5 Volt",
+              "_title": "/SmartDashboard/NEO 5 Volt"
+            }
+          },
+          "5,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/NEO 6 Volt",
+              "_title": "/SmartDashboard/NEO 6 Volt"
+            }
+          },
+          "6,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/NEO 7 Volt",
+              "_title": "/SmartDashboard/NEO 7 Volt"
+            }
+          },
+          "7,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/NEO 8 Volt",
+              "_title": "/SmartDashboard/NEO 8 Volt"
+            }
           }
         }
       }
     }
   ],
   "windowGeometry": {
-    "x": -6.222222328186035,
-    "y": -6.222222328186035,
+    "x": -5.333333492279053,
+    "y": 127.55555725097656,
     "width": 1719.111083984375,
     "height": 932.4444580078125
   }
