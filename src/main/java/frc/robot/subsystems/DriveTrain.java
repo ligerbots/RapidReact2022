@@ -87,7 +87,7 @@ public class DriveTrain extends SubsystemBase {
         // m_rightEncoder.setDistancePerPulse(Constants.ENCODER_DISTANCE_PER_PULSE);
         // m_rightEncoder.setReverseDirection(true);
         
-        m_odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(0));
+        m_odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(0), 0, 0);
         m_navX = new AHRS(Port.kMXP, (byte) 200);
 
         if (RobotBase.isSimulation()) {
@@ -182,7 +182,7 @@ public class DriveTrain extends SubsystemBase {
         m_rightLeader.setSelectedSensorPosition(0.0);
 
         if (Robot.isSimulation()) m_differentialDriveSim.setPose(new Pose2d()); // drive sim doesn't seem to get reset anymore?
-        m_odometry.resetPosition(pose, Rotation2d.fromDegrees(getGyroAngle()));
+        m_odometry.resetPosition(Rotation2d.fromDegrees(getGyroAngle()), getLeftEncoderDistance(), getRightEncoderDistance(), pose);
     }
 
     public double getHeading() {
