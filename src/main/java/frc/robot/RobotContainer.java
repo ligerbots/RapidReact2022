@@ -83,89 +83,89 @@ public class RobotContainer {
         
         // vacuum mode
         JoystickButton xboxYButton = new JoystickButton(m_xbox, Constants.XBOX_Y);
-        xboxYButton.whileHeld(new VacuumMode(m_shooter, m_intake));
+        xboxYButton.whileTrue(new VacuumMode(m_shooter, m_intake));
 
         // actual shooter command
 
         // shooting for upperHub
         JoystickButton xboxXButton = new JoystickButton(m_xbox, Constants.XBOX_X);
-        xboxXButton.whenPressed(new TurnAndShoot(m_shooter, m_intake, m_driveTrain, m_vision, m_driveCommand));
+        xboxXButton.onTrue(new TurnAndShoot(m_shooter, m_intake, m_driveTrain, m_vision, m_driveCommand));
 
         // shooting for upperHub from tarmac
         JoystickButton xboxAButton = new JoystickButton(m_xbox, Constants.XBOX_A);
-        xboxAButton.whenPressed(new ShooterCommand(m_shooter, m_intake, Constants.TARMAC_DEFAULT_DISTANCE, true));
+        xboxAButton.onTrue(new ShooterCommand(m_shooter, m_intake, Constants.TARMAC_DEFAULT_DISTANCE, true));
 
         // shooting for lowerHub
         JoystickButton xboxBButton = new JoystickButton(m_xbox, Constants.XBOX_B);
-        xboxBButton.whenPressed(new ShooterCommand(m_shooter, m_intake, m_vision, false));
+        xboxBButton.onTrue(new ShooterCommand(m_shooter, m_intake, m_vision, false));
 
         // Intake commands
         
         JoystickButton bumperRight = new JoystickButton(m_xbox, Constants.XBOX_RB);
-        bumperRight.whileHeld(new IntakeCommand(m_intake, Constants.INTAKE_SPEED));
+        bumperRight.whileTrue(new IntakeCommand(m_intake, Constants.INTAKE_SPEED));
     
         JoystickButton bumperLeft = new JoystickButton(m_xbox, Constants.XBOX_LB);
-        bumperLeft.whileHeld(new IntakeCommand(m_intake, -Constants.INTAKE_SPEED));
+        bumperLeft.whileTrue(new IntakeCommand(m_intake, -Constants.INTAKE_SPEED));
 
         // farm controller
         JoystickButton farm1 = new JoystickButton(m_farm, 1);
-        farm1.whenPressed(new SetElevatorHeightTest(m_climber));
+        farm1.onTrue(new SetElevatorHeightTest(m_climber));
 
         JoystickButton farm2 = new JoystickButton(m_farm, 2);
-        farm2.whenPressed(new SetArmAngleTest(m_climber));
+        farm2.onTrue(new SetArmAngleTest(m_climber));
 
         JoystickButton farm3 = new JoystickButton(m_farm, 3);
-        farm3.whenPressed(new SetOneElevatorHeightTest(m_climber));
+        farm3.onTrue(new SetOneElevatorHeightTest(m_climber));
 
         JoystickButton farm4 = new JoystickButton(m_farm, 4);
-        farm4.whenPressed(new AdjustRobotAngleTest(m_driveTrain));
+        farm4.onTrue(new AdjustRobotAngleTest(m_driveTrain));
 
         JoystickButton farm6 = new JoystickButton(m_farm, 6);
-        farm6.whenPressed(new SetClimber(m_climber));
+        farm6.onTrue(new SetClimber(m_climber));
 
         JoystickButton farm7 = new JoystickButton(m_farm, 7);
-        farm7.whenPressed(new RaiseToBar(m_climber).withTimeout(Constants.RAISE_TO_BAR_TIMEOUT));
+        farm7.onTrue(new RaiseToBar(m_climber).withTimeout(Constants.RAISE_TO_BAR_TIMEOUT));
 
         JoystickButton farm8 = new JoystickButton(m_farm, 8);
-        farm8.whenPressed(new ClimbToNextBar(m_climber).withTimeout(Constants.CLIMB_TO_NEXT_BAR_TIMEOUT));
+        farm8.onTrue(new ClimbToNextBar(m_climber).withTimeout(Constants.CLIMB_TO_NEXT_BAR_TIMEOUT));
 
         JoystickButton farm11 = new JoystickButton(m_farm, 11);
-        farm11.whenPressed(new ResetClimber(m_climber));
+        farm11.onTrue(new ResetClimber(m_climber));
 
         // Additional manual shooter position buttons(orange buttons)
         // JoystickButton farm4 = new JoystickButton(m_farm, 4);
-        // farm4.whenPressed(new ShooterCommand(m_shooter, m_intake, Constants.TARMAC_DEFAULT_DISTANCE, true));
+        // farm4.onTrue(new ShooterCommand(m_shooter, m_intake, Constants.TARMAC_DEFAULT_DISTANCE, true));
     
         JoystickButton farm5 = new JoystickButton(m_farm, 5);
-        farm5.whenPressed(new ShooterCommand(m_shooter, m_intake, Constants.JUST_OUTSIDE_TARMAC, true));
+        farm5.onTrue(new ShooterCommand(m_shooter, m_intake, Constants.JUST_OUTSIDE_TARMAC, true));
 
         JoystickButton farm9 = new JoystickButton(m_farm, 9);
-        farm9.whenPressed(new ShooterCommand(m_shooter, m_intake, Constants.CLOSE_LAUNCHPAD_SHOOTER_DISTANCE, true));
+        farm9.onTrue(new ShooterCommand(m_shooter, m_intake, Constants.CLOSE_LAUNCHPAD_SHOOTER_DISTANCE, true));
 
         JoystickButton farm10 = new JoystickButton(m_farm, 10);
-        farm10.whenPressed(new ShooterCommand(m_shooter, m_intake, Constants.FAR_LAUNCHPAD_SHOOTER_DISTANCE, true));
+        farm10.onTrue(new ShooterCommand(m_shooter, m_intake, Constants.FAR_LAUNCHPAD_SHOOTER_DISTANCE, true));
         // end additional shooter buttons
 
         // Arm Brake/Coast buttons
         JoystickButton farm13 = new JoystickButton(m_farm, 13);
-        farm13.whenPressed(new SetArmCoast(m_climber));
+        farm13.onTrue(new SetArmCoast(m_climber));
 
         JoystickButton farm15 = new JoystickButton(m_farm, 15);
-        farm15.whenPressed(new SetArmBrake(m_climber));        
+        farm15.onTrue(new SetArmBrake(m_climber));        
         
         //Bind buttons for vision modes.
         JoystickButton farm12 = new JoystickButton(m_farm, 12);
-        farm12.whenPressed(new SetVisionMode(m_vision, VisionMode.INTAKE)); 
+        farm12.onTrue(new SetVisionMode(m_vision, VisionMode.INTAKE)); 
 
         JoystickButton farm14 = new JoystickButton(m_farm, 14);
-        farm14.whenPressed(new SetVisionMode(m_vision, VisionMode.SHOOTER)); 
+        farm14.onTrue(new SetVisionMode(m_vision, VisionMode.SHOOTER)); 
 
         JoystickButton farm16 = new JoystickButton(m_farm, 16);
-        farm16.whenPressed(new SetVisionMode(m_vision, VisionMode.HUBFINDER)); 
+        farm16.onTrue(new SetVisionMode(m_vision, VisionMode.HUBFINDER)); 
 
         // For Testing
         // JoystickButton farm10 = new JoystickButton(m_farm, 10);
-        // xboxYButton.whenPressed(new FaceShootingTarget(m_driveTrain, m_vision, Constants.TURN_TOLERANCE_DEG, m_driveCommand)); 
+        // xboxYButton.onTrue(new FaceShootingTarget(m_driveTrain, m_vision, Constants.TURN_TOLERANCE_DEG, m_driveCommand)); 
     }
 
     private class Throttle implements DoubleSupplier {
