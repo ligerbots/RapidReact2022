@@ -12,55 +12,54 @@ import frc.robot.Constants;
 import frc.robot.subsystems.DriveTrain;
 
 public class DriveCommand extends CommandBase {
-	/** Creates a new DriveCommand. */
+  /** Creates a new DriveCommand. */
 
-	DriveTrain m_driveTrain;
-	DoubleSupplier m_throttle;
-	DoubleSupplier m_turn;
+  DriveTrain m_driveTrain;
+  DoubleSupplier m_throttle;
+  DoubleSupplier m_turn;
 
-	double m_multiplier;
-	double m_rmutiplier;
-	boolean m_isTuning;
+  double m_multiplier = Constants.FORWARD_BACKWARD;
+  double m_rmutiplier = Constants.ROTATION;
+  boolean m_slowMode = false;
 
-	public DriveCommand(DriveTrain driveTrain, DoubleSupplier throttle, DoubleSupplier turn) {
-		m_driveTrain = driveTrain;
-		m_throttle = throttle;
-		m_turn = turn;
-		addRequirements(driveTrain);
-	}
+  public DriveCommand(DriveTrain driveTrain, DoubleSupplier throttle, DoubleSupplier turn) {
+    m_driveTrain = driveTrain;
+    m_throttle = throttle;
+    m_turn = turn;
 
-	// Called when the command is initially scheduled.
-	@Override
-	public void initialize() {
-		m_multiplier = Constants.FORWARD_BACKWARD;
-		m_rmutiplier = Constants.ROTATION;
-		m_isTuning = false;
-		SmartDashboard.putNumber("multiplier", m_multiplier);
-		SmartDashboard.putNumber("rotationMultiplier",m_rmutiplier);
-		SmartDashboard.putBoolean("isTuning", m_isTuning);
-	}
+    SmartDashboard.putNumber("drivetrain/speedMultiplier", m_multiplier);
+    SmartDashboard.putNumber("drivetrain/rotationMultiplier", m_rmutiplier);
+    SmartDashboard.putBoolean("slowMode", m_slowMode);
 
-	// Called every time the scheduler runs while the command is scheduled.
-	@Override
-  public void execute() {
-    m_isTuning = SmartDashboard.getBoolean("isTuning", false);
-    m_multiplier = SmartDashboard.getNumber("multiplier", 1);
-	m_rmutiplier = SmartDashboard.getNumber("rotationMultiplier",1);
-    
-    if(m_isTuning)
-        m_driveTrain.drive(m_throttle.getAsDouble()*m_multiplier, m_turn.getAsDouble()*m_rmutiplier, true);
-    else
-		m_driveTrain.drive(m_throttle.getAsDouble(), m_turn.getAsDouble(), true);
+    addRequirements(driveTrain);
   }
 
-	// Called once the command ends or is interrupted.
-	@Override
-	public void end(boolean interrupted) {
-	}
+  // Called when the command is initially scheduled.
+  @Override
+  public void initialize() {
+  }
 
-	// Returns true when the command should end.
-	@Override
-	public boolean isFinished() {
-		return false;
-	}
+  // Called every time the scheduler runs while the command is scheduled.
+  @Override
+  public void execute() {
+    m_slowMode = SmartDashboard.getBoolean("slowMode", false);
+
+    if (m_slowMode) {
+      m_multiplier = SmartDashboard.getNumber("drivetrain/speedMultiplier", 1);
+      m_rmutiplier = SmartDashboard.getNumber("drivetrain/rotationMultiplier", 1);
+      m_driveTrain.drive(m_throttle.getAsDouble() * m_multiplier, m_turn.getAsDouble() * m_rmutiplier, true);
+    } else
+      m_driveTrain.drive(m_throttle.getAsDouble(), m_turn.getAsDouble(), true);
+  }
+
+  // Called once the command ends or is interrupted.
+  @Override
+  public void end(boolean interrupted) {
+  }
+
+  // Returns true when the command should end.
+  @Override
+  public boolean isFinished() {
+    return false;
+  }
 }
