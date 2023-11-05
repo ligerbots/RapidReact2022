@@ -20,7 +20,7 @@ public class DriveCommand extends CommandBase {
 
   double m_multiplier = Constants.FORWARD_BACKWARD;
   double m_rmutiplier = Constants.ROTATION;
-  boolean m_slowMode = false;
+  boolean m_slowMode = true;
 
   public DriveCommand(DriveTrain driveTrain, DoubleSupplier throttle, DoubleSupplier turn) {
     m_driveTrain = driveTrain;
