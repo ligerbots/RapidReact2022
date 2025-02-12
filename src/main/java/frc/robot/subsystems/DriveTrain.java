@@ -20,7 +20,7 @@ import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.simulation.DifferentialDrivetrainSim;
 // import edu.wpi.first.wpilibj.simulation.EncoderSim;
-import edu.wpi.first.wpilibj.simulation.SimDeviceSim;
+// import edu.wpi.first.wpilibj.simulation.SimDeviceSim;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -36,8 +36,8 @@ public class DriveTrain extends SubsystemBase {
     private WPI_TalonFX m_rightLeader = new WPI_TalonFX(Constants.LEADER_RIGHT_CAN_ID);
     private WPI_TalonFX m_rightFollower = new WPI_TalonFX(Constants.FOLLOWER_RIGHT_CAN_ID);
 
-    private TalonFXSimCollection m_leftLeader_sim;
-    private TalonFXSimCollection m_rightLeader_sim;
+    // private TalonFXSimCollection m_leftLeader_sim;
+    // private TalonFXSimCollection m_rightLeader_sim;
     private final MotorControllerGroup m_leftMotors = new MotorControllerGroup(m_leftLeader, m_leftFollower);
     private final MotorControllerGroup m_rightMotors = new MotorControllerGroup(m_rightLeader, m_rightFollower);
 
@@ -90,25 +90,25 @@ public class DriveTrain extends SubsystemBase {
         m_odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(0), 0, 0);
         m_navX = new AHRS(Port.kMXP, (byte) 200);
 
-        if (RobotBase.isSimulation()) {
+        // if (RobotBase.isSimulation()) {
 
-            m_differentialDriveSim = new DifferentialDrivetrainSim(
-                    Constants.kDrivetrainPlant,
-                    Constants.kDriveGearbox,
-                    Constants.kDriveGearing,
-                    Constants.kTrackwidth,
-                    Constants.kWheelDiameterMeters / 2.0,
-                    null);
+        //     m_differentialDriveSim = new DifferentialDrivetrainSim(
+        //             Constants.kDrivetrainPlant,
+        //             Constants.kDriveGearbox,
+        //             Constants.kDriveGearing,
+        //             Constants.kTrackwidth,
+        //             Constants.kWheelDiameterMeters / 2.0,
+        //             null);
 
-            m_leftLeader_sim = m_leftLeader.getSimCollection();
-            m_rightLeader_sim = m_rightLeader.getSimCollection();
-                    // m_leftEncoderSim = new EncoderSim(m_leftEncoder);
-            // m_rightEncoderSim = new EncoderSim(m_rightEncoder);
-            m_gyroAngleSim = new SimDeviceSim("navX-Sensor[0]").getDouble("Yaw");
+        //     m_leftLeader_sim = m_leftLeader.getSimCollection();
+        //     m_rightLeader_sim = m_rightLeader.getSimCollection();
+        //             // m_leftEncoderSim = new EncoderSim(m_leftEncoder);
+        //     // m_rightEncoderSim = new EncoderSim(m_rightEncoder);
+        //     m_gyroAngleSim = new SimDeviceSim("navX-Sensor[0]").getDouble("Yaw");
 
-            m_fieldSim = new Field2d();
-            SmartDashboard.putData("Field", m_fieldSim);
-        }
+        //     m_fieldSim = new Field2d();
+        //     SmartDashboard.putData("Field", m_fieldSim);
+        // }
     }
 
     public void setMotorMode(NeutralMode m) {
@@ -232,85 +232,85 @@ public class DriveTrain extends SubsystemBase {
         return new DifferentialDriveWheelSpeeds(getLeftEncoderVelocity(), getRightEncoderVelocity());
     }
 
-    @Override
-    public void simulationPeriodic() {
-        // Set the inputs to the system. Note that we need to convert
-        // the [-1, 1] PWM signal to voltage by multiplying it by the
-        // robot controller voltage.
-        m_differentialDriveSim.setInputs(m_leftMotors.get() * RobotController.getInputVoltage(),
-                m_rightMotors.get() * RobotController.getInputVoltage());
+    // @Override
+    // public void simulationPeriodic() {
+    //     // Set the inputs to the system. Note that we need to convert
+    //     // the [-1, 1] PWM signal to voltage by multiplying it by the
+    //     // robot controller voltage.
+    //     m_differentialDriveSim.setInputs(m_leftMotors.get() * RobotController.getInputVoltage(),
+    //             m_rightMotors.get() * RobotController.getInputVoltage());
 
-        // Advance the model by 20 ms. Note that if you are running this
-        // subsystem in a separate thread or have changed the nominal timestep
-        // of TimedRobot, this value needs to match it.
-        m_differentialDriveSim.update(0.02);
+    //     // Advance the model by 20 ms. Note that if you are running this
+    //     // subsystem in a separate thread or have changed the nominal timestep
+    //     // of TimedRobot, this value needs to match it.
+    //     m_differentialDriveSim.update(0.02);
 
-        // Update all of our sensors.
-        /*
-        m_leftEncoderSim.setDistance(m_differentialDriveSim.getLeftPositionMeters());
-        m_leftEncoderSim.setRate(m_differentialDriveSim.getLeftVelocityMetersPerSecond());
-        m_rightEncoderSim.setDistance(m_differentialDriveSim.getRightPositionMeters());
-        m_rightEncoderSim.setRate(m_differentialDriveSim.getRightVelocityMetersPerSecond());
-        */
+    //     // Update all of our sensors.
+    //     /*
+    //     m_leftEncoderSim.setDistance(m_differentialDriveSim.getLeftPositionMeters());
+    //     m_leftEncoderSim.setRate(m_differentialDriveSim.getLeftVelocityMetersPerSecond());
+    //     m_rightEncoderSim.setDistance(m_differentialDriveSim.getRightPositionMeters());
+    //     m_rightEncoderSim.setRate(m_differentialDriveSim.getRightVelocityMetersPerSecond());
+    //     */
 
-        m_leftLeader_sim.setIntegratedSensorRawPosition((int) (m_differentialDriveSim.getLeftPositionMeters() / Constants.DRIVE_FALCON_DISTANCE_PER_UNIT));
-        m_leftLeader_sim.setIntegratedSensorVelocity((int) (m_differentialDriveSim.getLeftVelocityMetersPerSecond() / Constants.DRIVE_FALCON_DISTANCE_PER_UNIT / 10.0));
+    //     m_leftLeader_sim.setIntegratedSensorRawPosition((int) (m_differentialDriveSim.getLeftPositionMeters() / Constants.DRIVE_FALCON_DISTANCE_PER_UNIT));
+    //     m_leftLeader_sim.setIntegratedSensorVelocity((int) (m_differentialDriveSim.getLeftVelocityMetersPerSecond() / Constants.DRIVE_FALCON_DISTANCE_PER_UNIT / 10.0));
 
-        m_rightLeader_sim.setIntegratedSensorRawPosition( - (int) (m_differentialDriveSim.getRightPositionMeters() / Constants.DRIVE_FALCON_DISTANCE_PER_UNIT));
-        m_rightLeader_sim.setIntegratedSensorVelocity( - (int) (m_differentialDriveSim.getRightVelocityMetersPerSecond() / Constants.DRIVE_FALCON_DISTANCE_PER_UNIT / 10.0));
+    //     m_rightLeader_sim.setIntegratedSensorRawPosition( - (int) (m_differentialDriveSim.getRightPositionMeters() / Constants.DRIVE_FALCON_DISTANCE_PER_UNIT));
+    //     m_rightLeader_sim.setIntegratedSensorVelocity( - (int) (m_differentialDriveSim.getRightVelocityMetersPerSecond() / Constants.DRIVE_FALCON_DISTANCE_PER_UNIT / 10.0));
 
-        m_gyroAngleSim.set(-m_differentialDriveSim.getHeading().getDegrees());
-        m_fieldSim.setRobotPose(m_odometry.getPoseMeters());
-    }
+    //     m_gyroAngleSim.set(-m_differentialDriveSim.getHeading().getDegrees());
+    //     m_fieldSim.setRobotPose(m_odometry.getPoseMeters());
+    // }
 
     public Field2d getField2d() {
         return m_fieldSim;
     }
 
-    public double disToTurn(double angle){
-        // calculate the distance one side of the wheels need to turn to get to the desired angle
-        return Constants.kTrackwidth*Math.PI*(angle / (2*Math.PI));
-    }
+    // public double disToTurn(double angle){
+    //     // calculate the distance one side of the wheels need to turn to get to the desired angle
+    //     return Constants.kTrackwidth*Math.PI*(angle / (2*Math.PI));
+    // }
 
-    public void setSetPoint(boolean turnToLeft, TrapezoidProfile.State setPoint, double startDisLeft, double startDisRight) {
-        // if turn to left, let the right motor drive, and vice versa
-        if(turnToLeft){
-            // have the left side go forward and right side backward to turn the robot to the right
-            m_leftLeader.set(ControlMode.Position, startDisLeft + setPoint.position);
-            m_rightLeader.set(ControlMode.Position, startDisRight - setPoint.position);
+    // public void setSetPoint(boolean turnToLeft, TrapezoidProfile.State setPoint, double startDisLeft, double startDisRight) {
+    //     // if turn to left, let the right motor drive, and vice versa
+    //     if(turnToLeft){
+    //         // have the left side go forward and right side backward to turn the robot to the right
+    //         m_leftLeader.set(ControlMode.Position, startDisLeft + setPoint.position);
+    //         m_rightLeader.set(ControlMode.Position, startDisRight - setPoint.position);
 
-            SmartDashboard.putNumber("DriveTrain/setPointLeft", Units.metersToInches(startDisLeft + setPoint.position));
-            SmartDashboard.putNumber("DriveTrain/setPointRight", Units.metersToInches(startDisRight - setPoint.position));
-        }else{
-            // have the right side go forward and left side backward to turn the robot to the left
-            m_leftLeader.set(ControlMode.Position, startDisLeft - setPoint.position);
-            m_rightLeader.set(ControlMode.Position, startDisRight + setPoint.position);
+    //         SmartDashboard.putNumber("DriveTrain/setPointLeft", Units.metersToInches(startDisLeft + setPoint.position));
+    //         SmartDashboard.putNumber("DriveTrain/setPointRight", Units.metersToInches(startDisRight - setPoint.position));
+    //     }else{
+    //         // have the right side go forward and left side backward to turn the robot to the left
+    //         m_leftLeader.set(ControlMode.Position, startDisLeft - setPoint.position);
+    //         m_rightLeader.set(ControlMode.Position, startDisRight + setPoint.position);
 
-            SmartDashboard.putNumber("DriveTrain/setPointLeft", Units.metersToInches(startDisLeft - setPoint.position));
-            SmartDashboard.putNumber("DriveTrain/setPointRight", Units.metersToInches(startDisRight + setPoint.position));
-        }
-        SmartDashboard.putBoolean("DriveTrain/turnToLeft", turnToLeft);        
-    }
+    //         SmartDashboard.putNumber("DriveTrain/setPointLeft", Units.metersToInches(startDisLeft - setPoint.position));
+    //         SmartDashboard.putNumber("DriveTrain/setPointRight", Units.metersToInches(startDisRight + setPoint.position));
+    //     }
+    //     SmartDashboard.putBoolean("DriveTrain/turnToLeft", turnToLeft);        
+    // }
 
-    public double turnSpeedCalc(double angleError) {
-        double absErr = Math.abs(angleError);
-        double turnSpeed;
-        if (absErr > 60.0) {
-            turnSpeed = 0.6;//0.8;
-        }
-        else if (absErr > 30.0) {
-            turnSpeed = 0.15;//0.2; //0.4;
-        }
-        else if (absErr > 10.0) {
-            turnSpeed = 0.1;//0.15;
-        }
-        // else if (absErr > 5.0) {
-        //     turnSpeed = 0.1; //0.07;
-        // }
-        else {
-            turnSpeed = 0.125; // 0.065;
-        }
+    // public double turnSpeedCalc(double angleError) {
+    //     double absErr = Math.abs(angleError);
+    //     double turnSpeed;
+    //     if (absErr > 60.0) {
+    //         turnSpeed = 0.6;//0.8;
+    //     }
+    //     else if (absErr > 30.0) {
+    //         turnSpeed = 0.15;//0.2; //0.4;
+    //     }
+    //     else if (absErr > 10.0) {
+    //         turnSpeed = 0.1;//0.15;
+    //     }
+    //     // else if (absErr > 5.0) {
+    //     //     turnSpeed = 0.1; //0.07;
+    //     // }
+    //     else {
+    //         turnSpeed = 0.125; // 0.065;
+    //     }
 
-        return turnSpeed * Math.signum(angleError);
-    }
+    //     return turnSpeed * Math.signum(angleError);
+    // }
 }

@@ -11,28 +11,9 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.AdjustRobotAngleTest;
-import frc.robot.commands.ClimbToNextBar;
-import frc.robot.commands.DriveCommand;
-import frc.robot.commands.ShooterCommand;
-import frc.robot.commands.TurnAndShoot;
-import frc.robot.commands.IntakeCommand;
-import frc.robot.commands.RaiseToBar;
-import frc.robot.commands.ResetClimber;
-import frc.robot.commands.SetArmAngleTest;
-import frc.robot.commands.SetArmBrake;
-import frc.robot.commands.SetArmCoast;
-import frc.robot.commands.SetClimber;
-import frc.robot.commands.SetElevatorHeightTest;
-import frc.robot.commands.SetOneElevatorHeightTest;
-import frc.robot.commands.SetVisionMode;
-import frc.robot.commands.VacuumMode;
-import frc.robot.subsystems.Climber;
-import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.Intake;
-import frc.robot.subsystems.Shooter;
-import frc.robot.subsystems.Vision;
-import frc.robot.subsystems.Vision.VisionMode;
+
+import frc.robot.commands.*;
+import frc.robot.subsystems.*;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -51,7 +32,7 @@ public class RobotContainer {
     // The robot's subsystems and commands are defined here...
     private final DriveTrain m_driveTrain = new DriveTrain();
     private final Vision m_vision = new Vision(m_driveTrain);
-    private final Climber m_climber = new Climber();
+    // private final Climber m_climber = new Climber();
     private final Shooter m_shooter = new Shooter();
     private final Intake m_intake = new Intake();
     
@@ -88,8 +69,8 @@ public class RobotContainer {
         // actual shooter command
 
         // shooting for upperHub
-        JoystickButton xboxXButton = new JoystickButton(m_xbox, Constants.XBOX_X);
-        xboxXButton.onTrue(new TurnAndShoot(m_shooter, m_intake, m_driveTrain, m_vision, m_driveCommand));
+        // JoystickButton xboxXButton = new JoystickButton(m_xbox, Constants.XBOX_X);
+        // xboxXButton.onTrue(new TurnAndShoot(m_shooter, m_intake, m_driveTrain, m_vision, m_driveCommand));
 
         // shooting for upperHub from tarmac
         JoystickButton xboxAButton = new JoystickButton(m_xbox, Constants.XBOX_A);
@@ -107,61 +88,61 @@ public class RobotContainer {
         JoystickButton bumperLeft = new JoystickButton(m_xbox, Constants.XBOX_LB);
         bumperLeft.whileTrue(new IntakeCommand(m_intake, -Constants.INTAKE_SPEED));
 
-        // farm controller
-        JoystickButton farm1 = new JoystickButton(m_farm, 1);
-        farm1.onTrue(new SetElevatorHeightTest(m_climber));
+        // // farm controller
+        // JoystickButton farm1 = new JoystickButton(m_farm, 1);
+        // farm1.onTrue(new SetElevatorHeightTest(m_climber));
 
-        JoystickButton farm2 = new JoystickButton(m_farm, 2);
-        farm2.onTrue(new SetArmAngleTest(m_climber));
+        // JoystickButton farm2 = new JoystickButton(m_farm, 2);
+        // farm2.onTrue(new SetArmAngleTest(m_climber));
 
-        JoystickButton farm3 = new JoystickButton(m_farm, 3);
-        farm3.onTrue(new SetOneElevatorHeightTest(m_climber));
+        // JoystickButton farm3 = new JoystickButton(m_farm, 3);
+        // farm3.onTrue(new SetOneElevatorHeightTest(m_climber));
 
-        JoystickButton farm4 = new JoystickButton(m_farm, 4);
-        farm4.onTrue(new AdjustRobotAngleTest(m_driveTrain));
+        // JoystickButton farm4 = new JoystickButton(m_farm, 4);
+        // farm4.onTrue(new AdjustRobotAngleTest(m_driveTrain));
 
-        JoystickButton farm6 = new JoystickButton(m_farm, 6);
-        farm6.onTrue(new SetClimber(m_climber));
+        // JoystickButton farm6 = new JoystickButton(m_farm, 6);
+        // farm6.onTrue(new SetClimber(m_climber));
 
-        JoystickButton farm7 = new JoystickButton(m_farm, 7);
-        farm7.onTrue(new RaiseToBar(m_climber).withTimeout(Constants.RAISE_TO_BAR_TIMEOUT));
+        // JoystickButton farm7 = new JoystickButton(m_farm, 7);
+        // farm7.onTrue(new RaiseToBar(m_climber).withTimeout(Constants.RAISE_TO_BAR_TIMEOUT));
 
-        JoystickButton farm8 = new JoystickButton(m_farm, 8);
-        farm8.onTrue(new ClimbToNextBar(m_climber).withTimeout(Constants.CLIMB_TO_NEXT_BAR_TIMEOUT));
+        // JoystickButton farm8 = new JoystickButton(m_farm, 8);
+        // farm8.onTrue(new ClimbToNextBar(m_climber).withTimeout(Constants.CLIMB_TO_NEXT_BAR_TIMEOUT));
 
-        JoystickButton farm11 = new JoystickButton(m_farm, 11);
-        farm11.onTrue(new ResetClimber(m_climber));
+        // JoystickButton farm11 = new JoystickButton(m_farm, 11);
+        // farm11.onTrue(new ResetClimber(m_climber));
 
         // Additional manual shooter position buttons(orange buttons)
         // JoystickButton farm4 = new JoystickButton(m_farm, 4);
         // farm4.onTrue(new ShooterCommand(m_shooter, m_intake, Constants.TARMAC_DEFAULT_DISTANCE, true));
     
-        JoystickButton farm5 = new JoystickButton(m_farm, 5);
-        farm5.onTrue(new ShooterCommand(m_shooter, m_intake, Constants.JUST_OUTSIDE_TARMAC, true));
+        // JoystickButton farm5 = new JoystickButton(m_farm, 5);
+        // farm5.onTrue(new ShooterCommand(m_shooter, m_intake, Constants.JUST_OUTSIDE_TARMAC, true));
 
-        JoystickButton farm9 = new JoystickButton(m_farm, 9);
-        farm9.onTrue(new ShooterCommand(m_shooter, m_intake, Constants.CLOSE_LAUNCHPAD_SHOOTER_DISTANCE, true));
+        // JoystickButton farm9 = new JoystickButton(m_farm, 9);
+        // farm9.onTrue(new ShooterCommand(m_shooter, m_intake, Constants.CLOSE_LAUNCHPAD_SHOOTER_DISTANCE, true));
 
-        JoystickButton farm10 = new JoystickButton(m_farm, 10);
-        farm10.onTrue(new ShooterCommand(m_shooter, m_intake, Constants.FAR_LAUNCHPAD_SHOOTER_DISTANCE, true));
-        // end additional shooter buttons
+        // JoystickButton farm10 = new JoystickButton(m_farm, 10);
+        // farm10.onTrue(new ShooterCommand(m_shooter, m_intake, Constants.FAR_LAUNCHPAD_SHOOTER_DISTANCE, true));
+        // // end additional shooter buttons
 
-        // Arm Brake/Coast buttons
-        JoystickButton farm13 = new JoystickButton(m_farm, 13);
-        farm13.onTrue(new SetArmCoast(m_climber));
+        // // Arm Brake/Coast buttons
+        // JoystickButton farm13 = new JoystickButton(m_farm, 13);
+        // farm13.onTrue(new SetArmCoast(m_climber));
 
-        JoystickButton farm15 = new JoystickButton(m_farm, 15);
-        farm15.onTrue(new SetArmBrake(m_climber));        
+        // JoystickButton farm15 = new JoystickButton(m_farm, 15);
+        // farm15.onTrue(new SetArmBrake(m_climber));        
         
-        //Bind buttons for vision modes.
-        JoystickButton farm12 = new JoystickButton(m_farm, 12);
-        farm12.onTrue(new SetVisionMode(m_vision, VisionMode.INTAKE)); 
+        // //Bind buttons for vision modes.
+        // JoystickButton farm12 = new JoystickButton(m_farm, 12);
+        // farm12.onTrue(new SetVisionMode(m_vision, VisionMode.INTAKE)); 
 
-        JoystickButton farm14 = new JoystickButton(m_farm, 14);
-        farm14.onTrue(new SetVisionMode(m_vision, VisionMode.SHOOTER)); 
+        // JoystickButton farm14 = new JoystickButton(m_farm, 14);
+        // farm14.onTrue(new SetVisionMode(m_vision, VisionMode.SHOOTER)); 
 
-        JoystickButton farm16 = new JoystickButton(m_farm, 16);
-        farm16.onTrue(new SetVisionMode(m_vision, VisionMode.HUBFINDER)); 
+        // JoystickButton farm16 = new JoystickButton(m_farm, 16);
+        // farm16.onTrue(new SetVisionMode(m_vision, VisionMode.HUBFINDER)); 
 
         // For Testing
         // JoystickButton farm10 = new JoystickButton(m_farm, 10);
@@ -200,9 +181,9 @@ public class RobotContainer {
         return m_vision;
     }
     
-    public Climber getClimber(){
-        return m_climber;
-    }
+    // public Climber getClimber(){
+    //     return m_climber;
+    // }
 
     public Shooter getShooter(){
         return m_shooter;

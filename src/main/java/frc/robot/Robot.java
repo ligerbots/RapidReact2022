@@ -11,13 +11,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.commands.AutoCommandInterface;
-import frc.robot.commands.FourBallLower;
-import frc.robot.commands.OneBallAuto;
-import frc.robot.commands.ThreeBallMiddle;
-import frc.robot.commands.TrajectoryPlotter;
-import frc.robot.commands.TwoBallAutoCurved;
-import frc.robot.commands.TwoBallAutoStraight;
+
+import frc.robot.commands.*;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -29,8 +24,8 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
   private RobotContainer m_robotContainer;
   private TrajectoryPlotter m_plotter;
-  private SendableChooser<AutoCommandInterface> m_chosenAuto = new SendableChooser<>();
-  private AutoCommandInterface m_prevAutoCommand = null;
+  // private SendableChooser<AutoCommandInterface> m_chosenAuto = new SendableChooser<>();
+  // private AutoCommandInterface m_prevAutoCommand = null;
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -42,27 +37,27 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
 
-    m_chosenAuto.setDefaultOption("TwoBallAutoStraight", 
-      new TwoBallAutoStraight(m_robotContainer.getShooter(), m_robotContainer.getIntake(), m_robotContainer.getDriveTrain(), m_robotContainer.getVision())
-    );
-    m_chosenAuto.addOption("TwoBallAutoCurved", 
-      new TwoBallAutoCurved(m_robotContainer.getShooter(), m_robotContainer.getIntake(), m_robotContainer.getDriveTrain(), m_robotContainer.getVision())
-    );
-    m_chosenAuto.addOption("OneBallAuto", 
-      new OneBallAuto(m_robotContainer.getShooter(), m_robotContainer.getIntake(), m_robotContainer.getDriveTrain(), m_robotContainer.getVision())
-    );
-    m_chosenAuto.addOption("ThreeBallMiddle", 
-      new ThreeBallMiddle(m_robotContainer.getShooter(), m_robotContainer.getIntake(), m_robotContainer.getDriveTrain(), m_robotContainer.getVision())
-    );
-    m_chosenAuto.addOption("FourBallLower", 
-      new FourBallLower(m_robotContainer.getShooter(), m_robotContainer.getIntake(), m_robotContainer.getDriveTrain(), m_robotContainer.getVision())
-    );
-    SmartDashboard.putData("Chosen Auto", m_chosenAuto);
+    // m_chosenAuto.setDefaultOption("TwoBallAutoStraight", 
+    //   new TwoBallAutoStraight(m_robotContainer.getShooter(), m_robotContainer.getIntake(), m_robotContainer.getDriveTrain(), m_robotContainer.getVision())
+    // );
+    // m_chosenAuto.addOption("TwoBallAutoCurved", 
+    //   new TwoBallAutoCurved(m_robotContainer.getShooter(), m_robotContainer.getIntake(), m_robotContainer.getDriveTrain(), m_robotContainer.getVision())
+    // );
+    // m_chosenAuto.addOption("OneBallAuto", 
+    //   new OneBallAuto(m_robotContainer.getShooter(), m_robotContainer.getIntake(), m_robotContainer.getDriveTrain(), m_robotContainer.getVision())
+    // );
+    // m_chosenAuto.addOption("ThreeBallMiddle", 
+    //   new ThreeBallMiddle(m_robotContainer.getShooter(), m_robotContainer.getIntake(), m_robotContainer.getDriveTrain(), m_robotContainer.getVision())
+    // );
+    // m_chosenAuto.addOption("FourBallLower", 
+    //   new FourBallLower(m_robotContainer.getShooter(), m_robotContainer.getIntake(), m_robotContainer.getDriveTrain(), m_robotContainer.getVision())
+    // );
+    // SmartDashboard.putData("Chosen Auto", m_chosenAuto);
 
-    m_plotter = new TrajectoryPlotter(m_robotContainer.getDriveTrain().getField2d());
+    // m_plotter = new TrajectoryPlotter(m_robotContainer.getDriveTrain().getField2d());
 
-    // Set climber motors to coast so we can move them if we need to.
-    m_robotContainer.getClimber().setBrakeMode(true);
+    // // Set climber motors to coast so we can move them if we need to.
+    // m_robotContainer.getClimber().setBrakeMode(true);
 
     SmartDashboard.putNumber("Constants/SetElevatorHeightTest", 0.0);
     SmartDashboard.putNumber("Constants/SetArmAngleTest", 80.0);
@@ -97,35 +92,35 @@ public class Robot extends TimedRobot {
     m_robotContainer.getDriveTrain().setMotorMode(NeutralMode.Coast);
   }
 
-  @Override
-  public void disabledPeriodic() {
-    AutoCommandInterface autoCommandInterface = m_chosenAuto.getSelected();
-    if (autoCommandInterface != null && autoCommandInterface != m_prevAutoCommand) {
-      m_robotContainer.getDriveTrain().setPose(autoCommandInterface.getInitialPose());
-      m_prevAutoCommand = autoCommandInterface;
+  // @Override
+  // public void disabledPeriodic() {
+  //   AutoCommandInterface autoCommandInterface = m_chosenAuto.getSelected();
+  //   if (autoCommandInterface != null && autoCommandInterface != m_prevAutoCommand) {
+  //     m_robotContainer.getDriveTrain().setPose(autoCommandInterface.getInitialPose());
+  //     m_prevAutoCommand = autoCommandInterface;
 
-      if (Robot.isSimulation()) {
-        m_plotter.clear();
-        autoCommandInterface.plotTrajectory(m_plotter);
-      }
-    }    
-  }
+  //     if (Robot.isSimulation()) {
+  //       m_plotter.clear();
+  //       autoCommandInterface.plotTrajectory(m_plotter);
+  //     }
+  //   }    
+  // }
 
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
-  @Override
-  public void autonomousInit() {
-    // Cancel the DriveCommand so that the joystick can't override this command
-    // group
-    m_robotContainer.getDriveCommand().cancel();
+  // @Override
+  // public void autonomousInit() {
+  //   // Cancel the DriveCommand so that the joystick can't override this command
+  //   // group
+  //   m_robotContainer.getDriveCommand().cancel();
 
-    m_robotContainer.getDriveTrain().setMotorMode(NeutralMode.Brake);
+  //   m_robotContainer.getDriveTrain().setMotorMode(NeutralMode.Brake);
 
-    // schedule the autonomous command
-    m_autonomousCommand = m_chosenAuto.getSelected();
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.schedule();
-    }
-  }
+  //   // schedule the autonomous command
+  //   m_autonomousCommand = m_chosenAuto.getSelected();
+  //   if (m_autonomousCommand != null) {
+  //     m_autonomousCommand.schedule();
+  //   }
+  // }
 
   /** This function is called periodically during autonomous. */
   @Override
@@ -143,14 +138,14 @@ public class Robot extends TimedRobot {
     m_robotContainer.getDriveCommand().schedule();
     m_robotContainer.getDriveTrain().setMotorMode(NeutralMode.Brake);
 
-    // Set Climber motors to Brake mode
-    m_robotContainer.getClimber().setBrakeMode(true);
+    // // Set Climber motors to Brake mode
+    // m_robotContainer.getClimber().setBrakeMode(true);
     
-    m_robotContainer.getClimber().m_elevator[0].resetElevatorPos();
-    m_robotContainer.getClimber().m_elevator[1].resetElevatorPos(); 
+    // m_robotContainer.getClimber().m_elevator[0].resetElevatorPos();
+    // m_robotContainer.getClimber().m_elevator[1].resetElevatorPos(); 
 
-    m_robotContainer.getClimber().m_arm[0].resetArmPos();
-    m_robotContainer.getClimber().m_arm[1].resetArmPos();  
+    // m_robotContainer.getClimber().m_arm[0].resetArmPos();
+    // m_robotContainer.getClimber().m_arm[1].resetArmPos();  
   }
 
 
