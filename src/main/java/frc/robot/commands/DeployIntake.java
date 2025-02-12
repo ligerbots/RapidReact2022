@@ -4,10 +4,10 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.DriveTrain;
 
-public class DeployIntake extends CommandBase {
+public class DeployIntake extends Command {
   /** Creates a new DeployIntake. */
   DriveTrain m_driveTrain;
   LigerTimer m_backwardsTime = new LigerTimer(0.1);

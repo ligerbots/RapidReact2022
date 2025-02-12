@@ -4,11 +4,11 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.subsystems.Climber;
 
-public class SetArmAngle extends CommandBase {
+public class SetArmAngle extends Command {
   /** Creates a new SetArmAngle. */
   Climber m_climber;
   double m_angle;

@@ -4,9 +4,9 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.Command;
 
-public class TimeOut extends CommandBase {
+public class TimeOut extends Command {
   /** Creates a new TimeOut. */
   LigerTimer m_timer;
   public TimeOut(double time) {
