@@ -4,7 +4,10 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.TalonFXSimCollection;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.ctre.phoenix6.hardware.TalonFX;
+import com.ctre.phoenix6.signals.NeutralModeValue;
+
 import edu.wpi.first.hal.SimDouble;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -31,10 +34,10 @@ import frc.robot.Robot;
 
 public class DriveTrain extends SubsystemBase {
 
-    private WPI_TalonFX m_leftLeader = new WPI_TalonFX(Constants.LEADER_LEFT_CAN_ID);
-    private WPI_TalonFX m_leftFollower = new WPI_TalonFX(Constants.FOLLOWER_LEFT_CAN_ID);
-    private WPI_TalonFX m_rightLeader = new WPI_TalonFX(Constants.LEADER_RIGHT_CAN_ID);
-    private WPI_TalonFX m_rightFollower = new WPI_TalonFX(Constants.FOLLOWER_RIGHT_CAN_ID);
+    private TalonFX m_leftLeader = new TalonFX(Constants.LEADER_LEFT_CAN_ID);
+    private TalonFX m_leftFollower = new TalonFX(Constants.FOLLOWER_LEFT_CAN_ID);
+    private TalonFX m_rightLeader = new TalonFX(Constants.LEADER_RIGHT_CAN_ID);
+    private TalonFX m_rightFollower = new TalonFX(Constants.FOLLOWER_RIGHT_CAN_ID);
 
     // private TalonFXSimCollection m_leftLeader_sim;
     // private TalonFXSimCollection m_rightLeader_sim;
@@ -77,7 +80,7 @@ public class DriveTrain extends SubsystemBase {
         m_rightLeader.setSensorPhase(true);
         
         m_rightMotors.setInverted(true);
-        setMotorMode(NeutralMode.Coast);
+        setMotorMode(NeutralModeValue.Coast);
     
        
         m_differentialDrive = new DifferentialDrive(m_leftMotors, m_rightMotors);
@@ -111,7 +114,7 @@ public class DriveTrain extends SubsystemBase {
         // }
     }
 
-    public void setMotorMode(NeutralMode m) {
+    public void setMotorMode(NeutralModeValue m) {
         m_leftLeader.setNeutralMode(m);
         m_leftFollower.setNeutralMode(m);
         m_rightLeader.setNeutralMode(m);
