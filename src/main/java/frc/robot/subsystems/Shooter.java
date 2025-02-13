@@ -10,10 +10,12 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.revrobotics.spark.SparkClosedLoopController;
+import com.revrobotics.spark.SparkMax;
+import com.revrobotics.spark.SparkBase.ControlType;
+import com.revrobotics.spark.SparkLowLevel.MotorType;
+
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -22,9 +24,8 @@ import frc.robot.Constants;
 public class Shooter extends SubsystemBase {
     
     // CANSparkMax for the hopper
-    CANSparkMax m_chuteMotor;
-    // WPI_TalonFX for the shooter
-    WPI_TalonFX m_topShooterMotor, m_bottomShooterMotor;
+    SparkMax m_chuteMotor, m_topShooterMotor, m_bottomShooterMotor;
+    PIDController m_topShooterController, m_bottomShooterController;
 
     // lookup table for upper hub speeds
     static final TreeMap<Double, ShooterSpeeds> shooterSpeeds = new TreeMap<>(Map.ofEntries(
@@ -46,12 +47,21 @@ public class Shooter extends SubsystemBase {
     // Shooter class constructor, initialize arrays for motors controllers,
     // encoders, and SmartDashboard data
     public Shooter() {
-        m_chuteMotor = new CANSparkMax(Constants.CHUTE_CAN_ID, MotorType.kBrushless);
+        m_chuteMotor = new SparkMax(Constants.CHUTE_CAN_ID, MotorType.kBrushless);
 
-        m_topShooterMotor = new WPI_TalonFX(Constants.TOP_SHOOTER_CAN_ID);
-        m_bottomShooterMotor = new WPI_TalonFX(Constants.BOTTOM_SHOOTER_CAN_ID);
+        m_topShooterMotor = new SparkMax(Constants.TOP_SHOOTER_CAN_ID, MotorType.kBrushless);
+        m_bottomShooterMotor = new SparkMax(Constants.BOTTOM_SHOOTER_CAN_ID, MotorType.kBrushless);
 
         // Config the Velocity closed loop gains in slot0
+
+        m_topShooterController = new PIDController(Constants.SHOOTER_KP, Constants.SHOOTER_KI, Constants.SHOOTER_KD);
+        m_bottomShooterController = new PIDController(Constants.SHOOTER_KP, Constants.SHOOTER_KI, Constants.SHOOTER_KD);
+
+        m_topShooterController.setReference(Constants.SHOOTER_KP, ControlType.kPosition);
+        m_topShooterController.setReference(Constants.SHOOTER_KI, ControlType.);
+        m_topShooterController.setReference(Constants.SHOOTER_KD, ControlType.kPosition);
+        m_topShooterController.setReference(Constants.SHOOTER_KF, ControlType.kPosition);
+
         m_topShooterMotor.config_kP(0, Constants.SHOOTER_KP);
         m_topShooterMotor.config_kI(0, Constants.SHOOTER_KI);
         m_topShooterMotor.config_kD(0, Constants.SHOOTER_KD);
@@ -115,11 +125,11 @@ public class Shooter extends SubsystemBase {
     }
 
     public double getTopRpm() {
-        return m_topShooterMotor.getSelectedSensorVelocity() / Constants.FALCON_UNITS_PER_RPM;
+        return m_topShooterMotor.get() / Constants.FALCON_UNITS_PER_RPM;
     }
 
     public double getBottomRpm() {
-        return m_bottomShooterMotor.getSelectedSensorVelocity() / Constants.FALCON_UNITS_PER_RPM;
+        return m_bottomShooterMotor.get() / Constants.FALCON_UNITS_PER_RPM;
     }
 
     public void setShooterRpms(double topRpm, double bottomRpm) {
@@ -128,8 +138,8 @@ public class Shooter extends SubsystemBase {
         double falconTop = topRpm * Constants.FALCON_UNITS_PER_RPM;
         double falconBottom = bottomRpm * Constants.FALCON_UNITS_PER_RPM;
         System.out.println("setting shooter motor signals " + falconTop + " " + falconBottom);
-        m_topShooterMotor.set(ControlMode.Velocity, falconTop);
-        m_bottomShooterMotor.set(TalonFXControlMode.Velocity, falconBottom);
+        m_topShooterMotor.set(falconTop);
+        m_bottomShooterMotor.set(falconBottom);
     }
 
     public void setChuteSpeed(double chute) {
