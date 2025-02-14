@@ -10,22 +10,21 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMax.ControlType;
-import com.revrobotics.CANPIDController;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.revrobotics.spark.SparkMax;
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
+import com.revrobotics.spark.SparkBase.ControlType;
+import com.revrobotics.spark.SparkLowLevel.MotorType;
 
 import frc.robot.Constants;
 
 public class Shooter extends SubsystemBase {
     
-    CANSparkMax m_chuteMotor;
-    CANSparkMax m_topShooterMotor, m_bottomShooterMotor;
-    CANPIDController m_topPIDController, m_bottomPIDController;
+    SparkMax m_chuteMotor;
+    SparkMax m_topShooterMotor, m_bottomShooterMotor;
+    PIDController m_topPIDController, m_bottomPIDController;
 
     // lookup table for upper hub speeds
     static final TreeMap<Double, ShooterSpeeds> shooterSpeeds = new TreeMap<>(Map.ofEntries(
@@ -49,9 +48,9 @@ public class Shooter extends SubsystemBase {
     public Shooter() {
         m_chuteMotor = new SparkMax(Constants.CHUTE_CAN_ID, MotorType.kBrushless);
 
-        m_topShooterMotor = new CANSparkMax(Constants.TOP_SHOOTER_CAN_ID, MotorType.kBrushless);
+        m_topShooterMotor = new SparkMax(Constants.TOP_SHOOTER_CAN_ID, MotorType.kBrushless);
         m_topShooterMotor.setInverted(false);
-        m_bottomShooterMotor = new CANSparkMax(Constants.BOTTOM_SHOOTER_CAN_ID, MotorType.kBrushless); 
+        m_bottomShooterMotor = new SparkMax(Constants.BOTTOM_SHOOTER_CAN_ID, MotorType.kBrushless); 
 
         m_topPIDController = m_topShooterMotor.getPIDController();
         m_topPIDController.setP(Constants.SHOOTER_KP);
