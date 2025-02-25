@@ -9,15 +9,11 @@ package frc.robot.subsystems;
 import java.util.Map;
 import java.util.TreeMap;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.revrobotics.spark.SparkMax;
-import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
-import com.revrobotics.spark.SparkBase.ControlType;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
+import com.revrobotics.spark.SparkMax;
 
+import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Shooter extends SubsystemBase {
@@ -52,10 +48,10 @@ public class Shooter extends SubsystemBase {
         m_topShooterMotor.setInverted(false);
         m_bottomShooterMotor = new SparkMax(Constants.BOTTOM_SHOOTER_CAN_ID, MotorType.kBrushless); 
 
-        m_topPIDController = m_topShooterMotor.getPIDController();
+        // m_topPIDController = m_topShooterMotor.getPIDController();
         m_topPIDController.setP(Constants.SHOOTER_KP);
 
-        m_bottomPIDController = m_bottomShooterMotor.getPIDController();
+        // m_bottomPIDController = m_bottomShooterMotor.getPIDController();
         m_bottomPIDController.setP(Constants.SHOOTER_KP);
         // // Config the Velocity closed loop gains in slot0
         // m_topShooterMotor.config_kP(0, Constants.SHOOTER_KP);
@@ -134,8 +130,21 @@ public class Shooter extends SubsystemBase {
         // double falconTop = topRpm * Constants.FALCON_UNITS_PER_RPM;
         // double falconBottom = bottomRpm * Constants.FALCON_UNITS_PER_RPM;
         // System.out.println("setting shooter motor signals " + falconTop + " " + falconBottom);
-        m_topPIDController.setReference(topRpm, ControlType.kVelocity);
-        m_bottomPIDController.setReference(bottomRpm, ControlType.kVelocity);
+
+        // Get current shooter speeds
+        double topMeasurement = m_topShooterMotor.getEncoder().getVelocity();
+        double bottomMeasurement = m_bottomShooterMotor.getEncoder().getVelocity();
+
+        // Compute PID output (percent power)
+        double topOutput = m_topPIDController.calculate(topMeasurement, topRpm);
+        double bottomOutput = m_bottomPIDController.calculate(bottomMeasurement, bottomRpm);
+
+        // Apply output to motors
+        m_topShooterMotor.set(topOutput);
+        m_bottomShooterMotor.set(bottomOutput);
+
+        // m_topPIDController.setReference(topRpm, ControlType.kVelocity);
+        // m_bottomPIDController.setReference(bottomRpm, ControlType.kVelocity);
     }
 
     public void setChuteSpeed(double chute) {
