@@ -189,8 +189,10 @@ public class DriveTrain extends SubsystemBase {
     public void setPose(Pose2d pose) {
         // m_leftEncoder.reset();
         // m_rightEncoder.reset();
-        m_leftLeader.setSelectedSensorPosition(0.0);
-        m_rightLeader.setSelectedSensorPosition(0.0);
+        // m_leftLeader.setSelectedSensorPosition(0.0);
+        // m_rightLeader.setSelectedSensorPosition(0.0);
+        setLeftEncoderTicks(0);
+        setRightEncoderTicks(0);
 
         if (Robot.isSimulation()) m_differentialDriveSim.setPose(new Pose2d()); // drive sim doesn't seem to get reset anymore?
         m_odometry.resetPosition(Rotation2d.fromDegrees(getGyroAngle()), getLeftEncoderDistance(), getRightEncoderDistance(), pose);
