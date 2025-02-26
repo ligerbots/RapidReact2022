@@ -2,37 +2,27 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
-import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.TalonFXSimCollection;
-import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix6.configs.MotorOutputConfigs;
 import com.ctre.phoenix6.configs.Slot0Configs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
+import com.studica.frc.AHRS;
 
 import edu.wpi.first.hal.SimDouble;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
-import edu.wpi.first.math.trajectory.TrapezoidProfile;
-import edu.wpi.first.math.util.Units;
-// import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.RobotBase;
-import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.SPI.Port;
-import com.kauailabs.navx.frc.AHRS;
-import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.simulation.DifferentialDrivetrainSim;
 // import edu.wpi.first.wpilibj.simulation.EncoderSim;
 // import edu.wpi.first.wpilibj.simulation.SimDeviceSim;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
 import frc.robot.Constants;
 import frc.robot.Robot;
 
@@ -67,10 +57,8 @@ public class DriveTrain extends SubsystemBase {
         m_rightMotor.getConfigurator().apply(new TalonFXConfiguration());
 
         // set configs
-        TalonFXConfiguration talonFXConfigs = new TalonFXConfiguration();
-        
         // set slot 0 gains
-        Slot0Configs slot0configs = talonFXConfigs.Slot0;
+        Slot0Configs slot0configs = new Slot0Configs();
         slot0configs.kP = Constants.DRIVETRAIN_KP;
         slot0configs.kI = Constants.DRIVETRAIN_KI;
         slot0configs.kD = Constants.DRIVETRAIN_KD;
@@ -141,28 +129,28 @@ public class DriveTrain extends SubsystemBase {
 
     // Get the current set speed of the speed controllers
     public double getRightSpeed() {
-        return -m_rightMotors.get();
+        return -m_rightMotor.get();
     }
 
     public double getLeftSpeed() {
-        return m_leftMotors.get();
+        return m_leftMotor.get();
     }
 
     // Get stats about the encoders
     public double getLeftEncoderDistance() {
         // return m_leftEncoder.getDistance();
-        return m_leftLeader.getSelectedSensorPosition() * Constants.DRIVE_FALCON_DISTANCE_PER_UNIT;
+        return m_leftMotor.getPosition().getValueAsDouble() * Constants.DRIVE_FALCON_DISTANCE_PER_UNIT;
     }
     public void setLeftEncoderDistance(double distance) {
-        m_leftLeader.setSelectedSensorPosition((int) (distance / Constants.DRIVE_FALCON_DISTANCE_PER_UNIT));
+        m_leftMotor.setPosition((int) (distance / Constants.DRIVE_FALCON_DISTANCE_PER_UNIT));
     }
 
     public double getRightEncoderDistance() {
         // return m_rightEncoder.getDistance();
-        return -m_rightLeader.getSelectedSensorPosition() * Constants.DRIVE_FALCON_DISTANCE_PER_UNIT;
+        return -m_rightMotor.getPosition().getValueAsDouble() * Constants.DRIVE_FALCON_DISTANCE_PER_UNIT;
     }
     public void setRightEncoderDistance(double distance) {
-        m_rightLeader.setSelectedSensorPosition((int) (-distance / Constants.DRIVE_FALCON_DISTANCE_PER_UNIT));
+        m_leftMotor.setPosition((int) (-distance / Constants.DRIVE_FALCON_DISTANCE_PER_UNIT));
     }
     public double getDistance() {
         return 0.5 * (getLeftEncoderDistance() + getRightEncoderDistance());
@@ -170,26 +158,28 @@ public class DriveTrain extends SubsystemBase {
 
     public double getLeftEncoderVelocity() {
         // sensor velocity is per 100ms, so an extra scale of 10
-        return m_leftLeader.getSelectedSensorVelocity() * Constants.DRIVE_FALCON_DISTANCE_PER_UNIT * 10.0;
+        return m_leftMotor.getVelocity().getValueAsDouble() * Constants.DRIVE_FALCON_DISTANCE_PER_UNIT * 10.0;
     }
     public double getRightEncoderVelocity() {
         // sensor velocity is per 100ms, so an extra scale of 10
-        return -m_rightLeader.getSelectedSensorVelocity() * Constants.DRIVE_FALCON_DISTANCE_PER_UNIT * 10.0;
+        return -m_rightMotor.getVelocity().getValueAsDouble() * Constants.DRIVE_FALCON_DISTANCE_PER_UNIT * 10.0;
     }
 
     public int getLeftEncoderTicks() {
         // return m_leftEncoder.get();
-        return (int)m_leftLeader.getSelectedSensorPosition();
+        return (int)m_leftMotor.getPosition().getValueAsDouble();
     }
     public void setLeftEncoderTicks(int ticks){
-        m_leftLeader.setSelectedSensorPosition(ticks);
+        // m_leftLeader.setSelectedSensorPosition(ticks);
+        m_leftMotor.setPosition(ticks);
     }
     public int getRightEncoderTicks() {
         // return m_rightEncoder.get();
-        return (int)m_rightLeader.getSelectedSensorPosition();
+        // return (int)m_rightLeader.getSelectedSensorPosition();
+        return (int)m_rightMotor.getPosition().getValueAsDouble();
     }
     public void setRightEncoderTicks(int ticks){
-        m_rightLeader.setSelectedSensorPosition(ticks);
+        m_rightMotor.setPosition(ticks);
     }
     // Get and Set odometry values
     public Pose2d getPose() {
