@@ -5,7 +5,11 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.TalonFXSimCollection;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.ctre.phoenix6.configs.MotorOutputConfigs;
+import com.ctre.phoenix6.configs.Slot0Configs;
+import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.hardware.TalonFX;
+import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 
 import edu.wpi.first.hal.SimDouble;
@@ -34,15 +38,13 @@ import frc.robot.Robot;
 
 public class DriveTrain extends SubsystemBase {
 
-    private TalonFX m_leftLeader = new TalonFX(Constants.LEADER_LEFT_CAN_ID);
-    private TalonFX m_leftFollower = new TalonFX(Constants.FOLLOWER_LEFT_CAN_ID);
-    private TalonFX m_rightLeader = new TalonFX(Constants.LEADER_RIGHT_CAN_ID);
-    private TalonFX m_rightFollower = new TalonFX(Constants.FOLLOWER_RIGHT_CAN_ID);
+    private TalonFX m_leftMotor = new TalonFX(Constants.LEADER_LEFT_CAN_ID);
+    private TalonFX m_rightMotor = new TalonFX(Constants.LEADER_RIGHT_CAN_ID);
 
     // private TalonFXSimCollection m_leftLeader_sim;
     // private TalonFXSimCollection m_rightLeader_sim;
-    private final MotorControllerGroup m_leftMotors = new MotorControllerGroup(m_leftLeader, m_leftFollower);
-    private final MotorControllerGroup m_rightMotors = new MotorControllerGroup(m_rightLeader, m_rightFollower);
+    // private final MotorControllerGroup m_leftMotors = new MotorControllerGroup(m_leftLeader, m_leftFollower);
+    // private final MotorControllerGroup m_rightMotors = new MotorControllerGroup(m_rightLeader, m_rightFollower);
 
     private DifferentialDrive m_differentialDrive;
 
@@ -60,26 +62,42 @@ public class DriveTrain extends SubsystemBase {
     private AHRS m_navX;
 
     public DriveTrain() {
-        // setup PID control for TalonFX
-        m_leftLeader.configFactoryDefault();
-        m_leftLeader.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 0);
-        m_leftLeader.set(ControlMode.Position,0);
-        m_leftLeader.config_kP(0, Constants.DRIVETRAIN_KP);
-        m_leftLeader.config_kI(0, Constants.DRIVETRAIN_KI);
-        m_leftLeader.config_kD(0, Constants.DRIVETRAIN_KD);
-        m_leftLeader.config_kF(0, Constants.DRIVETRAIN_KF);
-        m_leftLeader.setSensorPhase(false);
+        // set factory default
+        m_leftMotor.getConfigurator().apply(new TalonFXConfiguration());
+        m_rightMotor.getConfigurator().apply(new TalonFXConfiguration());
 
-        m_rightLeader.configFactoryDefault();
-        m_rightLeader.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 0);
-        m_rightLeader.set(ControlMode.Position,0);
-        m_rightLeader.config_kP(0, Constants.DRIVETRAIN_KP);
-        m_rightLeader.config_kI(0, Constants.DRIVETRAIN_KI);
-        m_rightLeader.config_kD(0, Constants.DRIVETRAIN_KD);
-        m_rightLeader.config_kF(0, Constants.DRIVETRAIN_KF);
-        m_rightLeader.setSensorPhase(true);
+        // set configs
+        TalonFXConfiguration talonFXConfigs = new TalonFXConfiguration();
         
-        m_rightMotors.setInverted(true);
+        // set slot 0 gains
+        Slot0Configs slot0configs = talonFXConfigs.Slot0;
+        slot0configs.kP = Constants.DRIVETRAIN_KP;
+        slot0configs.kI = Constants.DRIVETRAIN_KI;
+        slot0configs.kD = Constants.DRIVETRAIN_KD;
+
+        m_leftMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 0);
+        m_leftMotor.set(ControlMode.Position,0);
+        // slot0configs.(0, Constants.DRIVETRAIN_KF);
+        // m_leftLeader.setSensorPhase(false);
+
+        m_leftMotor.getConfigurator().apply(slot0configs);
+        m_rightMotor.getConfigurator().apply(slot0configs);
+
+        // m_rightLeader.configFactoryDefault();
+        // m_rightLeader.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 0);
+        // m_rightLeader.set(ControlMode.Position,0);
+        // m_rightLeader.config_kP(0, Constants.DRIVETRAIN_KP);
+        // m_rightLeader.config_kI(0, Constants.DRIVETRAIN_KI);
+        // m_rightLeader.config_kD(0, Constants.DRIVETRAIN_KD);
+        // m_rightLeader.config_kF(0, Constants.DRIVETRAIN_KF);
+        // m_rightLeader.setSensorPhase(true);
+        
+        MotorOutputConfigs rightMotorConfigs = new MotorOutputConfigs();
+
+        // set invert to CW+ and apply config change
+        rightMotorConfigs.Inverted = InvertedValue.Clockwise_Positive;
+        m_leftMotor.getConfigurator().apply(rightMotorConfigs);
+
         setMotorMode(NeutralModeValue.Coast);
     
        
