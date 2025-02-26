@@ -9,6 +9,7 @@ import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.studica.frc.AHRS;
+import com.studica.frc.AHRS.NavXComType;
 
 import edu.wpi.first.hal.SimDouble;
 import edu.wpi.first.math.geometry.Pose2d;
@@ -17,6 +18,7 @@ import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.wpilibj.SPI.Port;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import edu.wpi.first.wpilibj.simulation.DifferentialDrivetrainSim;
 // import edu.wpi.first.wpilibj.simulation.EncoderSim;
 // import edu.wpi.first.wpilibj.simulation.SimDeviceSim;
@@ -87,9 +89,8 @@ public class DriveTrain extends SubsystemBase {
         m_leftMotor.getConfigurator().apply(rightMotorConfigs);
 
         setMotorMode(NeutralModeValue.Coast);
-    
-       
-        m_differentialDrive = new DifferentialDrive(m_leftMotor, m_rightMotor);
+        
+        m_differentialDrive = new DifferentialDrive();
         m_differentialDrive.setSafetyEnabled(false);
 
         // m_leftEncoder.setDistancePerPulse(Constants.ENCODER_DISTANCE_PER_PULSE);
@@ -97,7 +98,7 @@ public class DriveTrain extends SubsystemBase {
         // m_rightEncoder.setReverseDirection(true);
         
         m_odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(0), 0, 0);
-        m_navX = new AHRS(Port.kMXP, (byte) 200);
+        m_navX = new AHRS(NavXComType.kMXP_SPI, (byte) 200);  // it's either kMXP_SPI or kMXP_UART
 
         // if (RobotBase.isSimulation()) {
 
