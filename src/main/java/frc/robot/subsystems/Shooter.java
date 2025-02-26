@@ -9,8 +9,11 @@ package frc.robot.subsystems;
 import java.util.Map;
 import java.util.TreeMap;
 
+import com.revrobotics.spark.SparkBase.PersistMode;
+import com.revrobotics.spark.SparkBase.ResetMode;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.SparkMax;
+import com.revrobotics.spark.config.SparkMaxConfig;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -45,7 +48,12 @@ public class Shooter extends SubsystemBase {
         m_chuteMotor = new SparkMax(Constants.CHUTE_CAN_ID, MotorType.kBrushless);
 
         m_topShooterMotor = new SparkMax(Constants.TOP_SHOOTER_CAN_ID, MotorType.kBrushless);
-        m_topShooterMotor.setInverted(false);
+        
+        SparkMaxConfig config = new SparkMaxConfig();
+        config.inverted(false);
+        m_topShooterMotor.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+        // m_topShooterMotor.setInverted(false);
+
         m_bottomShooterMotor = new SparkMax(Constants.BOTTOM_SHOOTER_CAN_ID, MotorType.kBrushless); 
 
         // m_topPIDController = m_topShooterMotor.getPIDController();
@@ -53,6 +61,7 @@ public class Shooter extends SubsystemBase {
 
         // m_bottomPIDController = m_bottomShooterMotor.getPIDController();
         m_bottomPIDController.setP(Constants.SHOOTER_KP);
+
         // // Config the Velocity closed loop gains in slot0
         // m_topShooterMotor.config_kP(0, Constants.SHOOTER_KP);
         // m_topShooterMotor.config_kI(0, Constants.SHOOTER_KI);
