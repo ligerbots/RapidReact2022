@@ -89,7 +89,7 @@ public class DriveTrain extends SubsystemBase {
         setMotorMode(NeutralModeValue.Coast);
     
        
-        m_differentialDrive = new DifferentialDrive(m_leftMotors, m_rightMotors);
+        m_differentialDrive = new DifferentialDrive(m_leftMotor, m_rightMotor);
         m_differentialDrive.setSafetyEnabled(false);
 
         // m_leftEncoder.setDistancePerPulse(Constants.ENCODER_DISTANCE_PER_PULSE);
@@ -121,10 +121,8 @@ public class DriveTrain extends SubsystemBase {
     }
 
     public void setMotorMode(NeutralModeValue m) {
-        m_leftLeader.setNeutralMode(m);
-        m_leftFollower.setNeutralMode(m);
-        m_rightLeader.setNeutralMode(m);
-        m_rightFollower.setNeutralMode(m); 
+        m_leftMotor.setNeutralMode(m);
+        m_rightMotor.setNeutralMode(m);
     }
 
     // Get the current set speed of the speed controllers
@@ -235,8 +233,8 @@ public class DriveTrain extends SubsystemBase {
     }
 
     public void tankDriveVolts (double leftVolts, double rightVolts) {
-        m_leftMotors.setVoltage(leftVolts);
-        m_rightMotors.setVoltage(rightVolts);
+        m_leftMotor.setVoltage(leftVolts);
+        m_rightMotor.setVoltage(rightVolts);
         m_differentialDrive.feed();
     }
 
