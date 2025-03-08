@@ -5,6 +5,7 @@
 package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix6.signals.NeutralModeValue;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -89,7 +90,7 @@ public class Robot extends TimedRobot {
   /** This function is called once each time the robot enters Disabled mode. */
   @Override
   public void disabledInit() {
-    m_robotContainer.getDriveTrain().setMotorMode(NeutralMode.Coast);
+    m_robotContainer.getDriveTrain().setMotorMode(NeutralModeValue.Coast);
   }
 
   // @Override
@@ -136,7 +137,7 @@ public class Robot extends TimedRobot {
       m_autonomousCommand.cancel();
     }
     m_robotContainer.getDriveCommand().schedule();
-    m_robotContainer.getDriveTrain().setMotorMode(NeutralMode.Brake);
+    m_robotContainer.getDriveTrain().setMotorMode(NeutralModeValue.Brake);
 
     // // Set Climber motors to Brake mode
     // m_robotContainer.getClimber().setBrakeMode(true);
