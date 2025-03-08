@@ -65,7 +65,7 @@ public class DriveTrain extends SubsystemBase {
         slot0configs.kI = Constants.DRIVETRAIN_KI;
         slot0configs.kD = Constants.DRIVETRAIN_KD;
 
-        m_leftMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 0);
+        // m_leftMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 0);
         m_leftMotor.setPosition(0);
         
         // slot0configs.(0, Constants.DRIVETRAIN_KF);
