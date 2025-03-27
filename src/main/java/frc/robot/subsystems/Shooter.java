@@ -56,11 +56,11 @@ public class Shooter extends SubsystemBase {
 
         m_bottomShooterMotor = new SparkMax(Constants.BOTTOM_SHOOTER_CAN_ID, MotorType.kBrushless); 
 
+        m_topPIDController = new PIDController(Constants.SHOOTER_KP, 0, 0);
         // m_topPIDController = m_topShooterMotor.getPIDController();
-        m_topPIDController.setP(Constants.SHOOTER_KP);
 
+        m_topPIDController = new PIDController(Constants.SHOOTER_KP, 0, 0);
         // m_bottomPIDController = m_bottomShooterMotor.getPIDController();
-        m_bottomPIDController.setP(Constants.SHOOTER_KP);
 
         // // Config the Velocity closed loop gains in slot0
         // m_topShooterMotor.config_kP(0, Constants.SHOOTER_KP);
