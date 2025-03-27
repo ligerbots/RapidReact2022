@@ -55,23 +55,27 @@ public class DriveTrain extends SubsystemBase {
 
     public DriveTrain() {
         // set factory default
-        m_leftMotor.getConfigurator().apply(new TalonFXConfiguration());
-        m_rightMotor.getConfigurator().apply(new TalonFXConfiguration());
-
-        // set configs
+        TalonFXConfiguration talonFXConfigs = new TalonFXConfiguration();
+        
         // set slot 0 gains
-        Slot0Configs slot0configs = new Slot0Configs();
+        Slot0Configs slot0configs = talonFXConfigs.Slot0;
+        
         slot0configs.kP = Constants.DRIVETRAIN_KP;
         slot0configs.kI = Constants.DRIVETRAIN_KI;
         slot0configs.kD = Constants.DRIVETRAIN_KD;
+        
+        // m_leftMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 0);
+        m_leftMotor.setPosition(0);
 
-        m_leftMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 0);
-        m_leftMotor.set(ControlMode.Position,0);
-        // slot0configs.(0, Constants.DRIVETRAIN_KF);
-        // m_leftLeader.setSensorPhase(false);
-
+        // apply configs
         m_leftMotor.getConfigurator().apply(slot0configs);
         m_rightMotor.getConfigurator().apply(slot0configs);
+
+        MotorOutputConfigs rightMotorConfigs = new MotorOutputConfigs();
+
+        // set invert to CW+ and apply config change
+        rightMotorConfigs.Inverted = InvertedValue.Clockwise_Positive;
+        m_leftMotor.getConfigurator().apply(rightMotorConfigs);
 
         // m_rightLeader.configFactoryDefault();
         // m_rightLeader.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 0);
@@ -81,16 +85,10 @@ public class DriveTrain extends SubsystemBase {
         // m_rightLeader.config_kD(0, Constants.DRIVETRAIN_KD);
         // m_rightLeader.config_kF(0, Constants.DRIVETRAIN_KF);
         // m_rightLeader.setSensorPhase(true);
-        
-        MotorOutputConfigs rightMotorConfigs = new MotorOutputConfigs();
-
-        // set invert to CW+ and apply config change
-        rightMotorConfigs.Inverted = InvertedValue.Clockwise_Positive;
-        m_leftMotor.getConfigurator().apply(rightMotorConfigs);
 
         setMotorMode(NeutralModeValue.Coast);
         
-        m_differentialDrive = new DifferentialDrive();
+        m_differentialDrive = new DifferentialDrive(m_leftMotor::set, m_rightMotor::set);
         m_differentialDrive.setSafetyEnabled(false);
 
         // m_leftEncoder.setDistancePerPulse(Constants.ENCODER_DISTANCE_PER_PULSE);
