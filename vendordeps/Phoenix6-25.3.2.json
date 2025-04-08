@@ -1,74 +1,80 @@
 {
-    "fileName": "Phoenix.json",
-    "name": "CTRE-Phoenix (v5)",
-    "version": "5.31.0+23.2.2",
-    "frcYear": 2023,
-    "uuid": "ab676553-b602-441f-a38d-f1296eff6537",
+    "fileName": "Phoenix6-25.3.2.json",
+    "name": "CTRE-Phoenix (v6)",
+    "version": "25.3.2",
+    "frcYear": "2025",
+    "uuid": "e995de00-2c64-4df5-8831-c1441420ff19",
     "mavenUrls": [
         "https://maven.ctr-electronics.com/release/"
     ],
-    "jsonUrl": "https://maven.ctr-electronics.com/release/com/ctre/phoenix/Phoenix5-frc2023-latest.json",
+    "jsonUrl": "https://maven.ctr-electronics.com/release/com/ctre/phoenix6/latest/Phoenix6-frc2025-latest.json",
+    "conflictsWith": [
+        {
+            "uuid": "e7900d8d-826f-4dca-a1ff-182f658e98af",
+            "errorMessage": "Users can not have both the replay and regular Phoenix 6 vendordeps in their robot program.",
+            "offlineFileName": "Phoenix6-replay-frc2025-latest.json"
+        }
+    ],
     "javaDependencies": [
         {
-            "groupId": "com.ctre.phoenix",
-            "artifactId": "api-java",
-            "version": "5.31.0"
-        },
-        {
-            "groupId": "com.ctre.phoenix",
+            "groupId": "com.ctre.phoenix6",
             "artifactId": "wpiapi-java",
-            "version": "5.31.0"
+            "version": "25.3.2"
         }
     ],
     "jniDependencies": [
         {
-            "groupId": "com.ctre.phoenix",
-            "artifactId": "cci",
-            "version": "5.31.0",
+            "groupId": "com.ctre.phoenix6",
+            "artifactId": "api-cpp",
+            "version": "25.3.2",
             "isJar": false,
             "skipInvalidPlatforms": true,
             "validPlatforms": [
                 "windowsx86-64",
                 "linuxx86-64",
+                "linuxarm64",
                 "linuxathena"
             ],
             "simMode": "hwsim"
         },
         {
-            "groupId": "com.ctre.phoenix.sim",
-            "artifactId": "cci-sim",
-            "version": "5.31.0",
-            "isJar": false,
-            "skipInvalidPlatforms": true,
-            "validPlatforms": [
-                "windowsx86-64",
-                "linuxx86-64",
-                "osxuniversal"
-            ],
-            "simMode": "swsim"
-        },
-        {
             "groupId": "com.ctre.phoenix6",
             "artifactId": "tools",
-            "version": "23.2.2",
+            "version": "25.3.2",
             "isJar": false,
             "skipInvalidPlatforms": true,
             "validPlatforms": [
                 "windowsx86-64",
                 "linuxx86-64",
+                "linuxarm64",
                 "linuxathena"
             ],
             "simMode": "hwsim"
         },
         {
             "groupId": "com.ctre.phoenix6.sim",
-            "artifactId": "tools-sim",
-            "version": "23.2.2",
+            "artifactId": "api-cpp-sim",
+            "version": "25.3.2",
             "isJar": false,
             "skipInvalidPlatforms": true,
             "validPlatforms": [
                 "windowsx86-64",
                 "linuxx86-64",
+                "linuxarm64",
+                "osxuniversal"
+            ],
+            "simMode": "swsim"
+        },
+        {
+            "groupId": "com.ctre.phoenix6.sim",
+            "artifactId": "tools-sim",
+            "version": "25.3.2",
+            "isJar": false,
+            "skipInvalidPlatforms": true,
+            "validPlatforms": [
+                "windowsx86-64",
+                "linuxx86-64",
+                "linuxarm64",
                 "osxuniversal"
             ],
             "simMode": "swsim"
@@ -76,25 +82,13 @@
         {
             "groupId": "com.ctre.phoenix6.sim",
             "artifactId": "simTalonSRX",
-            "version": "23.2.2",
+            "version": "25.3.2",
             "isJar": false,
             "skipInvalidPlatforms": true,
             "validPlatforms": [
                 "windowsx86-64",
                 "linuxx86-64",
-                "osxuniversal"
-            ],
-            "simMode": "swsim"
-        },
-        {
-            "groupId": "com.ctre.phoenix6.sim",
-            "artifactId": "simTalonFX",
-            "version": "23.2.2",
-            "isJar": false,
-            "skipInvalidPlatforms": true,
-            "validPlatforms": [
-                "windowsx86-64",
-                "linuxx86-64",
+                "linuxarm64",
                 "osxuniversal"
             ],
             "simMode": "swsim"
@@ -102,12 +96,13 @@
         {
             "groupId": "com.ctre.phoenix6.sim",
             "artifactId": "simVictorSPX",
-            "version": "23.2.2",
+            "version": "25.3.2",
             "isJar": false,
             "skipInvalidPlatforms": true,
             "validPlatforms": [
                 "windowsx86-64",
                 "linuxx86-64",
+                "linuxarm64",
                 "osxuniversal"
             ],
             "simMode": "swsim"
@@ -115,12 +110,13 @@
         {
             "groupId": "com.ctre.phoenix6.sim",
             "artifactId": "simPigeonIMU",
-            "version": "23.2.2",
+            "version": "25.3.2",
             "isJar": false,
             "skipInvalidPlatforms": true,
             "validPlatforms": [
                 "windowsx86-64",
                 "linuxx86-64",
+                "linuxarm64",
                 "osxuniversal"
             ],
             "simMode": "swsim"
@@ -128,12 +124,13 @@
         {
             "groupId": "com.ctre.phoenix6.sim",
             "artifactId": "simCANCoder",
-            "version": "23.2.2",
+            "version": "25.3.2",
             "isJar": false,
             "skipInvalidPlatforms": true,
             "validPlatforms": [
                 "windowsx86-64",
                 "linuxx86-64",
+                "linuxarm64",
                 "osxuniversal"
             ],
             "simMode": "swsim"
@@ -141,12 +138,27 @@
         {
             "groupId": "com.ctre.phoenix6.sim",
             "artifactId": "simProTalonFX",
-            "version": "23.2.2",
+            "version": "25.3.2",
             "isJar": false,
             "skipInvalidPlatforms": true,
             "validPlatforms": [
                 "windowsx86-64",
                 "linuxx86-64",
+                "linuxarm64",
+                "osxuniversal"
+            ],
+            "simMode": "swsim"
+        },
+        {
+            "groupId": "com.ctre.phoenix6.sim",
+            "artifactId": "simProTalonFXS",
+            "version": "25.3.2",
+            "isJar": false,
+            "skipInvalidPlatforms": true,
+            "validPlatforms": [
+                "windowsx86-64",
+                "linuxx86-64",
+                "linuxarm64",
                 "osxuniversal"
             ],
             "simMode": "swsim"
@@ -154,12 +166,13 @@
         {
             "groupId": "com.ctre.phoenix6.sim",
             "artifactId": "simProCANcoder",
-            "version": "23.2.2",
+            "version": "25.3.2",
             "isJar": false,
             "skipInvalidPlatforms": true,
             "validPlatforms": [
                 "windowsx86-64",
                 "linuxx86-64",
+                "linuxarm64",
                 "osxuniversal"
             ],
             "simMode": "swsim"
@@ -167,12 +180,41 @@
         {
             "groupId": "com.ctre.phoenix6.sim",
             "artifactId": "simProPigeon2",
-            "version": "23.2.2",
+            "version": "25.3.2",
             "isJar": false,
             "skipInvalidPlatforms": true,
             "validPlatforms": [
                 "windowsx86-64",
                 "linuxx86-64",
+                "linuxarm64",
+                "osxuniversal"
+            ],
+            "simMode": "swsim"
+        },
+        {
+            "groupId": "com.ctre.phoenix6.sim",
+            "artifactId": "simProCANrange",
+            "version": "25.3.2",
+            "isJar": false,
+            "skipInvalidPlatforms": true,
+            "validPlatforms": [
+                "windowsx86-64",
+                "linuxx86-64",
+                "linuxarm64",
+                "osxuniversal"
+            ],
+            "simMode": "swsim"
+        },
+        {
+            "groupId": "com.ctre.phoenix6.sim",
+            "artifactId": "simProCANdi",
+            "version": "25.3.2",
+            "isJar": false,
+            "skipInvalidPlatforms": true,
+            "validPlatforms": [
+                "windowsx86-64",
+                "linuxx86-64",
+                "linuxarm64",
                 "osxuniversal"
             ],
             "simMode": "swsim"
@@ -180,46 +222,17 @@
     ],
     "cppDependencies": [
         {
-            "groupId": "com.ctre.phoenix",
+            "groupId": "com.ctre.phoenix6",
             "artifactId": "wpiapi-cpp",
-            "version": "5.31.0",
-            "libName": "CTRE_Phoenix_WPI",
+            "version": "25.3.2",
+            "libName": "CTRE_Phoenix6_WPI",
             "headerClassifier": "headers",
             "sharedLibrary": true,
             "skipInvalidPlatforms": true,
             "binaryPlatforms": [
                 "windowsx86-64",
                 "linuxx86-64",
-                "linuxathena"
-            ],
-            "simMode": "hwsim"
-        },
-        {
-            "groupId": "com.ctre.phoenix",
-            "artifactId": "api-cpp",
-            "version": "5.31.0",
-            "libName": "CTRE_Phoenix",
-            "headerClassifier": "headers",
-            "sharedLibrary": true,
-            "skipInvalidPlatforms": true,
-            "binaryPlatforms": [
-                "windowsx86-64",
-                "linuxx86-64",
-                "linuxathena"
-            ],
-            "simMode": "hwsim"
-        },
-        {
-            "groupId": "com.ctre.phoenix",
-            "artifactId": "cci",
-            "version": "5.31.0",
-            "libName": "CTRE_PhoenixCCI",
-            "headerClassifier": "headers",
-            "sharedLibrary": true,
-            "skipInvalidPlatforms": true,
-            "binaryPlatforms": [
-                "windowsx86-64",
-                "linuxx86-64",
+                "linuxarm64",
                 "linuxathena"
             ],
             "simMode": "hwsim"
@@ -227,7 +240,7 @@
         {
             "groupId": "com.ctre.phoenix6",
             "artifactId": "tools",
-            "version": "23.2.2",
+            "version": "25.3.2",
             "libName": "CTRE_PhoenixTools",
             "headerClassifier": "headers",
             "sharedLibrary": true,
@@ -235,51 +248,23 @@
             "binaryPlatforms": [
                 "windowsx86-64",
                 "linuxx86-64",
+                "linuxarm64",
                 "linuxathena"
             ],
             "simMode": "hwsim"
         },
         {
-            "groupId": "com.ctre.phoenix.sim",
+            "groupId": "com.ctre.phoenix6.sim",
             "artifactId": "wpiapi-cpp-sim",
-            "version": "5.31.0",
-            "libName": "CTRE_Phoenix_WPISim",
+            "version": "25.3.2",
+            "libName": "CTRE_Phoenix6_WPISim",
             "headerClassifier": "headers",
             "sharedLibrary": true,
             "skipInvalidPlatforms": true,
             "binaryPlatforms": [
                 "windowsx86-64",
                 "linuxx86-64",
-                "osxuniversal"
-            ],
-            "simMode": "swsim"
-        },
-        {
-            "groupId": "com.ctre.phoenix.sim",
-            "artifactId": "api-cpp-sim",
-            "version": "5.31.0",
-            "libName": "CTRE_PhoenixSim",
-            "headerClassifier": "headers",
-            "sharedLibrary": true,
-            "skipInvalidPlatforms": true,
-            "binaryPlatforms": [
-                "windowsx86-64",
-                "linuxx86-64",
-                "osxuniversal"
-            ],
-            "simMode": "swsim"
-        },
-        {
-            "groupId": "com.ctre.phoenix.sim",
-            "artifactId": "cci-sim",
-            "version": "5.31.0",
-            "libName": "CTRE_PhoenixCCISim",
-            "headerClassifier": "headers",
-            "sharedLibrary": true,
-            "skipInvalidPlatforms": true,
-            "binaryPlatforms": [
-                "windowsx86-64",
-                "linuxx86-64",
+                "linuxarm64",
                 "osxuniversal"
             ],
             "simMode": "swsim"
@@ -287,7 +272,7 @@
         {
             "groupId": "com.ctre.phoenix6.sim",
             "artifactId": "tools-sim",
-            "version": "23.2.2",
+            "version": "25.3.2",
             "libName": "CTRE_PhoenixTools_Sim",
             "headerClassifier": "headers",
             "sharedLibrary": true,
@@ -295,6 +280,7 @@
             "binaryPlatforms": [
                 "windowsx86-64",
                 "linuxx86-64",
+                "linuxarm64",
                 "osxuniversal"
             ],
             "simMode": "swsim"
@@ -302,7 +288,7 @@
         {
             "groupId": "com.ctre.phoenix6.sim",
             "artifactId": "simTalonSRX",
-            "version": "23.2.2",
+            "version": "25.3.2",
             "libName": "CTRE_SimTalonSRX",
             "headerClassifier": "headers",
             "sharedLibrary": true,
@@ -310,21 +296,7 @@
             "binaryPlatforms": [
                 "windowsx86-64",
                 "linuxx86-64",
-                "osxuniversal"
-            ],
-            "simMode": "swsim"
-        },
-        {
-            "groupId": "com.ctre.phoenix6.sim",
-            "artifactId": "simTalonFX",
-            "version": "23.2.2",
-            "libName": "CTRE_SimTalonFX",
-            "headerClassifier": "headers",
-            "sharedLibrary": true,
-            "skipInvalidPlatforms": true,
-            "binaryPlatforms": [
-                "windowsx86-64",
-                "linuxx86-64",
+                "linuxarm64",
                 "osxuniversal"
             ],
             "simMode": "swsim"
@@ -332,7 +304,7 @@
         {
             "groupId": "com.ctre.phoenix6.sim",
             "artifactId": "simVictorSPX",
-            "version": "23.2.2",
+            "version": "25.3.2",
             "libName": "CTRE_SimVictorSPX",
             "headerClassifier": "headers",
             "sharedLibrary": true,
@@ -340,6 +312,7 @@
             "binaryPlatforms": [
                 "windowsx86-64",
                 "linuxx86-64",
+                "linuxarm64",
                 "osxuniversal"
             ],
             "simMode": "swsim"
@@ -347,7 +320,7 @@
         {
             "groupId": "com.ctre.phoenix6.sim",
             "artifactId": "simPigeonIMU",
-            "version": "23.2.2",
+            "version": "25.3.2",
             "libName": "CTRE_SimPigeonIMU",
             "headerClassifier": "headers",
             "sharedLibrary": true,
@@ -355,6 +328,7 @@
             "binaryPlatforms": [
                 "windowsx86-64",
                 "linuxx86-64",
+                "linuxarm64",
                 "osxuniversal"
             ],
             "simMode": "swsim"
@@ -362,7 +336,7 @@
         {
             "groupId": "com.ctre.phoenix6.sim",
             "artifactId": "simCANCoder",
-            "version": "23.2.2",
+            "version": "25.3.2",
             "libName": "CTRE_SimCANCoder",
             "headerClassifier": "headers",
             "sharedLibrary": true,
@@ -370,6 +344,7 @@
             "binaryPlatforms": [
                 "windowsx86-64",
                 "linuxx86-64",
+                "linuxarm64",
                 "osxuniversal"
             ],
             "simMode": "swsim"
@@ -377,7 +352,7 @@
         {
             "groupId": "com.ctre.phoenix6.sim",
             "artifactId": "simProTalonFX",
-            "version": "23.2.2",
+            "version": "25.3.2",
             "libName": "CTRE_SimProTalonFX",
             "headerClassifier": "headers",
             "sharedLibrary": true,
@@ -385,6 +360,23 @@
             "binaryPlatforms": [
                 "windowsx86-64",
                 "linuxx86-64",
+                "linuxarm64",
+                "osxuniversal"
+            ],
+            "simMode": "swsim"
+        },
+        {
+            "groupId": "com.ctre.phoenix6.sim",
+            "artifactId": "simProTalonFXS",
+            "version": "25.3.2",
+            "libName": "CTRE_SimProTalonFXS",
+            "headerClassifier": "headers",
+            "sharedLibrary": true,
+            "skipInvalidPlatforms": true,
+            "binaryPlatforms": [
+                "windowsx86-64",
+                "linuxx86-64",
+                "linuxarm64",
                 "osxuniversal"
             ],
             "simMode": "swsim"
@@ -392,7 +384,7 @@
         {
             "groupId": "com.ctre.phoenix6.sim",
             "artifactId": "simProCANcoder",
-            "version": "23.2.2",
+            "version": "25.3.2",
             "libName": "CTRE_SimProCANcoder",
             "headerClassifier": "headers",
             "sharedLibrary": true,
@@ -400,6 +392,7 @@
             "binaryPlatforms": [
                 "windowsx86-64",
                 "linuxx86-64",
+                "linuxarm64",
                 "osxuniversal"
             ],
             "simMode": "swsim"
@@ -407,7 +400,7 @@
         {
             "groupId": "com.ctre.phoenix6.sim",
             "artifactId": "simProPigeon2",
-            "version": "23.2.2",
+            "version": "25.3.2",
             "libName": "CTRE_SimProPigeon2",
             "headerClassifier": "headers",
             "sharedLibrary": true,
@@ -415,6 +408,39 @@
             "binaryPlatforms": [
                 "windowsx86-64",
                 "linuxx86-64",
+                "linuxarm64",
+                "osxuniversal"
+            ],
+            "simMode": "swsim"
+        },
+        {
+            "groupId": "com.ctre.phoenix6.sim",
+            "artifactId": "simProCANrange",
+            "version": "25.3.2",
+            "libName": "CTRE_SimProCANrange",
+            "headerClassifier": "headers",
+            "sharedLibrary": true,
+            "skipInvalidPlatforms": true,
+            "binaryPlatforms": [
+                "windowsx86-64",
+                "linuxx86-64",
+                "linuxarm64",
+                "osxuniversal"
+            ],
+            "simMode": "swsim"
+        },
+        {
+            "groupId": "com.ctre.phoenix6.sim",
+            "artifactId": "simProCANdi",
+            "version": "25.3.2",
+            "libName": "CTRE_SimProCANdi",
+            "headerClassifier": "headers",
+            "sharedLibrary": true,
+            "skipInvalidPlatforms": true,
+            "binaryPlatforms": [
+                "windowsx86-64",
+                "linuxx86-64",
+                "linuxarm64",
                 "osxuniversal"
             ],
             "simMode": "swsim"

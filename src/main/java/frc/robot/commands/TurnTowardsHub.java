@@ -1,7 +1,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
 import frc.robot.subsystems.DriveTrain;
@@ -12,7 +12,7 @@ public class TurnTowardsHub extends SequentialCommandGroup{
     Vision m_vision;
     double m_toleranceDeg, m_stabilizeSecs;
     static final double kP = 0.01;
-    class TurnTowardsHubLoop extends CommandBase {
+    class TurnTowardsHubLoop extends Command {
         boolean m_withinTolerance;
         double m_lastOutsideToleranceTime;
         public TurnTowardsHubLoop() {

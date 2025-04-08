@@ -4,7 +4,7 @@
 
 package frc.robot.subsystems;
 
-import com.revrobotics.CANSparkMax;
+import com.revrobotics.spark.SparkMax;
 import com.revrobotics.SparkMaxLimitSwitch;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.SparkMaxLimitSwitch.Type;
@@ -20,7 +20,7 @@ public class Climber extends SubsystemBase {
 
   public Elevator[] m_elevator = new Elevator[2];
 
-  public CANSparkMax[] m_elevatorMotor;
+  public SparkMax[] m_elevatorMotor;
   
   public SparkMaxLimitSwitch[] m_limitSwitch;
 

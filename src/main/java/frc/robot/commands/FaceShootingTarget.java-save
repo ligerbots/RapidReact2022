@@ -8,12 +8,12 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.Command;
 
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Vision;
 
-public class FaceShootingTarget extends CommandBase {
+public class FaceShootingTarget extends Command {
   /**
    * Creates a new FaceShootingTarget.
    */

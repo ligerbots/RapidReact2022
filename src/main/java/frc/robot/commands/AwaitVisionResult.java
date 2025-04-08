@@ -1,10 +1,10 @@
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.Vision;
 import frc.robot.subsystems.Vision.VisionMode;
 
-public class AwaitVisionResult extends CommandBase {
+public class AwaitVisionResult extends Command {
     private Vision m_vision;
     private VisionMode m_mode;
     public AwaitVisionResult(Vision vision, VisionMode mode) {

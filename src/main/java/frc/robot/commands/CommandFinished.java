@@ -5,9 +5,9 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.Command;
 
-public class CommandFinished extends CommandBase {
+public class CommandFinished extends Command {
   /** Creates a new CommandFinished. */
   boolean m_state;
   public CommandFinished(boolean state) {

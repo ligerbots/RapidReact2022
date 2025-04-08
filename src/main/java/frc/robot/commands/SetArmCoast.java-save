@@ -4,10 +4,10 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.Climber;
 
-public class SetArmCoast extends CommandBase {
+public class SetArmCoast extends Command {
   /** Creates a new SetArmCoast. */
   Climber m_climber;
   public SetArmCoast(Climber climber) {

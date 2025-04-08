@@ -1,10 +1,10 @@
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.Command;
 
 import frc.robot.subsystems.Vision;
 
-public class SetVisionMode extends CommandBase {
+public class SetVisionMode extends Command {
     Vision m_vision;
     Vision.VisionMode m_mode;
     
