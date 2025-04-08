@@ -31,10 +31,10 @@ public class RobotContainer {
 
     // The robot's subsystems and commands are defined here...
     private final DriveTrain m_driveTrain = new DriveTrain();
-    private final Vision m_vision = new Vision(m_driveTrain);
+    private final Vision m_vision = null; //new Vision(m_driveTrain);
     // private final Climber m_climber = new Climber();
-    private final Shooter m_shooter = new Shooter();
-    private final Intake m_intake = new Intake();
+    private final Shooter m_shooter = null; //new Shooter();
+    private final Intake m_intake = null; // new Intake();
     
     private final DriveCommand m_driveCommand = new DriveCommand(m_driveTrain, new Throttle(), new Turn());
 

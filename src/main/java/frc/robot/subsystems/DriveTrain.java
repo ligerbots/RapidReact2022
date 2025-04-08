@@ -1,7 +1,5 @@
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix6.configs.MotorOutputConfigs;
 import com.ctre.phoenix6.configs.Slot0Configs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
@@ -11,17 +9,12 @@ import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.studica.frc.AHRS;
 import com.studica.frc.AHRS.NavXComType;
 
-import edu.wpi.first.hal.SimDouble;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
-import edu.wpi.first.wpilibj.SPI.Port;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import edu.wpi.first.wpilibj.simulation.DifferentialDrivetrainSim;
-// import edu.wpi.first.wpilibj.simulation.EncoderSim;
-// import edu.wpi.first.wpilibj.simulation.SimDeviceSim;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -30,8 +23,8 @@ import frc.robot.Robot;
 
 public class DriveTrain extends SubsystemBase {
 
-    private TalonFX m_leftMotor = new TalonFX(Constants.LEADER_LEFT_CAN_ID);
-    private TalonFX m_rightMotor = new TalonFX(Constants.LEADER_RIGHT_CAN_ID);
+    private TalonFX m_leftMotor;
+    private TalonFX m_rightMotor;
 
     // private TalonFXSimCollection m_leftLeader_sim;
     // private TalonFXSimCollection m_rightLeader_sim;
@@ -47,13 +40,16 @@ public class DriveTrain extends SubsystemBase {
     // private EncoderSim m_leftEncoderSim;
     // private EncoderSim m_rightEncoderSim;
     private Field2d m_fieldSim;
-    private SimDouble m_gyroAngleSim;
+    // private SimDouble m_gyroAngleSim;
     
     private DifferentialDriveOdometry m_odometry;
 
     private AHRS m_navX;
 
     public DriveTrain() {
+        m_leftMotor = new TalonFX(Constants.LEADER_LEFT_CAN_ID);
+        m_rightMotor = new TalonFX(Constants.LEADER_RIGHT_CAN_ID);
+    
         // set factory default
         TalonFXConfiguration talonFXConfigs = new TalonFXConfiguration();
         
