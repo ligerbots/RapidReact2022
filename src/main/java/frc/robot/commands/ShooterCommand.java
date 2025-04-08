@@ -5,9 +5,9 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
-import frc.robot.subsystems.Vision;
+// import frc.robot.subsystems.Vision;
 import frc.robot.subsystems.Shooter.ShooterSpeeds;
-import frc.robot.subsystems.Vision.VisionMode;
+// import frc.robot.subsystems.Vision.VisionMode;
 
 public class ShooterCommand extends Command {
     /**
@@ -15,7 +15,7 @@ public class ShooterCommand extends Command {
      */
     Shooter m_shooter;
     Intake m_intake;
-    Vision m_vision;
+    // Vision m_vision;
     boolean m_upperHub;
     double m_distance;
     boolean m_useVision;
@@ -28,22 +28,23 @@ public class ShooterCommand extends Command {
 
     ShooterSpeeds m_shooterSpeeds;
     
-    static final double DEFAULT_DISTANCE_TO_THE_HUB = 9.0 * 12.0; // 9 feet
+    public static final double DEFAULT_DISTANCE_TO_THE_HUB = 9.0 * 12.0; // 9 feet
 
     enum State {
-        FINDING_VISION_TARGET, SPEED_UP_SHOOTER, WAIT_FOR_SHOOTER, TURN_ON_CHUTE, TURN_ON_INTAKE, 
+        // FINDING_VISION_TARGET, 
+        SPEED_UP_SHOOTER, WAIT_FOR_SHOOTER, TURN_ON_CHUTE, TURN_ON_INTAKE, 
         WAIT_FOR_SHOOT_BALL1, WAIT_FOR_SHOOT_BALL2;
     }
 
     State m_state;
 
-    public ShooterCommand(Shooter shooter, Intake intake, Vision vision, boolean upperHub) {
-        m_shooter = shooter;
-        m_intake = intake;
-        m_vision = vision;
-        m_upperHub = upperHub;
-        m_useVision = true;
-    }
+    // public ShooterCommand(Shooter shooter, Intake intake, Vision vision, boolean upperHub) {
+    //     m_shooter = shooter;
+    //     m_intake = intake;
+    //     m_vision = vision;
+    //     m_upperHub = upperHub;
+    //     m_useVision = true;
+    // }
 
     public ShooterCommand(Shooter shooter, Intake intake, double distance, boolean upperHub) {
         m_shooter = shooter;
@@ -56,33 +57,33 @@ public class ShooterCommand extends Command {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-        if (m_upperHub == false || ! m_useVision) { // if lowerhub or if distance pre-defined, skip vision
+        // if (m_upperHub == false || ! m_useVision) { // if lowerhub or if distance pre-defined, skip vision
             m_state = State.SPEED_UP_SHOOTER;
-        } else {
-            // turn on vision finding, just in case, and it does not hurt if already done
-            m_vision.setMode(VisionMode.HUBFINDER);
-            m_visionTime.start();
-            m_state = State.FINDING_VISION_TARGET;
-        }
+        // } else {
+        //     // turn on vision finding, just in case, and it does not hurt if already done
+        //     m_vision.setMode(VisionMode.HUBFINDER);
+        //     m_visionTime.start();
+        //     m_state = State.FINDING_VISION_TARGET;
+        // }
     }
 
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
         switch (m_state) {
-            case FINDING_VISION_TARGET:
-                m_distance = m_vision.getDistance();
-                // go to the next state once the target is found
-                if (m_distance > 1.0)
-                    m_state = State.SPEED_UP_SHOOTER;
-                else if (m_visionTime.hasElapsed()) {
-                    m_state = State.SPEED_UP_SHOOTER;
-                    // if still can't find the target, just use 9ft as the distance
-                    m_distance = DEFAULT_DISTANCE_TO_THE_HUB;
-                }
-                else 
-                    break;
-                // allows fall through to the next state if found the target
+            // case FINDING_VISION_TARGET:
+            //     m_distance = m_vision.getDistance();
+            //     // go to the next state once the target is found
+            //     if (m_distance > 1.0)
+            //         m_state = State.SPEED_UP_SHOOTER;
+            //     else if (m_visionTime.hasElapsed()) {
+            //         m_state = State.SPEED_UP_SHOOTER;
+            //         // if still can't find the target, just use 9ft as the distance
+            //         m_distance = DEFAULT_DISTANCE_TO_THE_HUB;
+            //     }
+            //     else 
+            //         break;
+            //     // allows fall through to the next state if found the target
 
             case SPEED_UP_SHOOTER:
                 m_shooterSpeeds = Shooter.calculateShooterSpeeds(m_distance, m_upperHub);
@@ -137,7 +138,7 @@ public class ShooterCommand extends Command {
         m_shooter.setShooterRpms(0.0, 0.0);
         m_shooter.setChuteSpeed(0.0);
         m_intake.run(0.0);
-        if (m_vision != null) m_vision.setMode(Vision.DEFAULT_MODE);
+        // if (m_vision != null) m_vision.setMode(Vision.DEFAULT_MODE);
     }
 
     // Returns true when the command should end.

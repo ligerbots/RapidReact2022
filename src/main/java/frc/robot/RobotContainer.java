@@ -31,10 +31,10 @@ public class RobotContainer {
 
     // The robot's subsystems and commands are defined here...
     private final DriveTrain m_driveTrain = new DriveTrain();
-    private final Vision m_vision = null; //new Vision(m_driveTrain);
+    // private final Vision m_vision = new Vision(m_driveTrain);
     // private final Climber m_climber = new Climber();
-    private final Shooter m_shooter = null; //new Shooter();
-    private final Intake m_intake = null; // new Intake();
+    private final Shooter m_shooter = new Shooter();
+    private final Intake m_intake = new Intake();
     
     private final DriveCommand m_driveCommand = new DriveCommand(m_driveTrain, new Throttle(), new Turn());
 
@@ -62,15 +62,15 @@ public class RobotContainer {
         // FOR TESTING!!
         // DriverStation.silenceJoystickConnectionWarning(true);
         
-        // vacuum mode
-        JoystickButton xboxYButton = new JoystickButton(m_xbox, Constants.XBOX_Y);
-        xboxYButton.whileTrue(new VacuumMode(m_shooter, m_intake));
+        // // vacuum mode
+        // JoystickButton xboxYButton = new JoystickButton(m_xbox, Constants.XBOX_Y);
+        // xboxYButton.whileTrue(new VacuumMode(m_shooter, m_intake));
 
-        // actual shooter command
+        // // actual shooter command
 
-        // shooting for upperHub
-        // JoystickButton xboxXButton = new JoystickButton(m_xbox, Constants.XBOX_X);
-        // xboxXButton.onTrue(new TurnAndShoot(m_shooter, m_intake, m_driveTrain, m_vision, m_driveCommand));
+        // // shooting for upperHub
+        // // JoystickButton xboxXButton = new JoystickButton(m_xbox, Constants.XBOX_X);
+        // // xboxXButton.onTrue(new TurnAndShoot(m_shooter, m_intake, m_driveTrain, m_vision, m_driveCommand));
 
         // shooting for upperHub from tarmac
         JoystickButton xboxAButton = new JoystickButton(m_xbox, Constants.XBOX_A);
@@ -78,7 +78,7 @@ public class RobotContainer {
 
         // shooting for lowerHub
         JoystickButton xboxBButton = new JoystickButton(m_xbox, Constants.XBOX_B);
-        xboxBButton.onTrue(new ShooterCommand(m_shooter, m_intake, m_vision, false));
+        xboxBButton.onTrue(new ShooterCommand(m_shooter, m_intake, ShooterCommand.DEFAULT_DISTANCE_TO_THE_HUB, false));
 
         // Intake commands
         
@@ -177,21 +177,21 @@ public class RobotContainer {
         return m_driveTrain;
     }
     
-    public Vision getVision() {
-        return m_vision;
-    }
+    // public Vision getVision() {
+    //     return m_vision;
+    // }
     
     // public Climber getClimber(){
     //     return m_climber;
     // }
 
-    public Shooter getShooter(){
-        return m_shooter;
-    }
+    // public Shooter getShooter(){
+    //     return m_shooter;
+    // }
 
-    public Intake getIntake(){
-        return m_intake;
-    }
+    // public Intake getIntake(){
+    //     return m_intake;
+    // }
 
     // LigerBots: we don't use this function.
     // Autonomous is controlled by a Chooser defined in Robot.

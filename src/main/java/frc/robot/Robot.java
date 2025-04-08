@@ -22,7 +22,6 @@ import frc.robot.commands.*;
 public class Robot extends TimedRobot {
     private Command m_autonomousCommand;
     private RobotContainer m_robotContainer;
-    private TrajectoryPlotter m_plotter;
     // private SendableChooser<AutoCommandInterface> m_chosenAuto = new SendableChooser<>();
     // private AutoCommandInterface m_prevAutoCommand = null;
     
@@ -134,8 +133,8 @@ public class Robot extends TimedRobot {
         if (m_autonomousCommand != null) {
             m_autonomousCommand.cancel();
         }
-        m_robotContainer.getDriveCommand().schedule();
-        m_robotContainer.getDriveTrain().setMotorMode(NeutralModeValue.Brake);
+        // m_robotContainer.getDriveCommand().schedule();
+        // m_robotContainer.getDriveTrain().setMotorMode(NeutralModeValue.Brake);
         
         // // Set Climber motors to Brake mode
         // m_robotContainer.getClimber().setBrakeMode(true);

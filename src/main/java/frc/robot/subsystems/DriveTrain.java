@@ -6,20 +6,21 @@ import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
-import com.studica.frc.AHRS;
-import com.studica.frc.AHRS.NavXComType;
+// import com.studica.frc.AHRS;
+// import com.studica.frc.AHRS.NavXComType;
 
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
+// import edu.wpi.first.math.geometry.Pose2d;
+// import edu.wpi.first.math.geometry.Rotation2d;
+// import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.simulation.DifferentialDrivetrainSim;
-import edu.wpi.first.wpilibj.smartdashboard.Field2d;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+// import edu.wpi.first.wpilibj.simulation.DifferentialDrivetrainSim;
+// import edu.wpi.first.wpilibj.smartdashboard.Field2d;
+// import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
 import frc.robot.Constants;
-import frc.robot.Robot;
+// import frc.robot.Robot;
 
 public class DriveTrain extends SubsystemBase {
 
@@ -36,15 +37,15 @@ public class DriveTrain extends SubsystemBase {
     // private Encoder m_leftEncoder = new Encoder(Constants.LEFT_ENCODER_PORTS[0], Constants.LEFT_ENCODER_PORTS[1]);
     // private Encoder m_rightEncoder = new Encoder(Constants.RIGHT_ENCODER_PORTS[0], Constants.RIGHT_ENCODER_PORTS[1]);
 
-    private DifferentialDrivetrainSim m_differentialDriveSim;
+    // private DifferentialDrivetrainSim m_differentialDriveSim;
     // private EncoderSim m_leftEncoderSim;
     // private EncoderSim m_rightEncoderSim;
-    private Field2d m_fieldSim;
+    // private Field2d m_fieldSim;
     // private SimDouble m_gyroAngleSim;
     
-    private DifferentialDriveOdometry m_odometry;
+    // private DifferentialDriveOdometry m_odometry;
 
-    private AHRS m_navX;
+    // private AHRS m_navX;
 
     public DriveTrain() {
         m_leftMotor = new TalonFX(Constants.LEADER_LEFT_CAN_ID);
@@ -84,15 +85,15 @@ public class DriveTrain extends SubsystemBase {
 
         setMotorMode(NeutralModeValue.Coast);
         
-        m_differentialDrive = new DifferentialDrive(m_leftMotor::set, m_rightMotor::set);
-        m_differentialDrive.setSafetyEnabled(false);
+        // m_differentialDrive = new DifferentialDrive(m_leftMotor::set, m_rightMotor::set);
+        // m_differentialDrive.setSafetyEnabled(false);
 
-        // m_leftEncoder.setDistancePerPulse(Constants.ENCODER_DISTANCE_PER_PULSE);
-        // m_rightEncoder.setDistancePerPulse(Constants.ENCODER_DISTANCE_PER_PULSE);
-        // m_rightEncoder.setReverseDirection(true);
+        // // m_leftEncoder.setDistancePerPulse(Constants.ENCODER_DISTANCE_PER_PULSE);
+        // // m_rightEncoder.setDistancePerPulse(Constants.ENCODER_DISTANCE_PER_PULSE);
+        // // m_rightEncoder.setReverseDirection(true);
         
-        m_odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(0), 0, 0);
-        m_navX = new AHRS(NavXComType.kMXP_SPI, (byte) 200);  // it's either kMXP_SPI or kMXP_UART
+        // m_odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(0), 0, 0);
+        // m_navX = new AHRS(NavXComType.kMXP_SPI, (byte) 200);  // it's either kMXP_SPI or kMXP_UART
 
         // if (RobotBase.isSimulation()) {
 
@@ -166,6 +167,7 @@ public class DriveTrain extends SubsystemBase {
         // m_leftLeader.setSelectedSensorPosition(ticks);
         m_leftMotor.setPosition(ticks);
     }
+
     public int getRightEncoderTicks() {
         // return m_rightEncoder.get();
         // return (int)m_rightLeader.getSelectedSensorPosition();
@@ -174,46 +176,47 @@ public class DriveTrain extends SubsystemBase {
     public void setRightEncoderTicks(int ticks){
         m_rightMotor.setPosition(ticks);
     }
-    // Get and Set odometry values
-    public Pose2d getPose() {
-        return m_odometry.getPoseMeters();
-    }
 
-    public void setPose(Pose2d pose) {
-        // m_leftEncoder.reset();
-        // m_rightEncoder.reset();
-        // m_leftLeader.setSelectedSensorPosition(0.0);
-        // m_rightLeader.setSelectedSensorPosition(0.0);
-        setLeftEncoderTicks(0);
-        setRightEncoderTicks(0);
+    // // Get and Set odometry values
+    // public Pose2d getPose() {
+    //     return m_odometry.getPoseMeters();
+    // }
 
-        if (Robot.isSimulation()) m_differentialDriveSim.setPose(new Pose2d()); // drive sim doesn't seem to get reset anymore?
-        m_odometry.resetPosition(Rotation2d.fromDegrees(getGyroAngle()), getLeftEncoderDistance(), getRightEncoderDistance(), pose);
-    }
+    // public void setPose(Pose2d pose) {
+    //     // m_leftEncoder.reset();
+    //     // m_rightEncoder.reset();
+    //     // m_leftLeader.setSelectedSensorPosition(0.0);
+    //     // m_rightLeader.setSelectedSensorPosition(0.0);
+    //     setLeftEncoderTicks(0);
+    //     setRightEncoderTicks(0);
 
-    public double getHeading() {
-        return m_odometry.getPoseMeters().getRotation().getDegrees();
-    }
+    //     if (Robot.isSimulation()) m_differentialDriveSim.setPose(new Pose2d()); // drive sim doesn't seem to get reset anymore?
+    //     m_odometry.resetPosition(Rotation2d.fromDegrees(getGyroAngle()), getLeftEncoderDistance(), getRightEncoderDistance(), pose);
+    // }
 
-    // Get Gyro info
-    public double getGyroAngle() {
-        return Math.IEEEremainder(m_navX.getAngle(), 360) * -1;
-    }
+    // public double getHeading() {
+    //     return m_odometry.getPoseMeters().getRotation().getDegrees();
+    // }
+
+    // // Get Gyro info
+    // public double getGyroAngle() {
+    //     return Math.IEEEremainder(m_navX.getAngle(), 360) * -1;
+    // }
 
     @Override
     public void periodic() {
-        m_odometry.update(Rotation2d.fromDegrees(getGyroAngle()), getLeftEncoderDistance(),
-                getRightEncoderDistance());
+        // m_odometry.update(Rotation2d.fromDegrees(getGyroAngle()), getLeftEncoderDistance(),
+        //         getRightEncoderDistance());
 
-        SmartDashboard.putNumber("driveTrain/heading", getHeading());
-        SmartDashboard.putNumber("driveTrain/NavX gyro", getGyroAngle());
-        SmartDashboard.putNumber("driveTrain/x position", getPose().getX());
-        SmartDashboard.putNumber("driveTrain/y position", getPose().getY());
+        // SmartDashboard.putNumber("driveTrain/heading", getHeading());
+        // SmartDashboard.putNumber("driveTrain/NavX gyro", getGyroAngle());
+        // SmartDashboard.putNumber("driveTrain/x position", getPose().getX());
+        // SmartDashboard.putNumber("driveTrain/y position", getPose().getY());
 
-        SmartDashboard.putNumber("driveTrain/left encoder", getLeftEncoderTicks());
-        SmartDashboard.putNumber("driveTrain/right encoder", getRightEncoderTicks());
-        SmartDashboard.putNumber("driveTrain/left distance", getLeftEncoderDistance());
-        SmartDashboard.putNumber("driveTrain/right distance", getRightEncoderDistance());
+        // SmartDashboard.putNumber("driveTrain/left encoder", getLeftEncoderTicks());
+        // SmartDashboard.putNumber("driveTrain/right encoder", getRightEncoderTicks());
+        // SmartDashboard.putNumber("driveTrain/left distance", getLeftEncoderDistance());
+        // SmartDashboard.putNumber("driveTrain/right distance", getRightEncoderDistance());
 
         // SmartDashboard.putNumber("driveTrain/LeftFollower", m_leftFollower.getSelectedSensorPosition());
         // SmartDashboard.putNumber("driveTrain/LeftLeader", m_leftLeader.getSelectedSensorPosition());
@@ -269,9 +272,9 @@ public class DriveTrain extends SubsystemBase {
     //     m_fieldSim.setRobotPose(m_odometry.getPoseMeters());
     // }
 
-    public Field2d getField2d() {
-        return m_fieldSim;
-    }
+    // public Field2d getField2d() {
+    //     return m_fieldSim;
+    // }
 
     // public double disToTurn(double angle){
     //     // calculate the distance one side of the wheels need to turn to get to the desired angle
